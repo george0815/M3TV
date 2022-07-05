@@ -27,7 +27,7 @@ window.addEventListener("gamepadconnected", function(e) {
 
 //adds channel
 
-function addChannel(){
+
   document.getElementById("okay").addEventListener("click", () => {
   
     tempChannel = new channel();
@@ -44,9 +44,9 @@ function addChannel(){
   });
   
 
-}
 
-  function push(){
+
+
 
   //push channels to local storage
   document.getElementById("backAC").addEventListener("click", () => {
@@ -60,43 +60,10 @@ function addChannel(){
     
   });
 
-  }
+  
 
 
-   //play
-   function playC(url){
-
-    console.log("few");
-    document.getElementById('curPlaying').style.display='block';
-    //document.getElementById('currentChannel').setAttribute('src', url);
-
-
-  }
-  //loads channels
-  function loadChannels(){
-
-
-    iChannels = JSON.parse(localStorage.getItem("iChannels"));
-
-    iChannels.forEach(channel => {
-       
-
-      
-      const ch = document.createElement("button");
-      ch.innerHTML = channel.title;
-
-      var tempString = 'playC(' + '\'' + channel.url + '\'' + ")";
-      ch.onclick = playC(channel.url);
-      document.body.appendChild(ch);
-      console.log(tempString);
    
-      
-
-    });
-
-    document.getElementById('curPlaying').style.display='none';
-
-  };
 
 
 
