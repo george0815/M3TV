@@ -2,7 +2,7 @@
 //array of individual channels
 var iChannels = [];
 
-
+iChannels = JSON.parse(localStorage.getItem("iChannels"));
 //channel object that stores channel metadata
 function channel() {
   return {

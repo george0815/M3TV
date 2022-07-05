@@ -1,14 +1,15 @@
-//play
+var player = videojs('curPlaying');
 
   //loads channels
   function playC(url){
 
  
-    document.getElementById('curPlaying').style.display='block';
-    //document.getElementById('curPlaying').play();   
-    var player = videojs('curPlaying');
+    
+      
+    
     player.src(url);
     player.play();  
+    document.getElementById('curPlaying').style.display='';
     console.log(document.getElementById('currentChannel').getAttribute('src'));
 
 
@@ -40,6 +41,6 @@
 
     });
 
-  //document.getElementById('curPlaying').style.display='none';
+  document.getElementById('curPlaying').style.display='none';
 
   };
