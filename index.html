@@ -15,11 +15,21 @@
 
 
 
-      <button id="play" onclick="location.href='play/play.html'">Wii Menu</button>
-      <button id="add" onclick="location.href='add/add.html'">Start</button>
+      <button id="play" onclick="location.href='play/play.html'">Play</button>
+      <button id="add" onclick="location.href='add/add.html'">Add</button>
       
 
+      <div id="time">
+        
+        <p><span id="date"></span></p>
 
+<script>
+var dt = new Date();
+document.getElementById("date").innerHTML =(("0"+dt.getHours()+1).slice(-2)) +":"+ (("0"+dt.getMinutes()+1).slice(-2)) + "<br>" + (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (("0"+dt.getDate()).slice(-2)) +"/"+ (dt.getFullYear());
+</script>
+        
+      
+      </div>
 
       
     </body>
