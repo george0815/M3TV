@@ -35,18 +35,6 @@ function playlist() {
   };
 };
 
-//stores playlist
-function storeTest(){
- 
-  channels.forEach(channel => {
-    localStorage.setItem(channel.title, JSON.stringify(channel));
-  });
-
-  //var myStorageObject = JSON.parse(localStorage.getItem("uniq"));
-
-}
-
-
 
 
 //parses extended m3u playlist file
@@ -132,11 +120,7 @@ function parser(pl){
 
     }
   }
-
-
-
-  storeTest();
-  
+ 
   
 }
 
@@ -171,7 +155,7 @@ document.getElementById("okay").addEventListener("click", () => {
 //adds playlist object to playlists array
 document.getElementById("okay").addEventListener("click", () => {
 
-
+  //creates and sets variables of playlist to be pushed
   tempPlaylist = new playlist();
   tempPlaylist.title = document.getElementById("name").value;
   
@@ -179,7 +163,7 @@ document.getElementById("okay").addEventListener("click", () => {
     
   tempPlaylist.url = document.getElementById("url").value;
   
-  
+  //pushes playlist to array
   playlists.push(tempPlaylist);
 
   document.getElementById("mform").reset();
@@ -188,7 +172,7 @@ document.getElementById("okay").addEventListener("click", () => {
 
 
 
-//pushes playlists to local storage
+//pushes playlists array to local storage
 document.getElementById("backAP").addEventListener("click", () => {
   
   localStorage.setItem('playlists', JSON.stringify(playlists));

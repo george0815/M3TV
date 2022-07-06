@@ -1,0 +1,11 @@
+<!--Time and Date-->  
+<div id="clock"></div>
+        
+<script>
+
+  function updateclock(){
+  var dt = new Date();
+  document.getElementById("clock").innerHTML = "<div id=\"time\">" +dt.getUTCHours() +":"+ (dt.getUTCMinutes()) + "</div><br><div id=\"date\"><strong>" + (dt.toLocaleDateString('en-US', { weekday: 'short' })) + " " + (("0"+(dt.getMonth()+1)).slice(-2)) + "/" +(("0"+dt.getDate()).slice(-2)) + "</strong></div>";
+  }
+  
+</script>

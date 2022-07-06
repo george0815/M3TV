@@ -2,6 +2,7 @@
 //array of individual channels
 var iChannels = [];
 
+
 iChannels = JSON.parse(localStorage.getItem("iChannels"));
 //channel object that stores channel metadata
 function channel() {
@@ -26,10 +27,10 @@ window.addEventListener("gamepadconnected", function(e) {
 
 
 //adds channel
-
-
   document.getElementById("okay").addEventListener("click", () => {
   
+
+    //creates and sets variables of channel to be pushed
     tempChannel = new channel();
     tempChannel.title = document.getElementById("name").value;
   
@@ -38,6 +39,7 @@ window.addEventListener("gamepadconnected", function(e) {
     tempChannel.url = document.getElementById("url").value;
   
   
+    //pushes channel to array
     iChannels.push(tempChannel);
     document.getElementById("mform").reset();
       
@@ -48,7 +50,7 @@ window.addEventListener("gamepadconnected", function(e) {
 
 
 
-  //push channels to local storage
+  //pushes channels array to local storage
   document.getElementById("backAC").addEventListener("click", () => {
 
 

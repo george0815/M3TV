@@ -6,31 +6,28 @@
     <meta charset=utf-8 />
     <title>PHANTOMa</title>
       
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script type="text/javascript" src="/scripts/clock.js"></script>
     <link href="styles/main.css" rel="stylesheet">
 
        
     </head>
-    <body>
+    <body id="bodyI" onload="updateClock(); setInterval('updateClock()', 60 * 1000)">
 
+      <iframe width="1" height="1" style="display:none;"  src="https://www.youtube.com/embed/5k3uAtQ8vlg?autoplay=1&loop=1&playlist=5k3uAtQ8vlg" frameborder="0" allowfullscreen></iframe>
 
-
-
-      <button id="play" onclick="location.href='play/play.html'">Play</button>
-      <button id="add" onclick="location.href='add/add.html'">Add</button>
+      <!--Main Buttons-->
+      <button class="buttonI" onclick="location.href='play/play.html'">Play</button>
+      <button class="buttonI" onclick="location.href='add/add.html'">Add</button>
+      <button class="buttonI" onclick="location.href='add/add.html'">Options</button>
       
 
-      <div id="time">
-        
-        <p><span id="date"></span></p>
 
-<script>
-var dt = new Date();
-document.getElementById("date").innerHTML =(("0"+dt.getHours()+1).slice(-2)) +":"+ (("0"+dt.getMinutes()+1).slice(-2)) + "<br>" + (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (("0"+dt.getDate()).slice(-2)) +"/"+ (dt.getFullYear());
-</script>
-        
+      <!--Time and Date-->  
+      <div id="clock"></div>
       
-      </div>
-
       
+      
+     
     </body>
     </html>

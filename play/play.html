@@ -5,16 +5,24 @@
         
     <meta charset=utf-8 />
     <title>PHANTOMa</title>
-      
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <link href="../styles/main.css" rel="stylesheet">
   
        
     </head>
-    <body>
+    <body id="body">
 
+      <!--Main Buttons-->
       <button id="playlist" onclick="location.href='playPlaylist.html'">Playlist</button>
       <button id="channel" onclick="location.href='playChannel.html'">Channel</button>
-      <button id="back" onclick="location.href='index.html'">Back</button>
+      <button id="back" onclick="location.href='../index.html'">Back</button>
+      <button id="back" onclick="location.href='../index.html'">Options</button>
       
-      
+      <div id="dateWrapper">
+        <script>
+          $('#dateWrapper').load('../clock.html');
+        </script>
+      </div>
+
     </body>
     </html>

@@ -6,12 +6,9 @@
     <meta charset=utf-8 />
     <title>PHANTOMa</title>
       
-    
+      <!--Videojs scripts and styles-->
       <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
-      <script src="https://unpkg.com/video.js/dist/video.js"></script>
-
-
-    
+      <script src="https://unpkg.com/video.js/dist/video.js"></script> 
       <script src="https://unpkg.com/browse/@videojs/http-streaming@2.14.2/dist/videojs-http-streaming.js"></script>
        
     </head>
@@ -19,26 +16,27 @@
 
 
 
-  <!--
-      <video id="my_video_1" class="video-js vjs-fluid vjs-default-skin" controls preload="auto"
+      <!--Video element for playing channels-->
+      <video muted=true id="curPlaying" class="video-js vjs-fluid vjs-default-skin" controls preload="auto"
       data-setup='{}'>
-        <source src="https://30a-tv.com/darcizzle.m3u8" type="application/x-mpegURL">
+
+        <source id="currentChannel" src="" type="application/x-mpegURL">
+
       </video>
       
 
      
-      -->
-
-      <button id="back" onclick="location.href='index.html'">Back</button>
+      
+      <!--Back button-->
+      <button id="back" onclick="location.href='play.html'">Back</button>
       
 
 
-
-       <script type="text/javascript" src="../scripts/playlist.js"></script>
-    <script>
-    var player = videojs('my_video_1');
-    player.play();
-    </script>
+      <!--Scripts for loading playlists and playing video-->
+      <script type="text/javascript" src="../scripts/playPlaylist.js"></script>
+      <script>
+        loadPlaylists();
+      </script>
       
     </body>
     </html>

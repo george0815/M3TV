@@ -6,43 +6,38 @@
     <meta charset=utf-8 />
     <title>PHANTOMa</title>
       
-    
+      <!--Videojs scripts and styles-->
       <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
-      <script src="https://unpkg.com/video.js/dist/video.js"></script>
-
-
-    
+      <script src="https://unpkg.com/video.js/dist/video.js"></script> 
       <script src="https://unpkg.com/browse/@videojs/http-streaming@2.14.2/dist/videojs-http-streaming.js"></script>
+      <link href="../styles/main.css" rel="stylesheet">
        
     </head>
     <body>
 
 
 
-  
-      <video muted=false id="curPlaying" class="video-js vjs-fluid vjs-default-skin" controls preload="auto"
+      <!--Video element for playing channels-->
+      <video muted=true id="curPlaying" class="video-js vjs-fluid vjs-default-skin" controls preload="auto"
       data-setup='{}'>
-        
-      
-      
-      <source id="currentChannel" src="https://nhkw-zh-hlscomp.akamaized.net/8thz5iufork8wjip/playlist.m3u8" type="application/x-mpegURL">
+
+        <source id="currentChannel" src="" type="application/x-mpegURL">
+
       </video>
       
 
      
       
-
-      <button id="back" onclick="location.href='../index.html'">Back</button>
+      <!--Back button-->
+      <button id="back" onclick="location.href='play.html'">Back</button>
       
 
 
-
-       <script type="text/javascript" src="../scripts/playChannel.js"></script>
-    <script>
-      loadChannels();
-   // var player = videojs('curPlaying');
-   // player.play();
-    </script>
+      <!--Scripts for loading channels and playing video-->
+      <script type="text/javascript" src="../scripts/playChannel.js"></script>
+      <script>
+        loadChannels();
+      </script>
       
     </body>
     </html>
