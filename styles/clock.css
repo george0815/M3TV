@@ -1,0 +1,62 @@
+/*Font declarations*/
+@font-face {
+    font-family: "WII";
+    src: url("../fonts/wii.otf");
+}
+@font-face {
+  font-family: "clock";
+  src: url("../fonts/clock.ttf");
+}
+
+
+/*Time and date*/
+  #clock{
+    
+    -webkit-box-shadow: inset 1px 20px 15px -6px #afb0b6; 
+box-shadow: inset 1px 20px 15px -6px #afb0b6;
+
+
+    border-top: solid;
+    border-color: #38bfed;
+    position: absolute;
+    bottom: 0px;
+    background-color: #d1d2d9;
+    min-width: 100%;
+    min-height: 30%;
+    max-height: 30%;
+    margin-bottom: 0%;
+    margin-top: 5%;
+
+    height: 30%;
+    width: 100%;
+
+    
+  }
+
+  #time{
+
+    /*centers text*/
+    text-align: center;
+    margin-top: 1%;
+
+    /*sets font*/
+    color: #9b9b9b;
+    font-size: 5vw;
+    font-family: "clock";
+
+  }
+  #date{
+
+    /*centers text*/
+    text-align: center;
+
+  
+
+    /*sets font*/
+    letter-spacing: .001em;
+    color: #818181;
+    font-size: 4vw;
+    font-family: "WII";
+    font-weight: 900;
+
+  }
