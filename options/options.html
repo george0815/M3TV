@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-    <html>
+    <html id="htmlSettings">
     <head>
 
         
@@ -13,20 +13,31 @@
 
        
     </head>
-    <body id="body">
+    <body id="bodySettings">
+
+      
+
+
+
+      <div id="settingsTop">
+
+        <div id="settingsLabel">System Settings</div>
+      
+      </div>
+      
 
       <!--Main Buttons-->
-      <button id="playlist" onclick="location.href='playPlaylist.html'">Music       <iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe>      </button>
+      <button class="settingsButton" onclick="location.href='playPlaylist.html'">Music<iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe>      </button>
       </button>
-      <button id="channel" onclick="location.href='playChannel.html'">Remove Channels</button>
-      <button id="channel" onclick="location.href='playChannel.html'">Remove playlists</button>
-      <button id="channel" onclick="location.href='playChannel.html'">Language</button>
-      <button id="back" onclick="location.href='../index.html'">Volume</button>
-      <button id="back" onclick="location.href='../index.html'">Back</button>
-      
-      
-      
-      
+      <button class="settingsButton" onclick="location.href='../index.html'">Volume</button>
+      <button class="settingsButton" onclick="location.href='playChannel.html'">Remove Channels</button>
+      <button class="settingsButton" onclick="location.href='playChannel.html'">Remove playlists</button>
+      <button class="settingsButton" onclick="location.href='playChannel.html'">Language</button>   
+      <div id="backButtonWrapper">
+        <button  id="settingBack" onclick="location.href='../index.html'">Back</button></div>
 
+
+
+      
     </body>
     </html>

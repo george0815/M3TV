@@ -6,28 +6,7 @@
 
 
 /*Buttons*/
-.buttonI{
-   
-    /*centers element*/
-    align-items: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2%;
-    margin-bottom: 0%;
-
-    /*slightly blurs text*/
-    color: transparent;
-    text-shadow: 0 0 2px rgba(0,0,0,100);
-
-    /*sets font*/
-    font-size: 2.2vw;
-    font-family: "WII";
-
-    /*sets border*/
-    border: solid;
-    border-radius: 9999em;
-    border-color: #38bfed;
+.buttonI{ 
 
     /*sets size*/
     min-height: 70%;
@@ -35,11 +14,7 @@
     min-width: 20%;
     max-width: 40%;
     
-   
-    /*Sets inner shadow*/
-    -moz-box-shadow: inset -15px -15px 10px -10px #abc0db;
-    -webkit-box-shadow: inset -15px -15px 10px -10px #abc0db;
-    box-shadow: inset -15px -15px 10px -10px #abc0db;
+  
   }
   button{
    
@@ -81,3 +56,71 @@
     transform: scale(1.05) perspective(1px);
  
   }
+
+  .settingsButton{
+
+    margin-top: 2%;
+
+    border-radius: .7em;
+    outline: medium solid rgb(255, 255, 255);
+
+  }
+
+  #settingBack{
+
+
+    /*sets size*/
+    min-height: 35%;
+    max-height: 55%;
+    min-width: 20%;
+    max-width: 30%;
+    margin-top: 1%;
+    position: absolute;
+    left: 15%;
+
+    outline: none;
+    border-radius: 9999em;
+    border: none;
+  }
+
+
+  #muteButton{
+
+    margin-top: 0%;
+    margin-left: 0%;
+   
+
+  }
+
+  #okay{
+
+/*sets size*/
+min-height: 35%;
+max-height: 55%;
+min-width: 20%;
+max-width: 30%;
+margin-top: 1%;
+position: absolute;
+left: 40%;
+
+outline: none;
+border-radius: 9999em;
+border: none;
+
+  }
+
+.remAll{
+
+  /*sets size*/
+min-height: 35%;
+max-height: 55%;
+min-width: 20%;
+max-width: 30%;
+margin-top: 1%;
+position: absolute;
+left: 40%;
+
+outline: none;
+border-radius: 9999em;
+border: none;   
+}
