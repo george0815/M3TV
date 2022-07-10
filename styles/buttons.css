@@ -6,6 +6,9 @@
 
 
 /*Buttons*/
+
+
+/*Main Menu Buttons*/
 .buttonI{ 
 
     /*sets size*/
@@ -14,8 +17,10 @@
     min-width: 20%;
     max-width: 40%;
     
-  
   }
+
+
+  /*All Buttons*/
   button{
    
     /*centers element*/
@@ -54,9 +59,10 @@
   }
   button:hover {
     transform: scale(1.05) perspective(1px);
- 
   }
 
+
+  /*Settings Buttons*/
   .settingsButton{
 
     margin-top: 2%;
@@ -66,24 +72,29 @@
 
   }
 
-  #settingBack{
 
+  /*all footer buttons*/
+  .footerButton{
 
     /*sets size*/
     min-height: 35%;
     max-height: 55%;
     min-width: 20%;
     max-width: 30%;
+
+    /*sets position*/
     margin-top: 1%;
     position: absolute;
-    left: 15%;
+    left: 40%;
 
+    /*sets border*/
     outline: none;
-    border-radius: 9999em;
     border: none;
   }
 
 
+
+  /*Mute button for music*/
   #muteButton{
 
     margin-top: 0%;
@@ -92,35 +103,10 @@
 
   }
 
-  #okay{
-
-/*sets size*/
-min-height: 35%;
-max-height: 55%;
-min-width: 20%;
-max-width: 30%;
-margin-top: 1%;
-position: absolute;
-left: 40%;
-
-outline: none;
-border-radius: 9999em;
-border: none;
-
+/*settings back button*/
+  #settingBack{
+    left: 15%;
   }
+  
 
-.remAll{
-
-  /*sets size*/
-min-height: 35%;
-max-height: 55%;
-min-width: 20%;
-max-width: 30%;
-margin-top: 1%;
-position: absolute;
-left: 40%;
-
-outline: none;
-border-radius: 9999em;
-border: none;   
-}
+  

@@ -1,0 +1,91 @@
+@font-face {
+    font-family: "WII";
+    src: url("../fonts/wii.otf");
+  }
+
+#settingsLabel{ 
+
+    /*position*/
+    position: absolute;
+    bottom: 0%;
+    left: 15%;
+
+    /*padding/text position*/
+    padding-bottom: 1%;
+    padding-left: 1%;
+
+    /*size*/
+    height: 20%;
+    width: 15%;
+   
+    border-bottom: solid gray;
+    
+  }
+
+
+
+  .label{
+
+    /*sets font*/
+    font-size: 2.2vw;
+    font-size: 3vh;
+    font-family: "WII";
+
+    /*slightly blurs text*/
+    color: transparent;
+    text-shadow: 0 0 2px rgba(0,0,0,100);
+
+    /*border*/
+    border-top-left-radius: 10px;
+    border-top-right-radius: 25px;
+    border-bottom: solid gray;
+
+    /*misc*/
+    padding: 1% 20% 1% 5%;
+    background-color: #ffffff;
+  }
+
+  
+    /*form styles*/
+  #formWrapper{
+    display: block;
+    text-align: center;
+  }
+  form{
+    margin-top: 1%;
+    display: inline-block;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+
+  
+   /*styles for misc inputs*/
+  .miscOptions{
+    
+
+    /*sets font*/
+    font-size: 2.2vw;
+    font-size: 3vh;
+    font-family: "WII";
+
+    /*size*/
+    min-height: 2em;
+    width: 35em;
+
+
+    border-radius: 0 .7em .7em .7em;
+  }
+
+
+  /*language container*/
+  #langWrapper{
+
+    margin-top: 2em;
+    min-height: 32em;
+    display: grid;
+    grid-template-columns: auto auto;
+
+  }

@@ -6,50 +6,53 @@
     <meta charset=utf-8 />
     <title>PHANTOMa</title>
     
-    <link href="../styles/clock.css" rel="stylesheet">
+
+    <!--styles-->
+    <link href="../styles/misc.css" rel="stylesheet">
     <link href="../styles/general.css" rel="stylesheet">
     <link href="../styles/buttons.css" rel="stylesheet">
   
 
        
     </head>
-    <body id="bodySettings">
+    <body>
 
       
 
 
-
+      <!--Header-->
       <div id="settingsTop">
 
-        <div id="settingsLabel">Volume Settings</div>
-
-        
-      
+        <div class="label" id="settingsLabel">Volume Settings</div>
+  
       </div>
       
 
-
+      <!--Form for volume options-->
       <div id="formWrapper">
         <form id="mform">
 
-            <label for="name">Channels:<iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe></label><br>
-            <input type="range" class="volume-control"><br>
-
-            <label for="url">Music:</label><br>
-            <input type="range" class="volume-control"><br>
-
-            <label for="desc">Sound Effects:</label>
-            <input type="range" class="volume-control"><br>
-
+            <label class="label" for="cVol">Channels:
+              
+              <iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe>
             
+            </label>
+            <input type="range" name="cVol" class="miscOptions"><br>
+
+            <label class="label" for="mVol">Music:</label><br>
+            <input type="range" name="mVol" class="miscOptions"><br>
+
+            <label  class="label" for="sVol">Sound Effects:</label>
+            <input type="range" name="sVol" class="miscOptions"><br>       
 
         </form>
-    </div>
+      </div>
 
       
-       
+       <!--Footer-->
       <div id="backButtonWrapper">
-        <button  id="settingBack" onclick="location.href='../index.html'">Back</button></div>
+        <button class="footerButton" id="settingBack" onclick="location.href='options.html'">Back</button>
+      </div>
 
 
 

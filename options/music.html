@@ -6,45 +6,52 @@
     <meta charset=utf-8 />
     <title>PHANTOMa</title>
     
-    <link href="../styles/clock.css" rel="stylesheet">
+
+    <!--styles-->
+    <link href="../styles/misc.css" rel="stylesheet">
     <link href="../styles/general.css" rel="stylesheet">
     <link href="../styles/buttons.css" rel="stylesheet">
   
 
        
     </head>
-    <body id="bodySettings">
+    <body>
 
       
 
 
-
+      <!--Header-->
       <div id="settingsTop">
 
-        <div id="settingsLabel">Music Settings</div>
+        <div class="label" id="settingsLabel">Music Settings</div>
       
       </div>
       
 
+      <!--Form for music options-->
       <div id="formWrapper">
         <form id="mform">
 
-           
+          
+            <label for="url" class="label">URL:
 
-            <label for="url">URL:</label><br>
-            <input type="text" id="url" name="url"><br><br><br>
+              <iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe>    
+
+            </label><br>
+            <input type="text" id="url" class="miscOptions" name="url"><br><br><br>
 
             
-            <button name="mute" id="muteButton" class="settingsButton" onclick="location.href='../index.html'">Mute Music</button>
-
-            
+            <button name="mute" id="muteButton" class="settingsButton" >Mute Music</button>
 
         </form>
-    </div>
+      </div>
 
 
+
+      <!--Footer-->
       <div id="backButtonWrapper">
-        <button  id="settingBack" onclick="location.href='../index.html'">Back</button></div>
+        <button  class="footerButton" id="settingBack" onclick="location.href='options.html'">Back</button>
+      </div>
 
 
 

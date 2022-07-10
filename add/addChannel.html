@@ -7,49 +7,52 @@
     <title>PHANTOMa</title>
       
 
-
-    <link href="../styles/clock.css" rel="stylesheet">
+    <!--Styles-->
     <link href="../styles/general.css" rel="stylesheet">
     <link href="../styles/buttons.css" rel="stylesheet">
+    <link href="../styles/misc.css" rel="stylesheet">
     
        
     </head>
     <body>
 
+
+        <!--Header-->
         <div id="settingsTop">
 
-            <div id="settingsLabel">Add Channels</div>
+            <div class="label" id="settingsLabel">Add Channels</div>
           
-          </div>
+        </div>
 
 
         <!--Form for adding channels-->
         <div id="formWrapper">
-        <form id="mform">
+            <form id="mform">
 
-            <label for="name">Title:<iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe></label><br>
-            <input type="text" id="name" name="name"><br><br><br>
+                <label class="label" for="name">Title:<iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe></label><br>
+                <input type="text" class="miscOptions"  id="name" name="name"><br><br><br>
 
-            <label for="url">URL:</label><br>
-            <input type="text" id="url" name="url"><br><br><br>
+                <label class="label" for="url">URL:</label><br>
+                <input type="text" class="miscOptions" id="url" name="url"><br><br><br>
 
-            <label for="desc">Description:</label><br>
-            <textarea id="desc" name="desc"></textarea><br><br><br>
+                <label class="label" for="desc">Description:</label><br>
+                <textarea id="desc" class="miscOptions" name="desc"></textarea><br><br><br>
 
+            </form>
+        </div>
+
+
+
+        <!--Footer-->
+        <div id="backButtonWrapper">     
+            <button class="footerButton" id="settingBack" onclick="location.href='add.html'">Back</button>
             
-
-        </form>
-    </div>
-
-        <div id="backButtonWrapper">
-             
-            <button id="settingBack" onclick="location.href='../index.html'">Back</button>
-            
-            <button id="okay">Confirm</button> </div>
+            <button class="footerButton" id="okay">Confirm</button> 
+        </div>
       
 
 
-
+        <!--Script-->
        <script type="text/javascript" src="../scripts/addChannel.js"></script>
  
       

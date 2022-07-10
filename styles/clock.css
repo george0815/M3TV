@@ -12,25 +12,29 @@
 /*Time and date*/
   #clock{
     
+
+    /*Box Shadow*/
     -webkit-box-shadow: inset 1px 20px 15px -6px #afb0b6; 
-box-shadow: inset 1px 20px 15px -6px #afb0b6;
+    box-shadow: inset 1px 20px 15px -6px #afb0b6;
 
-
+    /*Border*/
     border-top: solid;
     border-color: #38bfed;
+
+    /*Position*/
     position: absolute;
+    margin-bottom: 0%;
+    margin-top: 5%;
     bottom: 0px;
-    background-color: #d1d2d9;
+
+    /*Size*/
     min-width: 100%;
     min-height: 30%;
     max-height: 30%;
-    margin-bottom: 0%;
-    margin-top: 5%;
-
     height: 30%;
     width: 100%;
 
-    
+    background-color: #d1d2d9;
   }
 
   #time{
