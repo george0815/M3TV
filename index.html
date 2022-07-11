@@ -7,10 +7,10 @@
     <title>PHANTOMa</title>
       
     
-    <script type="text/javascript" src="/scripts/clock.js"></script>
-    <link href="../styles/clock.css" rel="stylesheet">
-    <link href="../styles/general.css" rel="stylesheet">
-    <link href="../styles/buttons.css" rel="stylesheet">
+    <script type="text/javascript" src="scripts/clock.js"></script>
+    <link href="styles/clock.css" rel="stylesheet">
+    <link href="styles/general.css" rel="stylesheet">
+    <link href="styles/buttons.css" rel="stylesheet">
 
        
     </head>
@@ -19,8 +19,9 @@
 
       
             <!--Main Buttons-->
-      <button class="buttonI" onclick="location.href='play/play.html'">Play 
-        <iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe>      </button>
+      <button id="mPlay" class="buttonI" onclick="location.href='play/play.html'">Play 
+        <iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe>      
+      </button>
       <button class="buttonI" onclick="location.href='add/add.html'">Add</button>
       <button class="buttonI" onclick="location.href='options/options.html'">Options</button>
       
@@ -33,6 +34,8 @@
 
         updateClock();
 
+        
+        
       </script>
       
      
