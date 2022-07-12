@@ -4,6 +4,8 @@ var iChannels = [];
 
 
 iChannels = JSON.parse(localStorage.getItem("iChannels"));
+
+
 //channel object that stores channel metadata
 function channel() {
   return {
@@ -51,7 +53,7 @@ window.addEventListener("gamepadconnected", function(e) {
 
 
   //pushes channels array to local storage
-  document.getElementById("backAC").addEventListener("click", () => {
+  document.getElementById("settingBack").addEventListener("click", () => {
 
 
     //deletes previous storage item so there are no duplicates

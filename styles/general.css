@@ -83,6 +83,28 @@ height: 100%;
       
 }
 
+
+/*body for play channels/playlists*/
+.playVid{
+  height: 100%;
+display: grid;
+grid-template-columns: auto;
+grid-template-rows: 65% 35%;
+}
+
+/*Channel Container*/
+#channelWrapper{
+  max-height: 60em;
+
+  
+      
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(4, 400px);
+  grid-template-rows: repeat(3, auto);
+ 
+}
+
 /*all bodies*/
 body{
 

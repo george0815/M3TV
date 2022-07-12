@@ -110,3 +110,57 @@
   
 
   
+  /*Channel and Playlist Buttons*/
+
+  
+
+  .channelButton {
+   
+    justify-content: stretch;
+    align-items: center;
+    position: relative;
+    width: 400px;
+    height: 225px;
+    border-color: #b4b4b4;
+    
+    align-self: center;
+ 
+    border-radius: 50% / 5%;
+    display: block;
+    margin-bottom: -50px;
+    margin-top: -50px;
+ 
+    text-align: center;
+    text-indent: .1em;
+    box-shadow: none;
+    }
+    .channelButton::before {
+      /*sets border*/
+    border-left: solid;
+    border-right: solid;
+    display: block;
+   
+    border-color: #b4b4b4;
+ 
+  
+      align-items: center;
+    
+      content: '';
+
+      width: 400px;
+    height: 225px;
+      
+      position: absolute;
+     
+      margin-top: -50px;
+  
+      margin-bottom: -50px;
+ 
+      top: 3%;
+      bottom: 3%;
+      right: -6%;
+      left: -6%;
+      background: inherit;
+      border-radius: 5% / 50%;
+      
+    }

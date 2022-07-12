@@ -1,6 +1,8 @@
   //player for playing vids
   var player = videojs('curPlaying');
 
+
+
   //plays channel
   function playC(url){
 
@@ -24,10 +26,11 @@
     iChannels.forEach(channel => {
        
       const ch = document.createElement("button");
-      ch.innerHTML = channel.title;
+      ch.style.content = channel.title;
+      ch.className = 'channelButton';
 
       ch.onclick = function () { playC(channel.url); };
-      document.body.appendChild(ch);
+      document.getElementById('channelWrapper').appendChild(ch);
       
     });
 

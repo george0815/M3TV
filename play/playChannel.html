@@ -10,6 +10,7 @@
       <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
       <script src="https://unpkg.com/video.js/dist/video.js"></script> 
       <script src="https://unpkg.com/browse/@videojs/http-streaming@2.14.2/dist/videojs-http-streaming.js"></script>
+      <script type="text/javascript" src="../scripts/clock.js"></script>
 
 
       <!--styles-->
@@ -18,7 +19,7 @@
       <link href="../styles/buttons.css" rel="stylesheet">
        
     </head>
-    <body>
+    <body class="playVid">
 
 
 
@@ -30,7 +31,22 @@
 
       </video>
       
+      <div id="channelWrapper">
 
+
+
+
+      </div>
+
+
+      <!--Time and Date-->  
+      <div id="clock"></div>
+      
+      <script>
+
+        updateClock();
+
+      </script>
      
       
       <!--Back button-->
