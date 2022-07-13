@@ -32,16 +32,32 @@
 
       </video>
       
-      <div id="channelWrapper">
 
+      <button style="
+      
+      all:unset;
+      color: transparent;
+      position: absolute;
+      left: 90%;
+      font-size: 7.2vw;
+    font-size: 10vh;
+    border: solid blue;
+    background: linear-gradient(to bottom, #5ecefe 0%,#abf6ff 50%,#5ecefe 100%);
+      bottom: 50%;
+      clip-path: polygon(45% 0, 100% 50%, 46% 100%, 53% 50%);
+      
+      ">  &#10148;</button>
 
-
-
-      </div>
+      <!--Container for channel buttons-->
+      <div id="channelWrapper"></div>
 
 
       <!--Time and Date-->  
-      <div id="clock"></div>
+      <div id="clock">
+        
+        
+      
+      </div>
       
       <script>
 
@@ -53,8 +69,12 @@
       <!--Back button-->
       <iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe>   
 
-      <button id="back" onclick="location.href='play.html'">Back</button>
-      
+
+      <button id="backChannel"  class="clockButton" onclick="location.href='play.html'">&#8617;</button>
+
+
+
+<button id="optionsChannel" class="clockButton" onclick="location.href='../options/options.html'">&#9881;</button>
 
 
       <!--Scripts for loading channels and playing video-->
