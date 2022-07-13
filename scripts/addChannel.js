@@ -16,7 +16,8 @@ function channel() {
     
       title: "",
       logoUrl: "",
-      url: ""
+      url: "",
+      pgNmbr: 0
      
   };
 };
