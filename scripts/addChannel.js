@@ -1,9 +1,13 @@
 
+
+
 //array of individual channels
-var iChannels = [];
+var iChannels = JSON.parse(localStorage.getItem("iChannels"));
 
+if (iChannels == null){
+  iChannels = [];
+}
 
-iChannels = JSON.parse(localStorage.getItem("iChannels"));
 
 
 //channel object that stores channel metadata
@@ -11,7 +15,7 @@ function channel() {
   return {
     
       title: "",
-      desc: "",
+      logoUrl: "",
       url: ""
      
   };
@@ -31,12 +35,12 @@ window.addEventListener("gamepadconnected", function(e) {
 //adds channel
   document.getElementById("okay").addEventListener("click", () => {
   
-
+   
     //creates and sets variables of channel to be pushed
     tempChannel = new channel();
     tempChannel.title = document.getElementById("name").value;
   
-    tempChannel.desc =  document.getElementById("desc").value;
+    tempChannel.logoUrl =  document.getElementById("logoUrl").value;
     
     tempChannel.url = document.getElementById("url").value;
   
@@ -67,7 +71,7 @@ window.addEventListener("gamepadconnected", function(e) {
   
 
 
-   
+  
 
 
 

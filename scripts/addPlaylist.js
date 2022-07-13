@@ -29,7 +29,7 @@ function playlist() {
   return {
 
     title: "",
-    desc: "",
+    logoUrl: "",
     url: ""
 
   };
@@ -159,7 +159,7 @@ document.getElementById("okay").addEventListener("click", () => {
   tempPlaylist = new playlist();
   tempPlaylist.title = document.getElementById("name").value;
   
-  tempPlaylist.desc =  document.getElementById("desc").value;
+  tempPlaylist.logoUrl =  document.getElementById("logoUrl").value;
     
   tempPlaylist.url = document.getElementById("url").value;
   
@@ -173,7 +173,7 @@ document.getElementById("okay").addEventListener("click", () => {
 
 
 //pushes playlists array to local storage
-document.getElementById("backAP").addEventListener("click", () => {
+document.getElementById("settingBack").addEventListener("click", () => {
   
   localStorage.setItem('playlists', JSON.stringify(playlists));
   

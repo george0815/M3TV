@@ -26,7 +26,11 @@
     iChannels.forEach(channel => {
        
       const ch = document.createElement("button");
-      ch.style.content = channel.title;
+      //ch.ariaLabel = channel.title;
+      ch.title = channel.title;
+      ch.innerHTML = "<img src=\""+channel.logoUrl+"\" alt=\""+channel.title+"\">"
+      
+      //ch.style.backgroundImage = 'url('+channel.logoUrl+')';
       ch.className = 'channelButton';
 
       ch.onclick = function () { playC(channel.url); };
@@ -39,3 +43,35 @@
     document.getElementById('curPlaying').style.display='none';
 
   };
+
+
+
+
+  document.addEventListener('keydown', function(event) {
+    
+   
+    player.pause();
+    player.src("");
+    
+
+    //makes video element invisible
+    document.getElementById('curPlaying').style.display='none';
+
+
+});
+
+
+document.addEventListener("fullscreenchange", function() {
+  if (!document.fullscreen) {
+    
+    player.pause();
+    player.src("");
+    
+
+    //makes video element invisible
+    document.getElementById('curPlaying').style.display='none';
+
+
+
+  } 
+});
