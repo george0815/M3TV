@@ -1,6 +1,3 @@
-
-
-
 //array of individual channels
 var iChannels = JSON.parse(localStorage.getItem("iChannels"));
 

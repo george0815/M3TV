@@ -65,6 +65,7 @@
   /*Settings Buttons*/
   .settingsButton{
 
+
     margin-top: 2%;
 
     border-radius: .7em;
@@ -77,8 +78,8 @@
   .footerButton{
 
     /*sets size*/
-    min-height: 35%;
-    max-height: 55%;
+    min-height: 10%;
+    max-height: 30%;
     min-width: 20%;
     max-width: 30%;
 
@@ -175,3 +176,74 @@
       padding-left: 5%;
 
     }
+
+
+
+    .arrowInside{
+
+
+      all:unset;
+      color: transparent;
+      position: absolute;
+
+      font-size: 7.2vw;
+      font-size: 10vh;
+      border: solid blue;
+      background: linear-gradient(to bottom, #5ecefe 0%,#abf6ff 50%,#5ecefe 100%);
+
+      
+      width: 96%;
+      height: 98%;
+      
+    clip-path: polygon(52% 5%, 95% 49%, 52% 92%, 58% 50%);
+    }
+
+    .arrow{
+
+      filter: blur(1.5rem);
+      all:unset;
+      background-color: blue;
+      position: absolute;
+      height: 130px;
+      width: 100px;
+      left: 90%;
+      bottom: 50%;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 56% 50%);
+    }
+    
+
+
+    #arrowPrev{
+
+      left: 5%;
+      bottom: 50%;
+      -moz-transform: scale(-1, 1);
+      -webkit-transform: scale(-1, 1);
+      -o-transform: scale(-1, 1);
+      -ms-transform: scale(-1, 1);
+      transform: scale(-1, 1);
+
+    }
+    #arrowInsideNext:hover{
+
+      transform: none;
+    }
+    #arrowNext:hover {
+      
+      transform: scale(1.1) perspective(1px);
+    }
+    #arrowInsidePrev:hover{
+
+      transform: none;
+ 
+    }
+    #arrowPrev:hover {
+      
+   
+      -moz-transform: scale(-1, 1);
+      -webkit-transform: scale(-1, 1);
+      -o-transform: scale(-1, 1);
+      -ms-transform: scale(-1, 1);
+      transform: scale(-1.1, 1.1) perspective(1px);
+    }
+  

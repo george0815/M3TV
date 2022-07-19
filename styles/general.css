@@ -131,10 +131,12 @@ body{
       margin-top: 5%;
       
       /*size*/
-      min-width: 100%;
+      
       min-height: 20%;
       max-height: 20%;
       height: 25%;
+
+      min-width: 100%;
       width: 100%;
 
       /*Background*/
@@ -167,6 +169,27 @@ body{
       background: rgb(0,0,0);
       background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 0%, rgba(41,41,41,1) 100%);
      
+    }
+    #remChannelWrapper{
+      display: grid;
+      grid-template-columns: auto;
+      grid-auto-rows: 150px;
+      height: auto;
+      max-height: 620px;
+    overflow-y: scroll;
+    padding-bottom: 2%;
+    
+    
+    }
+    #remBody{
+/*structure*/
+display: grid;
+grid-template-columns: auto;
+grid-template-rows: auto auto 20%;
+
+/*size*/
+height: 100%;
+width: 100%;
     }
 
     

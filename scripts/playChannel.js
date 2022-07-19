@@ -1,6 +1,22 @@
   //player for playing vids
   var player = videojs('curPlaying');
 
+
+  //used for page functionality
+  var page = 0;
+  var pgCounter = 0;
+
+  //disable next page button
+  document.getElementById('arrowNext').style.display='none';
+
+
+  //disable prev page button
+  document.getElementById('arrowPrev').style.display='none';
+
+
+  //declares ichannel array
+  var iChannels = [];
+
   //makes video element invisible
   document.getElementById('curPlaying').style.display='none';
 
@@ -17,7 +33,7 @@
   }
 
   //loads channels and their respective buttons
-  function loadChannels(){
+  function loadChannels(page){
 
     //loads channel from local storage
     iChannels = JSON.parse(localStorage.getItem("iChannels"));
@@ -26,8 +42,19 @@
     //creates button for each channel
     iChannels.forEach((channel, i) => {
 
-      if(i < 12){
+      
+   
 
+   
+      if(i % 12 == 0 && i != 0){
+        console.log(pgCounter)
+        pgCounter++;
+        
+      }
+
+
+      if(pgCounter == page){
+       
         
         console.log(channel.pgNmbr);
         const ch = document.createElement("button");
@@ -42,14 +69,35 @@
         document.getElementById('channelWrapper').appendChild(ch);
 
       }
-      else{
-        channel.pgNmbr = i/12;
-        console.log(channel.pgNmbr);
-      }
+      
        
       
       
     });
+
+
+ 
+    
+
+    //enables next page button if there are pages left
+    if((pgCounter > 0) && (page < pgCounter)){
+
+     
+
+      document.getElementById('arrowNext').style.display='';
+
+    }
+    else{
+      document.getElementById('arrowNext').style.display='none';
+    }
+    if(page > 0){
+      document.getElementById('arrowPrev').style.display='';
+
+    }
+    else{
+      document.getElementById('arrowPrev').style.display='none';
+    }
+    
 
 
     
@@ -91,4 +139,30 @@ document.addEventListener("fullscreenchange", function() {
 });
 
 
-//loads new page of channels
+
+//next channel page
+document.getElementById("arrowInsideNext").addEventListener("click", () => {
+  
+   
+  pgCounter = 0;
+
+
+  //makes video element invisible
+  document.getElementById('channelWrapper').innerHTML = "";
+  page++;
+  loadChannels(page);
+    
+});
+//next channel page
+document.getElementById("arrowInsidePrev").addEventListener("click", () => {
+  
+   
+  pgCounter = 0;
+
+
+  //makes video element invisible
+  document.getElementById('channelWrapper').innerHTML = "";
+  page--;
+  loadChannels(page);
+    
+});
