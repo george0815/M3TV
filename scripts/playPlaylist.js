@@ -56,82 +56,91 @@ function playC(url){
 
 function loadC(url){
 
+
+//disable next page button
+document.getElementById('arrowInsideNext').onclick = function () { arrowForwardC(url); };
+document.getElementById('arrowInsidePrev').onclick = function () { arrowBackC(url); };
   
   let promise = translate(url);
   promise.then((url) => {
   
     parser(url);
+
+
+    document.getElementById('channelWrapper').innerHTML = '';
+
+
+    console.log(channels);
+    console.log(channels.length);
+    
+    console.log("fwefew");
+    
+    
+    
+    //creates button for each channel
+    channels.forEach((channel, i) => {
+    
+        
+     
+    
+     
+      if(i % 12 == 0 && i != 0){
+        console.log(pgCounter)
+        pgCounter++;
+        
+      }
+    
+    
+      if(pgCounter == page){
+       
+        
+        console.log(channel.pgNmbr);
+        const ch = document.createElement("button");
+      
+        ch.title = channel.title;
+        ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+channel.title+"\">"
+      
+    
+        ch.className = 'channelButton';
+    
+        ch.onclick = function () { playC(channel.url); };
+        document.getElementById('channelWrapper').appendChild(ch);
+    
+      }
+      
+       
+      
+      
+    });
+    
+    
+    
+    
+    
+    //enables next page button if there are pages left
+    if((pgCounter > 0) && (page < pgCounter)){
+    
+     
+    
+      document.getElementById('arrowNext').style.display='';
+    
+    }
+    else{
+      document.getElementById('arrowNext').style.display='none';
+    }
+    if(page > 0){
+      document.getElementById('arrowPrev').style.display='';
+    
+    }
+    else{
+      document.getElementById('arrowPrev').style.display='none';
+    }
+
+
    
   });
   
-  document.getElementById('channelWrapper').innerHTML = '';
-
-
-console.log(channels);
-console.log(channels.length);
-
-console.log("fwefew");
-
-
-
-//creates button for each channel
-channels.forEach((channel, i) => {
-
-    
  
-
- 
-  if(i % 12 == 0 && i != 0){
-    console.log(pgCounter)
-    pgCounter++;
-    
-  }
-
-
-  if(pgCounter == page){
-   
-    
-    console.log(channel.pgNmbr);
-    const ch = document.createElement("button");
-  
-    ch.title = channel.title;
-    ch.innerHTML = "<img src=\""+channel.logoUrl+"\" alt=\""+channel.title+"\">"
-  
-
-    ch.className = 'channelButton';
-
-    ch.onclick = function () { playC(channel.url); };
-    document.getElementById('channelWrapper').appendChild(ch);
-
-  }
-  
-   
-  
-  
-});
-
-
-
-
-
-//enables next page button if there are pages left
-if((pgCounter > 0) && (page < pgCounter)){
-
- 
-
-  document.getElementById('arrowNext').style.display='';
-
-}
-else{
-  document.getElementById('arrowNext').style.display='none';
-}
-if(page > 0){
-  document.getElementById('arrowPrev').style.display='';
-
-}
-else{
-  document.getElementById('arrowPrev').style.display='none';
-}
 
 
 
@@ -290,7 +299,7 @@ function parser(pl){
     }
     else if(arr[i].includes("#EXTINF",0) && j != 0){
     
-      console.log(tempChannel);
+    
       channels.push(tempChannel);
       var tempChannel =  new channel();
         
@@ -302,7 +311,7 @@ function parser(pl){
     }
     else if(i == arr.length - 1){
 
-      console.log(tempChannel);
+      
       channels.push(tempChannel);
 
     }
@@ -326,8 +335,65 @@ function translate(url) {
 
 
 
-/*
- 
-  3. load channels
-  4. change back button onclick
- */
+
+
+
+
+  //next channel page
+function arrowForward (){
+  
+   
+  pgCounter = 0;
+
+
+  //makes video element invisible
+  document.getElementById('channelWrapper').innerHTML = "";
+  page++;
+  loadPlaylists(page);
+    
+}
+
+//next channel page
+function arrowBack() {
+  
+   
+  pgCounter = 0;
+
+
+  //makes video element invisible
+  document.getElementById('channelWrapper').innerHTML = "";
+  page--;
+  loadPlaylists(page);
+    
+}
+
+
+
+
+//next channel page
+function arrowForwardC(url){
+  
+   
+  pgCounter = 0;
+
+
+  //makes video element invisible
+  document.getElementById('channelWrapper').innerHTML = "";
+  page++;
+  loadC(url, page);
+    
+}
+
+//next channel page
+function arrowBackC(url) {
+  
+   
+  pgCounter = 0;
+
+
+  //makes video element invisible
+  document.getElementById('channelWrapper').innerHTML = "";
+  page--;
+  loadC(url, page);
+    
+}
