@@ -5,20 +5,22 @@
         
     <meta charset=utf-8 />
     <title>PHANTOMa</title>
-
     
+
     <!--styles-->
     <link href="../styles/misc.css" rel="stylesheet">
     <link href="../styles/general.css" rel="stylesheet">
     <link href="../styles/buttons.css" rel="stylesheet">
+
+    <!--scripts-->
+    <script type="text/javascript" src="../scripts/removePlaylist.js"></script>
   
 
        
     </head>
-    <body>
+    <body id="remBody">
 
       
-
 
       <!--Header-->
       <div id="settingsTop">
@@ -27,21 +29,20 @@
       
       </div>
       
-
+      <div id="remChannelWrapper"></div>
       <!--Main Buttons-->
-      <iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe>
 
 
       <!--Footer-->
       <div id="backButtonWrapper">
         <button  class="footerButton" id="settingBack" onclick="location.href='options.html'">Back</button>
     
-        <button class="footerButton" >Remove All</button> 
+        <button class="footerButton" >Remove All<iframe width="0" height="0" src="https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe></button> 
     
-    </div>
+      </div>
 
 
-
+    <script>remPlaylistsLoad()</script>
       
     </body>
     </html>

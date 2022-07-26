@@ -1,3 +1,7 @@
+  //player for playing vids
+  var player = videojs('curPlaying');
+
+
 //array of channels for playlists
 var channels = [];
 
@@ -5,6 +9,8 @@ var channels = [];
 //used for page functionality
 var page = 0;
 var pgCounter = 0;
+var tPgCounter = 0;
+var runAmt = 0;
 
 //disable next page button
 document.getElementById('arrowNext').style.display='none';
@@ -56,10 +62,13 @@ function playC(url){
 
 function loadC(url){
 
+  runAmt++;
+
 
 //disable next page button
 document.getElementById('arrowInsideNext').onclick = function () { arrowForwardC(url); };
 document.getElementById('arrowInsidePrev').onclick = function () { arrowBackC(url); };
+document.getElementById('backChannel').onclick = function () { backC(); };
   
   let promise = translate(url);
   promise.then((url) => {
@@ -79,6 +88,7 @@ document.getElementById('arrowInsidePrev').onclick = function () { arrowBackC(ur
     
     //creates button for each channel
     channels.forEach((channel, i) => {
+
     
         
      
@@ -87,6 +97,11 @@ document.getElementById('arrowInsidePrev').onclick = function () { arrowBackC(ur
       if(i % 12 == 0 && i != 0){
         console.log(pgCounter)
         pgCounter++;
+
+
+        if(runAmt == 1){
+          tPgCounter++;
+        }
         
       }
     
@@ -97,14 +112,28 @@ document.getElementById('arrowInsidePrev').onclick = function () { arrowBackC(ur
         console.log(channel.pgNmbr);
         const ch = document.createElement("button");
       
+        if(channel.title === "Undefined "){
+          ch.title = channel.id;
+          ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+channel.id+"\">"
+        }
+        else{
         ch.title = channel.title;
         ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+channel.title+"\">"
+        }
+        
       
     
         ch.className = 'channelButton';
     
         ch.onclick = function () { playC(channel.url); };
-        document.getElementById('channelWrapper').appendChild(ch);
+
+        if(channel.country == '' && channel.group == '' && channel.id == '' && channel.language == '' && channel.logo == '' && channel.title == ''){
+
+        
+        }
+        else{
+          document.getElementById('channelWrapper').appendChild(ch);
+        }
     
       }
       
@@ -118,7 +147,7 @@ document.getElementById('arrowInsidePrev').onclick = function () { arrowBackC(ur
     
     
     //enables next page button if there are pages left
-    if((pgCounter > 0) && (page < pgCounter)){
+    if((tPgCounter > 0) && (page < tPgCounter)){
     
      
     
@@ -397,3 +426,49 @@ function arrowBackC(url) {
   loadC(url, page);
     
 }
+
+function backC (){
+
+
+  document.getElementById('channelWrapper').innerHTML = "";
+
+  page = 0;
+ pgCounter = 0;
+ tPgCounter = 0;
+ runAmt = 0;
+
+loadPlaylists(0);
+
+
+//disable next page button
+document.getElementById('arrowInsideNext').onclick = function () { arrowForward(); };
+document.getElementById('arrowInsidePrev').onclick = function () { arrowBack(); };
+
+
+
+document.getElementById('backChannel').onclick = function () { location.href='play.html' };
+
+}
+
+
+
+
+
+
+
+
+
+
+//when user exits fullscreen close video
+document.addEventListener("fullscreenchange", function() {
+  if (!document.fullscreen) {
+    
+    player.pause();
+    player.src("");
+    
+
+    //makes video element invisible
+    document.getElementById('curPlaying').style.display='none';
+
+  } 
+});
