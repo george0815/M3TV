@@ -54,7 +54,7 @@ height: 100%;
 
 
 /*Body for index*/
-#bodyI{
+#MainContainer{
 
       /*structure*/
       display: grid;
@@ -108,6 +108,11 @@ grid-template-rows: 65% 35%;
 
 /*all bodies*/
 body{
+
+  /*size*/
+  height: 100%;
+  width: 100%;
+
 
   /*removes gap on side*/
   margin: 0%;
