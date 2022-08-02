@@ -38,6 +38,8 @@
     //loads channel from local storage
     iChannels = JSON.parse(localStorage.getItem("iChannels"));
 
+//iChannels[1].createElement("button");
+console.log(iChannels);
 
     //creates button for each channel
     iChannels.forEach((channel, i) => {
@@ -70,12 +72,12 @@
 
       }
       
-       
       
       
     });
 
 
+       
  
     
 

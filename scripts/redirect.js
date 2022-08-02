@@ -10,7 +10,7 @@ document.getElementById("iPlay").addEventListener("click", function() {
         document.documentElement.id = ""
 
 
-      //ADD BUTTONS
+      //PLAY BUTTONS
       document.getElementById("options").addEventListener("click", function() {
 
 
@@ -47,6 +47,7 @@ document.getElementById("iPlay").addEventListener("click", function() {
         var idString = document.body.firstChild.id;
     
         $("#" + idString).load("../play/playPlaylist.html",function(){
+          $.getScript("playPlaylist.js"); 
             document.body.firstChild.id = "";
             document.body.firstChild.className = "playVid";
             document.documentElement.id = ""
@@ -59,7 +60,9 @@ document.getElementById("iPlay").addEventListener("click", function() {
       var idString = document.body.firstChild.id;
   
       $("#" + idString).load("../play/playChannel.html",function(){
+        $.getScript("playChannel.js"); 
           document.body.firstChild.id = "";
+          
           document.body.firstChild.className = "playVid";
           document.documentElement.id = ""
       });

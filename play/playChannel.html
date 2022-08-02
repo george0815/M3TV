@@ -1,5 +1,31 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+
+        
+    <meta charset=utf-8 />
+    <title>PHANTOMa</title>
+      
+      <!--scripts-->
+      <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+      <script src="https://unpkg.com/video.js/dist/video.js"></script> 
+      <script src="https://unpkg.com/browse/@videojs/http-streaming@2.14.2/dist/videojs-http-streaming.js"></script>
+      <script type="text/javascript" src="../scripts/clock.js"></script>
+
+
+      <!--styles-->
+      <link href="../styles/misc.css" rel="stylesheet">
+      <link href="../styles/clock.css" rel="stylesheet">
+      <link href="../styles/general.css" rel="stylesheet">
+      <link href="../styles/buttons.css" rel="stylesheet">
+       
+    </head>
+    <body class="playVid">
+
+
+
       <!--Video element for playing channels-->
-      <video muted=true id="curPlaying" class="video-js vjs-fluid vjs-default-skin" controls preload="auto"
+      <video muted=false id="curPlaying" class="video-js vjs-fluid vjs-default-skin" controls preload="auto"
       data-setup='{}'>
 
         <source id="currentChannel" src="" type="application/x-mpegURL">
@@ -41,11 +67,9 @@
 
       <!--Scripts for loading channels and playing video-->
       <script type="text/javascript" src="../scripts/playChannel.js"></script>
-      <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
-      <script src="https://unpkg.com/video.js/dist/video.js"></script> 
-      <script src="https://unpkg.com/browse/@videojs/http-streaming@2.14.2/dist/videojs-http-streaming.js"></script>
-      <script type="text/javascript" src="../scripts/clock.js"></script>
       <script>
         loadChannels(0);
       </script>
       
+    </body>
+    </html>
