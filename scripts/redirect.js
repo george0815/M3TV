@@ -1,4 +1,149 @@
 
+function test(idString){
+
+
+  $("#" + idString).load("../add/add.html",function(){
+
+      
+
+    document.body.firstChild.id = "body";
+    document.documentElement.id = "def"
+
+
+
+    
+
+    //ADD BUTTONS
+    document.getElementById("options").addEventListener("click", function() {
+
+
+        var idString = document.body.firstChild.id;
+    
+        $("#" + idString).load("../options/options.html",function(){
+            document.body.firstChild.id = "def";
+            document.documentElement.id = "htmlSettings"
+        });
+    
+    
+    
+      }); 
+
+
+
+      document.getElementById("aBack").addEventListener("click", function() {
+
+
+        var idString = document.body.firstChild.id;
+    
+        $("#" + idString).load("../base.html",function(){
+            document.body.firstChild.id = "MainContainer";
+            document.documentElement.id = "def"
+        });
+    
+    
+    
+      }); 
+
+
+      
+
+    document.getElementById("aPlaylist").addEventListener("click", function() {
+
+        var idString = document.body.firstChild.id;
+
+        
+    
+        $("#" + idString).load("../add/addPlaylist.html",function(){
+            document.body.firstChild.id = "def";
+            document.documentElement.id = "htmlSettings"
+
+
+
+            
+            
+            document.getElementById("addPBack").addEventListener("click", function() {
+
+              var idString = document.body.firstChild.id;
+
+
+              
+
+              console.log(idString);
+              test(idString);
+          
+              
+
+          });
+
+          
+
+
+
+
+
+
+
+        });
+    
+    });
+
+
+    document.getElementById("aChannel").addEventListener("click", function() {
+
+        var idString = document.body.firstChild.id;
+
+        $("#" + idString).load("../add/addChannel.html",function(){
+        document.body.firstChild.id = "def";
+        document.documentElement.id = "htmlSettings"
+
+
+
+
+        document.getElementById("addCBack").addEventListener("click", function() {
+
+          var idString = document.body.firstChild.id;
+      
+          $("#" + idString).load("../add/add.html",function(){
+              
+  
+            document.body.firstChild.id = "body";
+               
+            document.documentElement.id = "def"
+           
+
+              
+          });
+
+      });
+
+
+    });
+
+
+      
+    
+    
+    
+
+
+
+
+
+});
+
+
+
+
+
+});
+
+
+}
+
+
+
+
+
 
 //INDEX BUTTONS
 document.getElementById("iPlay").addEventListener("click", function() {
@@ -7,7 +152,7 @@ document.getElementById("iPlay").addEventListener("click", function() {
 
     $("#" + idString).load("../play/play.html",function(){
         document.body.firstChild.id = "body";
-        document.documentElement.id = ""
+        document.documentElement.id = "def"
 
 
       //PLAY BUTTONS
@@ -34,7 +179,7 @@ document.getElementById("iPlay").addEventListener("click", function() {
     
         $("#" + idString).load("../base.html",function(){
             document.body.firstChild.id = "MainContainer";
-            document.documentElement.id = ""
+            document.documentElement.id = "def"
         });
     
     
@@ -50,7 +195,7 @@ document.getElementById("iPlay").addEventListener("click", function() {
          
             document.body.firstChild.id = "def";
             document.body.firstChild.className = "playVid";
-            document.documentElement.id = ""
+            document.documentElement.id = "def"
         });
     
     });
@@ -64,7 +209,7 @@ document.getElementById("iPlay").addEventListener("click", function() {
           document.body.firstChild.id = "def";
           
           document.body.firstChild.className = "playVid";
-          document.documentElement.id = ""
+          document.documentElement.id = "def"
       });
   
   });
@@ -81,141 +226,15 @@ document.getElementById("iPlay").addEventListener("click", function() {
 
 document.getElementById("iAdd").addEventListener("click", function() {
 
+
     var idString = document.body.firstChild.id;
-
-    $("#" + idString).load("../add/add.html",function(){
-
-        document.body.firstChild.id = "body";
-        document.documentElement.id = ""
+    console.log(idString);
 
 
+    test(idString);
 
-
-    
-        //ADD BUTTONS
-        document.getElementById("options").addEventListener("click", function() {
-
-
-            var idString = document.body.firstChild.id;
-        
-            $("#" + idString).load("../options/options.html",function(){
-                document.body.firstChild.id = "def";
-                document.documentElement.id = "htmlSettings"
-            });
-        
-        
-        
-          }); 
-
-
-
-          document.getElementById("aBack").addEventListener("click", function() {
-
-
-            var idString = document.body.firstChild.id;
-        
-            $("#" + idString).load("../base.html",function(){
-                document.body.firstChild.id = "MainContainer";
-                document.documentElement.id = ""
-            });
-        
-        
-        
-          }); 
-
-
-        document.getElementById("aPlaylist").addEventListener("click", function() {
-
-            var idString = document.body.firstChild.id;
-
-            console.log("fwefew");
-        
-            $("#" + idString).load("../add/addPlaylist.html",function(){
-                document.body.firstChild.id = "def";
-                document.documentElement.id = "htmlSettings"
-
-
-
-                
-
-                document.getElementById("addPBack").addEventListener("click", function() {
-
-                  console.log("fwefew");
-
-                  var idString = document.body.firstChild.id;
-              
-                  $("#" + idString).load("../add/add.html",function(){
-                      
-                      document.body.firstChild.id = "body";
-                   
-                      document.documentElement.id = "def"
-                     
-      
-                      
-                  });
-    
-              });
-
-              
-
-
-
-
-
-
-
-            });
-        
-        });
-
-
-        document.getElementById("aChannel").addEventListener("click", function() {
-
-            var idString = document.body.firstChild.id;
-
-            $("#" + idString).load("../add/addChannel.html",function(){
-            document.body.firstChild.id = "";
-            document.documentElement.id = "htmlSettings"
-
-
-
-
-            document.getElementById("addCBack").addEventListener("click", function() {
-
-              var idString = document.body.firstChild.id;
-          
-              $("#" + idString).load("../add/add.html",function(){
-                  
-      
-                  document.body.firstChild.className = "";
-                  document.documentElement.id = ""
-                  document.documentElement.id = ""
-  
-                  
-              });
-
-          });
-
-
-        });
-
-
-          
-        
-        
-        
-
-
-
-
-
-    });
-
-
-
-
-
-    });
+  /*} while (true)
+    gfiuyvweiufbiuewf*/
 
   });
 
@@ -232,7 +251,7 @@ document.getElementById("iAdd").addEventListener("click", function() {
     var idString = document.body.firstChild.id;
 
     $("#" + idString).load("../options/options.html",function(){
-        document.body.firstChild.id = "";
+        document.body.firstChild.id = "def";
         document.documentElement.id = "htmlSettings"
     });
 
