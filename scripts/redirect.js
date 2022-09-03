@@ -138,6 +138,111 @@ function iAdd(idString){
 
 function iPlay(idString){
 
+
+  $("#" + idString).load("../play/play.html",function(){
+
+
+    document.body.firstChild.id = "body";
+   
+
+
+  //PLAY BUTTONS
+  document.getElementById("options").addEventListener("click", function() {
+
+
+    var idString = document.body.firstChild.id;
+
+    $("#" + idString).load("../options/options.html",function(){
+        document.body.firstChild.id = "def";
+        document.documentElement.id = "htmlSettings"
+    });
+
+
+
+  }); 
+
+
+
+  document.getElementById("pBack").addEventListener("click", function() {
+
+
+    var idString = document.body.firstChild.id;
+
+    $("#" + idString).load("../base.html",function(){
+        document.body.firstChild.id = "MainContainer";
+        
+    });
+
+
+
+  }); 
+
+
+document.getElementById("pPlaylist").addEventListener("click", function() {
+
+    var idString = document.body.firstChild.id;
+
+    $("#" + idString).load("../play/playPlaylist.html",function(){
+     
+        document.body.firstChild.id = "def";
+        document.body.firstChild.className = "playVid";
+       
+
+
+        document.getElementById("backChannel").addEventListener("click", function(){
+
+
+         var idString = document.body.firstChild.id;
+
+
+              
+
+              console.log(idString);
+              iPlay(idString);
+          
+
+        })
+
+
+
+    });
+
+});
+
+document.getElementById("pChannel").addEventListener("click", function() {
+
+  var idString = document.body.firstChild.id;
+
+  $("#" + idString).load("../play/playChannel.html",function(){
+    
+      document.body.firstChild.id = "def";
+      
+      document.body.firstChild.className = "playVid";
+
+      document.getElementById("backChannel").addEventListener("click", function(){
+
+
+        var idString = document.body.firstChild.id;
+
+
+             
+
+             console.log(idString);
+             iPlay(idString);
+         
+
+       })
+
+      
+  });
+
+});
+
+
+    
+});
+
+
 }
 
 
@@ -148,78 +253,15 @@ function iPlay(idString){
 document.getElementById("iPlay").addEventListener("click", function() {
 
     var idString = document.body.firstChild.id;
-
-    $("#" + idString).load("../play/play.html",function(){
-        document.body.firstChild.id = "body";
-        document.documentElement.id = "def"
+    console.log(idString);
 
 
-      //PLAY BUTTONS
-      document.getElementById("options").addEventListener("click", function() {
-
-
-        var idString = document.body.firstChild.id;
+    iPlay(idString);
     
-        $("#" + idString).load("../options/options.html",function(){
-            document.body.firstChild.id = "def";
-            document.documentElement.id = "htmlSettings"
-        });
-    
-    
-    
-      }); 
-
-
-
-      document.getElementById("pBack").addEventListener("click", function() {
-
-
-        var idString = document.body.firstChild.id;
-    
-        $("#" + idString).load("../base.html",function(){
-            document.body.firstChild.id = "MainContainer";
-            document.documentElement.id = "def"
-        });
-    
-    
-    
-      }); 
-
-
-    document.getElementById("pPlaylist").addEventListener("click", function() {
-
-        var idString = document.body.firstChild.id;
-    
-        $("#" + idString).load("../play/playPlaylist.html",function(){
-         
-            document.body.firstChild.id = "def";
-            document.body.firstChild.className = "playVid";
-            document.documentElement.id = "def"
-        });
-    
-    });
-
-    document.getElementById("pChannel").addEventListener("click", function() {
-
-      var idString = document.body.firstChild.id;
-  
-      $("#" + idString).load("../play/playChannel.html",function(){
-        
-          document.body.firstChild.id = "def";
-          
-          document.body.firstChild.className = "playVid";
-          document.documentElement.id = "def"
-      });
-  
-  });
-
-
-        
-    });
 
   });
 
-
+/*BJBUB*/ 
   
 
 
