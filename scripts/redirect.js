@@ -1,5 +1,5 @@
 
-function test(idString){
+function iAdd(idString){
 
 
   $("#" + idString).load("../add/add.html",function(){
@@ -69,7 +69,7 @@ function test(idString){
               
 
               console.log(idString);
-              test(idString);
+              iAdd(idString);
           
               
 
@@ -102,17 +102,12 @@ function test(idString){
         document.getElementById("addCBack").addEventListener("click", function() {
 
           var idString = document.body.firstChild.id;
-      
-          $("#" + idString).load("../add/add.html",function(){
-              
-  
-            document.body.firstChild.id = "body";
-               
-            document.documentElement.id = "def"
-           
+
 
               
-          });
+
+              console.log(idString);
+              iAdd(idString);
 
       });
 
@@ -140,6 +135,10 @@ function test(idString){
 
 }
 
+
+function iPlay(idString){
+
+}
 
 
 
@@ -231,10 +230,8 @@ document.getElementById("iAdd").addEventListener("click", function() {
     console.log(idString);
 
 
-    test(idString);
+    iAdd(idString);
 
-  /*} while (true)
-    gfiuyvweiufbiuewf*/
 
   });
 

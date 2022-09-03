@@ -55,7 +55,7 @@ window.addEventListener("gamepadconnected", function(e) {
 
 
   //pushes channels array to local storage
-  document.getElementById("settingBack").addEventListener("click", () => {
+  document.getElementById("addPBack").addEventListener("click", () => {
 
 
     //deletes previous storage item so there are no duplicates
