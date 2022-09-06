@@ -17,12 +17,10 @@ function iAdd(idString){
     document.getElementById("options").addEventListener("click", function() {
 
 
-        var idString = document.body.firstChild.id;
+      var idString = document.body.firstChild.id;
+
     
-        $("#" + idString).load("../options/options.html",function(){
-            document.body.firstChild.id = "def";
-            document.documentElement.id = "htmlSettings"
-        });
+      iOptions(idString, 1);
     
     
     
@@ -152,10 +150,8 @@ function iPlay(idString){
 
     var idString = document.body.firstChild.id;
 
-    $("#" + idString).load("../options/options.html",function(){
-        document.body.firstChild.id = "def";
-        document.documentElement.id = "htmlSettings"
-    });
+    
+    iOptions(idString, 2);
 
 
 
@@ -197,9 +193,15 @@ document.getElementById("pPlaylist").addEventListener("click", function() {
 
               
 
-              console.log(idString);
+              
+
+              if(document.getElementById("backPlaylist") == null){
+
+                console.log(  document.getElementById("backChannel").id);
               iPlay(idString);
-          
+              }
+
+
 
         })
 
@@ -283,7 +285,7 @@ document.getElementById("pChannel").addEventListener("click", function() {
 
 }
 
-function iOptions(idString){
+function iOptions(idString, mode){
 
   var idString = document.body.firstChild.id;
 
@@ -308,7 +310,7 @@ function iOptions(idString){
 
             var idString = document.body.firstChild.id;
 
-            iOptions(idString);
+            iOptions(idString, mode);
           })
 
           
@@ -320,22 +322,43 @@ function iOptions(idString){
       document.getElementById("vol").addEventListener("click", function() {
 
 
-        document.getElementById("settingBack").addEventListener("click", function() {
 
-          var idString = document.body.firstChild.id;
+        var idString = document.body.firstChild.id;
 
-          iOptions(idString);
+        $("#" + idString).load("../options/volume.html",function(){
+
+
+          document.getElementById("settingBack").addEventListener("click", function() {
+
+            var idString = document.body.firstChild.id;
+
+            iOptions(idString, mode);
+          })
+
+          
+
         })
 
       })
 
       document.getElementById("remCh").addEventListener("click", function() {
 
-        document.getElementById("settingBack").addEventListener("click", function() {
+        
 
-          var idString = document.body.firstChild.id;
+        var idString = document.body.firstChild.id;
 
-          iOptions(idString);
+        $("#" + idString).load("../options/removeChannels.html",function(){
+
+
+          document.getElementById("settingBack").addEventListener("click", function() {
+
+            var idString = document.body.firstChild.id;
+
+            iOptions(idString, mode);
+          })
+
+          
+
         })
 
       })
@@ -343,11 +366,22 @@ function iOptions(idString){
       document.getElementById("remPl").addEventListener("click", function() {
 
 
-        document.getElementById("settingBack").addEventListener("click", function() {
+       
 
-          var idString = document.body.firstChild.id;
+        var idString = document.body.firstChild.id;
 
-          iOptions(idString);
+        $("#" + idString).load("../options/removePlaylists.html",function(){
+
+
+          document.getElementById("settingBack").addEventListener("click", function() {
+
+            var idString = document.body.firstChild.id;
+
+            iOptions(idString, mode);
+          })
+
+          
+
         })
 
 
@@ -356,15 +390,57 @@ function iOptions(idString){
       document.getElementById("lang").addEventListener("click", function() {
 
 
-        document.getElementById("settingBack").addEventListener("click", function() {
+        
 
-          var idString = document.body.firstChild.id;
+        var idString = document.body.firstChild.id;
 
-          iOptions(idString);
+        $("#" + idString).load("../options/language.html",function(){
+
+
+          document.getElementById("settingBack").addEventListener("click", function() {
+
+            var idString = document.body.firstChild.id;
+
+            iOptions(idString, mode);
+          })
+
+          
+
         })
 
 
       })
+
+
+      document.getElementById("settingBack").addEventListener("click", function() {
+
+        var idString = document.body.firstChild.id;
+
+
+        if (mode == 0){
+          
+          var idString = document.body.firstChild.id;
+    
+        $("#" + idString).load("../base.html",function(){
+            document.body.firstChild.id = "MainContainer";
+            document.documentElement.id = "def"
+        });
+
+        }
+        else if (mode == 1){
+
+          iAdd(idString);
+
+        }
+        else if (mode == 2){
+          iPlay(idString);
+        }
+
+        
+      })
+
+
+
 
   });
 
@@ -413,7 +489,7 @@ document.getElementById("iAdd").addEventListener("click", function() {
     var idString = document.body.firstChild.id;
 
     
-    iOptions(idString);
+    iOptions(idString, 0);
 
 
   }); 

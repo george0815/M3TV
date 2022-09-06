@@ -86,11 +86,20 @@
     /*sets position*/
     margin-top: 1%;
     position: absolute;
-    left: 40%;
+    left: 60%;
 
     /*sets border*/
     outline: none;
     border: none;
+  }
+
+
+  #settingBack{
+
+  
+    left: 20%;
+
+    
   }
 
 
@@ -158,6 +167,14 @@
     }
 
     #backChannel{
+
+      left: -10%; 
+      text-align: right;
+      padding-right: 5%;
+
+    }
+
+    #backPlaylist{
 
       left: -10%; 
       text-align: right;

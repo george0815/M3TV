@@ -62,13 +62,16 @@ function playC(url){
 
 function loadC(url){
 
+  document.getElementById("backChannel").id = "backPlaylist";
+
   runAmt++;
 
 
 //disable next page button
 document.getElementById('arrowInsideNext').onclick = function () { arrowForwardC(url); };
 document.getElementById('arrowInsidePrev').onclick = function () { arrowBackC(url); };
-document.getElementById('backChannel').onclick = function () { backC(); };
+document.getElementById('backPlaylist').onclick = function () { backC(); };
+
   
   let promise = translate(url);
   promise.then((url) => {
@@ -187,6 +190,9 @@ document.getElementById('backChannel').onclick = function () { backC(); };
 
 //loads channels and their respective buttons
 function loadPlaylists(page){
+
+
+  
 
   //loads channel from local storage
   playlists = JSON.parse(localStorage.getItem("playlists"));
@@ -445,8 +451,8 @@ document.getElementById('arrowInsideNext').onclick = function () { arrowForward(
 document.getElementById('arrowInsidePrev').onclick = function () { arrowBack(); };
 
 
-
-document.getElementById('backChannel').onclick = function () { location.href='play.html' };
+document.getElementById('backPlaylist').onclick = "";
+document.getElementById("backPlaylist").id = "backChannel";
 
 }
 
