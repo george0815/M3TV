@@ -204,6 +204,22 @@ document.getElementById("pPlaylist").addEventListener("click", function() {
         })
 
 
+        document.getElementById("optionsChannel").addEventListener("click", function(){
+
+
+          var idString = document.body.firstChild.id;
+ 
+ 
+          $("#" + idString).load("../options/options.html",function(){
+            document.body.firstChild.className = "";
+              document.body.firstChild.id = "def";
+              document.documentElement.id = "htmlSettings"
+          });
+           
+ 
+         })
+
+
 
     });
 
@@ -233,6 +249,28 @@ document.getElementById("pChannel").addEventListener("click", function() {
 
        })
 
+       document.getElementById("optionsChannel").addEventListener("click", function(){
+
+
+        var idString = document.body.firstChild.id;
+
+
+        $("#" + idString).load("../options/options.html",function(){
+          document.body.firstChild.className = "";
+            document.body.firstChild.id = "def";
+            document.documentElement.id = "htmlSettings"
+        });
+         
+
+       })
+
+
+
+
+
+
+       
+
       
   });
 
@@ -245,7 +283,92 @@ document.getElementById("pChannel").addEventListener("click", function() {
 
 }
 
+function iOptions(idString){
 
+  var idString = document.body.firstChild.id;
+
+  $("#" + idString).load("../options/options.html",function(){
+      document.body.firstChild.id = "def";
+      document.documentElement.id = "htmlSettings"
+
+
+
+
+      document.getElementById("mus").addEventListener("click", function() {
+
+    
+
+
+        var idString = document.body.firstChild.id;
+
+        $("#" + idString).load("../options/music.html",function(){
+
+
+          document.getElementById("settingBack").addEventListener("click", function() {
+
+            var idString = document.body.firstChild.id;
+
+            iOptions(idString);
+          })
+
+          
+
+        })
+
+      })
+
+      document.getElementById("vol").addEventListener("click", function() {
+
+
+        document.getElementById("settingBack").addEventListener("click", function() {
+
+          var idString = document.body.firstChild.id;
+
+          iOptions(idString);
+        })
+
+      })
+
+      document.getElementById("remCh").addEventListener("click", function() {
+
+        document.getElementById("settingBack").addEventListener("click", function() {
+
+          var idString = document.body.firstChild.id;
+
+          iOptions(idString);
+        })
+
+      })
+
+      document.getElementById("remPl").addEventListener("click", function() {
+
+
+        document.getElementById("settingBack").addEventListener("click", function() {
+
+          var idString = document.body.firstChild.id;
+
+          iOptions(idString);
+        })
+
+
+      })
+
+      document.getElementById("lang").addEventListener("click", function() {
+
+
+        document.getElementById("settingBack").addEventListener("click", function() {
+
+          var idString = document.body.firstChild.id;
+
+          iOptions(idString);
+        })
+
+
+      })
+
+  });
+
+}
 
 
 
@@ -261,7 +384,7 @@ document.getElementById("iPlay").addEventListener("click", function() {
 
   });
 
-/*BJBUB*/ 
+
   
 
 
@@ -289,11 +412,8 @@ document.getElementById("iAdd").addEventListener("click", function() {
 
     var idString = document.body.firstChild.id;
 
-    $("#" + idString).load("../options/options.html",function(){
-        document.body.firstChild.id = "def";
-        document.documentElement.id = "htmlSettings"
-    });
-
+    
+    iOptions(idString);
 
 
   }); 
