@@ -55,7 +55,7 @@ function playC(url){
   player.play(); 
   player.requestFullscreen();
   document.getElementById('curPlaying').style.display='';
-  console.log(document.getElementById('currentChannel').getAttribute('src'));
+
 
 
 }
@@ -82,10 +82,6 @@ document.getElementById('backPlaylist').onclick = function () { backC(); };
     document.getElementById('channelWrapper').innerHTML = '';
 
 
-    console.log(channels);
-    console.log(channels.length);
-    
-    console.log("fwefew");
     
     
     
@@ -98,7 +94,7 @@ document.getElementById('backPlaylist').onclick = function () { backC(); };
     
      
       if(i % 12 == 0 && i != 0){
-        console.log(pgCounter)
+       
         pgCounter++;
 
 
@@ -112,7 +108,7 @@ document.getElementById('backPlaylist').onclick = function () { backC(); };
       if(pgCounter == page){
        
         
-        console.log(channel.pgNmbr);
+
         const ch = document.createElement("button");
       
         if(channel.title === "Undefined "){
@@ -206,7 +202,7 @@ function loadPlaylists(page){
 
  
     if(i % 12 == 0 && i != 0){
-      console.log(pgCounter)
+ 
       pgCounter++;
       
     }
@@ -215,7 +211,7 @@ function loadPlaylists(page){
     if(pgCounter == page){
      
       
-      console.log(playlist.pgNmbr);
+ 
       const pl = document.createElement("button");
     
       pl.title = playlist.title;
@@ -272,6 +268,10 @@ function loadPlaylists(page){
 function parser(pl){
 
   
+
+  //empty channel array
+  channels = [];
+
   //splices m3u for more readability/easier parsing
   pl = pl.replace(/tvg-/g, '\n').replace(/group-/g, '\n').replace(/user-/g, '\n');
 
