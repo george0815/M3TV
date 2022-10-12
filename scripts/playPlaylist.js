@@ -62,19 +62,32 @@ function playC(url){
 
 function loadC(url){
 
+
+  
+ // var elements = document.getElementById('myDiv').children
+//elements.item(n)
+
+if(runAmt == 0){
   document.getElementById("backChannel").id = "backPlaylist";
+}
+
+  console.log("HERE");  
 
   runAmt++;
 
+  
 
 //disable next page button
 document.getElementById('arrowInsideNext').onclick = function () { arrowForwardC(url); };
 document.getElementById('arrowInsidePrev').onclick = function () { arrowBackC(url); };
 document.getElementById('backPlaylist').onclick = function () { backC(); };
 
-  
+
+
   let promise = translate(url);
   promise.then((url) => {
+
+    
   
     parser(url);
 
@@ -128,10 +141,12 @@ document.getElementById('backPlaylist').onclick = function () { backC(); };
 
         if(channel.country == '' && channel.group == '' && channel.id == '' && channel.language == '' && channel.logo == '' && channel.title == ''){
 
-        
+          
         }
         else{
           document.getElementById('channelWrapper').appendChild(ch);
+
+          
         }
     
       }

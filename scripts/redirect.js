@@ -141,6 +141,7 @@ function iPlay(idString){
 
 
     document.body.firstChild.id = "body";
+    document.documentElement.id = ""
    
 
 
@@ -163,6 +164,8 @@ function iPlay(idString){
 
 
     var idString = document.body.firstChild.id;
+
+      
 
     $("#" + idString).load("../base.html",function(){
         document.body.firstChild.id = "MainContainer";
