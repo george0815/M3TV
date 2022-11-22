@@ -294,6 +294,7 @@ function iOptions(idString, mode){
 
   $("#" + idString).load("../options/options.html",function(){
       document.body.firstChild.id = "def";
+      document.body.firstChild.className = "";
       document.documentElement.id = "htmlSettings"
 
 

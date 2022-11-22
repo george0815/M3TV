@@ -9,6 +9,9 @@
     playlists = JSON.parse(localStorage.getItem("playlists"));
 
 
+    if (playlists != null){
+      // your code here.
+ 
     //creates button for each channel
     playlists.forEach((playlist, i) => {
 
@@ -28,6 +31,7 @@
       
 
     });
+  }
 
   
 
@@ -52,3 +56,19 @@
 
 
   }
+
+
+  function removeAll(){
+
+    localStorage.removeItem('playlists');
+
+  }
+
+
+  //removes all
+  document.getElementById("removeAll").addEventListener("click", () => {
+
+    localStorage.removeItem('playlists');
+    remPlaylistsLoad();
+
+  })

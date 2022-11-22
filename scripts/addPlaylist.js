@@ -43,10 +43,14 @@ window.addEventListener("gamepadconnected", function(e) {
     tempPlaylist.url = document.getElementById("url").value;
   
   
+
+    if(!(tempPlaylist.url === "")){
     //pushes channel to array
     playlists.push(tempPlaylist);
     document.getElementById("mform").reset();
-      
+  }
+
+
   });
   
 

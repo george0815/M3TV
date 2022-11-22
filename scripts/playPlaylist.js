@@ -122,32 +122,23 @@ document.getElementById('backPlaylist').onclick = function () { backC(); };
        
         
 
-        const ch = document.createElement("button");
-      
-        if(channel.title === "Undefined "){
-          ch.title = channel.id;
-          ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+channel.id+"\">"
-        }
-        else{
-        ch.title = channel.title;
-        ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+channel.title+"\">"
-        }
         
+
+        if(!(channel.url === "")){
+     
+          const ch = document.createElement("button");
+
+          console.log(ch.title);
       
-    
-        ch.className = 'channelButton';
-    
-        ch.onclick = function () { playC(channel.url); };
-
-        if(channel.country == '' && channel.group == '' && channel.id == '' && channel.language == '' && channel.logo == '' && channel.title == ''){
-
-          
-        }
-        else{
+       
+          ch.title = channel.title;
+          ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+channel.title+"\">"
+          ch.className = 'channelButton';
+          ch.onclick = function () { playC(channel.url); };
           document.getElementById('channelWrapper').appendChild(ch);
 
-          
         }
+        
     
       }
       
@@ -208,7 +199,7 @@ function loadPlaylists(page){
   //loads channel from local storage
   playlists = JSON.parse(localStorage.getItem("playlists"));
 
-
+  if (playlists != null){
   //creates button for each channel
   playlists.forEach((playlist, i) => {
 
@@ -244,7 +235,7 @@ function loadPlaylists(page){
     
     
   });
-
+}
 
 
   
