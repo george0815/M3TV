@@ -9,6 +9,8 @@
     iChannels = JSON.parse(localStorage.getItem("iChannels"));
 
 
+
+    if (playlists != null){
     //creates button for each channel
     iChannels.forEach((channel, i) => {
 
@@ -29,7 +31,7 @@
 
     });
 
-  
+    }
 
   };
 

@@ -1,5 +1,9 @@
-  //player for playing vids
-  var player = videojs('curPlaying');
+//player for playing vids
+var player = videojs('curPlaying');
+
+
+
+
 
 
 //array of channels for playlists
@@ -51,7 +55,12 @@ function channel() {
 //plays playlist
 function playC(url){
 
+  
+
+  
+
   player.src(url);
+  console.log(url);
   player.play(); 
   player.requestFullscreen();
   document.getElementById('curPlaying').style.display='';
@@ -62,7 +71,7 @@ function playC(url){
 
 function loadC(url){
 
-
+ 
   
  // var elements = document.getElementById('myDiv').children
 //elements.item(n)
@@ -78,8 +87,8 @@ if(runAmt == 0){
   
 
 //disable next page button
-document.getElementById('arrowInsideNext').onclick = function () { arrowForwardC(url); };
-document.getElementById('arrowInsidePrev').onclick = function () { arrowBackC(url); };
+document.getElementById('arrowNext').onclick = function () { arrowForwardC(url); };
+document.getElementById('arrowPrev').onclick = function () { arrowBackC(url); };
 document.getElementById('backPlaylist').onclick = function () { backC(); };
 
 
@@ -260,7 +269,22 @@ function loadPlaylists(page){
   }
   
 
+//disable next page button
+document.getElementById('arrowNext').onclick = function () { arrowForward(); };
+document.getElementById('arrowPrev').onclick = function () { arrowBack(); };
 
+
+test = document.getElementById('backPlaylist');
+if(test){
+document.getElementById('backPlaylist').onclick = "";
+document.getElementById("backPlaylist").id = "backChannel";
+}
+
+document.getElementById("backChannel").addEventListener("click", function() {
+
+    player.dispose();
+    
+})
   
 
 };
@@ -452,13 +476,7 @@ function backC (){
 loadPlaylists(0);
 
 
-//disable next page button
-document.getElementById('arrowInsideNext').onclick = function () { arrowForward(); };
-document.getElementById('arrowInsidePrev').onclick = function () { arrowBack(); };
 
-
-document.getElementById('backPlaylist').onclick = "";
-document.getElementById("backPlaylist").id = "backChannel";
 
 }
 

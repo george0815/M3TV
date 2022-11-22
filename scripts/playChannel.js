@@ -1,3 +1,10 @@
+  
+  document.getElementById("backChannel").addEventListener("click", function() {
+
+    player.dispose();
+    
+})
+  
   //player for playing vids
   var player = videojs('curPlaying');
 
@@ -38,8 +45,12 @@
     //loads channel from local storage
     iChannels = JSON.parse(localStorage.getItem("iChannels"));
 
+    if (iChannels != null){
+
 //iChannels[1].createElement("button");
 console.log(iChannels);
+
+
 
     //creates button for each channel
     iChannels.forEach((channel, i) => {
@@ -76,7 +87,7 @@ console.log(iChannels);
       
     });
 
-
+  }
        
  
     
@@ -143,7 +154,7 @@ document.addEventListener("fullscreenchange", function() {
 
 
 //next channel page
-document.getElementById("arrowInsideNext").addEventListener("click", () => {
+document.getElementById("arrowNext").addEventListener("click", () => {
   
    
   pgCounter = 0;
@@ -156,7 +167,7 @@ document.getElementById("arrowInsideNext").addEventListener("click", () => {
     
 });
 //next channel page
-document.getElementById("arrowInsidePrev").addEventListener("click", () => {
+document.getElementById("arrowPrev").addEventListener("click", () => {
   
    
   pgCounter = 0;
