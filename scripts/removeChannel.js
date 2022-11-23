@@ -54,3 +54,19 @@
 
 
   }
+
+
+  //removes all
+  document.getElementById("removeAll").addEventListener("click", () => {
+
+
+    //removes all buttons
+    document.getElementById("remChannelWrapper").innerHTML = "";
+
+    //deletes previous storage item so there are no duplicates
+    localStorage.removeItem('playlists');
+
+    
+    remPlaylistsLoad();
+
+  })

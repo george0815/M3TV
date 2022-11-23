@@ -213,13 +213,10 @@ document.getElementById("pPlaylist").addEventListener("click", function() {
 
 
           var idString = document.body.firstChild.id;
- 
- 
-          $("#" + idString).load("../options/options.html",function(){
-            document.body.firstChild.className = "";
-              document.body.firstChild.id = "def";
-              document.documentElement.id = "htmlSettings"
-          });
+
+    
+          iOptions(idString, 2);
+      
            
  
          })
@@ -259,12 +256,9 @@ document.getElementById("pChannel").addEventListener("click", function() {
 
         var idString = document.body.firstChild.id;
 
+    
+        iOptions(idString, 2);
 
-        $("#" + idString).load("../options/options.html",function(){
-          document.body.firstChild.className = "";
-            document.body.firstChild.id = "def";
-            document.documentElement.id = "htmlSettings"
-        });
          
 
        })

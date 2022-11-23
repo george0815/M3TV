@@ -43,7 +43,7 @@ window.addEventListener("gamepadconnected", function(e) {
     tempChannel.url = document.getElementById("url").value;
   
   
-    if(!(tempPlaylist.url === "")){
+    if(!(tempChannel.url === "" || tempChannel.title === "")){
     //pushes channel to array
     iChannels.push(tempChannel);
     document.getElementById("mform").reset();

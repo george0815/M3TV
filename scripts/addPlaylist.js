@@ -44,7 +44,7 @@ window.addEventListener("gamepadconnected", function(e) {
   
   
 
-    if(!(tempPlaylist.url === "")){
+    if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){
     //pushes channel to array
     playlists.push(tempPlaylist);
     document.getElementById("mform").reset();
@@ -61,6 +61,7 @@ window.addEventListener("gamepadconnected", function(e) {
   //pushes channels array to local storage
   document.getElementById("addPBack").addEventListener("click", () => {
 
+    
 
     //deletes previous storage item so there are no duplicates
     localStorage.removeItem('playlists');
