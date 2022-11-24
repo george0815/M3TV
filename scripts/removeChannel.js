@@ -10,7 +10,7 @@
 
 
 
-    if (playlists != null){
+    if (iChannels != null){
     //creates button for each channel
     iChannels.forEach((channel, i) => {
 

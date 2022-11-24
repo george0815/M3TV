@@ -53,6 +53,7 @@ function iAdd(idString){
     
         $("#" + idString).load("../add/addPlaylist.html",function(){
             document.body.firstChild.id = "def";
+            document.body.firstChild.className = "";
             document.documentElement.id = "htmlSettings"
 
 
@@ -92,6 +93,7 @@ function iAdd(idString){
 
         $("#" + idString).load("../add/addChannel.html",function(){
         document.body.firstChild.id = "def";
+        document.body.firstChild.className = "";
         document.documentElement.id = "htmlSettings"
 
 
