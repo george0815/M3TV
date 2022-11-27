@@ -187,6 +187,7 @@ body{
     
     }
     #remBody{
+      
 /*structure*/
 display: grid;
 grid-template-columns: auto;

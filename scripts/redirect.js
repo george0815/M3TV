@@ -349,6 +349,7 @@ function iOptions(idString, mode){
 
         $("#" + idString).load("../options/removeChannels.html",function(){
 
+          document.body.firstChild.id = "remBody";
 
           document.getElementById("settingBack").addEventListener("click", function() {
 
@@ -372,6 +373,7 @@ function iOptions(idString, mode){
 
         $("#" + idString).load("../options/removePlaylists.html",function(){
 
+          document.body.firstChild.id = "remBody";
 
           document.getElementById("settingBack").addEventListener("click", function() {
 
