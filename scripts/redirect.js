@@ -1,4 +1,11 @@
 
+
+
+        var snd = new Audio("soundEffects/okMain.mp3"); // buffers automatically when created
+        snd.play();  
+      
+    
+
 function iAdd(idString){
 
 
