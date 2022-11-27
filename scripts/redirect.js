@@ -1,8 +1,18 @@
+//creates sound effects
+var okMain = new Audio("soundEffects/okMain.mp3"); 
+var okSetting = new Audio("soundEffects/okSetting.mp3"); 
+var okChannel = new Audio("soundEffects/okChannel.mp3"); 
+var backSetting = new Audio("soundEffects/backSetting.mp3"); 
+var backMain = new Audio("soundEffects/backMain.mp3"); 
+var backChannel = new Audio("soundEffects/backChannel.mp3"); 
 
-
-
-        var snd = new Audio("soundEffects/okMain.mp3"); // buffers automatically when created
-        snd.play();  
+        
+/*okMain.play();  
+okSetting.play();  
+okChannel.play();  
+backSetting.play();  
+backMain.play();  
+backChannel.play();  */
       
     
 
