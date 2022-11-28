@@ -22,7 +22,7 @@ function iAdd(idString){
   $("#" + idString).load("../add/add.html",function(){
 
       
-
+    
     document.body.firstChild.id = "body";
     document.documentElement.id = "def"
 
@@ -47,7 +47,7 @@ function iAdd(idString){
 
       document.getElementById("aBack").addEventListener("click", function() {
 
-
+        backMain.play();
         var idString = document.body.firstChild.id;
     
         $("#" + idString).load("../base.html",function(){
@@ -67,7 +67,7 @@ function iAdd(idString){
         var idString = document.body.firstChild.id;
 
         
-    
+        okSetting.play();
         $("#" + idString).load("../add/addPlaylist.html",function(){
             document.body.firstChild.id = "def";
             document.body.firstChild.className = "";
@@ -78,7 +78,7 @@ function iAdd(idString){
             
             
             document.getElementById("addPBack").addEventListener("click", function() {
-
+              backSetting.play();
               var idString = document.body.firstChild.id;
 
 
@@ -105,6 +105,7 @@ function iAdd(idString){
 
 
     document.getElementById("aChannel").addEventListener("click", function() {
+      okSetting.play();
 
         var idString = document.body.firstChild.id;
 
@@ -117,6 +118,7 @@ function iAdd(idString){
 
 
         document.getElementById("addCBack").addEventListener("click", function() {
+          backSetting.play();
 
           var idString = document.body.firstChild.id;
 
