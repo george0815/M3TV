@@ -81,7 +81,7 @@ function iAdd(idString){
               backSetting.play();
               var idString = document.body.firstChild.id;
 
-
+novejbugvbrebgurebugbruibuib
               
 
               console.log(idString);
