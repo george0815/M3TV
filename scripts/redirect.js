@@ -1,5 +1,6 @@
 //creates sound effects
 var okMain = new Audio("soundEffects/okMain.mp3"); 
+var okMain2 = new Audio("soundEffects/okMain.mp3"); 
 var okSetting = new Audio("soundEffects/okSetting.mp3"); 
 var okChannel = new Audio("soundEffects/okChannel.mp3"); 
 var backSetting = new Audio("soundEffects/backSetting.mp3"); 
@@ -33,7 +34,7 @@ function iAdd(idString){
     //ADD BUTTONS
     document.getElementById("options").addEventListener("click", function() {
 
-
+      okSetting.play();
       var idString = document.body.firstChild.id;
 
     
@@ -81,8 +82,7 @@ function iAdd(idString){
               backSetting.play();
               var idString = document.body.firstChild.id;
 
-novejbugvbrebgurebugbruibuib
-              
+
 
               console.log(idString);
               iAdd(idString);
@@ -169,7 +169,7 @@ function iPlay(idString){
   //PLAY BUTTONS
   document.getElementById("options").addEventListener("click", function() {
 
-
+    okSetting.play()
     var idString = document.body.firstChild.id;
 
     
@@ -183,7 +183,7 @@ function iPlay(idString){
 
   document.getElementById("pBack").addEventListener("click", function() {
 
-
+    backMain.play();
     var idString = document.body.firstChild.id;
 
       
@@ -199,18 +199,18 @@ function iPlay(idString){
 
 
 document.getElementById("pPlaylist").addEventListener("click", function() {
-
+  okMain2.play();
     var idString = document.body.firstChild.id;
 
     $("#" + idString).load("../play/playPlaylist.html",function(){
-     
+      
         document.body.firstChild.id = "def";
         document.body.firstChild.className = "playVid";
        
 
 
         document.getElementById("backChannel").addEventListener("click", function(){
-
+          backSetting.play();
 
          var idString = document.body.firstChild.id;
 
@@ -232,7 +232,7 @@ document.getElementById("pPlaylist").addEventListener("click", function() {
 
         document.getElementById("optionsChannel").addEventListener("click", function(){
 
-
+          okSetting.play();
           var idString = document.body.firstChild.id;
 
     
@@ -249,7 +249,7 @@ document.getElementById("pPlaylist").addEventListener("click", function() {
 });
 
 document.getElementById("pChannel").addEventListener("click", function() {
-
+  okMain2.play();
   var idString = document.body.firstChild.id;
 
   $("#" + idString).load("../play/playChannel.html",function(){
@@ -259,7 +259,7 @@ document.getElementById("pChannel").addEventListener("click", function() {
       document.body.firstChild.className = "playVid";
 
       document.getElementById("backChannel").addEventListener("click", function(){
-
+        backSetting.play();
 
         var idString = document.body.firstChild.id;
 
@@ -274,7 +274,7 @@ document.getElementById("pChannel").addEventListener("click", function() {
 
        document.getElementById("optionsChannel").addEventListener("click", function(){
 
-
+        okSetting.play();
         var idString = document.body.firstChild.id;
 
     
@@ -316,7 +316,7 @@ function iOptions(idString, mode){
 
 
       document.getElementById("mus").addEventListener("click", function() {
-
+        okSetting.play();
     
 
 
@@ -326,7 +326,7 @@ function iOptions(idString, mode){
 
 
           document.getElementById("settingBack").addEventListener("click", function() {
-
+            backSetting.play();
             var idString = document.body.firstChild.id;
 
             iOptions(idString, mode);
@@ -339,7 +339,7 @@ function iOptions(idString, mode){
       })
 
       document.getElementById("vol").addEventListener("click", function() {
-
+        okSetting.play();
 
 
         var idString = document.body.firstChild.id;
@@ -348,7 +348,7 @@ function iOptions(idString, mode){
 
 
           document.getElementById("settingBack").addEventListener("click", function() {
-
+            backSetting.play();
             var idString = document.body.firstChild.id;
 
             iOptions(idString, mode);
@@ -361,7 +361,7 @@ function iOptions(idString, mode){
       })
 
       document.getElementById("remCh").addEventListener("click", function() {
-
+        okSetting.play();
         
 
         var idString = document.body.firstChild.id;
@@ -371,7 +371,7 @@ function iOptions(idString, mode){
           document.body.firstChild.id = "remBody";
 
           document.getElementById("settingBack").addEventListener("click", function() {
-
+            backSetting.play();
             var idString = document.body.firstChild.id;
 
             iOptions(idString, mode);
@@ -384,7 +384,7 @@ function iOptions(idString, mode){
       })
 
       document.getElementById("remPl").addEventListener("click", function() {
-
+        okSetting.play();
 
        
 
@@ -395,7 +395,7 @@ function iOptions(idString, mode){
           document.body.firstChild.id = "remBody";
 
           document.getElementById("settingBack").addEventListener("click", function() {
-
+            backSetting.play();
             var idString = document.body.firstChild.id;
 
             iOptions(idString, mode);
@@ -409,7 +409,7 @@ function iOptions(idString, mode){
       })
 
       document.getElementById("lang").addEventListener("click", function() {
-
+        okSetting.play();
 
         
 
@@ -419,7 +419,7 @@ function iOptions(idString, mode){
 
 
           document.getElementById("settingBack").addEventListener("click", function() {
-
+            backSetting.play();
             var idString = document.body.firstChild.id;
 
             iOptions(idString, mode);
@@ -435,11 +435,12 @@ function iOptions(idString, mode){
 
       document.getElementById("settingBack").addEventListener("click", function() {
 
+
         var idString = document.body.firstChild.id;
 
 
         if (mode == 0){
-          
+          backMain.play();
           var idString = document.body.firstChild.id;
     
         $("#" + idString).load("../base.html",function(){
@@ -450,11 +451,13 @@ function iOptions(idString, mode){
         }
         else if (mode == 1){
 
+          backSetting.play();
           iAdd(idString);
 
         }
         else if (mode == 2){
           iPlay(idString);
+          backSetting.play();
         }
 
         
@@ -472,6 +475,7 @@ function iOptions(idString, mode){
 //INDEX BUTTONS
 document.getElementById("iPlay").addEventListener("click", function() {
 
+    okMain.play();
     var idString = document.body.firstChild.id;
     console.log(idString);
 
@@ -487,7 +491,7 @@ document.getElementById("iPlay").addEventListener("click", function() {
 
 document.getElementById("iAdd").addEventListener("click", function() {
 
-
+    okMain.play();
     var idString = document.body.firstChild.id;
     console.log(idString);
 
@@ -506,7 +510,7 @@ document.getElementById("iAdd").addEventListener("click", function() {
   //options
   document.getElementById("options").addEventListener("click", function() {
 
-
+    okMain.play();
     var idString = document.body.firstChild.id;
 
     
@@ -516,33 +520,3 @@ document.getElementById("iAdd").addEventListener("click", function() {
   }); 
 
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//PLAY BUTTONS
-
-
