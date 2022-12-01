@@ -28,7 +28,7 @@
         document.getElementById('remChannelWrapper').appendChild(ch);
 
       
-      
+       
 
     });
   }
@@ -39,7 +39,7 @@
 
 
   function removePl(title){
-
+    okSetting.play();
     document.getElementById(title).style.display = 'none';
 
     playlists = playlists.filter(function( playlist ) {
@@ -68,7 +68,7 @@
     //deletes previous storage item so there are no duplicates
     localStorage.removeItem('playlists');
 
-    
+    okSetting.play();
     remPlaylistsLoad();
 
   })

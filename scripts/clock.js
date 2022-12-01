@@ -1,3 +1,4 @@
+
 //Creates and implement a time and date div in the clock div
 function updateClock(){
     var dt = new Date();

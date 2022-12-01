@@ -27,7 +27,7 @@
         document.getElementById('remChannelWrapper').appendChild(ch);
 
       
-      
+       
 
     });
 
@@ -43,7 +43,7 @@
     iChannels = iChannels.filter(function( channel ) {
         return channel.title !== title;
       });
-
+      okSetting.play();
       
     //deletes previous storage item so there are no duplicates
     localStorage.removeItem('iChannels');
@@ -59,7 +59,7 @@
   //removes all
   document.getElementById("removeAll").addEventListener("click", () => {
 
-
+    okSetting.play();
     //removes all buttons
     document.getElementById("remChannelWrapper").innerHTML = "";
 

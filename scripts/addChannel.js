@@ -16,7 +16,7 @@ function channel() {
       url: "",
       pgNmbr: 0
      
-  };
+  }; 
 };
 
 
@@ -33,7 +33,7 @@ window.addEventListener("gamepadconnected", function(e) {
 //adds channel
   document.getElementById("okay").addEventListener("click", () => {
   
-   
+    okSetting.play();
     //creates and sets variables of channel to be pushed
     tempChannel = new channel();
     tempChannel.title = document.getElementById("name").value;

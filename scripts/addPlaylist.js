@@ -20,7 +20,7 @@ function playlist() {
 };
 
 
-
+ 
 //gamepad test
 window.addEventListener("gamepadconnected", function(e) {
     const gp = navigator.getGamepads()[e.gamepad.index];
@@ -33,6 +33,7 @@ window.addEventListener("gamepadconnected", function(e) {
 //adds channel
   document.getElementById("okay").addEventListener("click", () => {
   
+    okSetting.play();
    
     //creates and sets variables of channel to be pushed
     tempPlaylist = new playlist();

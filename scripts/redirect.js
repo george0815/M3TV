@@ -1,8 +1,14 @@
+$('[lang="en"]').hide();
+$('[lang="es"]').hide();
+
+
+
 //creates sound effects
 var okMain = new Audio("soundEffects/okMain.mp3"); 
 var okMain2 = new Audio("soundEffects/okMain.mp3"); 
 var okSetting = new Audio("soundEffects/okSetting.mp3"); 
 var okChannel = new Audio("soundEffects/okChannel.mp3"); 
+var okChannel2 = new Audio("soundEffects/okChannel.mp3"); 
 var backSetting = new Audio("soundEffects/backSetting.mp3"); 
 var backMain = new Audio("soundEffects/backMain.mp3"); 
 var backChannel = new Audio("soundEffects/backChannel.mp3"); 

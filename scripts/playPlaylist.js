@@ -1,7 +1,7 @@
 //player for playing vids
 var player = videojs('curPlaying');
 
-
+var playPromise;
 
 
 
@@ -56,12 +56,18 @@ function channel() {
 function playC(url){
 
   
-
+  okChannel2.play();
   
 
   player.src(url);
   console.log(url);
-  player.play(); 
+
+
+  playPromise = player.play();
+
+  
+
+
   player.requestFullscreen();
   document.getElementById('curPlaying').style.display='';
 
@@ -71,12 +77,15 @@ function playC(url){
 
 function loadC(url){
 
- 
+  
+  
   
  // var elements = document.getElementById('myDiv').children
 //elements.item(n)
 
 if(runAmt == 0){
+
+  okChannel.play();
   document.getElementById("backChannel").id = "backPlaylist";
 }
 
@@ -407,7 +416,7 @@ function translate(url) {
   //next channel page
 function arrowForward (){
   
-   
+  okSetting.play();
   pgCounter = 0;
 
 
@@ -420,7 +429,7 @@ function arrowForward (){
 
 //next channel page
 function arrowBack() {
-  
+  okSetting.play();
    
   pgCounter = 0;
 
@@ -440,7 +449,7 @@ function arrowForwardC(url){
   
    
   pgCounter = 0;
-
+  okSetting.play();
 
   //makes video element invisible
   document.getElementById('channelWrapper').innerHTML = "";
@@ -455,7 +464,7 @@ function arrowBackC(url) {
    
   pgCounter = 0;
 
-
+  okSetting.play();
   //makes video element invisible
   document.getElementById('channelWrapper').innerHTML = "";
   page--;
@@ -491,14 +500,40 @@ loadPlaylists(0);
 
 //when user exits fullscreen close video
 document.addEventListener("fullscreenchange", function() {
-  if (!document.fullscreen) {
-    
-    player.pause();
-    player.src("");
-    
+  
 
+  
+
+  if (!document.fullscreen) {
+  
+
+    backChannel.play();
     //makes video element invisible
     document.getElementById('curPlaying').style.display='none';
 
+
+
+    try {
+  
+   
+
+
+      if (playPromise !== undefined) {
+        playPromise.then(_ => {})
+        .catch(error => {
+        });
+      }
+  
+      player.src("");
+  
+  
+       
+    } catch (error) {
+      console.error(error);
+    
+    }
+
   } 
+
+
 });

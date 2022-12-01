@@ -31,6 +31,7 @@
   function playC(url){
 
     player.src(url);
+    okChannel.play();
     player.play(); 
     player.requestFullscreen();
     document.getElementById('curPlaying').style.display='';
@@ -140,13 +141,33 @@ console.log(iChannels);
 //when user exits fullscreen close video
 document.addEventListener("fullscreenchange", function() {
   if (!document.fullscreen) {
-    
-    player.pause();
-    player.src("");
-    
+  
 
+    backChannel.play();
     //makes video element invisible
     document.getElementById('curPlaying').style.display='none';
+
+
+
+    try {
+  
+   
+
+
+      if (playPromise !== undefined) {
+        playPromise.then(_ => {})
+        .catch(error => {
+        });
+      }
+  
+      player.src("");
+  
+  
+       
+    } catch (error) {
+      console.error(error);
+    
+    }
 
   } 
 });
@@ -159,6 +180,7 @@ document.getElementById("arrowNext").addEventListener("click", () => {
    
   pgCounter = 0;
 
+  okSetting.play();
 
   //makes video element invisible
   document.getElementById('channelWrapper').innerHTML = "";
@@ -169,7 +191,7 @@ document.getElementById("arrowNext").addEventListener("click", () => {
 //next channel page
 document.getElementById("arrowPrev").addEventListener("click", () => {
   
-   
+  okSetting.play();
   pgCounter = 0;
 
 
