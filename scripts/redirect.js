@@ -1,5 +1,21 @@
-$('[lang="en"]').hide();
 $('[lang="es"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+
+
+  $(document.body.firstChild).on('DOMSubtreeModified', function(){
+    $('[lang="es"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+  });
 
 
 
@@ -14,12 +30,7 @@ var backMain = new Audio("soundEffects/backMain.mp3");
 var backChannel = new Audio("soundEffects/backChannel.mp3"); 
 
         
-/*okMain.play();  
-okSetting.play();  
-okChannel.play();  
-backSetting.play();  
-backMain.play();  
-backChannel.play();  */
+
       
     
 
@@ -38,7 +49,9 @@ function iAdd(idString){
     
 
     //ADD BUTTONS
-    document.getElementById("options").addEventListener("click", function() {
+    var elements = document.querySelectorAll("#options");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
 
       okSetting.play();
       var idString = document.body.firstChild.id;
@@ -50,9 +63,13 @@ function iAdd(idString){
     
       }); 
 
+    }
 
 
-      document.getElementById("aBack").addEventListener("click", function() {
+
+    var elements = document.querySelectorAll("#aBack");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
 
         backMain.play();
         var idString = document.body.firstChild.id;
@@ -66,10 +83,12 @@ function iAdd(idString){
     
       }); 
 
-
+    }
       
 
-    document.getElementById("aPlaylist").addEventListener("click", function() {
+    var elements = document.querySelectorAll("#aPlaylist");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
 
         var idString = document.body.firstChild.id;
 
@@ -84,7 +103,9 @@ function iAdd(idString){
 
             
             
-            document.getElementById("addPBack").addEventListener("click", function() {
+            var elements = document.querySelectorAll("#addPBack");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
               backSetting.play();
               var idString = document.body.firstChild.id;
 
@@ -96,6 +117,7 @@ function iAdd(idString){
               
 
           });
+        }
 
           
 
@@ -109,8 +131,12 @@ function iAdd(idString){
     
     });
 
+  }
 
-    document.getElementById("aChannel").addEventListener("click", function() {
+
+  var elements = document.querySelectorAll("#aChannel");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener("click", function() {
       okSetting.play();
 
         var idString = document.body.firstChild.id;
@@ -123,7 +149,9 @@ function iAdd(idString){
 
 
 
-        document.getElementById("addCBack").addEventListener("click", function() {
+        var elements = document.querySelectorAll("#addCBack");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
           backSetting.play();
 
           var idString = document.body.firstChild.id;
@@ -135,11 +163,12 @@ function iAdd(idString){
               iAdd(idString);
 
       });
+    }
 
 
     });
 
-
+  
       
     
     
@@ -152,7 +181,7 @@ function iAdd(idString){
 });
 
 
-
+  }
 
 
 });
@@ -173,7 +202,9 @@ function iPlay(idString){
 
 
   //PLAY BUTTONS
-  document.getElementById("options").addEventListener("click", function() {
+  var elements = document.querySelectorAll("#options");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
 
     okSetting.play()
     var idString = document.body.firstChild.id;
@@ -184,10 +215,13 @@ function iPlay(idString){
 
 
   }); 
+}
 
 
 
-  document.getElementById("pBack").addEventListener("click", function() {
+var elements = document.querySelectorAll("#pBack");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
 
     backMain.play();
     var idString = document.body.firstChild.id;
@@ -202,9 +236,13 @@ function iPlay(idString){
 
 
   }); 
+  }
 
 
-document.getElementById("pPlaylist").addEventListener("click", function() {
+
+  var elements = document.querySelectorAll("#pPlaylist");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener("click", function() {
   okMain2.play();
     var idString = document.body.firstChild.id;
 
@@ -215,7 +253,9 @@ document.getElementById("pPlaylist").addEventListener("click", function() {
        
 
 
-        document.getElementById("backChannel").addEventListener("click", function(){
+        var elements = document.querySelectorAll("#backChannel");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
           backSetting.play();
 
          var idString = document.body.firstChild.id;
@@ -234,9 +274,12 @@ document.getElementById("pPlaylist").addEventListener("click", function() {
 
 
         })
+      }
 
 
-        document.getElementById("optionsChannel").addEventListener("click", function(){
+      var elements = document.querySelectorAll("#optionsChannel");
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].addEventListener("click", function() {
 
           okSetting.play();
           var idString = document.body.firstChild.id;
@@ -247,6 +290,7 @@ document.getElementById("pPlaylist").addEventListener("click", function() {
            
  
          })
+        }
 
 
 
@@ -254,7 +298,11 @@ document.getElementById("pPlaylist").addEventListener("click", function() {
 
 });
 
-document.getElementById("pChannel").addEventListener("click", function() {
+  }
+
+  var elements = document.querySelectorAll("#pChannel");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener("click", function() {
   okMain2.play();
   var idString = document.body.firstChild.id;
 
@@ -264,7 +312,9 @@ document.getElementById("pChannel").addEventListener("click", function() {
       
       document.body.firstChild.className = "playVid";
 
-      document.getElementById("backChannel").addEventListener("click", function(){
+      var elements = document.querySelectorAll("#backChannel");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
         backSetting.play();
 
         var idString = document.body.firstChild.id;
@@ -278,7 +328,11 @@ document.getElementById("pChannel").addEventListener("click", function() {
 
        })
 
-       document.getElementById("optionsChannel").addEventListener("click", function(){
+      }
+
+      var elements = document.querySelectorAll("#optionsChannel");
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].addEventListener("click", function() {
 
         okSetting.play();
         var idString = document.body.firstChild.id;
@@ -289,6 +343,7 @@ document.getElementById("pChannel").addEventListener("click", function() {
          
 
        })
+      }
 
 
 
@@ -302,7 +357,7 @@ document.getElementById("pChannel").addEventListener("click", function() {
 
 });
 
-
+}
     
 });
 
@@ -321,7 +376,9 @@ function iOptions(idString, mode){
 
 
 
-      document.getElementById("mus").addEventListener("click", function() {
+      var elements = document.querySelectorAll("#mus");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
         okSetting.play();
     
 
@@ -331,12 +388,16 @@ function iOptions(idString, mode){
         $("#" + idString).load("../options/music.html",function(){
 
 
-          document.getElementById("settingBack").addEventListener("click", function() {
+          var elements = document.querySelectorAll("#settingBack");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
             backSetting.play();
             var idString = document.body.firstChild.id;
 
             iOptions(idString, mode);
           })
+
+        }
 
           
 
@@ -344,7 +405,11 @@ function iOptions(idString, mode){
 
       })
 
-      document.getElementById("vol").addEventListener("click", function() {
+    }
+
+    var elements = document.querySelectorAll("#vol");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
         okSetting.play();
 
 
@@ -353,20 +418,26 @@ function iOptions(idString, mode){
         $("#" + idString).load("../options/volume.html",function(){
 
 
-          document.getElementById("settingBack").addEventListener("click", function() {
+          var elements = document.querySelectorAll("#settingBack");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
             backSetting.play();
             var idString = document.body.firstChild.id;
 
             iOptions(idString, mode);
           })
-
+        }
           
 
         })
 
       })
 
-      document.getElementById("remCh").addEventListener("click", function() {
+    }
+
+    var elements = document.querySelectorAll("#remCh");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
         okSetting.play();
         
 
@@ -376,20 +447,26 @@ function iOptions(idString, mode){
 
           document.body.firstChild.id = "remBody";
 
-          document.getElementById("settingBack").addEventListener("click", function() {
+          var elements = document.querySelectorAll("#settingBack");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
             backSetting.play();
             var idString = document.body.firstChild.id;
 
             iOptions(idString, mode);
           })
+        }
 
           
 
         })
 
       })
+    }
 
-      document.getElementById("remPl").addEventListener("click", function() {
+    var elements = document.querySelectorAll("#remPl");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
         okSetting.play();
 
        
@@ -400,12 +477,15 @@ function iOptions(idString, mode){
 
           document.body.firstChild.id = "remBody";
 
-          document.getElementById("settingBack").addEventListener("click", function() {
+          var elements = document.querySelectorAll("#settingBack");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
             backSetting.play();
             var idString = document.body.firstChild.id;
 
             iOptions(idString, mode);
           })
+        }
 
           
 
@@ -413,8 +493,11 @@ function iOptions(idString, mode){
 
 
       })
+    }
 
-      document.getElementById("lang").addEventListener("click", function() {
+    var elements = document.querySelectorAll("#lang");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
         okSetting.play();
 
         
@@ -424,12 +507,16 @@ function iOptions(idString, mode){
         $("#" + idString).load("../options/language.html",function(){
 
 
-          document.getElementById("settingBack").addEventListener("click", function() {
+          var elements = document.querySelectorAll("#settingBack");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
             backSetting.play();
             var idString = document.body.firstChild.id;
 
             iOptions(idString, mode);
           })
+
+        }
 
           
 
@@ -437,9 +524,12 @@ function iOptions(idString, mode){
 
 
       })
+    }
 
 
-      document.getElementById("settingBack").addEventListener("click", function() {
+    var elements = document.querySelectorAll("#settingBack");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
 
 
         var idString = document.body.firstChild.id;
@@ -468,6 +558,7 @@ function iOptions(idString, mode){
 
         
       })
+    }
 
 
 
@@ -479,7 +570,10 @@ function iOptions(idString, mode){
 
 
 //INDEX BUTTONS
-document.getElementById("iPlay").addEventListener("click", function() {
+var elements = document.querySelectorAll("#iPlay");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
+
 
     okMain.play();
     var idString = document.body.firstChild.id;
@@ -487,15 +581,18 @@ document.getElementById("iPlay").addEventListener("click", function() {
 
 
     iPlay(idString);
-    
+
 
   });
+}
 
 
   
 
 
-document.getElementById("iAdd").addEventListener("click", function() {
+var elements = document.querySelectorAll("#iAdd");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
 
     okMain.play();
     var idString = document.body.firstChild.id;
@@ -506,7 +603,7 @@ document.getElementById("iAdd").addEventListener("click", function() {
 
 
   });
-
+}
 
 
 
@@ -514,7 +611,9 @@ document.getElementById("iAdd").addEventListener("click", function() {
 
 
   //options
-  document.getElementById("options").addEventListener("click", function() {
+  var elements = document.querySelectorAll("#options");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
 
     okMain.play();
     var idString = document.body.firstChild.id;
@@ -524,5 +623,5 @@ document.getElementById("iAdd").addEventListener("click", function() {
 
 
   }); 
-
+}
   
