@@ -1,4 +1,15 @@
-$('[lang="es"]').hide();
+
+if(localStorage.getItem("lang") == null){
+
+  localStorage.setItem('lang', "EN");
+
+}
+else{
+
+  if(localStorage.getItem("lang") === "EN"){
+
+    $('[lang="en"]').show();
+    $('[lang="es"]').hide();
   $('[lang="jp"]').hide();
   $('[lang="ar"]').hide();
   $('[lang="fr"]').hide();
@@ -8,6 +19,7 @@ $('[lang="es"]').hide();
 
 
   $(document.body.firstChild).on('DOMSubtreeModified', function(){
+    $('[lang="en"]').show();
     $('[lang="es"]').hide();
   $('[lang="jp"]').hide();
   $('[lang="ar"]').hide();
@@ -16,6 +28,44 @@ $('[lang="es"]').hide();
   $('[lang="ru"]').hide();
   $('[lang="ch"]').hide();
   });
+
+  }
+  else if(localStorage.getItem("lang") === "ES"){
+
+    $('[lang="es"]').show();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+
+
+  $(document.body.firstChild).on('DOMSubtreeModified', function(){
+    $('[lang="es"]').show();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+  });
+
+
+
+  }
+
+
+
+}
+
+
+
+
+
+
 
 
 
@@ -505,6 +555,114 @@ for (var i = 0; i < elements.length; i++) {
         var idString = document.body.firstChild.id;
 
         $("#" + idString).load("../options/language.html",function(){
+
+
+
+          var elements = document.querySelectorAll("#EN");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
+            
+okSetting.play();
+    localStorage.setItem('lang', "EN");
+
+
+          })
+
+        }
+
+var elements = document.querySelectorAll("#ES");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
+            
+okSetting.play();
+    localStorage.setItem('lang', "ES");
+
+
+          })
+
+        }
+
+
+
+        var elements = document.querySelectorAll("#FR");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
+            
+okSetting.play();
+    localStorage.setItem('lang', "FR");
+
+
+          })
+
+        }
+
+
+        var elements = document.querySelectorAll("#GR");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
+            
+okSetting.play();
+    localStorage.setItem('lang', "GR");
+
+
+          })
+
+        }
+
+        var elements = document.querySelectorAll("#AR");
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].addEventListener("click", function() {
+                    
+        okSetting.play();
+            localStorage.setItem('lang', "AR");
+        
+        
+                  })
+        
+                }
+
+
+                var elements = document.querySelectorAll("#RU");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
+            
+okSetting.play();
+    localStorage.setItem('lang', "RU");
+
+
+          })
+
+        }
+
+
+        var elements = document.querySelectorAll("#CH");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
+            
+okSetting.play();
+    localStorage.setItem('lang', "CH");
+
+
+          })
+
+        }
+
+
+        var elements = document.querySelectorAll("#JP");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
+            
+okSetting.play();
+    localStorage.setItem('lang', "JP");
+
+
+          })
+
+        }
+
+
+
+
 
 
           var elements = document.querySelectorAll("#settingBack");

@@ -58,7 +58,7 @@
 
   //removes all
   document.getElementById("removeAll").addEventListener("click", () => {
-
+ 
     okSetting.play();
     //removes all buttons
     document.getElementById("remChannelWrapper").innerHTML = "";
