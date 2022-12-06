@@ -56,6 +56,159 @@ else{
 
 
   }
+  else if(localStorage.getItem("lang") === "FR"){
+
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').show();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+
+
+  $(document.body.firstChild).on('DOMSubtreeModified', function(){
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').show();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+  });
+
+
+
+  }
+  else if(localStorage.getItem("lang") === "GR"){
+
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').show();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+
+
+  $(document.body.firstChild).on('DOMSubtreeModified', function(){
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').show();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+  });
+
+
+
+  }
+  else if(localStorage.getItem("lang") === "AR"){
+
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').show();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+
+
+  $(document.body.firstChild).on('DOMSubtreeModified', function(){
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').show();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+  });
+
+
+
+  }else if(localStorage.getItem("lang") === "RU"){
+
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').show();
+  $('[lang="ch"]').hide();
+
+
+  $(document.body.firstChild).on('DOMSubtreeModified', function(){
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').show();
+  $('[lang="ch"]').hide();
+  });
+
+
+
+  }else if(localStorage.getItem("lang") === "CH"){
+
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').show();
+
+
+  $(document.body.firstChild).on('DOMSubtreeModified', function(){
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').show();
+  });
+
+
+
+  }else if(localStorage.getItem("lang") === "JP"){
+
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').show();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+
+
+  $(document.body.firstChild).on('DOMSubtreeModified', function(){
+    $('[lang="es"]').hide();
+    $('[lang="en"]').hide();
+  $('[lang="jp"]').show();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+  });
+
+
+
+  }
 
 
 
