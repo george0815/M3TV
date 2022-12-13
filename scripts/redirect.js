@@ -1,5 +1,6 @@
 langChange();
 
+
 function langChange(){
 
 
@@ -221,7 +222,23 @@ else{
 
 }
 
+function musicChange(){
 
+  if(localStorage.getItem("mus") == null){
+
+    document.getElementById("bgMusic").src = "https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1";
+  
+  }
+  else{
+
+
+    document.getElementById('bgMusic').src = localStorage.getItem("mus") + "?rel=0&autoplay=1&loop=1";
+    
+
+  }
+
+
+}
 
 
 
@@ -601,10 +618,26 @@ for (var i = 0; i < elements.length; i++) {
             backSetting.play();
             var idString = document.body.firstChild.id;
 
+
+
+            if(!(document.getElementById("url").value === "")){
+            localStorage.setItem('mus', document.getElementById("url").value);
+            musicChange();
+  }
+
+
             iOptions(idString, mode);
           })
 
-        }
+        }   
+
+
+
+
+
+
+
+
 
           
 
