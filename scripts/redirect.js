@@ -8,6 +8,16 @@ if(localStorage.getItem("lang") == null){
 
   localStorage.setItem('lang', "EN");
 
+  $('[lang="en"]').show();
+    $('[lang="es"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+
+
 }
 else{
 
@@ -227,6 +237,7 @@ function musicChange(){
   if(localStorage.getItem("mus") == null){
 
     document.getElementById("bgMusic").src = "https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1";
+    localStorage.setItem('mus', "https://www.youtube.com/embed/5k3uAtQ8vlg");
   
   }
   else{
