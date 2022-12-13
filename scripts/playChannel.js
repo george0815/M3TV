@@ -32,7 +32,13 @@
 
     player.src(url);
     okChannel.play();
-    player.play(); 
+
+    
+
+
+   
+    playPromise = player.play();
+   
     player.requestFullscreen();
     document.getElementById('curPlaying').style.display='';
     console.log(document.getElementById('currentChannel').getAttribute('src'));
