@@ -1,3 +1,7 @@
+langChange();
+
+function langChange(){
+
 
 if(localStorage.getItem("lang") == null){
 
@@ -215,7 +219,7 @@ else{
 }
 
 
-
+}
 
 
 
@@ -717,6 +721,7 @@ for (var i = 0; i < elements.length; i++) {
             
 okSetting.play();
     localStorage.setItem('lang', "EN");
+    langChange();
 
 
           })
@@ -729,7 +734,7 @@ for (var i = 0; i < elements.length; i++) {
             
 okSetting.play();
     localStorage.setItem('lang', "ES");
-
+    langChange();
 
           })
 
@@ -743,7 +748,7 @@ for (var i = 0; i < elements.length; i++) {
             
 okSetting.play();
     localStorage.setItem('lang', "FR");
-
+    langChange();
 
           })
 
@@ -756,7 +761,7 @@ for (var i = 0; i < elements.length; i++) {
             
 okSetting.play();
     localStorage.setItem('lang', "GR");
-
+    langChange();
 
           })
 
@@ -768,7 +773,7 @@ okSetting.play();
                     
         okSetting.play();
             localStorage.setItem('lang', "AR");
-        
+            langChange();
         
                   })
         
@@ -781,7 +786,7 @@ for (var i = 0; i < elements.length; i++) {
             
 okSetting.play();
     localStorage.setItem('lang', "RU");
-
+    langChange();
 
           })
 
@@ -794,7 +799,7 @@ for (var i = 0; i < elements.length; i++) {
             
 okSetting.play();
     localStorage.setItem('lang', "CH");
-
+    langChange();
 
           })
 
@@ -807,7 +812,7 @@ for (var i = 0; i < elements.length; i++) {
             
 okSetting.play();
     localStorage.setItem('lang', "JP");
-
+    langChange();
 
           })
 
