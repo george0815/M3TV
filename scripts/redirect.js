@@ -9,6 +9,17 @@ if(localStorage.getItem("lang") == null){
   localStorage.setItem('lang', "EN");
 
   $('[lang="en"]').show();
+  $('[lang="es"]').hide();
+  $('[lang="jp"]').hide();
+  $('[lang="ar"]').hide();
+  $('[lang="fr"]').hide();
+  $('[lang="gr"]').hide();
+  $('[lang="ru"]').hide();
+  $('[lang="ch"]').hide();
+
+
+  $(document.body.firstChild).on('DOMSubtreeModified', function(){
+    $('[lang="en"]').show();
     $('[lang="es"]').hide();
   $('[lang="jp"]').hide();
   $('[lang="ar"]').hide();
@@ -16,6 +27,7 @@ if(localStorage.getItem("lang") == null){
   $('[lang="gr"]').hide();
   $('[lang="ru"]').hide();
   $('[lang="ch"]').hide();
+  });
 
 
 }
@@ -624,6 +636,7 @@ for (var i = 0; i < elements.length; i++) {
 
 
           var elements = document.querySelectorAll("#settingBack");
+          document.getElementById("url").value = localStorage.getItem('mus');
 for (var i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function() {
             backSetting.play();
