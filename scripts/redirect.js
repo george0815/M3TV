@@ -1,4 +1,15 @@
+  //creates sound effects
+  var okMain = new Audio("soundEffects/okMain.mp3"); 
+  var okMain2 = new Audio("soundEffects/okMain.mp3"); 
+  var okSetting = new Audio("soundEffects/okSetting.mp3"); 
+  var okChannel = new Audio("soundEffects/okChannel.mp3"); 
+  var okChannel2 = new Audio("soundEffects/okChannel.mp3"); 
+  var backSetting = new Audio("soundEffects/backSetting.mp3"); 
+  var backMain = new Audio("soundEffects/backMain.mp3"); 
+  var backChannel = new Audio("soundEffects/backChannel.mp3"); 
+
 langChange();
+volChange();
 
 
 function langChange(){
@@ -287,15 +298,35 @@ function muteChange(){
 }
 
 
-//creates sound effects
-var okMain = new Audio("soundEffects/okMain.mp3"); 
-var okMain2 = new Audio("soundEffects/okMain.mp3"); 
-var okSetting = new Audio("soundEffects/okSetting.mp3"); 
-var okChannel = new Audio("soundEffects/okChannel.mp3"); 
-var okChannel2 = new Audio("soundEffects/okChannel.mp3"); 
-var backSetting = new Audio("soundEffects/backSetting.mp3"); 
-var backMain = new Audio("soundEffects/backMain.mp3"); 
-var backChannel = new Audio("soundEffects/backChannel.mp3"); 
+function volChange(){
+
+
+
+
+if(localStorage.getItem("seVol") == null){
+
+    
+    localStorage.setItem('seVol', "1");
+  
+  }
+  else{
+
+
+    //creates sound effects
+okMain.volume = parseFloat(localStorage.getItem("seVol"));  
+okMain2.volume = parseFloat(localStorage.getItem("seVol"));  
+okSetting.volume = parseFloat(localStorage.getItem("seVol"));  
+okChannel.volume = parseFloat(localStorage.getItem("seVol"));  
+okChannel2.volume = parseFloat(localStorage.getItem("seVol"));  
+backSetting.volume = parseFloat(localStorage.getItem("seVol"));  
+backMain.volume = parseFloat(localStorage.getItem("seVol"));  
+backChannel.volume = parseFloat(localStorage.getItem("seVol"));  
+    
+
+  }
+
+
+}
 
         
 
@@ -754,11 +785,41 @@ okSetting.play();
         $("#" + idString).load("../options/volume.html",function(){
 
 
+
+          document.getElementById("sVol").value = localStorage.getItem("seVol") * 100;
+
+
+
+
+            document.getElementById("sVol").addEventListener("change", function() {
+            
+              console.log(document.getElementById("sVol").value);
+
+              okMain.volume = document.getElementById("sVol").value / 100;  
+okSetting.volume = document.getElementById("sVol").value / 100;  
+okChannel.volume = document.getElementById("sVol").value / 100;  
+okChannel2.volume = document.getElementById("sVol").value / 100;  
+backSetting.volume = document.getElementById("sVol").value / 100;  
+backMain.volume = document.getElementById("sVol").value / 100;  
+backChannel.volume = document.getElementById("sVol").value / 100;  
+
+          })
+
+
+
+
+
+
+
           var elements = document.querySelectorAll("#settingBack");
 for (var i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function() {
             backSetting.play();
             var idString = document.body.firstChild.id;
+
+
+             localStorage.setItem("seVol",  document.getElementById("sVol").value / 100);
+
 
             iOptions(idString, mode);
           })
