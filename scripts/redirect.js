@@ -4,6 +4,8 @@ langChange();
 function langChange(){
 
 
+
+
 if(localStorage.getItem("lang") == null){
 
   localStorage.setItem('lang', "EN");
@@ -263,7 +265,26 @@ function musicChange(){
 
 }
 
+function muteChange(){
 
+  if(localStorage.getItem("mute") == null){
+
+    localStorage.setItem("mute", "false");
+    document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
+
+
+
+  }
+  else if(localStorage.getItem("mute") == "true"){
+
+    document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
+  }
+  else if(localStorage.getItem("mute") == "false"){
+    document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
+
+  }
+
+}
 
 
 //creates sound effects
@@ -635,27 +656,77 @@ for (var i = 0; i < elements.length; i++) {
         $("#" + idString).load("../options/music.html",function(){
 
 
+          if(localStorage.getItem("mute") == "false"){
+  
+            document.getElementById("muteButton").checked = true;
+     
+          }
+          else if(localStorage.getItem("mute") == "true"){
+      
+            document.getElementById("muteButton").checked = false;
+     
+        
+          }
+          
+
+
+
           var elements = document.querySelectorAll("#settingBack");
-          document.getElementById("url").value = localStorage.getItem('mus');
+          var song = localStorage.getItem('mus');
 for (var i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function() {
             backSetting.play();
             var idString = document.body.firstChild.id;
 
+            if(!(document.getElementById("url").value === "") && document.getElementById("url").value != song){
 
 
-            if(!(document.getElementById("url").value === "")){
+              
+
             localStorage.setItem('mus', document.getElementById("url").value);
             musicChange();
+
+
+
   }
 
+ 
 
             iOptions(idString, mode);
           })
 
         }   
 
+        var elements = document.querySelectorAll("#muteButton");
+          document.getElementById("url").value = localStorage.getItem('mus');
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
+            
+okSetting.play();
 
+
+     if(localStorage.getItem("mute") == "false"){
+  
+      localStorage.setItem("mute", "true")
+      document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
+    }
+    else if(localStorage.getItem("mute") == "true"){
+
+    
+      localStorage.setItem("mute", "false")
+      document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
+  
+    }
+
+
+
+
+          })
+
+        }
+
+
+        
 
 
 
@@ -666,6 +737,7 @@ for (var i = 0; i < elements.length; i++) {
           
 
         })
+      
 
       })
 

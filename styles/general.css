@@ -109,6 +109,8 @@ grid-template-rows: 65% 35%;
 /*all bodies*/
 body{
 
+  overflow: hidden;
+
   /*size*/
   height: 100%;
   width: 100%;

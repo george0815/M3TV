@@ -36,7 +36,7 @@
     
 
 
-   
+    player.muted(false);
     playPromise = player.play();
    
     player.requestFullscreen();
@@ -167,6 +167,7 @@ document.addEventListener("fullscreenchange", function() {
       }
   
       player.src("");
+      player.muted(true);
   
   
        

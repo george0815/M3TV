@@ -111,3 +111,12 @@
   #remChannelWrapper::-webkit-scrollbar{
     display: none;
   }
+
+
+  #musToggle{
+
+    display: flex;
+    margin: 0%;
+    padding: 0%;
+
+  }

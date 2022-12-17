@@ -57,8 +57,12 @@ function playC(url){
 
   
   okChannel2.play();
-  
 
+ 
+  document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
+
+  
+  player.muted(false);
   player.src(url);
   console.log(url);
 
@@ -79,9 +83,7 @@ function loadC(url){
 
   
   
-  
- // var elements = document.getElementById('myDiv').children
-//elements.item(n)
+
 
 if(runAmt == 0){
 
@@ -524,8 +526,9 @@ document.addEventListener("fullscreenchange", function() {
         });
       }
   
+      document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
       player.src("");
-  
+      player.muted(true);
   
        
     } catch (error) {
