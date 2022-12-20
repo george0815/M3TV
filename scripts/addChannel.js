@@ -1,9 +1,13 @@
 //array of individual channels
 var iChannels = JSON.parse(localStorage.getItem("iChannels"));
 
+
+
+//checks if channels array is null, if it is, creates channels array
 if (iChannels == null){
   iChannels = [];
 }
+
 
 
 
@@ -30,6 +34,8 @@ window.addEventListener("gamepadconnected", function(e) {
   });
 
 
+
+
 //adds channel
   document.getElementById("okay").addEventListener("click", () => {
   
@@ -43,6 +49,7 @@ window.addEventListener("gamepadconnected", function(e) {
     tempChannel.url = document.getElementById("url").value;
   
   
+    //if user hasnt entered anything, dont push channel to array
     if(!(tempChannel.url === "" || tempChannel.title === "")){
     //pushes channel to array
     iChannels.push(tempChannel);

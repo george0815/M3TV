@@ -1,6 +1,9 @@
 //array of individual playlists
 var playlists = JSON.parse(localStorage.getItem("playlists"));
 
+
+
+//checks if playlists array is null, if it is, creates playlists array
 if (playlists == null){
     playlists = [];
 }
@@ -21,6 +24,7 @@ function playlist() {
 
 
  
+
 //gamepad test
 window.addEventListener("gamepadconnected", function(e) {
     const gp = navigator.getGamepads()[e.gamepad.index];
@@ -28,6 +32,8 @@ window.addEventListener("gamepadconnected", function(e) {
       gp.index, gp.id,
       gp.buttons.length, gp.axes.length);
   });
+
+
 
 
 //adds channel
@@ -44,7 +50,7 @@ window.addEventListener("gamepadconnected", function(e) {
     tempPlaylist.url = document.getElementById("url").value;
   
   
-
+    //if user hasnt entered anything, dont push playlist to array
     if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){
     //pushes channel to array
     playlists.push(tempPlaylist);
