@@ -29,9 +29,9 @@ function channel() {
 window.addEventListener("gamepadconnected", function(e) {
     const gp = navigator.getGamepads()[e.gamepad.index];
     console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
-      gp.index, gp.id,
-      gp.buttons.length, gp.axes.length);
-  });
+    gp.index, gp.id,
+    gp.buttons.length, gp.axes.length);
+});
 
 
 
@@ -51,9 +51,10 @@ window.addEventListener("gamepadconnected", function(e) {
   
     //if user hasnt entered anything, dont push channel to array
     if(!(tempChannel.url === "" || tempChannel.title === "")){
-    //pushes channel to array
-    iChannels.push(tempChannel);
-    document.getElementById("mform").reset();
+      
+      //pushes channel to array
+      iChannels.push(tempChannel);
+      document.getElementById("mform").reset();
 
     }
       

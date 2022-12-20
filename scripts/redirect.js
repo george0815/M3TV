@@ -1,22 +1,27 @@
-  //creates sound effects
-  var okMain = new Audio("soundEffects/okMain.mp3"); 
-  var okMain2 = new Audio("soundEffects/okMain.mp3"); 
-  var okSetting = new Audio("soundEffects/okSetting.mp3"); 
-  var okChannel = new Audio("soundEffects/okChannel.mp3"); 
-  var okChannel2 = new Audio("soundEffects/okChannel.mp3"); 
-  var backSetting = new Audio("soundEffects/backSetting.mp3"); 
-  var backMain = new Audio("soundEffects/backMain.mp3"); 
-  var backChannel = new Audio("soundEffects/backChannel.mp3"); 
+//creates sound effects
+var okMain = new Audio("soundEffects/okMain.mp3"); 
+var okMain2 = new Audio("soundEffects/okMain.mp3"); 
+var okSetting = new Audio("soundEffects/okSetting.mp3"); 
+var okChannel = new Audio("soundEffects/okChannel.mp3"); 
+var okChannel2 = new Audio("soundEffects/okChannel.mp3"); 
+var backSetting = new Audio("soundEffects/backSetting.mp3"); 
+var backMain = new Audio("soundEffects/backMain.mp3"); 
+var backChannel = new Audio("soundEffects/backChannel.mp3"); 
 
+
+//sets language and volume at the start of program
 langChange();
 volChange();
 
 
+
+//controls the language, hides and shows elements of certain languages depending on 
+//a settig value taken from local storage
 function langChange(){
 
 
 
-
+//if there is no setting yet (first program start)
 if(localStorage.getItem("lang") == null){
 
   localStorage.setItem('lang', "EN");
@@ -30,221 +35,236 @@ if(localStorage.getItem("lang") == null){
   $('[lang="ru"]').hide();
   $('[lang="ch"]').hide();
 
-
+  //if page changes, makes sure language stays correct
   $(document.body.firstChild).on('DOMSubtreeModified', function(){
     $('[lang="en"]').show();
     $('[lang="es"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
+    $('[lang="jp"]').hide();
+    $('[lang="ar"]').hide();
+    $('[lang="fr"]').hide();
+    $('[lang="gr"]').hide();
+    $('[lang="ru"]').hide();
+    $('[lang="ch"]').hide();
   });
 
 
 }
+
+//if program has already been started once before
 else{
 
+
+  //ENGLSIH
   if(localStorage.getItem("lang") === "EN"){
 
     $('[lang="en"]').show();
     $('[lang="es"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
+    $('[lang="jp"]').hide();
+    $('[lang="ar"]').hide();
+    $('[lang="fr"]').hide();
+    $('[lang="gr"]').hide();
+    $('[lang="ru"]').hide();
+    $('[lang="ch"]').hide();
 
 
-  $(document.body.firstChild).on('DOMSubtreeModified', function(){
-    $('[lang="en"]').show();
-    $('[lang="es"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
-  });
+    //if page changes, makes sure language stays correct
+    $(document.body.firstChild).on('DOMSubtreeModified', function(){
+      $('[lang="en"]').show();
+      $('[lang="es"]').hide();
+      $('[lang="jp"]').hide();
+      $('[lang="ar"]').hide();
+      $('[lang="fr"]').hide();
+      $('[lang="gr"]').hide();
+      $('[lang="ru"]').hide();
+      $('[lang="ch"]').hide();
+    });
 
   }
+  //SPANISH
   else if(localStorage.getItem("lang") === "ES"){
 
     $('[lang="es"]').show();
     $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
+    $('[lang="jp"]').hide();
+    $('[lang="ar"]').hide();
+    $('[lang="fr"]').hide();
+    $('[lang="gr"]').hide();
+    $('[lang="ru"]').hide();
+    $('[lang="ch"]').hide();
 
-
-  $(document.body.firstChild).on('DOMSubtreeModified', function(){
-    $('[lang="es"]').show();
-    $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
-  });
+    //if page changes, makes sure language stays correct
+    $(document.body.firstChild).on('DOMSubtreeModified', function(){
+      $('[lang="es"]').show();
+      $('[lang="en"]').hide();
+      $('[lang="jp"]').hide();
+      $('[lang="ar"]').hide();
+      $('[lang="fr"]').hide();
+      $('[lang="gr"]').hide();
+      $('[lang="ru"]').hide();
+      $('[lang="ch"]').hide();
+    });
 
 
 
   }
+  //FRENCH
   else if(localStorage.getItem("lang") === "FR"){
 
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').show();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
+    $('[lang="jp"]').hide();
+    $('[lang="ar"]').hide();
+    $('[lang="fr"]').show();
+    $('[lang="gr"]').hide();
+    $('[lang="ru"]').hide();
+    $('[lang="ch"]').hide();
 
-
-  $(document.body.firstChild).on('DOMSubtreeModified', function(){
-    $('[lang="es"]').hide();
-    $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').show();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
-  });
+    //if page changes, makes sure language stays correct
+    $(document.body.firstChild).on('DOMSubtreeModified', function(){
+      $('[lang="es"]').hide();
+      $('[lang="en"]').hide();
+      $('[lang="jp"]').hide();
+      $('[lang="ar"]').hide();
+      $('[lang="fr"]').show();
+      $('[lang="gr"]').hide();
+      $('[lang="ru"]').hide();
+      $('[lang="ch"]').hide();
+    });
 
 
 
   }
+  //GERMAN
   else if(localStorage.getItem("lang") === "GR"){
 
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').show();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
+    $('[lang="jp"]').hide();
+    $('[lang="ar"]').hide();
+    $('[lang="fr"]').hide();
+    $('[lang="gr"]').show();
+    $('[lang="ru"]').hide();
+    $('[lang="ch"]').hide();
 
-
-  $(document.body.firstChild).on('DOMSubtreeModified', function(){
-    $('[lang="es"]').hide();
-    $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').show();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
-  });
+    //if page changes, makes sure language stays correct
+    $(document.body.firstChild).on('DOMSubtreeModified', function(){
+      $('[lang="es"]').hide();
+      $('[lang="en"]').hide();
+      $('[lang="jp"]').hide();
+      $('[lang="ar"]').hide();
+      $('[lang="fr"]').hide();
+      $('[lang="gr"]').show();
+      $('[lang="ru"]').hide();
+      $('[lang="ch"]').hide();
+    });
 
 
 
   }
+  //ARABIC
   else if(localStorage.getItem("lang") === "AR"){
 
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').show();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
+    $('[lang="jp"]').hide();
+    $('[lang="ar"]').show();
+    $('[lang="fr"]').hide();
+    $('[lang="gr"]').hide();
+    $('[lang="ru"]').hide();
+    $('[lang="ch"]').hide();
 
-
-  $(document.body.firstChild).on('DOMSubtreeModified', function(){
-    $('[lang="es"]').hide();
-    $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').show();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
-  });
-
-
-
-  }else if(localStorage.getItem("lang") === "RU"){
-
-    $('[lang="es"]').hide();
-    $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').show();
-  $('[lang="ch"]').hide();
-
-
-  $(document.body.firstChild).on('DOMSubtreeModified', function(){
-    $('[lang="es"]').hide();
-    $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').show();
-  $('[lang="ch"]').hide();
-  });
+    //if page changes, makes sure language stays correct
+    $(document.body.firstChild).on('DOMSubtreeModified', function(){
+      $('[lang="es"]').hide();
+      $('[lang="en"]').hide();
+      $('[lang="jp"]').hide();
+      $('[lang="ar"]').show();
+      $('[lang="fr"]').hide();
+      $('[lang="gr"]').hide();
+      $('[lang="ru"]').hide();
+      $('[lang="ch"]').hide();
+    });
 
 
 
-  }else if(localStorage.getItem("lang") === "CH"){
+  }
+  //RUSSIAN
+  else if(localStorage.getItem("lang") === "RU"){
 
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').show();
+    $('[lang="jp"]').hide();
+    $('[lang="ar"]').hide();
+    $('[lang="fr"]').hide();
+    $('[lang="gr"]').hide();
+    $('[lang="ru"]').show();
+    $('[lang="ch"]').hide();
+
+    //if page changes, makes sure language stays correct
+    $(document.body.firstChild).on('DOMSubtreeModified', function(){
+      $('[lang="es"]').hide();
+      $('[lang="en"]').hide();
+      $('[lang="jp"]').hide();
+      $('[lang="ar"]').hide();
+      $('[lang="fr"]').hide();
+      $('[lang="gr"]').hide();
+      $('[lang="ru"]').show();
+      $('[lang="ch"]').hide();
+    });
 
 
-  $(document.body.firstChild).on('DOMSubtreeModified', function(){
+
+  }
+  //CHINESE
+  else if(localStorage.getItem("lang") === "CH"){
+
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
-  $('[lang="jp"]').hide();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').show();
-  });
+    $('[lang="jp"]').hide();
+    $('[lang="ar"]').hide();
+    $('[lang="fr"]').hide();
+    $('[lang="gr"]').hide();
+    $('[lang="ru"]').hide();
+    $('[lang="ch"]').show();
+
+    //if page changes, makes sure language stays correct
+    $(document.body.firstChild).on('DOMSubtreeModified', function(){
+      $('[lang="es"]').hide();
+      $('[lang="en"]').hide();
+      $('[lang="jp"]').hide();
+      $('[lang="ar"]').hide();
+      $('[lang="fr"]').hide();
+      $('[lang="gr"]').hide();
+      $('[lang="ru"]').hide();
+      $('[lang="ch"]').show();
+    });
 
 
 
-  }else if(localStorage.getItem("lang") === "JP"){
+  }
+  //JAPANESE
+  else if(localStorage.getItem("lang") === "JP"){
 
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
-  $('[lang="jp"]').show();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
+    $('[lang="jp"]').show();
+    $('[lang="ar"]').hide();
+    $('[lang="fr"]').hide();
+    $('[lang="gr"]').hide();
+    $('[lang="ru"]').hide();
+    $('[lang="ch"]').hide();
 
-
-  $(document.body.firstChild).on('DOMSubtreeModified', function(){
-    $('[lang="es"]').hide();
-    $('[lang="en"]').hide();
-  $('[lang="jp"]').show();
-  $('[lang="ar"]').hide();
-  $('[lang="fr"]').hide();
-  $('[lang="gr"]').hide();
-  $('[lang="ru"]').hide();
-  $('[lang="ch"]').hide();
-  });
+    //if page changes, makes sure language stays correct
+    $(document.body.firstChild).on('DOMSubtreeModified', function(){
+      $('[lang="es"]').hide();
+      $('[lang="en"]').hide();
+      $('[lang="jp"]').show();
+      $('[lang="ar"]').hide();
+      $('[lang="fr"]').hide();
+      $('[lang="gr"]').hide();
+      $('[lang="ru"]').hide();
+      $('[lang="ch"]').hide();
+    });
 
 
 
@@ -257,14 +277,20 @@ else{
 
 }
 
+
+
+//controls the music, gets song url from local storage 
 function musicChange(){
 
+
+  //if music setting is null, sets it to default track
   if(localStorage.getItem("mus") == null){
 
     document.getElementById("bgMusic").src = "https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1";
     localStorage.setItem('mus', "https://www.youtube.com/embed/5k3uAtQ8vlg");
   
   }
+  //sets song url
   else{
 
 
@@ -275,6 +301,9 @@ function musicChange(){
 
 
 }
+
+
+
 
 function muteChange(){
 
@@ -298,13 +327,13 @@ function muteChange(){
 }
 
 
+
+//controls the volume for sound effects and channels, gets the values from local storage
 function volChange(){
 
 
-
-
-if(localStorage.getItem("seVol") == null){
-
+  //if setting is null, sets default volume
+  if(localStorage.getItem("seVol") == null){
     
     localStorage.setItem('seVol', "1");
   
@@ -312,15 +341,15 @@ if(localStorage.getItem("seVol") == null){
   else{
 
 
-    //creates sound effects
-okMain.volume = parseFloat(localStorage.getItem("seVol"));  
-okMain2.volume = parseFloat(localStorage.getItem("seVol"));  
-okSetting.volume = parseFloat(localStorage.getItem("seVol"));  
-okChannel.volume = parseFloat(localStorage.getItem("seVol"));  
-okChannel2.volume = parseFloat(localStorage.getItem("seVol"));  
-backSetting.volume = parseFloat(localStorage.getItem("seVol"));  
-backMain.volume = parseFloat(localStorage.getItem("seVol"));  
-backChannel.volume = parseFloat(localStorage.getItem("seVol"));  
+    //sets volume for sound effects
+    okMain.volume = parseFloat(localStorage.getItem("seVol"));  
+    okMain2.volume = parseFloat(localStorage.getItem("seVol"));  
+    okSetting.volume = parseFloat(localStorage.getItem("seVol"));  
+    okChannel.volume = parseFloat(localStorage.getItem("seVol"));  
+    okChannel2.volume = parseFloat(localStorage.getItem("seVol"));  
+    backSetting.volume = parseFloat(localStorage.getItem("seVol"));  
+    backMain.volume = parseFloat(localStorage.getItem("seVol"));  
+    backChannel.volume = parseFloat(localStorage.getItem("seVol"));  
     
 
   }
@@ -332,14 +361,17 @@ backChannel.volume = parseFloat(localStorage.getItem("seVol"));
 
       
     
-
+//controls all the buttons within the Add menu, recursively. 
 function iAdd(idString){
 
 
+
+
+  //loads add menu (add.html)
   $("#" + idString).load("../add/add.html",function(){
 
       
-    
+    //sets the ids for the body and html
     document.body.firstChild.id = "body";
     document.documentElement.id = "def"
 
@@ -348,15 +380,17 @@ function iAdd(idString){
     
 
     //ADD BUTTONS
-    var elements = document.querySelectorAll("#options");
-for (var i = 0; i < elements.length; i++) {
-  elements[i].addEventListener("click", function() {
 
-      okSetting.play();
-      var idString = document.body.firstChild.id;
+    //on click, plays sound effect and goes into options menu (options.html)
+    var elements = document.querySelectorAll("#options");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
+
+        okSetting.play();
+        var idString = document.body.firstChild.id;
 
     
-      iOptions(idString, 1);
+        iOptions(idString, 1);
     
     
     
@@ -365,7 +399,7 @@ for (var i = 0; i < elements.length; i++) {
     }
 
 
-
+    //on click, plays sound effect and goes back into the main menu (base.html)
     var elements = document.querySelectorAll("#aBack");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
@@ -373,6 +407,7 @@ for (var i = 0; i < elements.length; i++) {
         backMain.play();
         var idString = document.body.firstChild.id;
     
+        //loads main menu("base.html") and sets ids
         $("#" + idString).load("../base.html",function(){
             document.body.firstChild.id = "MainContainer";
             document.documentElement.id = "def"
@@ -385,72 +420,75 @@ for (var i = 0; i < elements.length; i++) {
     }
       
 
+    //on click, plays sound effect and goes back into the add playlist menu (addPlaylist.html)
     var elements = document.querySelectorAll("#aPlaylist");
-for (var i = 0; i < elements.length; i++) {
-  elements[i].addEventListener("click", function() {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
 
-        var idString = document.body.firstChild.id;
-
-        
+        //saves id and plays sound effect
+        var idString = document.body.firstChild.id;        
         okSetting.play();
+
+
+
         $("#" + idString).load("../add/addPlaylist.html",function(){
-            document.body.firstChild.id = "def";
-            document.body.firstChild.className = "";
-            document.documentElement.id = "htmlSettings"
+
+          //sets ids
+          document.body.firstChild.id = "def";
+          document.body.firstChild.className = "";
+          document.documentElement.id = "htmlSettings"
 
 
 
-            
-            
-            var elements = document.querySelectorAll("#addPBack");
-for (var i = 0; i < elements.length; i++) {
-  elements[i].addEventListener("click", function() {
+         //on click, plays sound effect and goes back into the add menu (add.html)
+          var elements = document.querySelectorAll("#addPBack");
+          for (var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener("click", function() {
+
+              //plays sound effect and saves id
               backSetting.play();
               var idString = document.body.firstChild.id;
 
-
-
-              console.log(idString);
+              //loads add menu
               iAdd(idString);
           
-              
-
-          });
-        }
-
-          
-
-
-
-
-
-
+            });
+          }
 
         });
     
-    });
+      });
 
-  }
+    }
 
+
+
+    //on click, plays sound effect and goes back into the add playlist menu (addPlaylist.html)
 
   var elements = document.querySelectorAll("#aChannel");
   for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener("click", function() {
+      //saves id and plays sound effect
       okSetting.play();
 
         var idString = document.body.firstChild.id;
 
         $("#" + idString).load("../add/addChannel.html",function(){
+                    //sets ids
+
         document.body.firstChild.id = "def";
         document.body.firstChild.className = "";
         document.documentElement.id = "htmlSettings"
 
 
 
+         //on click, plays sound effect and goes back into the add menu (add.html)
 
         var elements = document.querySelectorAll("#addCBack");
 for (var i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function() {
+                  //plays sound effect and saves id
+
           backSetting.play();
 
           var idString = document.body.firstChild.id;
@@ -458,7 +496,8 @@ for (var i = 0; i < elements.length; i++) {
 
               
 
-              console.log(idString);
+                            //loads add menu
+
               iAdd(idString);
 
       });

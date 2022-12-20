@@ -1,4 +1,4 @@
-  
+ //disposes of video player when back button is pressed 
   document.getElementById("backChannel").addEventListener("click", function() {
 
     player.dispose();
@@ -27,21 +27,23 @@
   //makes video element invisible
   document.getElementById('curPlaying').style.display='none';
 
+
+
   //plays channel
   function playC(url){
 
+    //sets source and plays sound effect
     player.src(url);
     okChannel.play();
 
     
 
-
+    //unmutes video audio and plays player, sets it to fullscreen
     player.muted(false);
     playPromise = player.play();
-   
     player.requestFullscreen();
     document.getElementById('curPlaying').style.display='';
-    console.log(document.getElementById('currentChannel').getAttribute('src'));
+
 
 
   }
@@ -54,55 +56,49 @@
 
     if (iChannels != null){
 
-//iChannels[1].createElement("button");
-console.log(iChannels);
 
+      //creates button for each channel
+      iChannels.forEach((channel, i) => {
 
+    
+        //for every 12 channels, increases the pgCounter by 1 
+        if(i % 12 == 0 && i != 0){
 
-    //creates button for each channel
-    iChannels.forEach((channel, i) => {
-
-      
-   
-
-   
-      if(i % 12 == 0 && i != 0){
-        console.log(pgCounter)
-        pgCounter++;
+          console.log(pgCounter)
+          pgCounter++;
         
-      }
+        }
 
 
-      if(pgCounter == page){
+        //if page counter matches the current page, displays channel button
+        if(pgCounter == page){
        
         
-        console.log(channel.pgNmbr);
-        const ch = document.createElement("button");
+          console.log(channel.pgNmbr);
+          const ch = document.createElement("button");
       
-        ch.title = channel.title;
-        ch.innerHTML = "<img src=\""+channel.logoUrl+"\" alt=\""+channel.title+"\">"
+          ch.title = channel.title;
+          ch.innerHTML = "<img src=\""+channel.logoUrl+"\" alt=\""+channel.title+"\">"
       
     
-        ch.className = 'channelButton';
+          ch.className = 'channelButton';
 
-        ch.onclick = function () { playC(channel.url); };
-        document.getElementById('channelWrapper').appendChild(ch);
+          ch.onclick = function () { playC(channel.url); };
+          document.getElementById('channelWrapper').appendChild(ch);
 
-      }
+        }
       
       
       
-    });
+      });
 
-  }
+    }
        
  
     
 
     //enables next page button if there are pages left
     if((pgCounter > 0) && (page < pgCounter)){
-
-     
 
       document.getElementById('arrowNext').style.display='';
 
@@ -133,6 +129,7 @@ console.log(iChannels);
   document.addEventListener('keydown', function(event) {
     
    
+    //pauses the player sets the source to 0
     player.pause();
     player.src("");
     
@@ -149,15 +146,13 @@ document.addEventListener("fullscreenchange", function() {
   if (!document.fullscreen) {
   
 
+    //plays soundeffect and makes video element invisible
     backChannel.play();
-    //makes video element invisible
     document.getElementById('curPlaying').style.display='none';
 
 
-
+    //mutes player and sets source to nothing
     try {
-  
-   
 
 
       if (playPromise !== undefined) {
@@ -184,25 +179,28 @@ document.addEventListener("fullscreenchange", function() {
 //next channel page
 document.getElementById("arrowNext").addEventListener("click", () => {
   
-   
+  //sets page counter to 0 and plays sound effect
   pgCounter = 0;
-
   okSetting.play();
 
-  //makes video element invisible
+  //clears buttons and reloads channels for next page
   document.getElementById('channelWrapper').innerHTML = "";
   page++;
   loadChannels(page);
     
 });
-//next channel page
+
+
+
+//prev channel page
 document.getElementById("arrowPrev").addEventListener("click", () => {
   
+  //sets page counter to 0 and plays sound effect
   okSetting.play();
   pgCounter = 0;
 
 
-  //makes video element invisible
+  //clears buttons and reloads channels for prev page
   document.getElementById('channelWrapper').innerHTML = "";
   page--;
   loadChannels(page);
