@@ -464,71 +464,60 @@ function iAdd(idString){
 
 
     //on click, plays sound effect and goes back into the add playlist menu (addPlaylist.html)
+    var elements = document.querySelectorAll("#aChannel");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
 
-  var elements = document.querySelectorAll("#aChannel");
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].addEventListener("click", function() {
-      //saves id and plays sound effect
-      okSetting.play();
-
+        //saves id and plays sound effect
+        okSetting.play();
         var idString = document.body.firstChild.id;
 
         $("#" + idString).load("../add/addChannel.html",function(){
-                    //sets ids
 
-        document.body.firstChild.id = "def";
-        document.body.firstChild.className = "";
-        document.documentElement.id = "htmlSettings"
-
-
-
-         //on click, plays sound effect and goes back into the add menu (add.html)
-
-        var elements = document.querySelectorAll("#addCBack");
-for (var i = 0; i < elements.length; i++) {
-  elements[i].addEventListener("click", function() {
-                  //plays sound effect and saves id
-
-          backSetting.play();
-
-          var idString = document.body.firstChild.id;
+          //sets ids
+          document.body.firstChild.id = "def";
+          document.body.firstChild.className = "";
+          document.documentElement.id = "htmlSettings"
 
 
-              
 
-                            //loads add menu
+          //on click, plays sound effect and goes back into the add menu (add.html)
+          var elements = document.querySelectorAll("#addCBack");
+          for (var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener("click", function() {
+                  
+              //plays sound effect and saves id
+              backSetting.play();
+              var idString = document.body.firstChild.id;
 
+
+              //loads add menu
               iAdd(idString);
 
+
+            });
+          }
+
+
+        });
+
+
       });
+
+
     }
 
-
-    });
-
-  
-      
-    
-    
-    
-
-
-
-
-
-});
-
-
-  }
-
-
-});
-
+  });
 
 }
 
 
+
+
+
+//controls all the buttons within the play menu, recursively. 
 function iPlay(idString){
+
 
 
   $("#" + idString).load("../play/play.html",function(){
