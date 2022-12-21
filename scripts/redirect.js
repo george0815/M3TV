@@ -430,7 +430,7 @@ function iAdd(idString){
         okSetting.play();
 
 
-
+        //loads add playlist menu (addPlaylist.html)
         $("#" + idString).load("../add/addPlaylist.html",function(){
 
           //sets ids
@@ -463,70 +463,59 @@ function iAdd(idString){
 
 
 
-    //on click, plays sound effect and goes back into the add playlist menu (addPlaylist.html)
+    //on click, plays sound effect and goes  into the add channel menu (addChannel.html)
+    var elements = document.querySelectorAll("#aChannel");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
 
-  var elements = document.querySelectorAll("#aChannel");
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].addEventListener("click", function() {
-      //saves id and plays sound effect
-      okSetting.play();
-
+        //saves id and plays sound effect
+        okSetting.play();
         var idString = document.body.firstChild.id;
 
+
         $("#" + idString).load("../add/addChannel.html",function(){
-                    //sets ids
-
-        document.body.firstChild.id = "def";
-        document.body.firstChild.className = "";
-        document.documentElement.id = "htmlSettings"
 
 
-
-         //on click, plays sound effect and goes back into the add menu (add.html)
-
-        var elements = document.querySelectorAll("#addCBack");
-for (var i = 0; i < elements.length; i++) {
-  elements[i].addEventListener("click", function() {
-                  //plays sound effect and saves id
-
-          backSetting.play();
-
-          var idString = document.body.firstChild.id;
+          //sets ids
+          document.body.firstChild.id = "def";
+          document.body.firstChild.className = "";
+          document.documentElement.id = "htmlSettings"
 
 
-              
+          //on click, plays sound effect and goes back into the add menu (add.html)
+          var elements = document.querySelectorAll("#addCBack");
+          for (var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener("click", function() {
 
-                            //loads add menu
-
+              //plays sound effect and saves id
+              backSetting.play();
+              var idString = document.body.firstChild.id;
+           
+              //loads add menu
               iAdd(idString);
 
+            });
+          }
+
+
+        });
+
+
+
       });
+
     }
 
 
-    });
-
-  
-      
-    
-    
-    
-
-
-
-
-
-});
-
-
-  }
-
-
-});
-
+  });
 
 }
 
+
+
+
+
+//PLAY BUTTONS
 
 function iPlay(idString){
 
@@ -539,74 +528,69 @@ function iPlay(idString){
    
 
 
-  //PLAY BUTTONS
-  var elements = document.querySelectorAll("#options");
-for (var i = 0; i < elements.length; i++) {
-  elements[i].addEventListener("click", function() {
+    //PLAY BUTTONS
+    var elements = document.querySelectorAll("#options");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
 
-    okSetting.play()
-    var idString = document.body.firstChild.id;
+        okSetting.play()
+        var idString = document.body.firstChild.id;
 
     
-    iOptions(idString, 2);
+        iOptions(idString, 2);
+
+      }); 
+    }
 
 
 
-  }); 
-}
+    var elements = document.querySelectorAll("#pBack");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
 
-
-
-var elements = document.querySelectorAll("#pBack");
-for (var i = 0; i < elements.length; i++) {
-  elements[i].addEventListener("click", function() {
-
-    backMain.play();
-    var idString = document.body.firstChild.id;
+        backMain.play();
+        var idString = document.body.firstChild.id;
 
       
 
-    $("#" + idString).load("../base.html",function(){
-        document.body.firstChild.id = "MainContainer";
+        $("#" + idString).load("../base.html",function(){
+          document.body.firstChild.id = "MainContainer";
         
-    });
+        });
+
+      }); 
+    }
 
 
 
-  }); 
-  }
+    var elements = document.querySelectorAll("#pPlaylist");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("click", function() {
 
+        okMain2.play();
+        var idString = document.body.firstChild.id;
 
-
-  var elements = document.querySelectorAll("#pPlaylist");
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].addEventListener("click", function() {
-  okMain2.play();
-    var idString = document.body.firstChild.id;
-
-    $("#" + idString).load("../play/playPlaylist.html",function(){
+        $("#" + idString).load("../play/playPlaylist.html",function(){
       
-        document.body.firstChild.id = "def";
-        document.body.firstChild.className = "playVid";
+          document.body.firstChild.id = "def";
+          document.body.firstChild.className = "playVid";
        
 
 
-        var elements = document.querySelectorAll("#backChannel");
-for (var i = 0; i < elements.length; i++) {
-  elements[i].addEventListener("click", function() {
-          backSetting.play();
+          var elements = document.querySelectorAll("#backChannel");
+          for (var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener("click", function() {
 
-         var idString = document.body.firstChild.id;
+              backSetting.play();
 
+              var idString = document.body.firstChild.id;
 
-              
-
-              
 
               if(document.getElementById("backPlaylist") == null){
 
                 console.log(  document.getElementById("backChannel").id);
-              iPlay(idString);
+                iPlay(idString);
+                
               }
 
 
