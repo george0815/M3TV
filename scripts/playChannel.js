@@ -74,16 +74,14 @@
         if(pgCounter == page){
        
         
-          console.log(channel.pgNmbr);
+          //sets button attributes
           const ch = document.createElement("button");
-      
           ch.title = channel.title;
           ch.innerHTML = "<img src=\""+channel.logoUrl+"\" alt=\""+channel.title+"\">"
-      
-    
           ch.className = 'channelButton';
-
           ch.onclick = function () { playC(channel.url); };
+
+          //creates html element
           document.getElementById('channelWrapper').appendChild(ch);
 
         }
