@@ -520,6 +520,7 @@ function iAdd(idString){
 function iPlay(idString){
 
 
+
   $("#" + idString).load("../play/play.html",function(){
 
 
