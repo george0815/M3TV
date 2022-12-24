@@ -367,7 +367,7 @@ function iAdd(idString){
     document.documentElement.id = "def"
 
 
-    //on click, plays sound effect and goes into options menu (options.html)
+    //OPTIONS BUTTON
     var elements = document.querySelectorAll("#options");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
@@ -388,7 +388,7 @@ function iAdd(idString){
     }
 
 
-    //on click, plays sound effect and goes back into the main menu (base.html)
+    //BACK BUTTON
     var elements = document.querySelectorAll("#aBack");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
@@ -410,7 +410,7 @@ function iAdd(idString){
     }
       
 
-    //on click, plays sound effect and goes back into the add playlist menu (addPlaylist.html)
+    //ADD PLAYLIST MENU BUTTON
     var elements = document.querySelectorAll("#aPlaylist");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
@@ -430,7 +430,7 @@ function iAdd(idString){
 
 
 
-         //on click, plays sound effect and goes back into the add menu (add.html)
+          //BACK BUTTON
           var elements = document.querySelectorAll("#addPBack");
           for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener("click", function() {
@@ -453,7 +453,7 @@ function iAdd(idString){
 
 
 
-    //on click, plays sound effect and goes  into the add channel menu (addChannel.html)
+    //ADD CHANNEL MENU BUTTON
     var elements = document.querySelectorAll("#aChannel");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
@@ -463,6 +463,7 @@ function iAdd(idString){
         var idString = document.body.firstChild.id;
 
 
+        //loads add channels menu (addChannel.html)
         $("#" + idString).load("../add/addChannel.html",function(){
 
 
@@ -472,7 +473,7 @@ function iAdd(idString){
           document.documentElement.id = "htmlSettings"
 
 
-          //on click, plays sound effect and goes back into the add menu (add.html)
+          //BACK BUTTON
           var elements = document.querySelectorAll("#addCBack");
           for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener("click", function() {
@@ -481,7 +482,7 @@ function iAdd(idString){
               backSetting.play();
               var idString = document.body.firstChild.id;
            
-              //loads add menu
+              //loads add menu (add.html)
               iAdd(idString);
 
             });
@@ -510,8 +511,7 @@ function iPlay(idString){
     document.documentElement.id = ""
    
 
-
-    //PLAY BUTTONS
+    //OPTIONS BUTTON
     var elements = document.querySelectorAll("#options");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
@@ -528,6 +528,7 @@ function iPlay(idString){
 
 
 
+    //BACK BUTTON
     var elements = document.querySelectorAll("#pBack");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
@@ -546,7 +547,7 @@ function iPlay(idString){
     }
 
 
-
+    //PLAY PLAYLISTS MENU BUTTON
     var elements = document.querySelectorAll("#pPlaylist");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
@@ -565,7 +566,7 @@ function iPlay(idString){
           document.body.firstChild.className = "playVid";
        
 
-
+          //BACK BUTTON
           var elements = document.querySelectorAll("#backChannel");
           for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener("click", function() {
@@ -584,6 +585,7 @@ function iPlay(idString){
           }
 
 
+          //OPTIONS BUTTON
           var elements = document.querySelectorAll("#optionsChannel");
           for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener("click", function() {
@@ -607,7 +609,7 @@ function iPlay(idString){
     } 
 
 
-
+    //PLAY CHANNEL MENU BUTTON
     var elements = document.querySelectorAll("#pChannel");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
@@ -625,6 +627,8 @@ function iPlay(idString){
           document.body.firstChild.id = "def";
           document.body.firstChild.className = "playVid";
 
+
+          //BACK BUTTON
           var elements = document.querySelectorAll("#backChannel");
           for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener("click", function() {
@@ -644,7 +648,7 @@ function iPlay(idString){
           }
 
 
-
+          //OPTIONS BUTTON
           var elements = document.querySelectorAll("#optionsChannel");
           for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener("click", function() {
@@ -684,6 +688,8 @@ function iOptions(idString, mode){
 
   var idString = document.body.firstChild.id;
 
+
+  //loads options menu (options.html)
   $("#" + idString).load("../options/options.html",function(){
 
       //sets ids
@@ -692,6 +698,7 @@ function iOptions(idString, mode){
       document.documentElement.id = "htmlSettings"
 
 
+      //MUSIC MENU BUTTON
       var elements = document.querySelectorAll("#mus");
       for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener("click", function() {
@@ -701,8 +708,9 @@ function iOptions(idString, mode){
           okSetting.play();
           var idString = document.body.firstChild.id;
 
-          $("#" + idString).load("../options/music.html",function(){
 
+          //loads music menu music.html)
+          $("#" + idString).load("../options/music.html",function(){
 
             if(localStorage.getItem("mute") == "false"){
               document.getElementById("muteButton").checked = true;
@@ -712,6 +720,7 @@ function iOptions(idString, mode){
             }
           
 
+            //BACK BUTTON
             var elements = document.querySelectorAll("#settingBack");
             var song = localStorage.getItem('mus');
             for (var i = 0; i < elements.length; i++) {
@@ -737,7 +746,7 @@ function iOptions(idString, mode){
             }   
 
 
-
+            //MUTE BUTTON
             var elements = document.querySelectorAll("#muteButton");
             document.getElementById("url").value = localStorage.getItem('mus');
             for (var i = 0; i < elements.length; i++) {
@@ -767,7 +776,7 @@ function iOptions(idString, mode){
 
 
 
-
+      //VOLUME MENU BUTTON
       var elements = document.querySelectorAll("#vol");
       for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener("click", function() {
@@ -795,7 +804,7 @@ function iOptions(idString, mode){
 
 
 
-
+            //BACK BUTTON
             var elements = document.querySelectorAll("#settingBack");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
@@ -821,7 +830,7 @@ function iOptions(idString, mode){
 
 
 
-
+      //REMOVE CHANNEL MENU BUTTON
       var elements = document.querySelectorAll("#remCh");
       for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener("click", function() {
@@ -837,10 +846,13 @@ function iOptions(idString, mode){
 
             document.body.firstChild.id = "remBody";
 
+
+            //BACK BUTTON
             var elements = document.querySelectorAll("#settingBack");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
 
+                //saves id and plays sound effect
                 backSetting.play();
                 var idString = document.body.firstChild.id;
 
@@ -856,7 +868,7 @@ function iOptions(idString, mode){
 
 
 
-
+      //REMOVE PLAYLIST MENU BUTTON
       var elements = document.querySelectorAll("#remPl");
       for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener("click", function() {
@@ -871,10 +883,13 @@ function iOptions(idString, mode){
 
             document.body.firstChild.id = "remBody";
 
+
+            //BACK BUTTON
             var elements = document.querySelectorAll("#settingBack");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
 
+                //saves id and plays sound effect
                 backSetting.play();
                 var idString = document.body.firstChild.id;
 
@@ -890,7 +905,7 @@ function iOptions(idString, mode){
 
 
 
-
+      //LANGUAGE MENU BUTTON
       var elements = document.querySelectorAll("#lang");
       for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener("click", function() {
@@ -904,6 +919,8 @@ function iOptions(idString, mode){
           //loads remove language menu (language.html)
           $("#" + idString).load("../options/language.html",function(){
 
+
+            //ENGLISH BUTTON
             var elements = document.querySelectorAll("#EN");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
@@ -916,7 +933,7 @@ function iOptions(idString, mode){
 
             }
 
-
+            //SPANISH BUTTON
             var elements = document.querySelectorAll("#ES");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
@@ -929,7 +946,7 @@ function iOptions(idString, mode){
 
             }
 
-
+            //FRENCH BUTTON
             var elements = document.querySelectorAll("#FR");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
@@ -942,7 +959,7 @@ function iOptions(idString, mode){
 
             }
 
-
+            //GERMAN BUTTON
             var elements = document.querySelectorAll("#GR");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
@@ -955,7 +972,7 @@ function iOptions(idString, mode){
 
             }
 
-
+            //ARABIC BUTTON
             var elements = document.querySelectorAll("#AR");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
@@ -968,7 +985,7 @@ function iOptions(idString, mode){
         
             }
 
-
+            //RUSSIAN BUTTON
             var elements = document.querySelectorAll("#RU");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
@@ -981,7 +998,7 @@ function iOptions(idString, mode){
 
             }
 
-
+            //CHINESE BUTTON
             var elements = document.querySelectorAll("#CH");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
@@ -994,7 +1011,7 @@ function iOptions(idString, mode){
 
             }
 
-
+            //JAPANESE BUTTON
             var elements = document.querySelectorAll("#JP");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
@@ -1007,7 +1024,7 @@ function iOptions(idString, mode){
 
             }
 
-
+            //BACK BUTTON
             var elements = document.querySelectorAll("#settingBack");
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
@@ -1032,7 +1049,7 @@ function iOptions(idString, mode){
 
 
 
-    //ON CLICK
+    //BACK BUTTON
     var elements = document.querySelectorAll("#settingBack");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
@@ -1088,7 +1105,7 @@ function iOptions(idString, mode){
 //INDEX BUTTONS
 
 
-//play
+//PLAY
 var elements = document.querySelectorAll("#iPlay");
 for (var i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function() {
@@ -1107,7 +1124,7 @@ for (var i = 0; i < elements.length; i++) {
 }
 
 
-//add
+//ADD
 var elements = document.querySelectorAll("#iAdd");
 for (var i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function() {
@@ -1125,7 +1142,7 @@ for (var i = 0; i < elements.length; i++) {
 }
 
 
-//options
+//OPTIONS
 var elements = document.querySelectorAll("#options");
 for (var i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function() {
