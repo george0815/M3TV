@@ -1,9 +1,9 @@
-//disposes of video player when back button is pressed 
+ //disposes of video player when back button is pressed 
   document.getElementById("backChannel").addEventListener("click", function() {
 
     player.dispose();
     
-  })
+})
   
   //player for playing vids
   var player = videojs('curPlaying');
@@ -32,10 +32,10 @@
   //plays channel
   function playC(url){
 
-    //sets source and plays sound effect and mutes background music
+    //sets source and plays sound effect
     player.src(url);
     okChannel.play();
-    document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
+
     
 
     //unmutes video audio and plays player, sets it to fullscreen
@@ -63,8 +63,10 @@
     
         //for every 12 channels, increases the pgCounter by 1 
         if(i % 12 == 0 && i != 0){
+
           console.log(pgCounter)
           pgCounter++;
+        
         }
 
 
@@ -72,14 +74,16 @@
         if(pgCounter == page){
        
         
-          //sets button attributes
+          console.log(channel.pgNmbr);
           const ch = document.createElement("button");
+      
           ch.title = channel.title;
           ch.innerHTML = "<img src=\""+channel.logoUrl+"\" alt=\""+channel.title+"\">"
+      
+    
           ch.className = 'channelButton';
-          ch.onclick = function () { playC(channel.url); };
 
-          //creates html element
+          ch.onclick = function () { playC(channel.url); };
           document.getElementById('channelWrapper').appendChild(ch);
 
         }
@@ -93,21 +97,27 @@
  
     
 
-    //enables next page button if there are pages left, disables it if not
+    //enables next page button if there are pages left
     if((pgCounter > 0) && (page < pgCounter)){
+
       document.getElementById('arrowNext').style.display='';
+
     }
     else{
       document.getElementById('arrowNext').style.display='none';
     }
-    //enables prev page button if there are pages before the current one, disables it if not
     if(page > 0){
       document.getElementById('arrowPrev').style.display='';
+
     }
     else{
       document.getElementById('arrowPrev').style.display='none';
     }
     
+
+
+    
+
   };
 
 
@@ -151,7 +161,6 @@ document.addEventListener("fullscreenchange", function() {
         });
       }
   
-      document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
       player.src("");
       player.muted(true);
   

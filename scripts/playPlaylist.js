@@ -1,7 +1,8 @@
 //player for playing vids
 var player = videojs('curPlaying');
-//kinda dont know what promises do
+
 var playPromise;
+
 
 
 
@@ -54,107 +55,158 @@ function channel() {
 //plays playlist
 function playC(url){
 
-  //plays sound effect and mutes background music
+  
   okChannel2.play();
+
+ 
   document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
 
-  //unmutes player and sets source
+  
   player.muted(false);
   player.src(url);
+  console.log(url);
+
+
   playPromise = player.play();
 
-  //unhides player and makes it full screen
+  
+
+
   player.requestFullscreen();
   document.getElementById('curPlaying').style.display='';
 
+
+
 }
 
-
-//responsible for the channel buttons for a specific playlist 
 function loadC(url){
 
-
-  //if its the firstime this function is loaded, play sound effect and 
-  //set back button id to "backPlaylist", this is to make sure the back button loads the right html
-  if(runAmt == 0){
-    okChannel.play();
-    document.getElementById("backChannel").id = "backPlaylist";
-  }
+  
+  
 
 
-  //increases run amount
+if(runAmt == 0){
+
+  okChannel.play();
+  document.getElementById("backChannel").id = "backPlaylist";
+}
+
+  console.log("HERE");  
+
   runAmt++;
 
-  //disable next page button
-  document.getElementById('arrowNext').onclick = function () { arrowForwardC(url); };
-  document.getElementById('arrowPrev').onclick = function () { arrowBackC(url); };
-  document.getElementById('backPlaylist').onclick = function () { backC(); };
+  
+
+//disable next page button
+document.getElementById('arrowNext').onclick = function () { arrowForwardC(url); };
+document.getElementById('arrowPrev').onclick = function () { arrowBackC(url); };
+document.getElementById('backPlaylist').onclick = function () { backC(); };
 
 
-  //calls parser and displays channel button
+
   let promise = translate(url);
   promise.then((url) => {
 
+    
+  
     parser(url);
+
+
     document.getElementById('channelWrapper').innerHTML = '';
+
+
+    
+    
     
     //creates button for each channel
     channels.forEach((channel, i) => {
 
-      //for every 12 channels, increases the pgCounter by 1 
+    
+        
+     
+    
+     
       if(i % 12 == 0 && i != 0){
        
         pgCounter++;
 
-        //if script has already ran once, increase total page counter, this is used when decide whether or not to display the navigation arrows
+
         if(runAmt == 1){
           tPgCounter++;
         }
         
       }
     
-
-      //if page counter matches the current page, displays channel button
+    
       if(pgCounter == page){
-        if((!(channel.url === ""))){
+       
+        
 
-          //sets button attributes
+        
+
+        if(!(channel.url === "")){
+     
           const ch = document.createElement("button");
+
+          console.log(ch.title);
+      
+       
           ch.title = channel.title;
           ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+channel.title+"\">"
           ch.className = 'channelButton';
           ch.onclick = function () { playC(channel.url); };
-
-          //creates html element
           document.getElementById('channelWrapper').appendChild(ch);
 
-          console.log(channel.title);
-
-
-        }      
+        }
+        
+    
       }
       
-           
+       
+      
+      
     });
     
     
-    //enables next page button if there are pages left, disables it if not
+    
+    
+    
+    //enables next page button if there are pages left
     if((tPgCounter > 0) && (page < tPgCounter)){
+    
+     
+    
       document.getElementById('arrowNext').style.display='';
+    
     }
     else{
       document.getElementById('arrowNext').style.display='none';
     }
-    //enables prev page button if there are pages before the current one, disables it if not
     if(page > 0){
       document.getElementById('arrowPrev').style.display='';
+    
     }
     else{
       document.getElementById('arrowPrev').style.display='none';
     }
+
+
    
   });
+  
+ 
+
+
+
+
+
 };
+
+
+
+
+
+
 
 
 
@@ -162,73 +214,94 @@ function loadC(url){
 function loadPlaylists(page){
 
 
+  
+
   //loads channel from local storage
   playlists = JSON.parse(localStorage.getItem("playlists"));
 
   if (playlists != null){
   //creates button for each channel
-    playlists.forEach((playlist, i) => {
+  playlists.forEach((playlist, i) => {
 
-  
-      //for every 12 channels, increases the pgCounter by 1 
-      if(i % 12 == 0 && i != 0){
-        pgCounter++;
-      }
+    
+ 
+
+ 
+    if(i % 12 == 0 && i != 0){
+ 
+      pgCounter++;
+      
+    }
 
 
-      if(pgCounter == page){
+    if(pgCounter == page){
      
-        //sets button attributes
-        const pl = document.createElement("button");
-        pl.title = playlist.title;
-        pl.innerHTML = "<img src=\""+playlist.logoUrl+"\" alt=\""+playlist.title+"\">"
-        pl.className = 'channelButton';
-        pl.onclick = function () { loadC(playlist.url); };
+      
+ 
+      const pl = document.createElement("button");
+    
+      pl.title = playlist.title;
+      pl.innerHTML = "<img src=\""+playlist.logoUrl+"\" alt=\""+playlist.title+"\">"
+    
+  
+      pl.className = 'channelButton';
 
-        //creates html element
-        document.getElementById('channelWrapper').appendChild(pl);
+      pl.onclick = function () { loadC(playlist.url); };
+      document.getElementById('channelWrapper').appendChild(pl);
 
-      }
-    });
-  }
+    }
+    
+     
+    
+    
+  });
+}
 
 
   
-  //enables next page button if there are pages left, disables it if not
+
+  //enables next page button if there are pages left
   if((pgCounter > 0) && (page < pgCounter)){
+
+   
+
     document.getElementById('arrowNext').style.display='';
+
   }
   else{
     document.getElementById('arrowNext').style.display='none';
   }
-  //enables prev page button if there are pages before the current one, disables it if not
   if(page > 0){
     document.getElementById('arrowPrev').style.display='';
+
   }
   else{
     document.getElementById('arrowPrev').style.display='none';
   }
   
 
-  //sets functions for page buttons
-  document.getElementById('arrowNext').onclick = function () { arrowForward(); };
-  document.getElementById('arrowPrev').onclick = function () { arrowBack(); };
+//disable next page button
+document.getElementById('arrowNext').onclick = function () { arrowForward(); };
+document.getElementById('arrowPrev').onclick = function () { arrowBack(); };
 
 
-  //change back button id to backchannel
-  test = document.getElementById('backPlaylist');
-  if(test){
-    document.getElementById('backPlaylist').onclick = "";
-    document.getElementById("backPlaylist").id = "backChannel";
-  }
+test = document.getElementById('backPlaylist');
+if(test){
+document.getElementById('backPlaylist').onclick = "";
+document.getElementById("backPlaylist").id = "backChannel";
+}
 
-  //disposes player when user exits play playlists menu
-  document.getElementById("backChannel").addEventListener("click", function() {
+document.getElementById("backChannel").addEventListener("click", function() {
+
     player.dispose();
-  })
+    
+})
   
 
 };
+
+
+
 
 
 
@@ -250,74 +323,71 @@ function parser(pl){
   var tempChannel =  new channel();
 
 
-
   //for each line, parse data from lines and place them into object, then pushes object into channels when the end of channel data is reached
   for (var i = 0; i < arr.length; i++){
    
-
-    //parses id
     if(arr[i].includes("id=\"",0)){
 
       var tempID = arr[i];
+
       tempChannel.id =  tempID.replace(/id=\"/g, '').replace(/\"/g, '');
 
     }
-    //parses title and group
     else if (arr[i].includes("title=\"",0)){
 
       var tempTitle = arr[i];
+
       tempTitle = tempTitle.replace(/title=\"/g, '').replace(/\"/g, '');
 
       var tempGroup = tempTitle.substr(0, tempTitle.indexOf(','));
+
       tempTitle = tempTitle.replace(tempGroup + ',', '');
 
       tempChannel.title = tempTitle;
       tempChannel.group = tempGroup;
 
     }
-    //parses country
     else if (arr[i].includes("country=\"",0)){
 
       var tempCountry = arr[i];
+    
       tempChannel.country = tempCountry.replace(/country=\"/g, '').replace(/\"/g, '');
 
     }
-    //parses language
     else if (arr[i].includes("language=\"",0)){
 
       var tempLanguage = arr[i];
+
       tempChannel.language = tempLanguage.replace(/language=\"/g, '').replace(/\"/g, '');
       
     }
-    //parses logo
     else if (arr[i].includes("logo=\"",0)){
 
       var tempLogo = arr[i];
+
       tempChannel.logo = tempLogo.replace(/logo=\"/g, '').replace(/\"/g, '');
 
     }
-    //parses url
     else if (arr[i].includes("http",0)){
       
       tempChannel.url = arr[i];
    
     }
-    //if done parsing channel, pushes channel to channel array
     else if(arr[i].includes("#EXTINF",0) && j != 0){
+    
     
       channels.push(tempChannel);
       var tempChannel =  new channel();
         
       j += 1;
     }
-    //increments j by one when new channel is being parsed
     else if(arr[i].includes("#EXTINF",0) && j == 0){
   
       j += 1;
     }
-    //if EOF, pushes channel to channel array
     else if(i == arr.length - 1){
-     
+
+      
       channels.push(tempChannel);
 
     }
@@ -328,8 +398,10 @@ function parser(pl){
 
 
 
-//gets data from url
+//gets data from download link
 function translate(url) {
+
+
   var result = fetch(url).then((resp) => {
     return resp.text();
   });
@@ -343,7 +415,7 @@ function translate(url) {
 
 
 
-//next channel page
+  //next channel page
 function arrowForward (){
   
   okSetting.play();
@@ -402,44 +474,58 @@ function arrowBackC(url) {
     
 }
 
-//function for back button when viewing an individual playlist
-//resets everything
 function backC (){
 
 
   document.getElementById('channelWrapper').innerHTML = "";
 
   page = 0;
-  pgCounter = 0;
-  tPgCounter = 0;
-  runAmt = 0;
+ pgCounter = 0;
+ tPgCounter = 0;
+ runAmt = 0;
 
-  loadPlaylists(0);
+loadPlaylists(0);
+
+
+
 
 }
 
 
 
+
+
+
+
+
+
+
 //when user exits fullscreen close video
 document.addEventListener("fullscreenchange", function() {
+  
+
+  
 
   if (!document.fullscreen) {
   
-    //plays sound effect and makes video element invisible
+
     backChannel.play();
+    //makes video element invisible
     document.getElementById('curPlaying').style.display='none';
 
 
 
     try {
   
+   
+
+
       if (playPromise !== undefined) {
         playPromise.then(_ => {})
         .catch(error => {
         });
       }
   
-      //mutes player and unmutes background music 
       document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
       player.src("");
       player.muted(true);
