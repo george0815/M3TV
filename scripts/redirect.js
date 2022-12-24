@@ -292,11 +292,7 @@ function musicChange(){
   }
   //sets song url
   else{
-
-
     document.getElementById('bgMusic').src = localStorage.getItem("mus") + "?rel=0&autoplay=1&loop=1";
-    
-
   }
 
 
@@ -304,24 +300,19 @@ function musicChange(){
 
 
 
-
+//controls whether music is muted or not 
 function muteChange(){
 
+  //if music setting is null, sets it to unmmuted, otherwise it sets it via the user setting
   if(localStorage.getItem("mute") == null){
-
     localStorage.setItem("mute", "false");
     document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
-
-
-
   }
   else if(localStorage.getItem("mute") == "true"){
-
     document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
   }
   else if(localStorage.getItem("mute") == "false"){
     document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
-
   }
 
 }
@@ -376,20 +367,18 @@ function iAdd(idString){
     document.documentElement.id = "def"
 
 
-
-    
-
-    //ADD BUTTONS
-
     //on click, plays sound effect and goes into options menu (options.html)
     var elements = document.querySelectorAll("#options");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
 
+
+        //saves id and plays sound effect
         okSetting.play();
         var idString = document.body.firstChild.id;
 
     
+        //loads options menu (options.html)
         iOptions(idString, 1);
     
     
@@ -404,6 +393,7 @@ function iAdd(idString){
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
 
+        //saves id and plays sound effect
         backMain.play();
         var idString = document.body.firstChild.id;
     
@@ -496,19 +486,10 @@ function iAdd(idString){
 
             });
           }
-
-
         });
-
-
-
       });
-
     }
-
-
   });
-
 }
 
 
@@ -520,10 +501,11 @@ function iAdd(idString){
 function iPlay(idString){
 
 
-
+  //loads play menu (play.html)
   $("#" + idString).load("../play/play.html",function(){
 
 
+    //sets ids
     document.body.firstChild.id = "body";
     document.documentElement.id = ""
    
@@ -534,10 +516,11 @@ function iPlay(idString){
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
 
+        //saves id and plays sound effect
         okSetting.play()
         var idString = document.body.firstChild.id;
 
-    
+        //loads options menu (options.html)
         iOptions(idString, 2);
 
       }); 
@@ -549,14 +532,14 @@ function iPlay(idString){
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
 
+        //saves id and plays sound effect
         backMain.play();
         var idString = document.body.firstChild.id;
 
       
-
+        //loads main menu (base.html)
         $("#" + idString).load("../base.html",function(){
-          document.body.firstChild.id = "MainContainer";
-        
+          document.body.firstChild.id = "MainContainer";      
         });
 
       }); 
@@ -568,11 +551,16 @@ function iPlay(idString){
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
 
+
+        //saves id and plays sound effect
         okMain2.play();
         var idString = document.body.firstChild.id;
 
+
+        //loads play playlist menu (playPlaylist.html)
         $("#" + idString).load("../play/playPlaylist.html",function(){
       
+          //sets ids
           document.body.firstChild.id = "def";
           document.body.firstChild.className = "playVid";
        
@@ -582,16 +570,14 @@ function iPlay(idString){
           for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener("click", function() {
 
-              backSetting.play();
 
+              //saves id and plays sound effect
+              backSetting.play();
               var idString = document.body.firstChild.id;
 
-
+              //if user is on choose playlist screen, loads play playlist menu (playPlaylist.html.html)
               if(document.getElementById("backPlaylist") == null){
-
-                console.log(  document.getElementById("backChannel").id);
                 iPlay(idString);
-
               }
 
             })
@@ -602,10 +588,13 @@ function iPlay(idString){
           for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener("click", function() {
 
+
+              //saves id and plays sound effect
               okSetting.play();
               var idString = document.body.firstChild.id;
 
-    
+
+              //loads play options menu (options.html)
               iOptions(idString, 2);
       
             })
@@ -623,11 +612,16 @@ function iPlay(idString){
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
 
+        //saves id and plays sound effect
         okMain2.play();
         var idString = document.body.firstChild.id;
 
+
+        //loads play channel menu (playChannel.html)
         $("#" + idString).load("../play/playChannel.html",function(){
     
+
+          //sets ids
           document.body.firstChild.id = "def";
           document.body.firstChild.className = "playVid";
 
@@ -635,14 +629,13 @@ function iPlay(idString){
           for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener("click", function() {
 
-              backSetting.play();
 
+              //saves id and plays sound effect
+              backSetting.play();
               var idString = document.body.firstChild.id;
 
 
-             
-
-              console.log(idString);
+              //loads play menu (play.html)
               iPlay(idString);
          
 
@@ -656,10 +649,12 @@ function iPlay(idString){
           for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener("click", function() {
 
+
+              //saves id and plays sound effect
               okSetting.play();
               var idString = document.body.firstChild.id;
 
-    
+              //loads options menu (options.html)
               iOptions(idString, 2);
 
         
@@ -691,11 +686,10 @@ function iOptions(idString, mode){
 
   $("#" + idString).load("../options/options.html",function(){
 
+      //sets ids
       document.body.firstChild.id = "def";
       document.body.firstChild.className = "";
       document.documentElement.id = "htmlSettings"
-
-
 
 
       var elements = document.querySelectorAll("#mus");
@@ -703,7 +697,7 @@ function iOptions(idString, mode){
         elements[i].addEventListener("click", function() {
 
 
-
+          //saves id and plays sound effect
           okSetting.play();
           var idString = document.body.firstChild.id;
 
@@ -711,14 +705,10 @@ function iOptions(idString, mode){
 
 
             if(localStorage.getItem("mute") == "false"){
-  
               document.getElementById("muteButton").checked = true;
-     
             }
-            else if(localStorage.getItem("mute") == "true"){
-      
-              document.getElementById("muteButton").checked = false;
-     
+            else if(localStorage.getItem("mute") == "true"){ 
+              document.getElementById("muteButton").checked = false;  
             }
           
 
@@ -727,16 +717,19 @@ function iOptions(idString, mode){
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
 
+
+                //saves id and plays sound effect
                 backSetting.play();
                 var idString = document.body.firstChild.id;
 
-                if(!(document.getElementById("url").value === "") && document.getElementById("url").value != song){
 
+                if(!(document.getElementById("url").value === "") && document.getElementById("url").value != song){
                   localStorage.setItem('mus', document.getElementById("url").value);
                   musicChange();
-
                 }
 
+
+                //loads options menu (options.html)
                 iOptions(idString, mode);
 
               })
@@ -750,34 +743,25 @@ function iOptions(idString, mode){
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
             
+
+                //plays sound effect
                 okSetting.play();
 
 
                 if(localStorage.getItem("mute") == "false"){
-  
                   localStorage.setItem("mute", "true")
                   document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
                 }
 
                 else if(localStorage.getItem("mute") == "true"){
-   
                   localStorage.setItem("mute", "false")
-                  document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
-  
+                  document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1',''); 
                 }
 
-
-
-
               })
-
             }   
-
           })
-      
-
         })
-
       } 
 
 
@@ -787,17 +771,18 @@ function iOptions(idString, mode){
       var elements = document.querySelectorAll("#vol");
       for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener("click", function() {
+
+
+          //saves id and plays sound effect
           okSetting.play();
-
-
           var idString = document.body.firstChild.id;
 
+          //loads volume menu (volume.html)
           $("#" + idString).load("../options/volume.html",function(){
 
             document.getElementById("sVol").value = localStorage.getItem("seVol") * 100;
             document.getElementById("sVol").addEventListener("change", function() {
             
-   
               okMain.volume = document.getElementById("sVol").value / 100;  
               okSetting.volume = document.getElementById("sVol").value / 100;  
               okChannel.volume = document.getElementById("sVol").value / 100;  
@@ -815,11 +800,12 @@ function iOptions(idString, mode){
             for (var i = 0; i < elements.length; i++) {
               elements[i].addEventListener("click", function() {
 
+
+                //saves id and plays sound effect
                 backSetting.play();
                 var idString = document.body.firstChild.id;
 
                 localStorage.setItem("seVol",  document.getElementById("sVol").value / 100);
-
                 iOptions(idString, mode);
 
               })
@@ -840,9 +826,13 @@ function iOptions(idString, mode){
       for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener("click", function() {
 
+
+          //saves id and plays sound effect
           okSetting.play();
           var idString = document.body.firstChild.id;
 
+
+          //loads remove channels menu (removeChannels.html)
           $("#" + idString).load("../options/removeChannels.html",function(){
 
             document.body.firstChild.id = "remBody";
@@ -871,9 +861,12 @@ function iOptions(idString, mode){
       for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener("click", function() {
 
+          //saves id and plays sound effect
           okSetting.play();
           var idString = document.body.firstChild.id;
 
+
+          //loads remove channels menu (removeChannels.html)
           $("#" + idString).load("../options/removePlaylists.html",function(){
 
             document.body.firstChild.id = "remBody";
@@ -902,9 +895,13 @@ function iOptions(idString, mode){
       for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener("click", function() {
 
+
+          //saves id and plays sound effect
           okSetting.play();
           var idString = document.body.firstChild.id;
 
+
+          //loads remove language menu (language.html)
           $("#" + idString).load("../options/language.html",function(){
 
             var elements = document.querySelectorAll("#EN");
@@ -1035,34 +1032,41 @@ function iOptions(idString, mode){
 
 
 
-
+    //ON CLICK
     var elements = document.querySelectorAll("#settingBack");
     for (var i = 0; i < elements.length; i++) {
       elements[i].addEventListener("click", function() {
 
 
+        //saves id
         var idString = document.body.firstChild.id;
 
 
         if (mode == 0){
 
+          //saves id and plays sound effect
           backMain.play();
           var idString = document.body.firstChild.id;
     
-            $("#" + idString).load("../base.html",function(){
-              document.body.firstChild.id = "MainContainer";
-              document.documentElement.id = "def"
-            });
+
+          //loads mein menu (base.html)
+          $("#" + idString).load("../base.html",function(){
+            //sets ids
+            document.body.firstChild.id = "MainContainer";
+            document.documentElement.id = "def"
+          });
 
         }
         else if (mode == 1){
 
+          //plays sound effect and reloads add menu
           backSetting.play();
           iAdd(idString);
 
         }
         else if (mode == 2){
 
+          //plays sound effect and reloads play menu
           iPlay(idString);
           backSetting.play();
 
@@ -1083,16 +1087,19 @@ function iOptions(idString, mode){
 
 //INDEX BUTTONS
 
+
+//play
 var elements = document.querySelectorAll("#iPlay");
 for (var i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function() {
 
 
+    //saves id and plays sound effect
     okMain.play();
     var idString = document.body.firstChild.id;
-    console.log(idString);
 
 
+    //loads play menu (play.html)
     iPlay(idString);
 
 
@@ -1100,18 +1107,17 @@ for (var i = 0; i < elements.length; i++) {
 }
 
 
-  
-
-
+//add
 var elements = document.querySelectorAll("#iAdd");
 for (var i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function() {
 
+    //saves id and plays sound effect
     okMain.play();
     var idString = document.body.firstChild.id;
-    console.log(idString);
 
 
+    //loads add menu (add.html)
     iAdd(idString);
 
 
@@ -1119,19 +1125,17 @@ for (var i = 0; i < elements.length; i++) {
 }
 
 
-
-
-
-
-  //options
+//options
 var elements = document.querySelectorAll("#options");
 for (var i = 0; i < elements.length; i++) {
   elements[i].addEventListener("click", function() {
 
+    //saves id and plays sound effect
     okMain.play();
     var idString = document.body.firstChild.id;
 
     
+    //loads options menu (options.html)
     iOptions(idString, 0);
 
 
