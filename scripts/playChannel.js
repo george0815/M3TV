@@ -1,9 +1,9 @@
- //disposes of video player when back button is pressed 
+//disposes of video player when back button is pressed 
   document.getElementById("backChannel").addEventListener("click", function() {
 
     player.dispose();
     
-})
+  })
   
   //player for playing vids
   var player = videojs('curPlaying');

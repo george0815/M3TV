@@ -4,6 +4,7 @@ var player = videojs('curPlaying');
 var playPromise;
 
 
+
 //array of channels for playlists
 var channels = [];
 
@@ -114,18 +115,23 @@ function loadC(url){
     
 
       //if page counter matches the current page, displays channel button
-      if((pgCounter == page) && (!(channel.url === ""))){
-            
-        //sets button attributes
-        const ch = document.createElement("button");
-        ch.title = channel.title;
-        ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+channel.title+"\">"
-        ch.className = 'channelButton';
-        ch.onclick = function () { playC(channel.url); };
+      if(pgCounter == page){
+        if((!(channel.url === ""))){
 
-        //creates html element
-        document.getElementById('channelWrapper').appendChild(ch);
-             
+          //sets button attributes
+          const ch = document.createElement("button");
+          ch.title = channel.title;
+          ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+channel.title+"\">"
+          ch.className = 'channelButton';
+          ch.onclick = function () { playC(channel.url); };
+
+          //creates html element
+          document.getElementById('channelWrapper').appendChild(ch);
+
+          console.log(channel.title);
+
+
+        }      
       }
       
            

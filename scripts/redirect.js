@@ -792,6 +792,7 @@ function iOptions(idString, mode){
             document.getElementById("sVol").value = localStorage.getItem("seVol") * 100;
             document.getElementById("sVol").addEventListener("change", function() {
             
+              okSetting.play();
               okMain.volume = document.getElementById("sVol").value / 100;  
               okSetting.volume = document.getElementById("sVol").value / 100;  
               okChannel.volume = document.getElementById("sVol").value / 100;  
