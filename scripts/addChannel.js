@@ -1,13 +1,9 @@
 //array of individual channels
 var iChannels = JSON.parse(localStorage.getItem("iChannels"));
 
-
-
-//checks if channels array is null, if it is, creates channels array
 if (iChannels == null){
   iChannels = [];
 }
-
 
 
 
@@ -29,11 +25,9 @@ function channel() {
 window.addEventListener("gamepadconnected", function(e) {
     const gp = navigator.getGamepads()[e.gamepad.index];
     console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
-    gp.index, gp.id,
-    gp.buttons.length, gp.axes.length);
-});
-
-
+      gp.index, gp.id,
+      gp.buttons.length, gp.axes.length);
+  });
 
 
 //adds channel
@@ -49,12 +43,10 @@ window.addEventListener("gamepadconnected", function(e) {
     tempChannel.url = document.getElementById("url").value;
   
   
-    //if user hasnt entered anything, dont push channel to array
     if(!(tempChannel.url === "" || tempChannel.title === "")){
-      
-      //pushes channel to array
-      iChannels.push(tempChannel);
-      document.getElementById("mform").reset();
+    //pushes channel to array
+    iChannels.push(tempChannel);
+    document.getElementById("mform").reset();
 
     }
       
