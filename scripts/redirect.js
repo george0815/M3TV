@@ -1185,3 +1185,44 @@ for (var i = 0; i < elements.length; i++) {
   }); 
 }
   
+
+
+document.addEventListener("keydown", function(e){
+
+  if (e.key == 'Tab') {
+
+  }
+
+})
+
+
+
+//controls the gamepad controls
+var i = 1; 
+window.addEventListener("gamepadconnected", function(e) {
+  var gp = navigator.getGamepads()[e.gamepad.index];
+  console.log("A " + gp.id + " was successfully detected!");
+
+  setInterval(function(){
+
+    // ===> Get a fresh GamepadList! <===
+    var gp = navigator.getGamepads()[e.gamepad.index];
+
+    
+
+    if(gp.buttons[1].pressed == true){
+
+   
+      console.log("pressed");
+
+
+      document.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Tab'}));
+
+    }
+  
+  }, 100)
+});
+
+
+
+

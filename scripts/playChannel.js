@@ -6,6 +6,11 @@ var player = document.getElementById('curPlaying');
 var page = 0;
 var pgCounter = 0;
 
+
+//holds index of current channel playing, and whether or not something is playing
+var curIndex = 0;
+var playing = false;
+
 //disable next page button
 document.getElementById('arrowNext').style.display='none';
 
@@ -20,12 +25,27 @@ var iChannels = [];
 //makes video element invisible
 document.getElementById('curPlaying').style.display='none';
 
+
+
 //plays channel
-function playC(url){
+function playC(url, index){
 
   //plays sound effect and mutes background music
   okChannel2.play();
   document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
+
+
+  //Remove after debugging
+  console.log(index);
+
+  //sets current index
+  curIndex = index;
+
+  //for cors pretected channels
+  const proxy_url = 'http://localhost:8080/';
+  url = proxy_url + url;
+
+
 
   //unmutes player and sets source
   player.muted = false;
@@ -106,22 +126,6 @@ function loadChannels(page){
 
 
 
-/*on escape, close video this is technically uneeded since escape will exit fullscreen and
- fire the below function anyway, but this is just incase escape doesnt exit fullscreen by default*/
-  document.addEventListener('keydown', function(event) {
-    
-   
-    player.pause();
-    player.src("");
-    
-
-    //makes video element invisible
-    document.getElementById('curPlaying').style.display='none';
-
-
-});
-
-
 //when user exits fullscreen close video
 document.addEventListener("fullscreenchange", function() {
   if (!document.fullscreen) {
@@ -129,6 +133,7 @@ document.addEventListener("fullscreenchange", function() {
     //plays sound effect and makes video element invisible
     backChannel.play();
     document.getElementById('curPlaying').style.display='none';
+    playing = false;
 
     try {
 
@@ -182,3 +187,23 @@ document.getElementById("arrowPrev").addEventListener("click", () => {
   loadChannels(page);
     
 });
+
+
+
+
+
+//plays next channel in playlist if user clicks n
+document.addEventListener("keydown", function(e){
+  if (e.key == 'n' && channels != null && playing == true && curIndex + 1 <= channels.length){
+    playC(channels[curIndex + 1].url, ++curIndex);
+  }
+})
+
+
+
+//plays prev channel in playlist if user clicks p
+document.addEventListener("keydown", function(e){
+  if (e.key == 'p' && channels != null && playing == true && curIndex - 1 >= 0){
+    playC(channels[curIndex - 1].url, --curIndex);
+  }
+})

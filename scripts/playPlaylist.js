@@ -69,8 +69,8 @@ function playC(url, index){
   document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
 
 
-  //fix error issue
-
+  //Remove after debugging
+  console.log(index);
 
   //sets current index
   curIndex = index;
@@ -78,10 +78,6 @@ function playC(url, index){
   //for cors pretected channels
   const proxy_url = 'http://localhost:8080/';
   url = proxy_url + url;
-
-
-  
-
 
   //unmutes player and sets source
   player.muted = false;
@@ -498,24 +494,57 @@ document.addEventListener("fullscreenchange", function() {
 
 
 
-//plays next channel in playlist
+
+//plays next channel in playlist if user clicks n
 document.addEventListener("keydown", function(e){
 
-
-  if (e.key == 'n' && channels != null && playing == true){
-    playC(channels[curIndex++].url, curIndex++);
+  console.log(e);
+  if (e.key == 'n' && channels != null && playing == true && curIndex + 1 <= channels.length){
+    playC(channels[curIndex + 1].url, ++curIndex);
   }
+})
 
+
+
+
+
+
+//plays prev channel in playlist if user clicks p
+document.addEventListener('keydown', function(e){
+  if (e.key == 'p' && channels != null && playing == true && curIndex - 1 >= 0){
+    playC(channels[curIndex - 1].url, --curIndex);
+  }
+})
+
+
+
+
+
+
+//controls the gamepad controls
+var i = 1; 
+window.addEventListener("gamepadconnected", function(e) {
+  var gp = navigator.getGamepads()[e.gamepad.index];
+  console.log("A " + gp.id + " was successfully detected!");
+
+  setInterval(function(){
+
+    // ===> Get a fresh GamepadList! <===
+    var gp = navigator.getGamepads()[e.gamepad.index];
+
+    
+
+    if(gp.buttons[0].pressed == true && gp.buttons[0].pressed){
+
+   
+      console.log("pressed");
+
+
+      document.dispatchEvent(new KeyboardEvent('keydown', {'key': 'n'}));
+
+    }
   
-
-})
-
-
-
-//plays next channel in playlist
-document.addEventListener("keydown", function(e){
-  var key = e.key
+  }, 100)
+});
 
 
-
-})

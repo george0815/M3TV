@@ -21,13 +21,6 @@ function playlist() {
 
 
  
-//gamepad test
-window.addEventListener("gamepadconnected", function(e) {
-    const gp = navigator.getGamepads()[e.gamepad.index];
-    console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
-      gp.index, gp.id,
-      gp.buttons.length, gp.axes.length);
-  });
 
 
 //adds channel
@@ -42,7 +35,6 @@ window.addEventListener("gamepadconnected", function(e) {
     tempPlaylist.logoUrl =  document.getElementById("logoUrl").value;
     
     tempPlaylist.url = document.getElementById("url").value;
-  
   
 
     if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){

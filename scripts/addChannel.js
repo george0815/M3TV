@@ -21,13 +21,20 @@ function channel() {
 
 
 
-//gamepad test
+var i = 1; 
 window.addEventListener("gamepadconnected", function(e) {
-    const gp = navigator.getGamepads()[e.gamepad.index];
-    console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
-      gp.index, gp.id,
-      gp.buttons.length, gp.axes.length);
-  });
+  var gp = navigator.getGamepads()[e.gamepad.index];
+  console.log("A " + gp.id + " was successfully detected!");
+
+  setInterval(function(){
+
+    // ===> Get a fresh GamepadList! <===
+    var gp = navigator.getGamepads()[e.gamepad.index];
+
+    isPressed = gp.buttons[0].pressed;
+    console.log(isPressed);
+  }, 100)
+});
 
 
 //adds channel
@@ -71,8 +78,6 @@ window.addEventListener("gamepadconnected", function(e) {
 
   
 
-
-  
 
 
 

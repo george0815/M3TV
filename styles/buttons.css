@@ -56,11 +56,18 @@
     -moz-box-shadow: inset -15px -15px 10px -10px #abc0db;
     -webkit-box-shadow: inset -15px -15px 10px -10px #abc0db;
     box-shadow: inset -15px -15px 10px -10px #abc0db;
+
+    outline-color: #38bfed;
+
+
   }
   button:hover {
     transform: scale(1.05) perspective(1px);
   }
-
+  /*button:focus{
+    outline-style: solid;
+    outline-width: 5px;
+  }*/
 
   /*Settings Buttons*/
   .settingsButton{
@@ -72,7 +79,9 @@
     outline: medium solid rgb(255, 255, 255);
 
   }
-
+  /*.settingsButton:focus{
+    outline-color: #38bfed;
+  }*/
 
   /*all footer buttons*/
   .footerButton{
@@ -92,6 +101,11 @@
     outline: none;
     border: none;
   }
+  /*.footerButton:focus{
+    outline-style: solid;
+    outline-width: 5px;
+    outline-color: #38bfed;
+  }*/
 
 
   #settingBack{
