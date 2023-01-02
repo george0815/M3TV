@@ -72,9 +72,12 @@ height: 100%;
 #body{
 
       /*structure*/
+      padding-top: 2%;
       display: grid;
       grid-template-columns: auto auto;
       grid-template-rows: auto auto 40%;
+
+
 
       /*size*/
       min-width:600px;

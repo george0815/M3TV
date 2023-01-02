@@ -1,8 +1,13 @@
 //player for playing vids
 var player = document.getElementById('curPlaying');
+
 //kinda dont know what promises do
 var playPromise;
 
+
+//holds index of current channel playing, and whether or not something is playing
+var curIndex = 0;
+var playing = false;
 
 
 //array of channels for playlists
@@ -52,11 +57,31 @@ function channel() {
 
 
 //plays playlist
-function playC(url){
+function playC(url, index){
+
+
+  //something is currently playing
+  playing = true;
+
 
   //plays sound effect and mutes background music
   okChannel2.play();
   document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
+
+
+  //fix error issue
+
+
+  //sets current index
+  curIndex = index;
+
+  //for cors pretected channels
+  const proxy_url = 'http://localhost:8080/';
+  url = proxy_url + url;
+
+
+  
+
 
   //unmutes player and sets source
   player.muted = false;
@@ -98,11 +123,18 @@ function loadC(url){
   let promise = translate(url);
   promise.then((url) => {
 
+
+    //calls parser
     parser(url);
+
+    //deletes all button
     document.getElementById('channelWrapper').innerHTML = '';
     
     //creates button for each channel
     channels.forEach((channel, i) => {
+
+
+
 
       //for every 12 channels, increases the pgCounter by 1 
       if(i % 12 == 0 && i != 0){
@@ -126,7 +158,7 @@ function loadC(url){
           ch.title = channel.title;
           ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+channel.title+"\">"
           ch.className = 'channelButton';
-          ch.onclick = function () { playC(channel.url); };
+          ch.onclick = function () { playC(channel.url, i); };
 
           //creates html element
           document.getElementById('channelWrapper').appendChild(ch);
@@ -137,6 +169,7 @@ function loadC(url){
         }      
       }
       
+  
            
     });
     
@@ -225,10 +258,7 @@ function loadPlaylists(page){
     document.getElementById("backPlaylist").id = "backChannel";
   }
 
-  //disposes player when user exits play playlists menu
-  document.getElementById("backChannel").addEventListener("click", function() {
-    player.dispose();
-  })
+  
   
 
 };
@@ -427,12 +457,14 @@ function backC (){
 //when user exits fullscreen close video
 document.addEventListener("fullscreenchange", function() {
 
+
+
   if (!document.fullscreen) {
   
-    //plays sound effect and makes video element invisible
+    //plays sound effect and makes video element invisible, sets playing to false
     backChannel.play();
     document.getElementById('curPlaying').style.display='none';
-
+    playing = false;
 
 
     try {
@@ -443,10 +475,12 @@ document.addEventListener("fullscreenchange", function() {
         });
       }
   
-      //mutes player and unmutes background music 
+      //mutes player and unmutes background music, destroys player 
       document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
       player.muted = 'true';
       hls.destroy();
+      
+      
       
   
        
@@ -459,3 +493,29 @@ document.addEventListener("fullscreenchange", function() {
 
 
 });
+
+
+
+
+
+//plays next channel in playlist
+document.addEventListener("keydown", function(e){
+
+
+  if (e.key == 'n' && channels != null && playing == true){
+    playC(channels[curIndex++].url, curIndex++);
+  }
+
+  
+
+})
+
+
+
+//plays next channel in playlist
+document.addEventListener("keydown", function(e){
+  var key = e.key
+
+
+
+})

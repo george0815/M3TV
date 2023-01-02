@@ -1,75 +1,63 @@
-  
-  document.getElementById("backChannel").addEventListener("click", function() {
+//player for playing vids
+var player = document.getElementById('curPlaying');
 
-    player.dispose();
+
+//used for page functionality
+var page = 0;
+var pgCounter = 0;
+
+//disable next page button
+document.getElementById('arrowNext').style.display='none';
+
+
+//disable prev page button
+document.getElementById('arrowPrev').style.display='none';
+
+
+//declares ichannel array
+var iChannels = [];
+
+//makes video element invisible
+document.getElementById('curPlaying').style.display='none';
+
+//plays channel
+function playC(url){
+
+  //plays sound effect and mutes background music
+  okChannel2.play();
+  document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
+
+  //unmutes player and sets source
+  player.muted = false;
+  var hls = new Hls();
+  hls.loadSource(url);
+  hls.attachMedia(player);
     
-})
-  
-  //player for playing vids
-  var player = videojs('curPlaying');
+  playPromise = player.play();
+
+  //unhides player and makes it full screen
+  player.requestFullscreen();
+  document.getElementById('curPlaying').style.display='';
 
 
-  //used for page functionality
-  var page = 0;
-  var pgCounter = 0;
+}
 
-  //disable next page button
-  document.getElementById('arrowNext').style.display='none';
+//loads channels and their respective buttons
+function loadChannels(page){
 
+  //loads channel from local storage
+  iChannels = JSON.parse(localStorage.getItem("iChannels"));
 
-  //disable prev page button
-  document.getElementById('arrowPrev').style.display='none';
-
-
-  //declares ichannel array
-  var iChannels = [];
-
-  //makes video element invisible
-  document.getElementById('curPlaying').style.display='none';
-
-  //plays channel
-  function playC(url){
-
-    player.src(url);
-    okChannel.play();
-
-    
-
-
-    player.muted(false);
-    playPromise = player.play();
-   
-    player.requestFullscreen();
-    document.getElementById('curPlaying').style.display='';
-    console.log(document.getElementById('currentChannel').getAttribute('src'));
-
-
-  }
-
-  //loads channels and their respective buttons
-  function loadChannels(page){
-
-    //loads channel from local storage
-    iChannels = JSON.parse(localStorage.getItem("iChannels"));
-
-    if (iChannels != null){
-
-//iChannels[1].createElement("button");
-console.log(iChannels);
-
-
+  if (iChannels != null){
 
     //creates button for each channel
     iChannels.forEach((channel, i) => {
 
-      
-   
 
-   
       if(i % 12 == 0 && i != 0){
         console.log(pgCounter)
         pgCounter++;
-        
+      
       }
 
 
@@ -96,34 +84,24 @@ console.log(iChannels);
 
   }
        
- 
-    
+  
 
     //enables next page button if there are pages left
     if((pgCounter > 0) && (page < pgCounter)){
-
-     
-
       document.getElementById('arrowNext').style.display='';
-
     }
     else{
       document.getElementById('arrowNext').style.display='none';
     }
     if(page > 0){
       document.getElementById('arrowPrev').style.display='';
-
     }
     else{
       document.getElementById('arrowPrev').style.display='none';
     }
     
 
-
-    
-
-  };
-
+};
 
 
 
@@ -148,17 +126,11 @@ console.log(iChannels);
 document.addEventListener("fullscreenchange", function() {
   if (!document.fullscreen) {
   
-
+    //plays sound effect and makes video element invisible
     backChannel.play();
-    //makes video element invisible
     document.getElementById('curPlaying').style.display='none';
 
-
-
     try {
-  
-   
-
 
       if (playPromise !== undefined) {
         playPromise.then(_ => {})
@@ -166,9 +138,11 @@ document.addEventListener("fullscreenchange", function() {
         });
       }
   
-      player.src("");
-      player.muted(true);
-  
+      //mutes player and unmutes background music 
+      document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
+      player.muted = 'true';
+      hls.destroy();
+      
   
        
     } catch (error) {

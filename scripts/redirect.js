@@ -323,7 +323,7 @@ function muteChange(){
 function volChange(){
 
 
-  //if setting is null, sets default volume
+  //if setting is null, sets default sound effect volume
   if(localStorage.getItem("seVol") == null){
     
     localStorage.setItem('seVol', "1");
@@ -344,7 +344,13 @@ function volChange(){
     
 
   }
-
+  //if setting is null, sets default sound effect volume
+  if(localStorage.getItem("cVol") == null){
+    
+    localStorage.setItem('cVol', "1");
+  
+  }
+  
 
 }
 
@@ -564,6 +570,9 @@ function iPlay(idString){
           //sets ids
           document.body.firstChild.id = "def";
           document.body.firstChild.className = "playVid";
+
+          //sets channel volume
+          document.getElementById("curPlaying").volume = localStorage.getItem("cVol");
        
 
           //BACK BUTTON
@@ -622,6 +631,10 @@ function iPlay(idString){
         //loads play channel menu (playChannel.html)
         $("#" + idString).load("../play/playChannel.html",function(){
     
+
+          //sets channel volume
+          document.getElementById("curPlaying").volume = localStorage.getItem("cVol");
+       
 
           //sets ids
           document.body.firstChild.id = "def";
@@ -789,6 +802,8 @@ function iOptions(idString, mode){
           //loads volume menu (volume.html)
           $("#" + idString).load("../options/volume.html",function(){
 
+
+            //Controls sound effect volume
             document.getElementById("sVol").value = localStorage.getItem("seVol") * 100;
             document.getElementById("sVol").addEventListener("change", function() {
             
@@ -801,6 +816,16 @@ function iOptions(idString, mode){
               backMain.volume = document.getElementById("sVol").value / 100;  
               backChannel.volume = document.getElementById("sVol").value / 100;  
 
+            })
+
+
+            //Controls channel volume
+            document.getElementById("cVol").value = localStorage.getItem("cVol") * 100;
+            document.getElementById("cVol").addEventListener("change", function() {
+            
+              okSetting.play();            
+              localStorage.setItem('cVol', document.getElementById("cVol").value / 100);
+              
             })
 
 
