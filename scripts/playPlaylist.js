@@ -76,7 +76,7 @@ function playC(url, index){
   curIndex = index;
 
   //for cors pretected channels
-  const proxy_url = 'http://localhost:8080/';
+  const proxy_url = 'http://localhost:8000/';
   url = proxy_url + url;
 
   //unmutes player and sets source

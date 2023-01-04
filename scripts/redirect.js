@@ -1187,13 +1187,7 @@ for (var i = 0; i < elements.length; i++) {
   
 
 
-document.addEventListener("keydown", function(e){
 
-  if (e.key == 'Tab') {
-
-  }
-
-})
 
 
 
@@ -1226,3 +1220,6 @@ window.addEventListener("gamepadconnected", function(e) {
 
 
 
+//const focusableElements = document.querySelectorAll(
+ // 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+//);
