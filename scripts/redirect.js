@@ -1,3 +1,141 @@
+/*Controller navigation in the menus is mainly handled by having the
+user use a button to cycle through and focus input elements, then clicking them
+with another button. However the next and previous channel buttons are handled 
+by just dispatching a keydown event, which a listener in playPlaylist/playChannel.js 
+responds too
+*/
+
+//used for constantly calling update loop
+const rAF = window.mozRequestAnimationFrame || window.requestAnimationFrame; 
+
+//when gamepad is connected, start listening for button input
+window.addEventListener('gamepadconnected', function() {
+  updateLoop();
+}); 
+
+
+//constantly recursivley calls itself to check for button input
+function updateLoop() {
+  rAF(updateLoop);
+}
+
+
+//gets an array of all buttons clickable by the controller (focusbaleElements)
+var focusableElements = document.querySelectorAll(
+  'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"], input:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'
+);
+
+
+//sets current index of focuabsle elements
+let current = 0;
+
+
+//controls what buttons do what
+function updateLoop() {
+
+  //gets gamepad object 
+  const gamepad = navigator.getGamepads()[0]
+
+  //A - Select:Clicks current element
+  const gamepadA = gamepad.buttons[0]
+  if (gamepadA.pressed) { clickItem(current)}
+
+  //B - Back:focuses the back button and clicks it
+  const gamepadB = gamepad.buttons[1]
+  if (gamepadB.pressed && !(document.getElementById('iPlay'))) { 
+
+    document.querySelector('[id*="Back" i]').focus();
+    document.querySelector('[id*="Back" i]').click();
+    
+  }
+
+  //Left Bumper - Focuses previous menu item
+  const gamepadBumperL = gamepad.buttons[4]
+  if (gamepadBumperL.pressed) { prevItem(current) }
+  
+  //Right Bumper - Focuses next menu item
+  const gamepadBumperR = gamepad.buttons[5]
+  if (gamepadBumperR.pressed) { nextItem(current) }
+  
+  //Left Trigger - Plays next channel
+  const gamepadLT = gamepad.buttons[6]
+  if (gamepadLT.pressed) { document.dispatchEvent(new KeyboardEvent('keydown', {'key':'p'} )); }
+
+  //Right Trigger - Plays previous channel
+  const gamepadRT = gamepad.buttons[7]
+  if (gamepadRT.pressed) { document.dispatchEvent(new KeyboardEvent('keydown', {'key':'n'} )); }
+
+  //Back - Exits channel
+  const gamepadBack = gamepad.buttons[8]
+  if (gamepadBack.pressed) { document.exitFullscreen();}
+
+  //Settings/Start - Settings:focuses the settings button and clicks it
+  const gamepadSettings = gamepad.buttons[9]
+  if (gamepadSettings.pressed && document.documentElement.id !== 'htmlSettings') { 
+    
+    document.querySelector('[id*="options" i]').focus();
+    document.querySelector('[id*="options" i]').click();
+
+  } 
+
+  //D-Pad Left - Prev Page:focuses the previous page button and clicks it
+  const gamepadLeft = gamepad.buttons[14]
+  if (gamepadLeft.pressed && (document.getElementById('backPlaylist') || document.getElementById('backChannel')) && document.getElementById('arrowPrev').style.display !== 'none') { 
+    
+    document.getElementById("arrowPrev").focus();
+    document.getElementById("arrowPrev").click(); 
+     
+  }
+
+  //D-Pad Right - Next Page:focuses the next page button and clicks it
+  const gamepadRight = gamepad.buttons[15]
+  if (gamepadRight.pressed && (document.getElementById('backPlaylist') || document.getElementById('backChannel')) && document.getElementById('arrowNext').style.display !== 'none') { 
+    
+    document.getElementById("arrowNext").focus();
+    document.getElementById("arrowNext").click(); 
+     
+  }
+  
+  //used to set how long before another button press is registered
+  setTimeout(() => rAF(updateLoop), 125)
+}
+
+
+//focuses previous element
+function prevItem(index) {
+
+  --current;
+
+  //if current will lead to index out of bounds, focuses the last element
+  if(current < 0){
+    current = focusableElements.length - 1;
+  }
+
+  focusableElements[current].focus()
+}
+
+
+//focuses next element
+function nextItem(index) {
+  
+  ++current;
+
+  //if current will lead to index out of bounds, focuses the last element
+  if(current >  focusableElements.length - 1){
+    current = 0;
+  }
+
+  focusableElements[current].focus()
+}
+
+
+//clicks current focused element
+function clickItem(current) {
+  focusableElements[current].click();
+}
+
+
+
 //creates sound effects
 var okMain = new Audio("soundEffects/okMain.mp3"); 
 var okMain2 = new Audio("soundEffects/okMain.mp3"); 
@@ -21,10 +159,12 @@ function langChange(){
 
 
 
+
+
 //if there is no setting yet (first program start)
 if(localStorage.getItem("lang") == null){
 
-  localStorage.setItem('lang', "EN");
+  localStorage.setItem('lang', "en");
 
   $('[lang="en"]').show();
   $('[lang="es"]').hide();
@@ -55,7 +195,7 @@ else{
 
 
   //ENGLSIH
-  if(localStorage.getItem("lang") === "EN"){
+  if(localStorage.getItem("lang") === "en"){
 
     $('[lang="en"]').show();
     $('[lang="es"]').hide();
@@ -69,6 +209,7 @@ else{
 
     //if page changes, makes sure language stays correct
     $(document.body.firstChild).on('DOMSubtreeModified', function(){
+
       $('[lang="en"]').show();
       $('[lang="es"]').hide();
       $('[lang="jp"]').hide();
@@ -77,11 +218,23 @@ else{
       $('[lang="gr"]').hide();
       $('[lang="ru"]').hide();
       $('[lang="ch"]').hide();
+
+      
+
+      
+
+      focusableElements = document.querySelectorAll(
+        'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'
+       
+      );;
+
+      console.log(focusableElements);
+
     });
 
   }
   //SPANISH
-  else if(localStorage.getItem("lang") === "ES"){
+  else if(localStorage.getItem("lang") === "es"){
 
     $('[lang="es"]').show();
     $('[lang="en"]').hide();
@@ -108,7 +261,7 @@ else{
 
   }
   //FRENCH
-  else if(localStorage.getItem("lang") === "FR"){
+  else if(localStorage.getItem("lang") === "fr"){
 
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
@@ -135,7 +288,7 @@ else{
 
   }
   //GERMAN
-  else if(localStorage.getItem("lang") === "GR"){
+  else if(localStorage.getItem("lang") === "gr"){
 
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
@@ -162,7 +315,7 @@ else{
 
   }
   //ARABIC
-  else if(localStorage.getItem("lang") === "AR"){
+  else if(localStorage.getItem("lang") === "ar"){
 
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
@@ -189,7 +342,7 @@ else{
 
   }
   //RUSSIAN
-  else if(localStorage.getItem("lang") === "RU"){
+  else if(localStorage.getItem("lang") === "ru"){
 
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
@@ -216,7 +369,7 @@ else{
 
   }
   //CHINESE
-  else if(localStorage.getItem("lang") === "CH"){
+  else if(localStorage.getItem("lang") === "ch"){
 
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
@@ -243,7 +396,7 @@ else{
 
   }
   //JAPANESE
-  else if(localStorage.getItem("lang") === "JP"){
+  else if(localStorage.getItem("lang") === "jp"){
 
     $('[lang="es"]').hide();
     $('[lang="en"]').hide();
@@ -748,6 +901,7 @@ function iOptions(idString, mode){
                 if(!(document.getElementById("url").value === "") && document.getElementById("url").value != song){
                   localStorage.setItem('mus', document.getElementById("url").value);
                   musicChange();
+                  muteChange();
                 }
 
 
@@ -952,7 +1106,7 @@ function iOptions(idString, mode){
               elements[i].addEventListener("click", function() {
             
                 okSetting.play();
-                localStorage.setItem('lang', "EN");
+                localStorage.setItem('lang', "en");
                 langChange();
 
               })
@@ -965,7 +1119,7 @@ function iOptions(idString, mode){
               elements[i].addEventListener("click", function() {
             
                 okSetting.play();
-                localStorage.setItem('lang', "ES");
+                localStorage.setItem('lang', "es");
                 langChange();
 
               })
@@ -978,7 +1132,7 @@ function iOptions(idString, mode){
               elements[i].addEventListener("click", function() {
             
                 okSetting.play();
-                localStorage.setItem('lang', "FR");
+                localStorage.setItem('lang', "fr");
                 langChange();
 
               })
@@ -991,7 +1145,7 @@ function iOptions(idString, mode){
               elements[i].addEventListener("click", function() {
             
                 okSetting.play();
-                localStorage.setItem('lang', "GR");
+                localStorage.setItem('lang', "gr");
                 langChange();
 
               })
@@ -1004,7 +1158,7 @@ function iOptions(idString, mode){
               elements[i].addEventListener("click", function() {
                     
                 okSetting.play();
-                localStorage.setItem('lang', "AR");
+                localStorage.setItem('lang', "ar");
                 langChange();
         
               })
@@ -1017,7 +1171,7 @@ function iOptions(idString, mode){
               elements[i].addEventListener("click", function() {
             
                 okSetting.play();
-                localStorage.setItem('lang', "RU");
+                localStorage.setItem('lang', "ru");
                 langChange();
 
               })
@@ -1030,7 +1184,7 @@ function iOptions(idString, mode){
               elements[i].addEventListener("click", function() {
             
                 okSetting.play();
-                localStorage.setItem('lang', "CH");
+                localStorage.setItem('lang', "ch");
                 langChange();
 
               })
@@ -1043,7 +1197,7 @@ function iOptions(idString, mode){
               elements[i].addEventListener("click", function() {
             
                 okSetting.play();
-                localStorage.setItem('lang', "JP");
+                localStorage.setItem('lang', "jp");
                 langChange();
 
               })
@@ -1191,35 +1345,6 @@ for (var i = 0; i < elements.length; i++) {
 
 
 
-//controls the gamepad controls
-var i = 1; 
-window.addEventListener("gamepadconnected", function(e) {
-  var gp = navigator.getGamepads()[e.gamepad.index];
-  console.log("A " + gp.id + " was successfully detected!");
-
-  setInterval(function(){
-
-    // ===> Get a fresh GamepadList! <===
-    var gp = navigator.getGamepads()[e.gamepad.index];
-
-    
-
-    if(gp.buttons[1].pressed == true){
-
-   
-      console.log("pressed");
-
-
-      document.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Tab'}));
-
-    }
-  
-  }, 100)
-});
 
 
 
-
-//const focusableElements = document.querySelectorAll(
- // 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-//);

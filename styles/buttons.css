@@ -64,10 +64,10 @@
   button:hover {
     transform: scale(1.05) perspective(1px);
   }
-  /*button:focus{
+  button:focus{
     outline-style: solid;
     outline-width: 5px;
-  }*/
+  }
 
   /*Settings Buttons*/
   .settingsButton{
@@ -79,9 +79,9 @@
     outline: medium solid rgb(255, 255, 255);
 
   }
-  /*.settingsButton:focus{
+  .settingsButton:focus{
     outline-color: #38bfed;
-  }*/
+  }
 
   /*all footer buttons*/
   .footerButton{
@@ -101,11 +101,11 @@
     outline: none;
     border: none;
   }
-  /*.footerButton:focus{
+  .footerButton:focus{
     outline-style: solid;
     outline-width: 5px;
     outline-color: #38bfed;
-  }*/
+  }
 
 
   #settingBack{
@@ -169,6 +169,12 @@
     font-size: 10vh;
     text-shadow: none;
 
+      outline: none;
+
+    }
+    .clockButton:focus{
+
+      outline: none;
     }
 
     #backChannel{

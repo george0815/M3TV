@@ -90,7 +90,9 @@ function loadChannels(page){
         ch.title = channel.title;
         ch.innerHTML = "<img src=\""+channel.logoUrl+"\" alt=\""+channel.title+"\">"
       
-    
+        ch.tabIndex = i + 1;
+        ch.lang = localStorage.getItem("lang");
+
         ch.className = 'channelButton';
 
         ch.onclick = function () { playC(channel.url); };

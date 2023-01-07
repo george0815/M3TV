@@ -20,48 +20,28 @@ function channel() {
 };
 
 
-
-var i = 1; 
-window.addEventListener("gamepadconnected", function(e) {
-  var gp = navigator.getGamepads()[e.gamepad.index];
-  console.log("A " + gp.id + " was successfully detected!");
-
-  setInterval(function(){
-
-    // ===> Get a fresh GamepadList! <===
-    var gp = navigator.getGamepads()[e.gamepad.index];
-
-    isPressed = gp.buttons[0].pressed;
-    console.log(isPressed);
-  }, 100)
-});
-
-
 //adds channel
-  document.getElementById("okay").addEventListener("click", () => {
+document.getElementById("okay").addEventListener("click", () => {
   
-    okSetting.play();
-    //creates and sets variables of channel to be pushed
-    tempChannel = new channel();
-    tempChannel.title = document.getElementById("name").value;
+  okSetting.play();
+  //creates and sets variables of channel to be pushed
+  tempChannel = new channel();
+  tempChannel.title = document.getElementById("name").value;
   
-    tempChannel.logoUrl =  document.getElementById("logoUrl").value;
+  tempChannel.logoUrl =  document.getElementById("logoUrl").value;
     
-    tempChannel.url = document.getElementById("url").value;
+  tempChannel.url = document.getElementById("url").value;
   
   
-    if(!(tempChannel.url === "" || tempChannel.title === "")){
+  if(!(tempChannel.url === "" || tempChannel.title === "")){
     //pushes channel to array
     iChannels.push(tempChannel);
     document.getElementById("mform").reset();
 
-    }
+  }
       
-  });
+});
   
-
-
-
 
 
   //pushes channels array to local storage

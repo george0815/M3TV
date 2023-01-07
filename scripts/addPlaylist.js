@@ -20,9 +20,6 @@ function playlist() {
 };
 
 
- 
-
-
 //adds channel
   document.getElementById("okay").addEventListener("click", () => {
   

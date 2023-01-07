@@ -1,6 +1,9 @@
 //player for playing vids
 var player = document.getElementById('curPlaying');
 
+
+
+
 //kinda dont know what promises do
 var playPromise;
 
@@ -57,7 +60,7 @@ function channel() {
 
 
 //plays playlist
-function playC(url, index){
+function playC(url, indexP){
 
 
   //something is currently playing
@@ -69,11 +72,10 @@ function playC(url, index){
   document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
 
 
-  //Remove after debugging
-  console.log(index);
+ 
 
   //sets current index
-  curIndex = index;
+  curIndex = indexP;
 
   //for cors pretected channels
   const proxy_url = 'http://localhost:8000/';
@@ -156,6 +158,9 @@ function loadC(url){
           ch.className = 'channelButton';
           ch.onclick = function () { playC(channel.url, i); };
 
+          ch.tabIndex = i + 1;
+          ch.lang = localStorage.getItem("lang");
+
           //creates html element
           document.getElementById('channelWrapper').appendChild(ch);
 
@@ -216,6 +221,9 @@ function loadPlaylists(page){
         pl.innerHTML = "<img src=\""+playlist.logoUrl+"\" alt=\""+playlist.title+"\">"
         pl.className = 'channelButton';
         pl.onclick = function () { loadC(playlist.url); };
+
+        pl.tabIndex = i + 1;
+        pl.lang = localStorage.getItem("lang");
 
         //creates html element
         document.getElementById('channelWrapper').appendChild(pl);
@@ -453,8 +461,6 @@ function backC (){
 //when user exits fullscreen close video
 document.addEventListener("fullscreenchange", function() {
 
-
-
   if (!document.fullscreen) {
   
     //plays sound effect and makes video element invisible, sets playing to false
@@ -472,7 +478,7 @@ document.addEventListener("fullscreenchange", function() {
       }
   
       //mutes player and unmutes background music, destroys player 
-      document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
+      muteChange();
       player.muted = 'true';
       hls.destroy();
       
@@ -489,6 +495,13 @@ document.addEventListener("fullscreenchange", function() {
 
 
 });
+
+
+
+function closeChannel(){
+  
+}
+
 
 
 
@@ -515,36 +528,5 @@ document.addEventListener('keydown', function(e){
     playC(channels[curIndex - 1].url, --curIndex);
   }
 })
-
-
-
-
-
-
-//controls the gamepad controls
-var i = 1; 
-window.addEventListener("gamepadconnected", function(e) {
-  var gp = navigator.getGamepads()[e.gamepad.index];
-  console.log("A " + gp.id + " was successfully detected!");
-
-  setInterval(function(){
-
-    // ===> Get a fresh GamepadList! <===
-    var gp = navigator.getGamepads()[e.gamepad.index];
-
-    
-
-    if(gp.buttons[0].pressed == true && gp.buttons[0].pressed){
-
-   
-      console.log("pressed");
-
-
-      document.dispatchEvent(new KeyboardEvent('keydown', {'key': 'n'}));
-
-    }
-  
-  }, 100)
-});
 
 
