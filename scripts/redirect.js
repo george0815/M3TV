@@ -114,7 +114,6 @@ function prevItem(index) {
   focusableElements[current].focus()
 }
 
-
 //focuses next element
 function nextItem(index) {
   
@@ -185,6 +184,12 @@ if(localStorage.getItem("lang") == null){
     $('[lang="gr"]').hide();
     $('[lang="ru"]').hide();
     $('[lang="ch"]').hide();
+
+    focusableElements = document.querySelectorAll(
+      'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'      
+    );;
+
+    console.log(focusableElements);
   });
 
 
@@ -224,8 +229,7 @@ else{
       
 
       focusableElements = document.querySelectorAll(
-        'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'
-       
+        'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'      
       );;
 
       console.log(focusableElements);
@@ -255,6 +259,14 @@ else{
       $('[lang="gr"]').hide();
       $('[lang="ru"]').hide();
       $('[lang="ch"]').hide();
+
+
+
+      focusableElements = document.querySelectorAll(
+        'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'      
+      );;
+
+      console.log(focusableElements);
     });
 
 
@@ -282,6 +294,13 @@ else{
       $('[lang="gr"]').hide();
       $('[lang="ru"]').hide();
       $('[lang="ch"]').hide();
+
+
+      focusableElements = document.querySelectorAll(
+        'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'      
+      );;
+
+      console.log(focusableElements);
     });
 
 
@@ -309,6 +328,13 @@ else{
       $('[lang="gr"]').show();
       $('[lang="ru"]').hide();
       $('[lang="ch"]').hide();
+
+
+      focusableElements = document.querySelectorAll(
+        'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'      
+      );;
+
+      console.log(focusableElements);
     });
 
 
@@ -336,6 +362,13 @@ else{
       $('[lang="gr"]').hide();
       $('[lang="ru"]').hide();
       $('[lang="ch"]').hide();
+
+
+      focusableElements = document.querySelectorAll(
+        'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'      
+      );;
+
+      console.log(focusableElements);
     });
 
 
@@ -363,6 +396,12 @@ else{
       $('[lang="gr"]').hide();
       $('[lang="ru"]').show();
       $('[lang="ch"]').hide();
+
+      focusableElements = document.querySelectorAll(
+        'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'      
+      );;
+
+      console.log(focusableElements);
     });
 
 
@@ -390,6 +429,12 @@ else{
       $('[lang="gr"]').hide();
       $('[lang="ru"]').hide();
       $('[lang="ch"]').show();
+
+      focusableElements = document.querySelectorAll(
+        'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'      
+      );;
+
+      console.log(focusableElements);
     });
 
 
@@ -417,6 +462,12 @@ else{
       $('[lang="gr"]').hide();
       $('[lang="ru"]').hide();
       $('[lang="ch"]').hide();
+
+      focusableElements = document.querySelectorAll(
+        'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'      
+      );;
+
+      console.log(focusableElements);
     });
 
 

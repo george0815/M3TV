@@ -17,22 +17,16 @@
 
         const ch = document.createElement("button");
       
-       ch.id = channel.title;
+        ch.id = channel.title;
         ch.innerHTML = channel.title;
-      
-    
+          
         ch.className = 'settingsButton';
 
         ch.onclick = function () { removeCh(channel.title); };
         document.getElementById('remChannelWrapper').appendChild(ch);
 
-      
-       
-
     });
-
     }
-
   };
 
 
@@ -42,8 +36,8 @@
 
     iChannels = iChannels.filter(function( channel ) {
         return channel.title !== title;
-      });
-      okSetting.play();
+    });
+    okSetting.play();
       
     //deletes previous storage item so there are no duplicates
     localStorage.removeItem('iChannels');
@@ -57,16 +51,20 @@
 
 
   //removes all
-  document.getElementById("removeAll").addEventListener("click", () => {
+  var elements = document.querySelectorAll("#removeAll");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener("click", function() {
  
-    okSetting.play();
-    //removes all buttons
-    document.getElementById("remChannelWrapper").innerHTML = "";
+      okSetting.play();
+      //removes all buttons
+      document.getElementById("remChannelWrapper").innerHTML = "";
 
-    //deletes previous storage item so there are no duplicates
-    localStorage.removeItem('playlists');
+      //deletes previous storage item so there are no duplicates
+      localStorage.removeItem('playlists');
 
     
-    remPlaylistsLoad();
+      remPlaylistsLoad();
 
-  })
+    })
+
+  }

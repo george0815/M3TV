@@ -20,8 +20,11 @@ function channel() {
 };
 
 
+
 //adds channel
-document.getElementById("okay").addEventListener("click", () => {
+var elements = document.querySelectorAll("#okay");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
   
   okSetting.play();
   //creates and sets variables of channel to be pushed
@@ -42,10 +45,11 @@ document.getElementById("okay").addEventListener("click", () => {
       
 });
   
+}
 
-
-  //pushes channels array to local storage
-  document.getElementById("addCBack").addEventListener("click", () => {
+var elements = document.querySelectorAll("#addCBack");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
 
 
     //deletes previous storage item so there are no duplicates
@@ -56,7 +60,7 @@ document.getElementById("okay").addEventListener("click", () => {
     
   });
 
-  
+}
 
 
 

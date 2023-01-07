@@ -10,15 +10,14 @@
 
 
     if (playlists != null){
-      // your code here.
- 
-    //creates button for each channel
-    playlists.forEach((playlist, i) => {
+     
+      //creates button for each channel
+      playlists.forEach((playlist, i) => {
 
 
         const ch = document.createElement("button");
       
-       ch.id = playlist.title;
+        ch.id = playlist.title;
         ch.innerHTML = playlist.title;
       
     
@@ -27,11 +26,8 @@
         ch.onclick = function () { removePl(playlist.title); };
         document.getElementById('remChannelWrapper').appendChild(ch);
 
-      
-       
-
-    });
-  }
+      });
+    } 
 
   
 
@@ -43,8 +39,8 @@
     document.getElementById(title).style.display = 'none';
 
     playlists = playlists.filter(function( playlist ) {
-        return playlist.title !== title;
-      });
+      return playlist.title !== title;
+    });
 
       
     //deletes previous storage item so there are no duplicates
@@ -57,10 +53,11 @@
 
   }
 
-
+  
   //removes all
-  document.getElementById("removeAll").addEventListener("click", () => {
-
+  var elements = document.querySelectorAll("#removeAll");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener("click", function() {
 
     //removes all buttons
     document.getElementById("remChannelWrapper").innerHTML = "";
@@ -71,4 +68,5 @@
     okSetting.play();
     remPlaylistsLoad();
 
-  })
+    })
+  }

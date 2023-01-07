@@ -20,8 +20,11 @@ function playlist() {
 };
 
 
+
 //adds channel
-  document.getElementById("okay").addEventListener("click", () => {
+var elements = document.querySelectorAll("#okay");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
   
     okSetting.play();
    
@@ -35,23 +38,21 @@ function playlist() {
   
 
     if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){
-    //pushes channel to array
-    playlists.push(tempPlaylist);
-    document.getElementById("mform").reset();
-  }
+      //pushes channel to array
+      playlists.push(tempPlaylist);
+      document.getElementById("mform").reset();
+    }
 
 
   });
+
+}
   
 
-
-
-
-
-  //pushes channels array to local storage
-  document.getElementById("addPBack").addEventListener("click", () => {
-
-    
+//pushes channels array to local storage
+var elements = document.querySelectorAll("#addPBack");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
 
     //deletes previous storage item so there are no duplicates
     localStorage.removeItem('playlists');
@@ -61,7 +62,7 @@ function playlist() {
     
   });
 
-  
+}
 
 
   
