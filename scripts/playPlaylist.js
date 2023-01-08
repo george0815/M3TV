@@ -509,24 +509,86 @@ function closeChannel(){
 
 
 //plays next channel in playlist if user clicks n
-document.addEventListener("keydown", function(e){
-
+document.removeEventListener('keydown', nextChannel);
+var nextChannel = function(e){
   console.log(e);
   if (e.key == 'n' && channels != null && playing == true && curIndex + 1 <= channels.length){
+    console.log("PUSHED");
     playC(channels[curIndex + 1].url, ++curIndex);
   }
-})
-
-
-
+}
+document.addEventListener("keydown", nextChannel);
 
 
 
 //plays prev channel in playlist if user clicks p
-document.addEventListener('keydown', function(e){
+document.removeEventListener('keydown', prevChannel);
+var prevChannel = function(e){
   if (e.key == 'p' && channels != null && playing == true && curIndex - 1 >= 0){
+    console.log("PUSHED");
     playC(channels[curIndex - 1].url, --curIndex);
   }
-})
+}
+document.addEventListener('keydown', prevChannel);
+
+
+
+//plays random channel in playlist if user clicks r
+document.removeEventListener('keydown', randChannel);
+var randChannel = function(e){
+  var rand = Math.floor(Math.random() * channels.length);
+  if (e.key == 'r' && channels != null && playing == true){
+    console.log("PUSHED");
+    playC(channels[rand].url, rand);
+  }
+}
+document.addEventListener('keydown', randChannel);
+
+
+
+//adds channel from playlists to channel
+document.removeEventListener('keydown', favChannel);
+var favChannel = function(e){
+
+  if (e.key == 'f' && channels != null && playing == true){
+
+    //array of individual channels
+    var iChannels = JSON.parse(localStorage.getItem("iChannels"));
+
+    if (iChannels == null){
+      iChannels = [];
+    }
+
+    okSetting.play();
+    //creates and sets variables of channel to be pushed
+    tempChannel = new channel();
+
+    
+    tempChannel.title = channels[curIndex].title;
+    console.log(tempChannel.title);
+
+    tempChannel.logoUrl = channels[curIndex].logo;
+    console.log(tempChannel.logoUrl);
+
+    tempChannel.url = channels[curIndex].url;
+    console.log(tempChannel.url);
+  
+    if(!(tempChannel.url === "" || tempChannel.title === "")){
+      //pushes channel to array
+      iChannels.push(tempChannel);
+      console.log("PUSHED");
+    
+    }
+
+    //deletes previous storage item so there are no duplicates
+    localStorage.removeItem('iChannels');
+
+    //pushes it to storage
+    localStorage.setItem('iChannels', JSON.stringify(iChannels));
+
+  }
+}
+document.addEventListener('keydown', favChannel);
+
 
 

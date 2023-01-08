@@ -79,6 +79,13 @@ function updateLoop() {
   } 
 
   //D-Pad Left - Prev Page:focuses the previous page button and clicks it
+  const gamepadUp = gamepad.buttons[12]
+  if(gamepadUp.pressed){document.dispatchEvent(new KeyboardEvent('keydown', {'key':'r'} ));}
+    
+     
+  
+
+  //D-Pad Left - Prev Page:focuses the previous page button and clicks it
   const gamepadLeft = gamepad.buttons[14]
   if (gamepadLeft.pressed && (document.getElementById('backPlaylist') || document.getElementById('backChannel')) && document.getElementById('arrowPrev').style.display !== 'none') { 
     

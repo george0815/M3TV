@@ -60,10 +60,10 @@
       document.getElementById("remChannelWrapper").innerHTML = "";
 
       //deletes previous storage item so there are no duplicates
-      localStorage.removeItem('playlists');
+      localStorage.removeItem('iChannels');
 
     
-      remPlaylistsLoad();
+      remChannelsLoad();
 
     })
 

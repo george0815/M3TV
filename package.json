@@ -1,0 +1,19 @@
+{
+  "pkg": {
+      "name": "PHANTOMa",
+      "main": "index.html",
+      "assets": [
+          "*",
+          "add/*",
+          "play/*",
+          "options/*",
+          "fonts/*",
+          "styles/*",
+          "scripts/*.js",
+          "soundEffects/*"
+      ],
+      "version": "1.0.0",
+      "bin": "app.js"
+  }
+
+}

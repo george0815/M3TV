@@ -42,7 +42,7 @@ function playC(url, index){
   curIndex = index;
 
   //for cors pretected channels
-  const proxy_url = 'http://localhost:8080/';
+  const proxy_url = 'http://localhost:8000/';
   url = proxy_url + url;
 
 
@@ -201,11 +201,17 @@ document.addEventListener("keydown", function(e){
   }
 })
 
-
-
 //plays prev channel in playlist if user clicks p
 document.addEventListener("keydown", function(e){
   if (e.key == 'p' && channels != null && playing == true && curIndex - 1 >= 0){
     playC(channels[curIndex - 1].url, --curIndex);
+  }
+})
+
+//plays random channel in playlist if user clicks r
+document.addEventListener('keydown', function(e){
+  var rand = Math.floor(Math.random() * channels.length);
+  if (e.key == 'r' && channels != null && playing == true){
+    playC(channels[rand].url, rand);
   }
 })
