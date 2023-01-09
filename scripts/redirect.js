@@ -78,10 +78,14 @@ function updateLoop() {
 
   } 
 
-  //D-Pad Left - Prev Page:focuses the previous page button and clicks it
+  //D-Pad Up - Random Channel:plays a random channel
   const gamepadUp = gamepad.buttons[12]
   if(gamepadUp.pressed){document.dispatchEvent(new KeyboardEvent('keydown', {'key':'r'} ));}
     
+  //D-Pad Down - Fav Channel:Copies a channel from the playlist into the individual channel thing
+  const gamepadDown = gamepad.buttons[13]
+  if(gamepadDown.pressed){document.dispatchEvent(new KeyboardEvent('keydown', {'key':'f'} ));}
+
   //D-Pad Left - Prev Page:focuses the previous page button and clicks it
   const gamepadLeft = gamepad.buttons[14]
   if (gamepadLeft.pressed) { document.dispatchEvent(new KeyboardEvent('keydown', {'key':'a'} )); }
