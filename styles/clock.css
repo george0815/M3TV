@@ -46,7 +46,7 @@
 
     /*sets font*/
     color: #9b9b9b;
-    font-size: 5vw;
+    font-size: 7vh;
     font-family: "clock";
 
   }
@@ -60,7 +60,7 @@
     /*sets font*/
     letter-spacing: .001em;
     color: #818181;
-    font-size: 4vw;
+    font-size: 6vh;
     font-family: "WII";
     font-weight: 900;
 

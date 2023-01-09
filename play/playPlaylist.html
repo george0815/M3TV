@@ -9,12 +9,12 @@
 
        
     </head>
-    <body class="playVid">
+    <body tabindex="-1" class="playVid">
 
 
 
       <!--Video element for playing channels-->
-      <video id="curPlaying" >
+      <video tabindex="-1" id="curPlaying" >
 
         <source id="currentChannel" src="" type="application/x-mpegURL">
 
@@ -22,11 +22,11 @@
       
 
       <!--Container for channel buttons-->
-      <div id="channelWrapper"></div>
+      <div tabindex="-1" id="channelWrapper"></div>
 
 
       <!--Time and Date-->  
-      <div id="clock">
+      <div tabindex="-1" id="clock">
         
         
       
@@ -41,11 +41,11 @@
       
       
 
-      <button tabindex="15" id="backChannel"  class="clockButton">&#8617;</button>
+      <button tabindex="14" id="backChannel"  class="clockButton">&#8617;</button>
 
 
 
-<button tabindex="16" id="optionsChannel" class="clockButton" >&#9881;</button>
+      <button tabindex="15" id="optionsChannel" class="clockButton" >&#9881;</button>
 
 
       <!--Scripts for loading channels and playing video-->
