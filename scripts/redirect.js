@@ -471,6 +471,42 @@ else{
 
 
   }
+  //EDGE CASE
+  else{
+    $('[lang="en"]').show();
+    $('[lang="es"]').hide();
+    $('[lang="jp"]').hide();
+    $('[lang="ar"]').hide();
+    $('[lang="fr"]').hide();
+    $('[lang="gr"]').hide();
+    $('[lang="ru"]').hide();
+    $('[lang="ch"]').hide();
+
+
+    //if page changes, makes sure language stays correct
+    $(document.body.firstChild).on('DOMSubtreeModified', function(){
+
+      $('[lang="en"]').show();
+      $('[lang="es"]').hide();
+      $('[lang="jp"]').hide();
+      $('[lang="ar"]').hide();
+      $('[lang="fr"]').hide();
+      $('[lang="gr"]').hide();
+      $('[lang="ru"]').hide();
+      $('[lang="ch"]').hide();
+
+      
+
+      
+
+      focusableElements = document.querySelectorAll(
+        'button:not([tabindex="-1"])[lang="'+ CSS.escape(localStorage.getItem("lang"))+'"]'      
+      );;
+
+      console.log(focusableElements);
+
+    });
+  }
 
 
 
