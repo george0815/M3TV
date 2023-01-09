@@ -1,8 +1,8 @@
 //player for playing vids
 var player = document.getElementById('curPlaying');
 
-
-
+//used for holding current url for arrows
+var urlGlobal;
 
 //kinda dont know what promises do
 var playPromise;
@@ -23,12 +23,7 @@ var pgCounter = 0;
 var tPgCounter = 0;
 var runAmt = 0;
 
-//disable next page button
-document.getElementById('arrowNext').style.display='none';
 
-
-//disable prev page button
-document.getElementById('arrowPrev').style.display='none';
 
 
 //declares playlists array
@@ -99,6 +94,7 @@ function playC(url, indexP){
 //responsible for the channel buttons for a specific playlist 
 function loadC(url){
 
+  urlGlobal = url;
 
   //if its the firstime this function is loaded, play sound effect and 
   //set back button id to "backPlaylist", this is to make sure the back button loads the right html
@@ -110,10 +106,6 @@ function loadC(url){
 
   //increases run amount
   runAmt++;
-
-  //disable next page button
-  document.getElementById('arrowNext').onclick = function () { arrowForwardC(url); };
-  document.getElementById('arrowPrev').onclick = function () { arrowBackC(url); };
   document.getElementById('backPlaylist').onclick = function () { backC(); };
 
 
@@ -175,22 +167,15 @@ function loadC(url){
     });
     
     
-    //enables next page button if there are pages left, disables it if not
-    if((tPgCounter > 0) && (page < tPgCounter)){
-      document.getElementById('arrowNext').style.display='';
-    }
-    else{
-      document.getElementById('arrowNext').style.display='none';
-    }
-    //enables prev page button if there are pages before the current one, disables it if not
-    if(page > 0){
-      document.getElementById('arrowPrev').style.display='';
-    }
-    else{
-      document.getElementById('arrowPrev').style.display='none';
-    }
+  
    
   });
+
+
+
+
+
+
 };
 
 
@@ -233,26 +218,7 @@ function loadPlaylists(page){
   }
 
 
-  
-  //enables next page button if there are pages left, disables it if not
-  if((pgCounter > 0) && (page < pgCounter)){
-    document.getElementById('arrowNext').style.display='';
-  }
-  else{
-    document.getElementById('arrowNext').style.display='none';
-  }
-  //enables prev page button if there are pages before the current one, disables it if not
-  if(page > 0){
-    document.getElementById('arrowPrev').style.display='';
-  }
-  else{
-    document.getElementById('arrowPrev').style.display='none';
-  }
-  
 
-  //sets functions for page buttons
-  document.getElementById('arrowNext').onclick = function () { arrowForward(); };
-  document.getElementById('arrowPrev').onclick = function () { arrowBack(); };
 
 
   //change back button id to backchannel
@@ -498,11 +464,34 @@ document.addEventListener("fullscreenchange", function() {
 
 
 
-function closeChannel(){
-  
-}
+
+  //plays next channel in playlist if user clicks n
+  document.removeEventListener('keydown', arrowsC);
+  var arrowsC = function(e){
+    console.log(e);
+    
+    if (e.key == 'd'){
+      if(document.getElementById('backPlaylist') && (tPgCounter > 0) && (page < tPgCounter)){
+        arrowForwardC(urlGlobal);
+      }
+      else if (document.getElementById('backChannel') && (tPgCounter > 0) && (page < tPgCounter)){
+        arrowForward();
+      }
+    }
+    else if (e.key == 'a'){
+      if(document.getElementById('backPlaylist') && page > 0){
+        arrowBackC(urlGlobal);
+      }
+      else if (document.getElementById('backChannel') && page > 0){
+        arrowBack();
+      }
+    }
 
 
+
+
+  }
+  document.addEventListener("keydown", arrowsC);
 
 
 

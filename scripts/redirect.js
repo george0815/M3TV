@@ -82,26 +82,13 @@ function updateLoop() {
   const gamepadUp = gamepad.buttons[12]
   if(gamepadUp.pressed){document.dispatchEvent(new KeyboardEvent('keydown', {'key':'r'} ));}
     
-     
-  
-
   //D-Pad Left - Prev Page:focuses the previous page button and clicks it
   const gamepadLeft = gamepad.buttons[14]
-  if (gamepadLeft.pressed && (document.getElementById('backPlaylist') || document.getElementById('backChannel')) && document.getElementById('arrowPrev').style.display !== 'none') { 
-    
-    document.getElementById("arrowPrev").focus();
-    document.getElementById("arrowPrev").click(); 
-     
-  }
+  if (gamepadLeft.pressed) { document.dispatchEvent(new KeyboardEvent('keydown', {'key':'a'} )); }
 
   //D-Pad Right - Next Page:focuses the next page button and clicks it
   const gamepadRight = gamepad.buttons[15]
-  if (gamepadRight.pressed && (document.getElementById('backPlaylist') || document.getElementById('backChannel')) && document.getElementById('arrowNext').style.display !== 'none') { 
-    
-    document.getElementById("arrowNext").focus();
-    document.getElementById("arrowNext").click(); 
-     
-  }
+  if (gamepadRight.pressed){ document.dispatchEvent(new KeyboardEvent('keydown', {'key':'d'} )); }
   
   //used to set how long before another button press is registered
   setTimeout(() => rAF(updateLoop), 125)
