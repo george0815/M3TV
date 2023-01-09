@@ -23,9 +23,6 @@ var pgCounter = 0;
 var tPgCounter = 0;
 var runAmt = 0;
 
-
-
-
 //declares playlists array
 var playlists = [];
 
@@ -447,11 +444,7 @@ document.addEventListener("fullscreenchange", function() {
       muteChange();
       player.muted = 'true';
       hls.destroy();
-      
-      
-      
-  
-       
+             
     } catch (error) {
       console.error(error);
     
@@ -461,8 +454,6 @@ document.addEventListener("fullscreenchange", function() {
 
 
 });
-
-
 
 
   //plays next channel in playlist if user clicks n
