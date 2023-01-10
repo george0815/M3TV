@@ -33,7 +33,7 @@
 
     /*slightly blurs text*/
     color: transparent;
-    text-shadow: 0 0 2px rgba(0,0,0,100);
+    text-shadow: 0 0 .09em rgba(0,0,0,100);
 
     /*sets font*/
     font-size: 2.2vw;
@@ -51,6 +51,7 @@
     min-width: 40%;
     max-width: 60%;
     
+    
    
     /*Sets inner shadow*/
     -moz-box-shadow: inset -15px -15px 10px -10px #abc0db;
@@ -66,7 +67,7 @@
   }
   button:focus{
     outline-style: solid;
-    outline-width: .25em;
+    outline-width: .20em;
   }
 
   /*Settings Buttons*/
@@ -125,13 +126,19 @@
   .channelButton {
    
     
-    min-width: 13.3em;
-    width: 7em;
-    min-height: 7em;
-    height: 7em;
+    min-width: 20%;
+    max-width: 100%;
+   
+    
+    min-height: 6.5em;
+
+    height: 6.5em;
+    max-height: 6.5em;
     border-color: #b4b4b4;
     
     margin: .3em;
+    margin-bottom: 0px;
+    margin-top: 0px;
     
  
     border-radius: 10%;
@@ -159,7 +166,7 @@
       background-color: #d3d5dc; 
       max-height: 12em;
       min-height: 20%; 
-      border: solid 5px;
+      border: solid .09em;
       border-color: #b9bcbf;
       min-width: 25%;
       

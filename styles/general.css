@@ -74,13 +74,13 @@ height: 100%;
       /*structure*/
       padding-top: 2%;
       display: grid;
-      grid-template-columns: auto auto;
+      grid-template-columns: 1fr 1fr;
       grid-template-rows: auto auto 40%;
 
 
 
       /*size*/
-      min-width:600px;
+    
       height: 100%;
       width: 100%;
       
@@ -92,7 +92,9 @@ height: 100%;
   height: 100%;
   min-width: none;
 display: grid;
+
 padding-bottom: 5%;
+margin-top: .3%;
 grid-template-columns: auto;
 grid-template-rows: 65% 35%;
 }
@@ -101,8 +103,10 @@ grid-template-rows: 65% 35%;
 #channelWrapper{
   height: 100%;
   
-  max-width: 100%;
-  min-width: 1em;
+  width: 80%;
+  
+  margin-top: .8%;
+ 
 
   margin-left: auto;
   margin-right: auto;
@@ -110,7 +114,7 @@ grid-template-rows: 65% 35%;
       
   display: grid;
   align-items: center;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, auto);
  
 }

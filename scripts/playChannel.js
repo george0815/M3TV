@@ -11,16 +11,13 @@ var pgCounter = 0;
 var curIndex = 0;
 var playing = false;
 
-//disable next page button
-document.getElementById('arrowNext').style.display='none';
 
-
-//disable prev page button
-document.getElementById('arrowPrev').style.display='none';
 
 
 //declares ichannel array
 var iChannels = [];
+
+
 
 //makes video element invisible
 document.getElementById('curPlaying').style.display='none';
@@ -108,19 +105,7 @@ function loadChannels(page){
        
   
 
-    //enables next page button if there are pages left
-    if((pgCounter > 0) && (page < pgCounter)){
-      document.getElementById('arrowNext').style.display='';
-    }
-    else{
-      document.getElementById('arrowNext').style.display='none';
-    }
-    if(page > 0){
-      document.getElementById('arrowPrev').style.display='';
-    }
-    else{
-      document.getElementById('arrowPrev').style.display='none';
-    }
+    
     
 
 };
@@ -161,57 +146,44 @@ document.addEventListener("fullscreenchange", function() {
 });
 
 
-
-//next channel page
-document.getElementById("arrowNext").addEventListener("click", () => {
-  
-   
-  pgCounter = 0;
-
-  okSetting.play();
-
-  //makes video element invisible
-  document.getElementById('channelWrapper').innerHTML = "";
-  page++;
-  loadChannels(page);
-    
-});
-//next channel page
-document.getElementById("arrowPrev").addEventListener("click", () => {
-  
-  okSetting.play();
-  pgCounter = 0;
-
-
-  //makes video element invisible
-  document.getElementById('channelWrapper').innerHTML = "";
-  page--;
-  loadChannels(page);
-    
-});
-
-
-
-
-
 //plays next channel in playlist if user clicks n
-document.addEventListener("keydown", function(e){
-  if (e.key == 'n' && channels != null && playing == true && curIndex + 1 <= channels.length){
-    playC(channels[curIndex + 1].url, ++curIndex);
-  }
-})
+  document.removeEventListener('keydown', keys);
+  var keys = function(e){
+    console.log(e);
+    
+    if (e.key == 'd' && (pgCounter > 0) && (page < pgCounter)){
+      pgCounter = 0;
 
-//plays prev channel in playlist if user clicks p
-document.addEventListener("keydown", function(e){
-  if (e.key == 'p' && channels != null && playing == true && curIndex - 1 >= 0){
-    playC(channels[curIndex - 1].url, --curIndex);
-  }
-})
+      okSetting.play();
 
-//plays random channel in playlist if user clicks r
-document.addEventListener('keydown', function(e){
-  var rand = Math.floor(Math.random() * channels.length);
-  if (e.key == 'r' && channels != null && playing == true){
-    playC(channels[rand].url, rand);
+      //makes video element invisible
+      document.getElementById('channelWrapper').innerHTML = "";
+      page++;
+      loadChannels(page);
+    }
+    else if (e.key == 'a' && page > 0){
+      okSetting.play();
+      pgCounter = 0;
+
+
+      //makes video element invisible
+      document.getElementById('channelWrapper').innerHTML = "";
+      page--;
+      loadChannels(page);
+    }
+    //plays next channel in playlist if user clicks n
+    else if (e.key == 'n' && iChannels != null && playing == true && curIndex + 1 <= iChannels.length){
+      playC(iChannels[curIndex + 1].url, ++curIndex);
+    }
+    //plays prev channel in playlist if user clicks p
+    else if (e.key == 'p' && iChannels != null && playing == true && curIndex - 1 >= 0){
+      playC(iChannels[curIndex - 1].url, --curIndex);
+    }
+    //plays random channel in playlist if user clicks r
+    else if (e.key == 'r' && iChannels != null && playing == true){
+      var rand = Math.floor(Math.random() * iChannels.length);
+      playC(iChannels[rand].url, rand);
+    }
+    
   }
-})
+  document.addEventListener("keydown", keys);
