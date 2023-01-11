@@ -73,8 +73,10 @@
   /*Settings Buttons*/
   .settingsButton{
 
+    min-height: 70%;
+    height: 70%;
+    max-height: 70%;
 
-    margin-top: 2%;
 
     border-radius: .7em;
     outline: medium solid rgb(255, 255, 255);
@@ -104,7 +106,7 @@
   }
   .footerButton:focus{
     outline-style: solid;
-    outline-width: 5px;
+    outline-width: .20em;
     outline-color: #38bfed;
   }
 

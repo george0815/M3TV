@@ -1,19 +1,24 @@
 {
   "pkg": {
-      "name": "PHANTOMa",
-      "main": "index.html",
-      "assets": [
-          "*",
-          "add/*",
-          "play/*",
-          "options/*",
-          "fonts/*",
-          "styles/*",
-          "scripts/*.js",
-          "soundEffects/*"
-      ],
-      "version": "1.0.0",
-      "bin": "app.js"
+    "name": "PHANTOMa",
+    "main": "index.html",
+    "assets": [
+      "*",
+      "add/*",
+      "play/*",
+      "options/*",
+      "fonts/*",
+      "styles/*",
+      "scripts/*.js",
+      "soundEffects/*"
+    ],
+    "version": "1.0.0",
+    "bin": "app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cors-anywhere": "^0.4.4",
+    "express": "^4.18.2",
+    "open": "^8.4.0"
   }
-
 }

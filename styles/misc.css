@@ -5,16 +5,18 @@
 
 #settingsLabel{ 
 
-    /*position*/
     position: absolute;
-    bottom: 0%;
+    
     left: 15%;
+    bottom: 0px;
+    
 
     /*padding/text position*/
-    padding-bottom: 1%;
     padding-left: 1%;
+    padding-bottom: 3%;
 
     /*size*/
+    max-height: 5%;
     height: 20%;
     width: 20%;
    
@@ -27,13 +29,13 @@
   .label{
 
     /*sets font*/
-    font-size: 2.2vw;
-    font-size: 3vh;
+    font-size: 1.8vw;
+
     font-family: "WII";
 
     /*slightly blurs text*/
     color: transparent;
-    text-shadow: 0 0 2px rgba(0,0,0,100);
+    text-shadow: 0 0 0.07em rgba(0,0,0,100);
 
     /*border*/
     border-top-left-radius: 10px;
@@ -83,8 +85,8 @@
   /*language container*/
   #langWrapper{
 
-    margin-top: 2em;
-    min-height: 32em;
+  
+    max-height: 27em;
     display: grid;
     grid-template-columns: auto auto;
 

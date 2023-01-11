@@ -13,6 +13,7 @@ cors_proxy.createServer({
 
 
 const express = require("express");
+const open = require('open');
 const app = express();
 const cors = require('cors');
 
@@ -39,3 +40,6 @@ app.listen(5000, () => {
     console.log("Application started and Listening on port 5000");
   });
   
+
+// opens the url in the default browser 
+open('http://127.0.0.1:5000', {app: {name: 'chrome', arguments: ['--disable-web-security', '--kiosk','--user-data-dir']}});
