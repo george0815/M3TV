@@ -668,7 +668,7 @@ function iAdd(idString){
         $("#" + idString).load("../add/addPlaylist.html",function(){
 
           //sets ids
-          document.body.firstChild.id = "def";
+          document.body.firstChild.id = "remBody";
           document.body.firstChild.className = "";
           document.documentElement.id = "htmlSettings"
 
@@ -712,7 +712,7 @@ function iAdd(idString){
 
 
           //sets ids
-          document.body.firstChild.id = "def";
+          document.body.firstChild.id = "remBody";
           document.body.firstChild.className = "";
           document.documentElement.id = "htmlSettings"
 
