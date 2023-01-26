@@ -46,7 +46,7 @@
     border-color: #38bfed;
 
     /*sets size*/
-    min-height: 50%;
+    
     max-height: 51%;
     min-width: 40%;
     max-width: 60%;
@@ -73,7 +73,7 @@
   /*Settings Buttons*/
   .settingsButton{
 
-    min-height: 70%;
+    
     height: 70%;
     max-height: 70%;
 
@@ -90,7 +90,7 @@
   .footerButton{
 
     /*sets size*/
-    min-height: 10%;
+
     max-height: 30%;
     min-width: 20%;
     max-width: 30%;
@@ -210,68 +210,6 @@
       padding-left: 5%;
 
     }
-
-
-
-    #arrowNext{
-
-   
-      all:unset;
-      font-size: 5em;
-      background-color: rgba(255, 255, 255, 0);
-      position: absolute;
-      height: .1em;
-      width: .1em;
-      
-      color:#38bfed;
-      left: 94%;
-      bottom: 50%;
-
-
-    }
-    
-
-
-    #arrowPrev{
-      all:unset;
-      font-size: 5em;
-      background-color: rgba(255, 255, 255, 0);
-      position: absolute;
-      height: 130px;
-      width: 100px;
-
-      color:#38bfed;
-      left: 0.5%;
-      bottom: 50%;
-
-
-      -moz-transform: scale(-1, 1);
-      -webkit-transform: scale(-1, 1);
-      -o-transform: scale(-1, 1);
-      -ms-transform: scale(-1, 1);
-      transform: scale(-1, 1);
-
-    }
-    
-    #arrowNext:hover {
-      
-      transform: scale(1.1) perspective(1px);
-    }
-    
-    #arrowPrev:hover {
-      
-   
-      -moz-transform: scale(-1, 1);
-      -webkit-transform: scale(-1, 1);
-      -o-transform: scale(-1, 1);
-      -ms-transform: scale(-1, 1);
-      transform: scale(-1.1, 1.1) perspective(1px);
-    }
-  
-
-
-
-
 
 
     /* The switch - the box around the slider */

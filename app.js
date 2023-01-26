@@ -56,7 +56,7 @@ defaultBrowser(function (err, res) {
 
   switch(res.commonName) {
     case 'chrome':
-      open('http://127.0.0.1:5000', {app: {name: 'chrome', arguments: ['--kiosk','--disable-web-security', '--start-fullscreen','--user-data-dir']}});
+      open('http://127.0.0.1:5000', {app: {name: 'chrome', arguments: ['--disable-web-security', '--start-fullscreen','--user-data-dir']}});
 
       break;
     case 'firefox':
