@@ -4,9 +4,17 @@ const express = require("express");
 const open = require('open');
 const cors = require('cors');
 var cors_proxy = require('cors-anywhere');
+var fs = require("fs");
+var fileToRead = 'le.txt';
+
+fs.readFile(fileToRead, 'utf8', (err, data) => {
+  
+    console.log('\x1b[36m%s\x1b[0m', data);
+
+});
 
 const ConsoleWindow = require("node-hide-console-window");
-ConsoleWindow.hideConsole();
+//ConsoleWindow.hideConsole();
 
 
 // Listen on a specific host via the HOST environment variable
