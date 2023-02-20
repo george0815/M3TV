@@ -460,13 +460,16 @@ document.addEventListener("fullscreenchange", function() {
   document.removeEventListener('keydown', keys);
   var keys = function(e){
     console.log(e);
+
+    console.log("tPgCounter: " + tPgCounter +"\npage: " + page + "\npgCounter: " + pgCounter);
     
     if (e.key == 'd'){
       if(document.getElementById('backPlaylist') && (tPgCounter > 0) && (page < tPgCounter)){
         arrowForwardC(urlGlobal);
       }
-      else if (document.getElementById('backChannel') && (tPgCounter > 0) && (page < tPgCounter)){
+      else if (document.getElementById('backChannel') && (pgCounter > 0) && (page < pgCounter)){
         arrowForward();
+        console.log("TEST");
       }
     }
     else if (e.key == 'a'){

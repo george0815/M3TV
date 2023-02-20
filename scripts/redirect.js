@@ -546,7 +546,7 @@ function muteChange(){
     localStorage.setItem("mute", "false");
     document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
   }
-  else if(localStorage.getItem("mute") == "true"){
+  else if(localStorage.getItem("mute") == "true" && !(document.getElementById("bgMusic").src.includes("&mute=1"))){
     document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
   }
   else if(localStorage.getItem("mute") == "false"){

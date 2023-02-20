@@ -27,9 +27,12 @@ document.getElementById('curPlaying').style.display='none';
 //plays channel
 function playC(url, index){
 
-  //plays sound effect and mutes background music
+  //plays sound effect and mutes background music if it isn't already muted
   okChannel2.play();
-  document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
+  if(!(document.getElementById("bgMusic").src.includes("&mute=1"))){
+    document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
+  }
+  
 
 
   //Remove after debugging
@@ -42,6 +45,9 @@ function playC(url, index){
   const proxy_url = 'http://localhost:8000/';
   url = proxy_url + url;
 
+
+  //sets playing to true so channel buttons can work
+  playing = true;
 
 
   //unmutes player and sets source
@@ -92,7 +98,7 @@ function loadChannels(page){
 
         ch.className = 'channelButton';
 
-        ch.onclick = function () { playC(channel.url); };
+        ch.onclick = function () { playC(channel.url, i); };
         document.getElementById('channelWrapper').appendChild(ch);
 
       }
@@ -130,8 +136,8 @@ document.addEventListener("fullscreenchange", function() {
         });
       }
   
-      //mutes player and unmutes background music 
-      document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
+      //mutes player and unmutes background music, destroys player 
+      muteChange();
       player.muted = 'true';
       hls.destroy();
       
@@ -146,10 +152,13 @@ document.addEventListener("fullscreenchange", function() {
 });
 
 
-//plays next channel in playlist if user clicks n
+//controlls channel buttons
   document.removeEventListener('keydown', keys);
   var keys = function(e){
     console.log(e);
+  
+    console.log(curIndex);
+    //console.log(iChannels.length);
     
     if (e.key == 'd' && (pgCounter > 0) && (page < pgCounter)){
       pgCounter = 0;

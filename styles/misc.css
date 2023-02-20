@@ -23,7 +23,7 @@
     border-bottom: solid gray;
     
   }
-
+ 
 
 
   .label{
@@ -135,4 +135,10 @@
     margin: 0%;
     padding: 0%;
 
+  }
+
+
+  /*makes russian smaller*/
+  *[lang="ru"] {
+    font-size: 2vh;
   }
