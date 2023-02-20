@@ -61,7 +61,9 @@ function playC(url, indexP){
 
   //plays sound effect and mutes background music
   okChannel2.play();
-  document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
+  if(!(document.getElementById("bgMusic").src.includes("&mute=1"))){
+    document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
+  }
 
 
  
