@@ -14,7 +14,8 @@ function playlist() {
     title: "",
     logoUrl: "",
     url: "",
-    pgNmbr: 0
+    pgNmbr: 0,
+    isLocal: false
      
   };
 };
@@ -34,7 +35,30 @@ for (var i = 0; i < elements.length; i++) {
   
     tempPlaylist.logoUrl =  document.getElementById("logoUrl").value;
     
+
+
+    //is playlist is local, ask user for file prompt
+    if(document.getElementById("isLocal").checked){
+      var input = document.createElement('input');
+      input.type = 'file';
+
+      input.onchange = e => { 
+        var file = e.target.files[0]; 
+      }
+
+      input.click();
+    }
+    else{
     tempPlaylist.url = document.getElementById("url").value;
+    }
+
+    //if playlist is local, set isLocal bool to true so parser knows how to parse it 
+    if(document.getElementById("isLocal").checked){
+      tempPlaylist.isLocal = true;
+    }
+    else{
+      tempPlaylist.isLocal = false;
+    }
   
 
     if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){

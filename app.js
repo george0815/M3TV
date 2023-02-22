@@ -63,8 +63,8 @@ io.on('connection', function(socket) {
   //Whenever someone disconnects this piece of code executed
   socket.on('disconnect', function () {
      //console.log('A user disconnected');
-     http.close();
-     cors_proxy.close();
+     //http.close();
+     //cors_proxy.close();
   });
 });
 
