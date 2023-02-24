@@ -4,6 +4,9 @@ var player = document.getElementById('curPlaying');
 //used for holding current url for arrows
 var urlGlobal;
 
+//used for holding all channels in a local playlists
+var urlLocal;
+
 //kinda dont know what promises do
 var playPromise;
 
@@ -89,11 +92,13 @@ function playC(url, indexP){
   player.requestFullscreen();
   document.getElementById('curPlaying').style.display='';
 
+  console.log(playing)
+
 }
 
 
 //responsible for the channel buttons for a specific playlist 
-function loadC(url){
+function loadC(url, isLocal){
 
   urlGlobal = url;
 
@@ -110,10 +115,22 @@ function loadC(url){
   document.getElementById('backPlaylist').onclick = function () { backC(); };
 
 
-  //calls parser and displays channel button
+  
+
+  if(isLocal){
+    urlLocal = url;
+  }
+
   let promise = translate(url);
   promise.then((url) => {
 
+    if(isLocal){
+
+      url = urlLocal;
+
+    }
+
+    console.log(url);
 
     //calls parser
     parser(url);
@@ -147,7 +164,23 @@ function loadC(url){
           //sets button attributes
           const ch = document.createElement("button");
           ch.title = channel.title;
-          ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+channel.title+"\">"
+
+          //sets alt, if title is empty, use id, if id is empty, use url
+          var alt;
+          if(channel.title != ""){
+            alt = channel.title;
+          }
+          else if(channel.id != ""){
+            alt = channel.id;
+          }
+          else{
+            alt = channel.url;
+          }
+
+
+          ch.innerHTML = "<img src=\""+channel.logo+"\" alt=\""+alt+"\">"
+
+
           ch.className = 'channelButton';
           ch.onclick = function () { playC(channel.url, i); };
 
@@ -206,7 +239,7 @@ function loadPlaylists(page){
         pl.title = playlist.title;
         pl.innerHTML = "<img src=\""+playlist.logoUrl+"\" alt=\""+playlist.title+"\">"
         pl.className = 'channelButton';
-        pl.onclick = function () { loadC(playlist.url); };
+        pl.onclick = function () { loadC(playlist.url, playlist.isLocal); };
 
         pl.tabIndex = i + 1;
         pl.lang = localStorage.getItem("lang");
@@ -238,6 +271,8 @@ function loadPlaylists(page){
 
 //parses extended m3u playlist file
 function parser(pl){
+
+  //console.log(pl);
 
   //Resets J
   j = 0;
@@ -310,6 +345,7 @@ function parser(pl){
     //if done parsing channel, pushes channel to channel array
     else if(arr[i].includes("#EXTINF",0) && j != 0){
     
+      console.log(tempChannel);
       channels.push(tempChannel);
       var tempChannel =  new channel();
         
@@ -323,6 +359,7 @@ function parser(pl){
     //if EOF, pushes channel to channel array
     else if(i == arr.length - 1){
      
+      console.log(tempChannel);
       channels.push(tempChannel);
 
     }
@@ -340,6 +377,8 @@ function translate(url) {
   });
   return result; // As Promise
 }
+
+
 
 
 
@@ -467,20 +506,20 @@ document.addEventListener("fullscreenchange", function() {
 
     console.log("tPgCounter: " + tPgCounter +"\npage: " + page + "\npgCounter: " + pgCounter);
     
-    if (e.key == 'd'){
+    if (e.key == 'd' && playing == false){
       if(document.getElementById('backPlaylist') && (tPgCounter > 0) && (page < tPgCounter)){
         arrowForwardC(urlGlobal);
       }
-      else if (document.getElementById('backChannel') && (pgCounter > 0) && (page < pgCounter)){
+      else if (document.getElementById('backChannel') && (pgCounter > 0) && (page < pgCounter) && playing == false){
         arrowForward();
         console.log("TEST");
       }
     }
     else if (e.key == 'a'){
-      if(document.getElementById('backPlaylist') && page > 0){
+      if(document.getElementById('backPlaylist') && page > 0 && playing == false){
         arrowBackC(urlGlobal);
       }
-      else if (document.getElementById('backChannel') && page > 0){
+      else if (document.getElementById('backChannel') && page > 0 && playing == false){
         arrowBack();
       }
     }

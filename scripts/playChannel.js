@@ -160,7 +160,7 @@ document.addEventListener("fullscreenchange", function() {
     console.log(curIndex);
     //console.log(iChannels.length);
     
-    if (e.key == 'd' && (pgCounter > 0) && (page < pgCounter)){
+    if (e.key == 'd' && (pgCounter > 0) && (page < pgCounter) && playing == false){
       pgCounter = 0;
 
       okSetting.play();
@@ -170,7 +170,7 @@ document.addEventListener("fullscreenchange", function() {
       page++;
       loadChannels(page);
     }
-    else if (e.key == 'a' && page > 0){
+    else if (e.key == 'a' && page > 0 && playing == false){
       okSetting.play();
       pgCounter = 0;
 
