@@ -43,35 +43,7 @@ for (var i = 0; i < elements.length; i++) {
       input.type = 'file';
 
       input.onchange = e => { 
-        
-        // getting a hold of the file reference
         var file = e.target.files[0]; 
-
-        // setting up the reader
-        var reader = new FileReader();
-        reader.readAsText(file,'UTF-8');
-
-        // here we tell the reader what to do when it's done reading...
-        reader.onload = readerEvent => {
-          var content = readerEvent.target.result; // this is the content!
-          
-          tempPlaylist.url = content;
-          console.log( tempPlaylist.url );
-          document.getElementById("url").value = file.name;
-
-
-          //repeated if statement because the other one will run before 
-          //the reader is finished, and thus wont push it into the array
-          if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){
-            //pushes channel to array
-            playlists.push(tempPlaylist);
-            document.getElementById("mform").reset();
-            document.activeElement.blur()
-          }
-
-        }
-
-
       }
 
       input.click();
@@ -88,12 +60,11 @@ for (var i = 0; i < elements.length; i++) {
       tempPlaylist.isLocal = false;
     }
   
-    //if url and title arent empty, push
+
     if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){
       //pushes channel to array
       playlists.push(tempPlaylist);
       document.getElementById("mform").reset();
-      document.activeElement.blur()
     }
 
 
