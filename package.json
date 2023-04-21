@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "M3U Player",
   "scripts": {
-    "start": "node app.js & node app.js --port $PORT_2"
+    "start": "node app.js & node cors-proxy.js --port $PORT_2"
   },
   "pkg": {
     "name": "PHANTOMa",
