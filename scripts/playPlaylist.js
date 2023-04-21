@@ -74,8 +74,8 @@ function playC(url, indexP){
   curIndex = indexP;
 
   //for cors pretected channels
-  const proxy_url = 'http://localhost:8000/';
-  //url = proxy_url + url;
+  const proxy_url = 'https://phantoma.vercel.app/api/cors-proxy?url=';//'http://localhost:8000/';
+  url = proxy_url + url;
 
   //unmutes player and sets source
   player.muted = false;
