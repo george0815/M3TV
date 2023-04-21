@@ -1,4 +1,10 @@
 {
+  "name": "M3TV",
+  "version": "1.0.0",
+  "description": "M3U Player",
+  "scripts": {
+    "start": "node app.js"
+  },
   "pkg": {
     "name": "PHANTOMa",
     "main": "index.html",
