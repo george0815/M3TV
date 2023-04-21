@@ -13,11 +13,10 @@ var fileToRead = 'le.txt';
 
 //});
 
-const ConsoleWindow = require("node-hide-console-window");
-ConsoleWindow.hideConsole();
+//const ConsoleWindow = require("node-hide-console-window");
+//ConsoleWindow.hideConsole();
 
-const ConsoleWindow = require("node-hide-console-window");
-ConsoleWindow.hideConsole();
+
 
 
 // Listen on a specific host via the HOST environment variable
