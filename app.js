@@ -27,7 +27,7 @@ var port = process.env.PORT || 8000;
 cors_proxy.createServer({
     originWhitelist: [], // Allow all origins
     
-}).listen(port, '0.0.0.0', function() {
+}).listen(8080, '0.0.0.0', function() {
     //console.log('Running CORS Anywhere on ' + host + ':' + port);
 });
 
