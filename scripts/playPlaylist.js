@@ -77,6 +77,8 @@ function playC(url, indexP){
   const proxy_url = 'https://phantoma-production.up.railway.app/';//'http://localhost:8000/';
   url = proxy_url + url;
 
+  console.log(url);
+
   //unmutes player and sets source
   player.muted = false;
   var hls = new Hls();

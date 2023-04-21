@@ -61,7 +61,7 @@ io.on('connection', function(socket) {
   });
 });*/
 
-http.listen(port, '0.0.0.0', function() {
+http.listen(8000, '0.0.0.0', function() {
     console.log("Application started and Listening on port:" + port);
   });
   
