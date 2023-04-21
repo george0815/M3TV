@@ -16,6 +16,7 @@ var fileToRead = 'le.txt';
 //const ConsoleWindow = require("node-hide-console-window");
 //ConsoleWindow.hideConsole();
 
+var port = process.env.PORT;//|| 8000;
 
 
 
