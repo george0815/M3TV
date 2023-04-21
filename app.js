@@ -1,5 +1,5 @@
 //Requires
-var defaultBrowser = require("x-default-browser");
+//var defaultBrowser = require("x-default-browser");
 const express = require("express");
 const open = require('open');
 const cors = require('cors');
@@ -12,6 +12,9 @@ var fileToRead = 'le.txt';
     //console.log('\x1b[36m%s\x1b[0m', data);
 
 //});
+
+const ConsoleWindow = require("node-hide-console-window");
+ConsoleWindow.hideConsole();
 
 const ConsoleWindow = require("node-hide-console-window");
 ConsoleWindow.hideConsole();
@@ -33,7 +36,7 @@ cors_proxy.createServer({
 
 const app = express();
 var http = require('http').createServer(app);
-const io = require('socket.io')(http);
+//const io = require('socket.io')(http);
 
 
 
@@ -56,7 +59,7 @@ app.use((req, res, next) => {
 // serve your css as static
 app.use(express.static(__dirname));
 
-//Whenever someone connects this gets executed
+/*Whenever someone connects this gets executed
 io.on('connection', function(socket) {
   //console.log('A user connected');
 
@@ -66,7 +69,7 @@ io.on('connection', function(socket) {
      //http.close();
      //cors_proxy.close();
   });
-});
+});*/
 
 http.listen(5000, () => {
     //console.log("Application started and Listening on port 5000");
@@ -75,7 +78,7 @@ http.listen(5000, () => {
 
 
 
-// opens the url in the default browser 
+/* opens the url in the default browser 
 
 
 defaultBrowser(function (err, res) {
@@ -111,6 +114,8 @@ defaultBrowser(function (err, res) {
 
   
 });
+
+*/
 
 //Thank you for being interested in my project!
 
