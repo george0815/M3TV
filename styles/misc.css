@@ -84,7 +84,7 @@ form{
   padding: 0;
 }
 
-/*makes russian smaller*/
-*[lang="ru"] {
-  font-size: 2vh;
-}
+/*language scaling fixes*/
+*[lang="ru"], #settingsLabel[lang="gr"]{ font-size: 2vh;}
+.channelButton[lang="ru"] { font-size: 3vh;}
+#playPlaylist[lang="ru"], #playChannel[lang="ru"] {   font-size: 1.5vh;}
