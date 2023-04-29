@@ -16,7 +16,8 @@
       "fonts/*",
       "styles/*",
       "scripts/*.js",
-      "soundEffects/*"
+      "soundEffects/*",
+      "misc/*"
     ],
     "version": "1.0.0",
     "bin": "app.js"
