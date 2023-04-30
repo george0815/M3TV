@@ -39,6 +39,7 @@ for (var i = 0; i < elements.length; i++) {
 
     //is playlist is local, ask user for file prompt
     if(document.getElementById("isLocal").checked){
+      tempPlaylist.isLocal = true;
       var input = document.createElement('input');
       input.type = 'file';
 
@@ -67,56 +68,32 @@ for (var i = 0; i < elements.length; i++) {
             playlists.push(tempPlaylist);
             document.getElementById("mform").reset();
             document.activeElement.blur()
-            if(localStorage.getItem("lang") ==  'en'){window.alert("Playlist Added, press \"back\" to save changes.");}
-            else if(localStorage.getItem("lang") == 'es'){window.alert("Lista de reproducción añadida, presione \"volver\" para guardar los cambios.");}
-            else if(localStorage.getItem("lang") == 'fr'){window.alert("Playlist ajoutée, appuyez sur \"retour\" pour enregistrer les modifications.");}
-            else if(localStorage.getItem("lang") == 'gr'){window.alert("Wiedergabeliste hinzugefügt, drücken Sie \"Zurück\", um die Änderungen zu speichern.");}
-            else if(localStorage.getItem("lang") == 'ar'){window.alert("تمت إضافة قائمة التشغيل ، اضغط على \"العودة\" لحفظ التغييرات.");}
-            else if(localStorage.getItem("lang") == 'ru'){window.alert("Плейлист добавлен, нажмите \"назад\", чтобы сохранить изменения.");}
-            else if(localStorage.getItem("lang") == 'ch'){window.alert("播放列表已添加，请按\"返回\"保存更改。");}
-            else if(localStorage.getItem("lang") == 'jp'){window.alert("プレイリストが追加されました。「戻る」を押して変更を保存してください。");}
+            displayAlert(0);
           }
-          else{
-            if(localStorage.getItem("lang") ==  'en'){window.alert("Please fill out the required fields");}
-            else if(localStorage.getItem("lang") == 'es'){window.alert("Por favor, complete los campos requeridos");}
-            else if(localStorage.getItem("lang") == 'fr'){window.alert("Veuillez remplir les champs obligatoires");}
-            else if(localStorage.getItem("lang") == 'gr'){window.alert("Bitte füllen Sie die Pflichtfelder aus");}
-            else if(localStorage.getItem("lang") == 'ar'){window.alert("يرجى ملء الحقول المطلوبة");}
-            else if(localStorage.getItem("lang") == 'ru'){window.alert("Пожалуйста, заполните обязательные поля");}
-            else if(localStorage.getItem("lang") == 'ch'){window.alert("请填写必填字段");}
-            else if(localStorage.getItem("lang") == 'jp'){window.alert("必須項目を入力してください");}
-          }
+          else{ displayAlert(1);}
+          
 
         }
-
-
       }
 
       input.click();
     }
+    //if playlist isnt local
     else{
-    tempPlaylist.url = document.getElementById("url").value;
-    }
-
-    //if playlist is local, set isLocal bool to true so parser knows how to parse it 
-    if(document.getElementById("isLocal").checked){
-      tempPlaylist.isLocal = true;
-    }
-    else{
+      tempPlaylist.url = document.getElementById("url").value;
       tempPlaylist.isLocal = false;
-    }
-  
-    //if url and title arent empty, push
-    if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){
-      //pushes channel to array
-      playlists.push(tempPlaylist);
-      document.getElementById("mform").reset();
-      document.activeElement.blur()
-    }
 
-
+      //if url and title arent empty, push
+      if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){
+        //pushes channel to array
+        playlists.push(tempPlaylist);
+        document.getElementById("mform").reset();
+        document.activeElement.blur();
+        displayAlert(0);
+      }
+      else {displayAlert(1);}
+    }
   });
-
 }
   
 
@@ -132,9 +109,38 @@ for (var i = 0; i < elements.length; i++) {
     localStorage.setItem('playlists', JSON.stringify(playlists));
     
   });
-
 }
 
+function displayAlert(mode){
+  console.log("called");
+  if (mode == 0){
+    if(localStorage.getItem("lang") ==  'en'){window.alert("Playlist Added, press \"back\" to save changes.");}
+    else if(localStorage.getItem("lang") == 'es'){window.alert("Lista de reproducción añadida, presione \"volver\" para guardar los cambios.");}
+    else if(localStorage.getItem("lang") == 'fr'){window.alert("Playlist ajoutée, appuyez sur \"retour\" pour enregistrer les modifications.");}
+    else if(localStorage.getItem("lang") == 'gr'){window.alert("Wiedergabeliste hinzugefügt, drücken Sie \"Zurück\", um die Änderungen zu speichern.");}
+    else if(localStorage.getItem("lang") == 'ar'){window.alert("تمت إضافة قائمة التشغيل ، اضغط على \"العودة\" لحفظ التغييرات.");}
+    else if(localStorage.getItem("lang") == 'ru'){window.alert("Плейлист добавлен, нажмите \"назад\", чтобы сохранить изменения.");}
+    else if(localStorage.getItem("lang") == 'ch'){window.alert("播放列表已添加，请按\"返回\"保存更改。");}
+    else if(localStorage.getItem("lang") == 'jp'){window.alert("プレイリストが追加されました。「戻る」を押して変更を保存してください。");}
+  }
+  else {
+    if(localStorage.getItem("lang") ==  'en'){window.alert("Please fill out the required fields");}
+    else if(localStorage.getItem("lang") == 'es'){window.alert("Por favor, complete los campos requeridos");}
+    else if(localStorage.getItem("lang") == 'fr'){window.alert("Veuillez remplir les champs obligatoires");}
+    else if(localStorage.getItem("lang") == 'gr'){window.alert("Bitte füllen Sie die Pflichtfelder aus");}
+    else if(localStorage.getItem("lang") == 'ar'){window.alert("يرجى ملء الحقول المطلوبة");}
+    else if(localStorage.getItem("lang") == 'ru'){window.alert("Пожалуйста, заполните обязательные поля");}
+    else if(localStorage.getItem("lang") == 'ch'){window.alert("请填写必填字段");}
+    else if(localStorage.getItem("lang") == 'jp'){window.alert("必須項目を入力してください");}
+  }
+}
 
   
+//adds channel
+var elements = document.querySelectorAll("#isLocal");
+for (var i = 0; i < elements.length; i++) {
+  elements[i].addEventListener("click", function() {
+    console.log("TEST");
+  })
 
+};

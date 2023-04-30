@@ -31,77 +31,8 @@
                 <br>
                 <input tabindex="1" type="text" class="miscOptions" id="name" name="name">
 
-
-
-                <label style="padding-right: 5%;" tabindex="-1" lang="en" class="label" for="url">URL: 
-                    <span style="margin-left: 2vw;">Local</span>
-                   
-                    <label style="margin-top: 1vh;" tabindex="-1" class="switch" for="isLocal">
-                        <input tabindex="2" id="isLocal" type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                </label>
-                <label style="padding-right: 5%;" tabindex="-1" lang="es" class="label" for="url">URL:
-                    <span style="margin-left: 2vw;">Local</span>
-                   
-                    <label style="margin-top: 1vh;" tabindex="-1" class="switch" for="isLocal">
-                        <input tabindex="2" id="isLocal" type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                </label>
-                
-                <label style="padding-right: 5%;" tabindex="-1" lang="fr" class="label" for="url">URL:
-                    <span style="margin-left: 2vw;">Local</span>
-                   
-                    <label style="margin-top: 1vh;" tabindex="-1" class="switch" for="isLocal">
-                        <input tabindex="2" id="isLocal" type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                </label>
-                <label  style="padding-right: 5%;" tabindex="-1" lang="gr" class="label" for="url">URL:
-                    <span style="margin-left: 2vw;">Lokale</span>
-                   
-                    <label style="margin-top: 1vh;" tabindex="-1" class="switch" for="isLocal">
-                        <input tabindex="2" id="isLocal" type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                </label>
-                <label style="padding-right: 5%;" tabindex="-1" lang="ar" class="label" for="url">>عُنْوَان اِنْتِرْنَت:
-                    <span style="margin-left: 2vw;">محلي</span>
-                   
-                    <label style="margin-top: 1vh;" tabindex="-1" class="switch" for="isLocal">
-                        <input tabindex="2" id="isLocal" type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                </label>
-                <label style="padding-right: 5%;" tabindex="-1" lang="ru" class="label" for="url">УРЛ:
-                    <span style="margin-left: 2vw;">локальный</span>
-                   
-                    <label style="margin-top: 1vh;" tabindex="-1" class="switch" for="isLocal">
-                        <input tabindex="2" id="isLocal" type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                </label>
-                <label style="padding-right: 5%;" tabindex="-1" lang="ch" class="label" for="url">因特网地址:
-                    <span style="margin-left: 2vw;">本地</span>
-                   
-                    <label style="margin-top: 1vh;" tabindex="-1" class="switch" for="isLocal">
-                        <input tabindex="2" id="isLocal" type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                </label>
-                <label style="padding-right: 5%;" tabindex="-1" lang="jp" class="label" for="url">URL:
-                    <span style="margin-left: 2vw;">ローカル</span>
-                   
-                    <label style="margin-top: 1vh;" tabindex="-1" class="switch" for="isLocal">
-                        <input tabindex="2" id="isLocal" type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                </label>          
                 <br>
                 <input tabindex="2" type="text" class="miscOptions" id="url" name="url">
-
-
 
                 <label tabindex="-1" lang="en" class="label" for="logoUrl">Logo URL:</label>
                 <label tabindex="-1" lang="es" class="label" for="logoUrl">URL del Icono:</label>
@@ -151,5 +82,46 @@
 
 
         <!--Script-->
+        <script>
+
+            //creates and sets label
+            const label = document.createElement("label");
+            label.setAttribute("style", "padding-right: 5%;");
+            label.setAttribute("tabindex", "-1");
+            label.setAttribute("lang", localStorage.getItem("lang"));
+            label.setAttribute("class", "label");
+            label.setAttribute("for", "url");
+
+            
+            let localText = ""; let urlText = "";
+            //sets url text
+            if (localStorage.getItem("lang") == "en" || localStorage.getItem("lang") == "es" || 
+            localStorage.getItem("lang") == "fr" || localStorage.getItem("lang") == "gr" || localStorage.getItem("lang") == "jp"){
+                urlText = "URL:"; 
+            }
+            else if (localStorage.getItem("lang") == "ar") {urlText = "عُنْوَان اِنْتِرْنَت:"}
+            else if (localStorage.getItem("lang") == "ru") {urlText = "УРЛ:"}
+            else if (localStorage.getItem("lang") == "ch") {urlText = "因特网地址:"}
+
+            //sets local text
+            if(localStorage.getItem("lang") == "en" || localStorage.getItem("lang") == "es" || 
+            localStorage.getItem("lang") == "fr"){ localText = "Local"}
+            else if(localStorage.getItem("lang") == "gr"){localText = "Lokale"}
+            else if(localStorage.getItem("lang") == "ar"){localText = "محلي"}
+            else if(localStorage.getItem("lang") == "ru"){localText = "локальный"}
+            else if(localStorage.getItem("lang") == "ch"){localText = "本地"}
+            else if(localStorage.getItem("lang") == "jp"){localText = "ローカル"}
+
+            label.innerHTML = urlText + "<span style=\"margin-left: 2vw;\">"+localText +"</span><label style=\"margin-top: 1vh; margin-left: 1vw;\" tabindex=\"-1\" class=\"switch\" for=\"isLocal\"><input tabindex=\"2\" id=\"isLocal\" type=\"checkbox\"><span class=\"slider round\"></span></label>";
+
+
+
+
+
+            //appends label to document
+            document.getElementById("name").insertAdjacentElement("afterend", label);
+
+
+        </script>
        <script type="text/javascript" src="../scripts/addPlaylist.js"></script>
  

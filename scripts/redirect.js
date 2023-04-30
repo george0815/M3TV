@@ -586,28 +586,28 @@ for (var i = 0; i < elements.length; i++) {
     const splash = document.createElement('div'); splash.classList.add('splashControls'); 
     
     if(localStorage.getItem("lang") ==  'en'){
-      splash.innerHTML = "Next Channel - N <br> Previous Channel - P <br> Random Channel - R <br> Save Channel - F <br> Next Page - <span onclick=\"location.href = 'misc/doom/index.html';\">D<span> <br> Previous Page - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> Created by George S.</p>";
+      splash.innerHTML = "Next Channel - N <br> Previous Channel - P <br> Random Channel - R <br> Save Channel - F <br> Next Page - <span onclick=\"location.href = 'misc/doom/index.html';\">D</span> <br> Previous Page - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> Created by George S.</p>";
     }
     else if(localStorage.getItem("lang") ==  'es'){
-      splash.innerHTML = "Siguiente canal - N <br> Canal anterior - P <br> Canal aleatorio - R <br> Guardar canal - F <br> Siguiente página - <span onclick=\"location.href = 'misc/doom/index.html';\">D<span> <br> Página anterior - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> Creado por George S.</p>";    
+      splash.innerHTML = "Siguiente canal - N <br> Canal anterior - P <br> Canal aleatorio - R <br> Guardar canal - F <br> Siguiente página - <span onclick=\"location.href = 'misc/doom/index.html';\">D</span> <br> Página anterior - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> Creado por George S.</p>";    
     }
     else if(localStorage.getItem("lang") ==  'fr'){
-      splash.innerHTML = "Chaîne suivante - N <br> Chaîne précédente - P <br> Chaîne aléatoire - R <br> Enregistrer la chaîne - F <br> Page suivante - <span onclick=\"location.href = 'misc/doom/index.html';\">D<span> <br> Page précédente - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> Créé par George S.</p>";   
+      splash.innerHTML = "Chaîne suivante - N <br> Chaîne précédente - P <br> Chaîne aléatoire - R <br> Enregistrer la chaîne - F <br> Page suivante - <span onclick=\"location.href = 'misc/doom/index.html';\">D</span> <br> Page précédente - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> Créé par George S.</p>";   
     }
     else if(localStorage.getItem("lang") ==  'gr'){
-      splash.innerHTML = "Nächster Kanal - N <br> Vorheriger Kanal - P <br> Zufälliger Kanal - R <br> Kanal speichern - F <br> Nächste Seite - <span onclick=\"location.href = 'misc/doom/index.html';\">D<span> <br> Vorherige Seite - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> Erstellt von George S.</p>";    
+      splash.innerHTML = "Nächster Kanal - N <br> Vorheriger Kanal - P <br> Zufälliger Kanal - R <br> Kanal speichern - F <br> Nächste Seite - <span onclick=\"location.href = 'misc/doom/index.html';\">D</span> <br> Vorherige Seite - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> Erstellt von George S.</p>";    
     }
     else if(localStorage.getItem("lang") ==  'ar'){
-      splash.innerHTML = "القناة التالية - N <br> القناة السابقة - P <br> القناة العشوائية - R <br> حفظ القناة - F <br> الصفحة التالية - <span onclick=\"location.href = 'misc/doom/index.html';\">D<span> <br> الصفحة السابقة - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> تم الإنشاء بواسطة جورج S.</p>";
+      splash.innerHTML = "القناة التالية - N <br> القناة السابقة - P <br> القناة العشوائية - R <br> حفظ القناة - F <br> الصفحة التالية - <span onclick=\"location.href = 'misc/doom/index.html';\">D</span> <br> الصفحة السابقة - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> تم الإنشاء بواسطة جورج S.</p>";
     }
     else if(localStorage.getItem("lang") ==  'ru'){
-      splash.innerHTML = "Следующий канал - N <br> Предыдущий канал - P <br> Случайный канал - R <br> Сохранить канал - F <br> Следующая страница - <span onclick=\"location.href = 'misc/doom/index.html';\">D<span> <br> Предыдущая страница - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> Создано Георгом С.</p>";
+      splash.innerHTML = "Следующий канал - N <br> Предыдущий канал - P <br> Случайный канал - R <br> Сохранить канал - F <br> Следующая страница - <span onclick=\"location.href = 'misc/doom/index.html';\">D</span> <br> Предыдущая страница - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> Создано Георгом С.</p>";
     }
     else if(localStorage.getItem("lang") ==  'ch'){
-      splash.innerHTML = "下一个频道 - N <br> 上一个频道 - P <br> 随机频道 - R <br> 保存频道 - F <br> 下一页 - <span onclick=\"location.href = 'misc/doom/index.html';\">D<span> <br> 上一页 - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> 创建者：George S.</p>";
+      splash.innerHTML = "下一个频道 - N <br> 上一个频道 - P <br> 随机频道 - R <br> 保存频道 - F <br> 下一页 - <span onclick=\"location.href = 'misc/doom/index.html';\">D</span> <br> 上一页 - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> 创建者：George S.</p>";
     }
     else if(localStorage.getItem("lang") ==  'jp'){
-      splash.innerHTML = "次のチャンネル - N <br> 前のチャンネル - P <br> ランダムのチャンネル - R <br> チャンネルを保存する - F <br> 次のページ - <span onclick=\"location.href = 'misc/doom/index.html';\">D<span> <br> 前のページ - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> 作成者：ジョージ・S．</p>";
+      splash.innerHTML = "次のチャンネル - N <br> 前のチャンネル - P <br> ランダムのチャンネル - R <br> チャンネルを保存する - F <br> 次のページ - <span onclick=\"location.href = 'misc/doom/index.html';\">D</span> <br> 前のページ - A <p style=\"position: absolute;bottom: 0; margin-right: 2vw; right: 0;\"> 作成者：ジョージ・S．</p>";
     }
     const body = document.getElementsByTagName('body')[0];
     body.insertBefore(splash, body.firstChild);  
