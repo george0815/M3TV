@@ -181,7 +181,7 @@ document.addEventListener("fullscreenchange", function() {
       let tempChannel = {
 
         title : channels[curIndex].inf.title,
-        logoUrl : channels[curIndex].inf.tvgId,
+        logoUrl : channels[curIndex].inf.tvgLogo,
         url : channels[curIndex].url
 
       }
