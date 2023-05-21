@@ -18,8 +18,10 @@ m3tv is a web app that allows you to stream M3U playlists and M3U8 streams.
 
 
 ## Usage
-App is availbe at 
-https://m3tv.netlify.app/
+App is available at 
+https://m3tv.netlify.app/<br>
+https://m3tv.vercel.app/
+The second link uses a proxy server to bypass CORS restrcitions so more streams will most likely be available.
 Make sure to click anywhere on the splash screen to enter the main menu.
 
 ### Add Playlist or Channel
@@ -44,10 +46,6 @@ Random Channel - R<br>
 Save Channel - F (only available when watching a channel that's a part of a playlist)<br>
 Next Page - D<br>
 Previous Page - A
-
-## License
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). You are free to modify and distribute the software for personal or commercial use.
 
 ## Acknowledgements
 
