@@ -31,7 +31,7 @@ function playC(url, index) {
 
   // for cors pretected channels
   const proxy_url = 'http://localhost:8000/';
-  // url = proxy_url + url;
+  url = proxy_url + url;
 
   // sets playing to true so channel buttons can work
   playing = true;

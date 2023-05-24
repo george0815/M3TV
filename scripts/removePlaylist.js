@@ -14,16 +14,16 @@
       //creates button for each channel
       playlists.forEach((playlist, i) => {
 
-
+        console.log(i);
         const ch = document.createElement("button");
       
-        ch.id = playlist.title;
+        ch.id = i;
         ch.innerHTML = playlist.title;
       
     
         ch.className = 'settingsButton';
 
-        ch.onclick = function () { removePl(playlist.title); };
+        ch.onclick = function () { removePl(playlist.title, i); };
         document.getElementById('remChannelWrapper').appendChild(ch);
 
       });
@@ -34,13 +34,23 @@
   };
 
 
-  function removePl(title){
+  function removePl(title, id){
     okSetting.play();
-    document.getElementById(title).style.display = 'none';
+    document.getElementById(id).style.display = 'none';
 
-    playlists = playlists.filter(function( playlist ) {
-      return playlist.title !== title;
+    let tempPlaylists = [];
+
+    playlists.forEach((playlist, i) => {
+
+      console.log(title + id);
+      console.log(playlist.title + i);
+
+      if (id !== i){
+        tempPlaylists.push(playlist);
+      }
+
     });
+    playlists = tempPlaylists;
 
       
     //deletes previous storage item so there are no duplicates
