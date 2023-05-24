@@ -17,12 +17,12 @@
 
         const ch = document.createElement("button");
       
-        ch.id = channel.title;
+        ch.id = i;
         ch.innerHTML = channel.title;
           
         ch.className = 'settingsButton';
 
-        ch.onclick = function () { removeCh(channel.title); };
+        ch.onclick = function () { removeCh(channel.title, i); };
         document.getElementById('remChannelWrapper').appendChild(ch);
 
     });
@@ -30,13 +30,23 @@
   };
 
 
-  function removeCh(title){
+  function removeCh(title, id){
 
-    document.getElementById(title).style.display = 'none';
+    document.getElementById(id).style.display = 'none';
 
-    iChannels = iChannels.filter(function( channel ) {
-        return channel.title !== title;
+    let tempChannels = [];
+
+    iChannels.forEach((channel, i) => {
+
+      console.log(title + id);
+      console.log(channel.title + i);
+
+      if (id !== i){
+        tempChannels.push(channel);
+      }
+
     });
+    iChannels = tempChannels;
     okSetting.play();
       
     //deletes previous storage item so there are no duplicates

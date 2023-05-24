@@ -203,6 +203,10 @@ body {
   color: #59aeff;
 }
 
+.splashControls > span:hover{
+  text-shadow: 0 0 10px #f36666, 0 0 20px #f36666, 0 0 30px #f36666;
+}
+
 @keyframes visible {
   from {
     opacity: 0;

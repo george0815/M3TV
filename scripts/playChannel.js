@@ -29,14 +29,12 @@ function playC(url, index) {
   // sets current index
   curIndex = index;
 
-  // for cors pretected channels
-  const proxy_url = 'http://localhost:8000/';
-  // url = proxy_url + url;
-
   // sets playing to true so channel buttons can work
   playing = true;
 
   // Unmutes player and sets source
+  const proxy_url = 'https://phantoma-production.up.railway.app/';
+  url = proxy_url + url;
   player.muted = false;
   var hls = new Hls();
   hls.loadSource(url);
