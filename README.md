@@ -21,7 +21,8 @@ m3tv is a web app that allows you to stream M3U playlists and M3U8 streams.
 App is available at <br> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://m3tv.netlify.app/<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://m3tv.vercel.app/<br>
-The second link uses a proxy server to bypass CORS restrcitions so more streams will most likely be available.<br>
+The second link uses a proxy server to access CORS restricted streams. <br>
+You can use the first link combined with an extension to bypass CORS (like [Moesif Origin & CORS Changer](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc?hl=en), [Cross Domain - CORS](https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai?hl=en) and [Allow CORS](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)) to access the same streams. <br>
 Make sure to click anywhere on the splash screen to enter the main menu.
 
 ### Add Playlist or Channel
