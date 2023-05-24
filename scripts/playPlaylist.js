@@ -56,7 +56,7 @@ function playC(url, indexP){
   curIndex = indexP;
 
   //for cors pretected channels
-  const proxy_url = 'https://phantoma-production.up.railway.app/';
+  const proxy_url = 'https://phantoma.up.railway.app/';
   url = proxy_url + url;
 
   console.log(url);

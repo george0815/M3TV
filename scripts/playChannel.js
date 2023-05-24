@@ -33,7 +33,7 @@ function playC(url, index) {
   playing = true;
 
   // Unmutes player and sets source
-  const proxy_url = 'https://phantoma-production.up.railway.app/';
+  const proxy_url = 'https://phantoma.up.railway.app/';
   url = proxy_url + url;
   player.muted = false;
   var hls = new Hls();
