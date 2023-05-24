@@ -18,10 +18,10 @@ m3tv is a web app that allows you to stream M3U playlists and M3U8 streams.
 
 
 ## Usage
-App is available at 
-https://m3tv.netlify.app/<br>
-https://m3tv.vercel.app/
-The second link uses a proxy server to bypass CORS restrcitions so more streams will most likely be available.
+App is available at <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://m3tv.netlify.app/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://m3tv.vercel.app/<br>
+The second link uses a proxy server to bypass CORS restrcitions so more streams will most likely be available.<br>
 Make sure to click anywhere on the splash screen to enter the main menu.
 
 ### Add Playlist or Channel
@@ -37,7 +37,8 @@ To change the background music:
 1. Find a youtube video
 2. Click "share"
 3. Click "Embed"
-4. Copy the string that's in the quotations after "src=" and paste it into the text box.
+4. Copy the string that's in the quotations after "src=" and paste it into the text box
+5. Click "Back" to save changes
 
 ### Controls
 Next Channel - N<br>
