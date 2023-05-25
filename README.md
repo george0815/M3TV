@@ -19,7 +19,9 @@ m3tv is a web app that allows you to stream M3U playlists and M3U8 streams.
 
 ## Usage
 Assuming you have node installed, all you have to do is launch m3tv.js, <br>
-Make sure to click anywhere on the splash screen to enter the main menu.
+Make sure to click anywhere on the splash screen to enter the main menu. <br>
+
+NOTE: On Microsoft Edge, you have to whitelist it by going to Settings > Cookies and site permissions > Manage and delete cookies and site data, then clicking "Add" in the "Allow" section and entering the URL
 
 ### Add Playlist or Channel
 1. Click anywhere to exit the splash screen and enter the main menu
