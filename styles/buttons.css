@@ -96,6 +96,7 @@ button:focus {
   text-align: center;
   text-indent: .1em;
   box-shadow: none;
+  overflow: hidden;
 }
 
 .clockButton {
