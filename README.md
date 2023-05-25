@@ -25,11 +25,13 @@ The second link uses a proxy server to access CORS restricted streams. <br>
 You can use the first link combined with an extension to bypass CORS (like [Moesif Origin & CORS Changer](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc?hl=en), [Cross Domain - CORS](https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai?hl=en) and [Allow CORS](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)) to access the same streams. <br>
 Make sure to click anywhere on the splash screen to enter the main menu.
 
+NOTE: On Microsoft Edge, you have to whitelist it by going to Settings > Cookies and site permissions > Manage and delete cookies and site data, then clicking "Add" in the "Allow" section and entering the URL
+
 ### Add Playlist or Channel
 1. Click anywhere to exit the splash screen and enter the main menu
 2. To add a playlist, click the "Add Playlists" button in the main menu, or the "Add Channels" button if your adding a channel
-3. Enter the corrent URL for the m3u playlist or m3u8 stream, if the m3u file is stored locally on your computer, click the "local" button
-4. Enter a title and a image URL for the logo (optional)
+3. Enter the correct URL for the m3u playlist or m3u8 stream, if the m3u file is stored locally on your computer, click the "local" button NOTE: if you are adding a local playlist, you do not have to enter anything into the textbox. You will be prompted with a file dialog upon clicking the "Okay" button
+4. Enter a title and an image URL for the logo (optional)
 5. Press back to save changes
 6. Once the playlist or channel is added, you can see view them by clicking the "Play Playlists" or "Play Channels" button in the main menu
 
