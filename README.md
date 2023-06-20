@@ -18,12 +18,11 @@ m3tv is a web app that allows you to stream M3U playlists and M3U8 streams.
 
 
 ## Usage
-App is available at <br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://m3tv.netlify.app/<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://m3tv.vercel.app/<br>
+App is available at https://m3tv.netlify.app/ and https://m3tv.vercel.app/ , make sure to click anywhere on the splash screen to enter the main menu.<br>
+<br>
 The second link uses a proxy server to access CORS restricted streams. <br>
 You can use the first link combined with an extension to bypass CORS (like [Moesif Origin & CORS Changer](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc?hl=en), [Cross Domain - CORS](https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai?hl=en) and [Allow CORS](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)) to access the same streams. <br>
-Make sure to click anywhere on the splash screen to enter the main menu.
+Also, the first link doesn't automatically upgrade insecure requests, this is useful for when you're trying to view a playlist that's locally hosted using something like [dizquetv](https://github.com/vexorian/dizquetv) or [ErsatzTV](https://github.com/jasongdove/ErsatzTV). Just remember to allow insecure content. <br>
 
 NOTE: On Microsoft Edge, you have to whitelist it by going to Settings > Cookies and site permissions > Manage and delete cookies and site data, then clicking "Add" in the "Allow" section and entering the URL
 
