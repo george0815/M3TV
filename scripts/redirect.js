@@ -55,6 +55,30 @@ function iOptions(){
               document.getElementById("muteButton").checked = false;  
             }
           
+            //Controls sound effect volume
+            document.getElementById("sVol").value = localStorage.getItem("seVol") * 100;
+            document.getElementById("sVol").addEventListener("change", function() {
+            
+              okSetting.play();
+              okMain.volume = document.getElementById("sVol").value / 100;  
+              okSetting.volume = document.getElementById("sVol").value / 100;  
+              okChannel.volume = document.getElementById("sVol").value / 100;  
+              okChannel2.volume = document.getElementById("sVol").value / 100;  
+              backSetting.volume = document.getElementById("sVol").value / 100;  
+              backMain.volume = document.getElementById("sVol").value / 100;  
+              backChannel.volume = document.getElementById("sVol").value / 100;  
+
+            })
+
+
+            //Controls channel volume
+            document.getElementById("cVol").value = localStorage.getItem("cVol") * 100;
+            document.getElementById("cVol").addEventListener("change", function() {
+            
+              okSetting.play();            
+              localStorage.setItem('cVol', document.getElementById("cVol").value / 100);
+              
+            })
 
             //BACK BUTTON
             var elements = document.querySelectorAll("#settingBack");
@@ -76,6 +100,7 @@ function iOptions(){
 
 
                 //loads options menu (options.html)
+                localStorage.setItem("seVol",  document.getElementById("sVol").value / 100);
                 iOptions();
 
               })
@@ -113,8 +138,8 @@ function iOptions(){
 
 
 
-      //VOLUME MENU BUTTON
-      var elements = document.querySelectorAll("#vol");
+      //VIDEO MENU BUTTON
+      var elements = document.querySelectorAll("#vid");
       for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener("click", function() {
 
@@ -123,32 +148,31 @@ function iOptions(){
           okSetting.play();
           var idString = document.body.firstChild.id;
 
-          //loads volume menu (volume.html)
-          $("#" + idString).load("../options/volume.html",function(){
+          //loads volume menu (video.html)
+          $("#" + idString).load("../options/video.html",function(){
 
 
-            //Controls sound effect volume
-            document.getElementById("sVol").value = localStorage.getItem("seVol") * 100;
-            document.getElementById("sVol").addEventListener("change", function() {
+            //VIDEO PLAYER
+            console.log(localStorage.getItem("player"));
+            if(localStorage.getItem("player") == null){
+              localStorage.setItem('player', "hls");
+              document.getElementById("player").value = "hls";
+            }
+            else if(localStorage.getItem("player") == "hls"){ document.getElementById("player").value = "hls" }
+            else if(localStorage.getItem("player") == "vjs"){ document.getElementById("player").value = "vjs" }  
+
+            //CORS BUTTON
+            if(localStorage.getItem("cors") == null){
+              localStorage.setItem('cors', false);
+              document.getElementById("corsButton").checked = false;  
+            }
+            else if(localStorage.getItem('cors') == "false"){ document.getElementById("corsButton").checked = false; }
+            else if(localStorage.getItem('cors') == "true"){document.getElementById("corsButton").checked = true;  }          
             
-              okSetting.play();
-              okMain.volume = document.getElementById("sVol").value / 100;  
-              okSetting.volume = document.getElementById("sVol").value / 100;  
-              okChannel.volume = document.getElementById("sVol").value / 100;  
-              okChannel2.volume = document.getElementById("sVol").value / 100;  
-              backSetting.volume = document.getElementById("sVol").value / 100;  
-              backMain.volume = document.getElementById("sVol").value / 100;  
-              backChannel.volume = document.getElementById("sVol").value / 100;  
+            document.getElementById("corsButton").addEventListener("click", function() {
 
-            })
-
-
-            //Controls channel volume
-            document.getElementById("cVol").value = localStorage.getItem("cVol") * 100;
-            document.getElementById("cVol").addEventListener("change", function() {
-            
-              okSetting.play();            
-              localStorage.setItem('cVol', document.getElementById("cVol").value / 100);
+              if(document.getElementById("corsButton").checked == false){ localStorage.setItem('cors', false);}
+              else if(document.getElementById("corsButton").checked == true){ localStorage.setItem('cors', true);}     
               
             })
 
@@ -164,7 +188,9 @@ function iOptions(){
                 backSetting.play();
                 var idString = document.body.firstChild.id;
 
-                localStorage.setItem("seVol",  document.getElementById("sVol").value / 100);
+                if(document.getElementById("player").value == "hls"){ localStorage.setItem('player', 'hls'); }
+                else if(document.getElementById("player").value == "vjs"){ localStorage.setItem('player', 'vjs'); }  
+
                 iOptions();
 
               })
@@ -344,6 +370,9 @@ for (var i = 0; i < elements.length; i++) {
     okMain2.play();
     var idString = document.body.firstChild.id;
 
+    //predisposed videojs player so that a new one can be created
+    if(videojs.getPlayer("vjsP")){videojs.getPlayer('vjsP').dispose(); }
+
 
     //loads play playlist menu (playPlaylist.html)
     $("#" + idString).load("../play/playPlaylist.html",function(){
@@ -354,6 +383,7 @@ for (var i = 0; i < elements.length; i++) {
 
       //sets channel volume
       document.getElementById("curPlaying").volume = localStorage.getItem("cVol");
+      if(videojs.getPlayer("vjsP")){videojs.getPlayer("vjsP").volume(localStorage.getItem("cVol"));}
    
 
       //BACK BUTTON
@@ -410,6 +440,9 @@ for (var i = 0; i < elements.length; i++) {
     okMain2.play();
     var idString = document.body.firstChild.id;
 
+    //predisposed videojs player so that a new one can be created
+    if(videojs.getPlayer("vjs")){videojs.getPlayer('vjs').dispose(); }
+
 
     //loads play channel menu (playChannel.html)
     $("#" + idString).load("../play/playChannel.html",function(){
@@ -417,7 +450,8 @@ for (var i = 0; i < elements.length; i++) {
 
       //sets channel volume
       document.getElementById("curPlaying").volume = localStorage.getItem("cVol");
-  
+      if(videojs.getPlayer("vjs")){videojs.getPlayer("vjs").volume(localStorage.getItem("cVol"));}
+
 
       //sets ids
       document.body.firstChild.id = "def";
@@ -433,8 +467,7 @@ for (var i = 0; i < elements.length; i++) {
           //saves id and plays sound effect
           backMain.play();
           var idString = document.body.firstChild.id;
-
-        
+   
           //loads main menu (base.html)
           $("#" + idString).load("../base.html",function(){
             document.body.firstChild.id = "body";      
@@ -544,7 +577,6 @@ for (var i = 0; i < elements.length; i++) {
           //saves id and plays sound effect
           backMain.play();
           var idString = document.body.firstChild.id;
-
         
           //loads main menu (base.html)
           $("#" + idString).load("../base.html",function(){

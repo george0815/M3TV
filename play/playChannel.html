@@ -6,15 +6,16 @@
     <meta charset=utf-8 />
     <title>PHANTOMa</title>
       
- 
+    
        
     </head>
     <body tabindex="-1" class="playVid">
 
-
-
-      <!--Video element for playing channels-->
+      <!--Video element for playing channels (hls)-->
       <video tabindex="-1" id="curPlaying">  <source id="currentChannel" src="" type="application/x-mpegURL"> </video>
+      <!--Video element for playing channels (videojs)-->
+      <video id="vjs" lang="" class="video-js vjs-default-skin" controls ><source src="path/to/your/video.mp4"> </video>
+
       
 
       <!--Container for channel buttons-->

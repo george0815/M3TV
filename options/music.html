@@ -23,14 +23,14 @@
       <!--Header-->
       <div tabindex="-1" id="settingsTop">
 
-        <div tabindex="-1" lang="en" class="label" id="settingsLabel">Music</div>
-        <div tabindex="-1" lang="es" class="label" id="settingsLabel">Música</div>
-        <div tabindex="-1" lang="fr" class="label" id="settingsLabel">Musique</div>
-        <div tabindex="-1" lang="gr" class="label" id="settingsLabel">Musik</div>
-        <div tabindex="-1" lang="ar" class="label" id="settingsLabel">موسيقى</div>
-        <div tabindex="-1" lang="ru" class="label" id="settingsLabel">Музыка</div>
-        <div tabindex="-1" lang="ch" class="label" id="settingsLabel">音乐</div>
-        <div tabindex="-1" lang="jp" class="label" id="settingsLabel">音楽</div>
+        <div tabindex="-1" lang="en" class="label" id="settingsLabel">Audio</div>
+        <div tabindex="-1" lang="es" class="label" id="settingsLabel">Audio</div>
+        <div tabindex="-1" lang="fr" class="label" id="settingsLabel">Audio</div>
+        <div tabindex="-1" lang="de" class="label" id="settingsLabel">Audio</div>
+        <div tabindex="-1" lang="ar" class="label" id="settingsLabel">الصوت</div>
+        <div tabindex="-1" lang="ru" class="label" id="settingsLabel">Аудио</div>
+        <div tabindex="-1" lang="ch" class="label" id="settingsLabel">音頻</div>
+        <div tabindex="-1" lang="jp" class="label" id="settingsLabel">オーディオ</div>
       
       </div>
       
@@ -40,24 +40,48 @@
         <form tabindex="-1" id="mform">
 
           
-            <label tabindex="-1" lang="en" for="url" class="label">URL</label>
-            <label tabindex="-1" lang="es" for="url" class="label">URL</label>
-            <label tabindex="-1" lang="fr" for="url" class="label">URL</label>
-            <label tabindex="-1" lang="gr" for="url" class="label">URL</label>
-            <label tabindex="-1" lang="ar" for="url" class="label">عُنْوَان اِنْتِرْنَت:</label>
-            <label tabindex="-1" lang="ru" for="url" class="label">УРЛ:</label>
-            <label tabindex="-1" lang="ch" for="url" class="label">因特网地址:</label>
-            <label tabindex="-1" lang="jp" for="url" class="label">URL</label>
+            <label tabindex="-1" lang="en" for="url" class="label mlabel">URL</label>
+            <label tabindex="-1" lang="es" for="url" class="label mlabel">URL</label>
+            <label tabindex="-1" lang="fr" for="url" class="label mlabel">URL</label>
+            <label tabindex="-1" lang="gr" for="url" class="label mlabel">URL</label>
+            <label tabindex="-1" lang="ar" for="url" class="label mlabel">عُنْوَان اِنْتِرْنَت:</label>
+            <label tabindex="-1" lang="ru" for="url" class="label mlabel">УРЛ:</label>
+            <label tabindex="-1" lang="ch" for="url" class="label mlabel">因特网地址:</label>
+            <label tabindex="-1" lang="jp" for="url" class="label mlabel">URL</label>
             <br>
-            <input tabindex="1" type="text" id="url" class="miscOptions" name="url"><br><br><br>
+            <input tabindex="1" type="text" id="url" class="miscOptions" name="url">
 
             
 
-            <label tabindex="-1" class="switch">
+            <label tabindex="-1"  class="switch" style="margin-top: 2vh;">
               <input tabindex="2" id="muteButton" type="checkbox">
               <span class="slider round"></span>
             </label>
 
+
+          
+            <br>
+            <label tabindex="-1" lang="en" class="label mlabel" for="cVol">Channels:</label>
+            <label tabindex="-1" lang="es" class="label mlabel" for="cVol">Canales:</label>
+            <label tabindex="-1" lang="fr" class="label mlabel" for="cVol">Chaînes:</label>
+            <label tabindex="-1" lang="gr" class="label mlabel" for="cVol">Kanäle:</label>
+            <label tabindex="-1" lang="ar" class="label mlabel" for="cVol">قناة:</label>
+            <label tabindex="-1" lang="ru" class="label mlabel" for="cVol">Каналы:</label>
+            <label tabindex="-1" lang="ch" class="label mlabel" for="cVol">频道:</label>
+            <label tabindex="-1" lang="jp" class="label mlabel" for="cVol">チャネル:</label>
+            <input tabindex="3"  type="range" id="cVol" name="cVol" class="miscOptions"><br>
+
+            <label tabindex="-1" lang="en" class="label mlabel" for="sVol">Sound Effects:</label>
+            <label tabindex="-1" lang="es" class="label mlabel" for="sVol">Efectos Sonoros:</label>
+            <label tabindex="-1" lang="fr" class="label mlabel" for="sVol">Effets Sonores:</label>
+            <label tabindex="-1" lang="gr" class="label mlabel" for="sVol">Soundeffekte:</label>
+            <label tabindex="-1" lang="ar" class="label mlabel" for="sVol">مؤثرات صوتية:</label>
+            <label tabindex="-1" lang="ru" class="label mlabel" for="sVol">Звуковые Зффекты:</label>
+            <label tabindex="-1" lang="ch" class="label mlabel" for="sVol">声音效果:</label>
+            <label tabindex="-1" lang="jp" class="label mlabel" for="sVol">操作音:</label>
+            <input tabindex="4" type="range" id="sVol" name="sVol" class="miscOptions"><br>
+
+       
 
 
           
