@@ -30,6 +30,10 @@
   margin-top: 2vh;
 }
 
+.mlabel{
+  width: fit-content; padding-right: 4vw; height: 5vh; font-size: 3vh;
+}
+
 form{
   height: 96%;
   max-height: 96%;
@@ -88,3 +92,7 @@ form{
 *[lang="ru"], #settingsLabel[lang="gr"]{ font-size: 2vh;}
 .channelButton[lang="ru"] { font-size: 3vh;}
 #playPlaylist[lang="ru"], #playChannel[lang="ru"] {   font-size: 1.5vh;}
+
+
+/*Drop down menu*/
+#player{width: 20vw;} 

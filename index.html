@@ -5,19 +5,19 @@
         
     <meta charset=utf-8 />
     <meta name="referrer" content="no-referrer">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     
     <title>m3tv</title>
 
       <script type="text/javascript" src="scripts/clock.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-      <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+      <script type="text/javascript" src="scripts/dist/hls.min.js"></script>
+      <script type="text/javascript" src="scripts/dist/jquery1.7.1.min.js"></script>
+      <script src="scripts/dist/video.min.js"></script>
 
-      
       <link href="styles/clock.css" rel="stylesheet">
       <link href="styles/misc.css" rel="stylesheet">
-      <link href="styles/general.css" rel="stylesheet">
+      <link href="styles/general.css" rel="stylesheet">   
       <link href="styles/buttons.css" rel="stylesheet">
+      <link href="styles/dist/video-js.min.css" rel="stylesheet">
       <link rel="icon" type="image/x-icon" href="misc/favicon.ico">
 
 
@@ -97,7 +97,6 @@
         musicChange();
         muteChange();
         volChange();
-
       });
 
 
