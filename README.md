@@ -56,7 +56,8 @@ Previous Page - A
 
 ## Acknowledgements
 
-- [hls.js](https://github.com/video-dev/hls.js/): Library for streaming.
+- [hls.js](https://github.com/video-dev/hls.js/): Library for viewing HLS streams.
+- [Video.js](https://github.com/videojs/video.js): HTML5 Video Player.
 - [m3u8-file-parser](https://github.com/NimitzDEV/m3u8-file-parser): A powerful parser for m3u and m3u8 files.
 - [js-dos](https://js-dos.com/): simple API to run DOS games in browser.
 
