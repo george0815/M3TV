@@ -19,10 +19,8 @@ m3tv is a web app that allows you to stream M3U playlists and M3U8 streams.
 
 ## Usage
 App is available at https://m3tv.netlify.app/ and https://m3tv.vercel.app/ , make sure to click anywhere on the splash screen to enter the main menu.<br>
-<br>
-The second link uses a proxy server to access CORS restricted streams. <br>
-You can use the first link combined with an extension to bypass CORS (like [Moesif Origin & CORS Changer](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc?hl=en), [Cross Domain - CORS](https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai?hl=en) and [Allow CORS](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)) to access the same streams. <br>
-Also, the first link doesn't automatically upgrade insecure requests, this is useful for when you're trying to view a playlist that's locally hosted using something like [dizquetv](https://github.com/vexorian/dizquetv) or [ErsatzTV](https://github.com/jasongdove/ErsatzTV). Just remember to allow insecure content. <br>
+
+If you're trying to view a playlist that's locally hosted using something like [dizquetv](https://github.com/vexorian/dizquetv) or [ErsatzTV](https://github.com/jasongdove/ErsatzTV), just remember to allow insecure content in the browser settings. <br>
 
 NOTE: On Microsoft Edge, you have to whitelist it by going to Settings > Cookies and site permissions > Manage and delete cookies and site data, then clicking "Add" in the "Allow" section and entering the URL
 
@@ -34,13 +32,19 @@ NOTE: On Microsoft Edge, you have to whitelist it by going to Settings > Cookies
 5. Press back to save changes
 6. Once the playlist or channel is added, you can see view them by clicking the "Play Playlists" or "Play Channels" button in the main menu
 
-### Background music
+### Audio Settings
+You can adjust the sound effect and channel volume by using their respective sliders. <br>
+
 To change the background music: 
 1. Find a youtube video
 2. Click "share"
 3. Click "Embed"
 4. Copy the string that's in the quotations after "src=" and paste it into the text box
 5. Click "Back" to save changes
+
+### Video Settings
+If you want to view CORS protected streams, then click the "CORS Proxy Server" toggle. Additionally, you can also choose the video player that's used to play the streams. 
+
 
 ### Controls
 Next Channel - N<br>
