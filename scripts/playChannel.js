@@ -52,7 +52,6 @@ function playC(url, index) {
   // sets playing to true so channel buttons can work
   playing = true;
 
-  // Unmutes player and sets source
 
   //CORS
   const proxy_url = 'https://phantoma.up.railway.app/';
@@ -122,8 +121,7 @@ document.addEventListener("fullscreenchange", function() {
   if (!document.fullscreen) {
 
     // plays sound effect and makes video element invisible
-    
-      backChannel.play();
+    backChannel.play();
     if(vP == "hls"){document.getElementById('curPlaying').style.display = 'none';}
     else if(vP == "vjs"){document.getElementById('vjs').style.display = 'none'; player.hide(); player.pause();}
     
