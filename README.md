@@ -25,13 +25,16 @@ If you're trying to view a playlist that's locally hosted using something like [
 
 NOTE: On Microsoft Edge, you have to whitelist it by going to Settings > Cookies and site permissions > Manage and delete cookies and site data, then clicking "Add" in the "Allow" section and entering the URL
 
-### Add Playlist or Channel
+### Add a Playlist or Channel
 1. Click anywhere to exit the splash screen and enter the main menu
 2. To add a playlist, click the "Add Playlists" button in the main menu, or the "Add Channels" button if your adding a channel
 3. Enter the correct URL for the m3u playlist or m3u8 stream, if the m3u file is stored locally on your computer, click the "local" button NOTE: if you are adding a local playlist, you do not have to enter anything into the textbox. You will be prompted with a file dialog upon clicking the "Okay" button
 4. Enter a title and an image URL for the logo (optional)
 5. Press back to save changes
 6. Once the playlist or channel is added, you can see view them by clicking the "Play Playlists" or "Play Channels" button in the main menu
+
+### Edit a Playlist or Channel
+Users can edit existing playlists or channels by clicking the "Edit Playlists" or "Edit Channels" buttons in the options menu. There they can edit a given channel's name, URL, and logo. Changes are saved by pressing the "back" button. Users can also remove a channel or playlist by clicking the "remove" button on the bottom right of the screen.
 
 ### Audio Settings
 You can adjust the sound effect and channel volume by using their respective sliders. <br>
