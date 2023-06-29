@@ -217,25 +217,10 @@ function iOptions(){
           var idString = document.body.firstChild.id;
 
 
-          //loads remove channels menu (removeChannels.html)
-          $("#" + idString).load("../options/removeChannels.html",function(){
+          //loads edit channels menu (editChannels.html)
+          $("#" + idString).load("../options/editChannels.html",function(){
 
             document.body.firstChild.id = "remBody";
-
-
-            //BACK BUTTON
-            var elements = document.querySelectorAll("#settingBack");
-            for (var i = 0; i < elements.length; i++) {
-              elements[i].addEventListener("click", function() {
-
-                //saves id and plays sound effect
-                backSetting.play();
-                var idString = document.body.firstChild.id;
-
-                iOptions();
-
-              })
-            }
 
           })
 
@@ -254,25 +239,10 @@ function iOptions(){
           var idString = document.body.firstChild.id;
 
 
-          //loads remove channels menu (removeChannels.html)
-          $("#" + idString).load("../options/removePlaylists.html",function(){
+          //loads edit playlists menu (editPlaylists.html)
+          $("#" + idString).load("../options/editPlaylists.html",function(){
 
             document.body.firstChild.id = "remBody";
-
-
-            //BACK BUTTON
-            var elements = document.querySelectorAll("#settingBack");
-            for (var i = 0; i < elements.length; i++) {
-              elements[i].addEventListener("click", function() {
-
-                //saves id and plays sound effect
-                backSetting.play();
-                var idString = document.body.firstChild.id;
-
-                iOptions();
-
-              })
-            }
 
           })
 

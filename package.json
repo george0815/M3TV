@@ -13,7 +13,9 @@
       "options/*",
       "fonts/*",
       "styles/*",
+      "styles/dist/*",
       "scripts/*.js",
+      "scripts/dist/*.js",
       "soundEffects/*",
       "misc/**/*"
     ],
