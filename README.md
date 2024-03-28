@@ -1,6 +1,6 @@
 # m3tv
 <img src="https://i.imgur.com/Wg3AGFG.png" width=25% height=25%>
-m3tv is a web app that allows you to stream M3U playlists and M3U8 streams. 
+m3tv is a web app that allows you to stream M3U playlists and M3U8 streams. Intended to be used with the streams found [here](https://github.com/iptv-org/iptv)
 
 ## Features
 
