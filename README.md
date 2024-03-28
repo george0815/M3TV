@@ -1,6 +1,6 @@
 # m3tv
 <img src="https://i.imgur.com/Wg3AGFG.png" width=25% height=25%>
-m3tv is a web app that allows you to stream M3U playlists and M3U8 streams. Intended to be used with the streams found [here](https://github.com/iptv-org/iptv)
+m3tv is a web app that allows you to stream M3U playlists and M3U8 streams. 
 
 ## Features
 
@@ -18,7 +18,7 @@ m3tv is a web app that allows you to stream M3U playlists and M3U8 streams. Inte
 
 
 ## Usage
-App is available at https://m3tv.netlify.app/ and https://m3tv.vercel.app/ , make sure to click anywhere on the splash screen to enter the main menu.<br>
+App is available at https://m3tv.netlify.app/ and https://m3tv.vercel.app/ , make sure to click anywhere on the splash screen to enter the main menu.<br><br>Can be used with most MPEG-DASH and HLS streams, but mainly intended to be used with the streams found [here](https://github.com/iptv-org/iptv).
 
 If you're trying to view a playlist that's locally hosted using something like [dizquetv](https://github.com/vexorian/dizquetv) or [ErsatzTV](https://github.com/jasongdove/ErsatzTV), just remember to allow insecure content in the browser settings. <br>
 
