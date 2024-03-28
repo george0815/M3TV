@@ -670,7 +670,7 @@ function musicChange(){
   //if music setting is null, sets it to default track
   if(localStorage.getItem("mus") == null){
 
-    document.getElementById("bgMusic").src = "https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1&mute=1";
+    document.getElementById("bgMusic").src = "https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1";
     localStorage.setItem('mus', "https://www.youtube.com/embed/5k3uAtQ8vlg");
   
   }
@@ -689,7 +689,7 @@ function muteChange(){
 
   //if music setting is null, sets it to unmmuted, otherwise it sets it via the user setting
   if(localStorage.getItem("mute") == null){
-    localStorage.setItem("mute", "false");
+    localStorage.setItem("mute", "true");
     document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
   }
   else if(localStorage.getItem("mute") == "true" && !(document.getElementById("bgMusic").src.includes("&mute=1"))){
@@ -710,7 +710,7 @@ function volChange(){
   //if setting is null, sets default sound effect volume
   if(localStorage.getItem("seVol") == null){
     
-    localStorage.setItem('seVol', .3);
+    localStorage.setItem('seVol', .1);
   
     //sets volume for sound effects
     okMain.volume = parseFloat(localStorage.getItem("seVol"));  
