@@ -670,7 +670,7 @@ function musicChange(){
   //if music setting is null, sets it to default track
   if(localStorage.getItem("mus") == null){
 
-    document.getElementById("bgMusic").src = "https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1";
+    document.getElementById("bgMusic").src = "https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1&mute=1";
     localStorage.setItem('mus', "https://www.youtube.com/embed/5k3uAtQ8vlg");
   
   }
