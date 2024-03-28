@@ -676,7 +676,7 @@ function musicChange(){
   }
   //sets song url
   else{
-    document.getElementById('bgMusic').src = localStorage.getItem("mus") + "?rel=0&autoplay=1&loop=1";
+    document.getElementById('bgMusic').src = localStorage.getItem("mus") + "?rel=0&autoplay=1&loop=1&mute=1";
   }
 
 
@@ -690,7 +690,6 @@ function muteChange(){
   //if music setting is null, sets it to unmmuted, otherwise it sets it via the user setting
   if(localStorage.getItem("mute") == null){
     localStorage.setItem("mute", "true");
-    document.getElementById("bgMusic").src = document.getElementById("bgMusic").src.replace('&mute=1','');
   }
   else if(localStorage.getItem("mute") == "true" && !(document.getElementById("bgMusic").src.includes("&mute=1"))){
     document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
