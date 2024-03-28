@@ -670,7 +670,7 @@ function musicChange(){
   //if music setting is null, sets it to default track
   if(localStorage.getItem("mus") == null){
 
-    document.getElementById("bgMusic").src = "https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1";
+    document.getElementById("bgMusic").src = "https://www.youtube.com/embed/5k3uAtQ8vlg?rel=0&autoplay=1&loop=1&mute=1";
     localStorage.setItem('mus', "https://www.youtube.com/embed/5k3uAtQ8vlg");
   
   }
@@ -710,8 +710,19 @@ function volChange(){
   //if setting is null, sets default sound effect volume
   if(localStorage.getItem("seVol") == null){
     
-    localStorage.setItem('seVol', "1");
+    localStorage.setItem('seVol', .3);
   
+    //sets volume for sound effects
+    okMain.volume = parseFloat(localStorage.getItem("seVol"));  
+    okMain2.volume = parseFloat(localStorage.getItem("seVol"));  
+    okSetting.volume = parseFloat(localStorage.getItem("seVol"));  
+    okChannel.volume = parseFloat(localStorage.getItem("seVol"));  
+    okChannel2.volume = parseFloat(localStorage.getItem("seVol"));  
+    backSetting.volume = parseFloat(localStorage.getItem("seVol"));  
+    backMain.volume = parseFloat(localStorage.getItem("seVol"));  
+    backChannel.volume = parseFloat(localStorage.getItem("seVol"));  
+    splashIn.volume = parseFloat(localStorage.getItem("seVol"));  
+    splashOut.volume = parseFloat(localStorage.getItem("seVol"));  
   }
   else{
 
@@ -734,7 +745,7 @@ function volChange(){
   //if setting is null, sets default sound effect volume
   if(localStorage.getItem("cVol") == null){
     
-    localStorage.setItem('cVol', "1");
+    localStorage.setItem('cVol', 1);
   
   }
   
