@@ -1,0 +1,354 @@
+@font-face {
+  font-family: "WII";
+  src: url("../fonts/wii.otf");
+}
+
+#settingsLabel{ 
+  position: absolute;
+  left: 15%;
+  bottom: 0px;
+  max-height: 5%;
+  height: 20vh;
+  width: 20vh;
+  border-bottom: 1px solid gray;
+  padding-bottom: 6vh;
+  padding-left: 1%;
+}
+
+.label{
+  font-size: 3.5vh;
+  display:inline-block;
+  white-space: nowrap;    
+  font-family: "WII";
+  color: transparent;
+  text-shadow: 0 0 0.07em rgba(0,0,0,100);
+  border-top-left-radius: 2vh;
+  border-top-right-radius: 5vh;
+  border-bottom: 1px solid gray;
+  padding: 1% 20% 1% 5%;
+  background-color: #ffffff;
+  margin-top: 2vh;
+}
+
+.mlabel{
+  width: fit-content; padding-right: 4vw; height: 5vh; font-size: 3vh;
+}
+
+#mform{
+  height: 96%;
+  max-height: 96%;
+  width: 100vh;
+  margin: 0 auto;
+}
+
+
+/*styles for misc inputs*/
+.miscOptions{
+  font-size: 3vh;
+  font-family: "WII";
+  min-height: 2em;
+  width: 35em;  
+  border-radius: 0 .7em .7em .7em;
+}
+
+
+/*language container*/
+#langWrapper{
+  height: 96%;
+  max-height: 96% !important;
+  padding-top: 2vh;
+  width: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 15%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 4(1fr);
+}
+
+
+/*Logos*/
+.channelButton > img{
+  margin: 0 auto;
+  display: block;
+  min-width: 40%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit:cover;
+  justify-content: stretch;
+}
+
+#remChannelWrapper::-webkit-scrollbar{
+  display: none;
+}
+
+/*Toggle*/
+#musToggle{
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+/*language scaling fixes*/
+*[lang="ru"], #settingsLabel[lang="gr"]{ font-size: 2vh;}
+.channelButton[lang="ru"] { font-size: 3vh;}
+#playPlaylist[lang="ru"], #playChannel[lang="ru"] { font-size: 1.5vh;}
+
+
+/*Drop down menu*/
+#player{width: 20vw; } 
+
+
+
+/*channelbutton links*/
+#channelLink{
+  min-width: 100%;
+}
+
+/*created by text*/
+#createdBy {
+  position: absolute;bottom: 0; margin-right: 2vw; right: 0;
+}
+
+
+/*video*/
+#vid1{
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+
+/*for form wrapper in video options*/
+#formWrapperVideo{
+  width: 80vw;
+  padding-right: 2vw;
+  display: grid;
+  margin-left: auto;
+  margin-right:auto;
+  padding-left: 4vh;
+  grid-template-columns: 50% 50%;
+  
+
+}
+
+/*email and password input*/
+.loginInput{
+  min-width: 200px;
+  width: 100%;
+}
+
+
+/*input container*/
+.inputContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+
+/*row containing login/logout and forgot password buttons*/
+#buttonRow{
+  display: flex;
+  justify-content: center;
+}
+
+
+/*responsive back and settings button for main page*/
+#optionsMain, #backMain{
+  display: none;
+}
+
+#channelsFooter{
+  display: none;
+}
+
+/*media queries*/
+
+@media (max-width: 1300px) {
+
+
+  .playVid{
+    display: grid;
+    grid-template-rows: 70vh auto;
+    grid-template-columns: auto;
+
+  }
+
+  #formWrapperVideo{
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+  }
+  #formWrapperVideo > #mform{
+    height: auto;
+  }
+  .editMenu{
+    display: initial !important;
+    padding-top: 2vh;
+  }
+  body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  
+  .editMenu > Button{
+    font-size: larger;
+    width: auto;
+    min-width: 30vw !important;
+  }
+  #settingsTop, #bButtonWrapper{
+    display: none;
+  }
+  #remBody{
+    grid-template-rows: 60% 40%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    margin-top: 0vh;
+    flex-direction: column;
+  }
+  #settingsButtonWrapper, #langWrapper, .audioForm{
+    width: 100vw !important;
+    margin-top: 5vh;
+    margin-top: 0vh;
+    min-height: -webkit-fill-available !important;
+
+
+    margin-bottom: 5vh;
+    
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+  }
+
+ 
+  html{
+    overflow-x: hidden;
+
+  }
+  
+  #langWrapper{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10vh;
+  }
+  .audioForm{
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 2vh !important;
+  }
+  #mform, #loginContainer{
+    width: 75vw !important;
+    margin: 0;
+  }
+  .audioForm > input{
+    width: 90%;
+  }
+  #date{
+    font-size:x-large;
+  }
+  button{
+    min-width: 45vw !important  ;
+    border-radius: 30px;
+  }
+  #loginButton{
+    font-size: smaller;
+    width: auto;
+    min-width: auto !important;
+  }
+  #clock{
+    display: none;
+  }
+  #optionsMain, #backMain{
+    display: initial;
+  }
+  #body{
+    grid-template-rows: auto auto auto;
+  }
+  #channelWrapper{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    row-gap: 2%;
+    width: 100vw;
+    padding-top: 1vh;
+    height: 100%;
+    margin: 0;
+  }
+  #curPlaying, #vjsContainer{
+    position: absolute;
+    bottom: 0;
+  }
+  .channelButton{
+    height: 100%;
+    width: 90%;
+    max-width: 90%;
+    color: black;
+    min-height: 100%;
+    
+  }
+  #channelsFooter{
+    /*Box Shadow*/
+    box-shadow: inset 1px 20px 15px -6px #afb0b6; 
+
+    /*Border*/
+    border-top: solid #38bfed;
+
+    /*Position*/
+    bottom: 0;
+    margin: 5% 0 0 0;
+    width: 100%;
+    height: auto;
+    display: block;
+    
+    
+
+    background-color: #d1d2d9;
+  }
+
+  html ::-webkit-scrollbar {   width: 40px; } 
+html ::-webkit-scrollbar-thumb {   
+    border: 12px solid rgba(0, 0, 0, 0);   
+    background-clip: padding-box;   
+    -webkit-border-radius: 20px;   
+    background-color: rgba(0, 0, 0, 0.0);;  
+}
+html  ::-webkit-scrollbar-thumb:hover { background-color: rgba(111, 110, 110, 0.5);;  }
+  
+  
+  
+
+  
+
+}
+
+@media (max-width: 1300px) and (orientation:landscape){
+
+  #channelWrapper{
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 2%;
+    min-width: 100% !important;
+    padding-top: 1vh;
+    height: 100%;
+    margin: 0;
+  }
+  .channelButton{
+    min-width: 95% !important  ;
+  }
+  .channelFooterButton{
+    border:#38bfed .5em solid;
+  }
+
+}
+
+
+
+@media screen and (max-device-width: 1300px) and (orientation:landscape){
+html{
+  overflow-y: scroll;
+}
+
+}

@@ -1,39 +1,45 @@
 {
-  "name": "M3TV",
-  "version": "1.0.0",
-  "description": "M3U Player",
-  "scripts": {
-    "start": "node m3tv.js"
-  },
-  "pkg": {
-    "name": "PHANTOMa",
-    "main": "index.html",
-    "assets": [
-      "*",
-      "add/*",
-      "play/*",
-      "options/*",
-      "fonts/*",
-      "styles/*",
-      "styles/dist/*",
-      "scripts/*.js",
-      "scripts/dist/*.js",
-      "soundEffects/*",
-      "misc/*"
-    ],
-    "version": "1.0.0",
-    "bin": "app.js"
-  },
+  "name": "m3tv",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "cors": "^2.8.5",
-    "cors-anywhere": "^0.4.4",
-    "detect-browser": "^5.3.0",
-    "express": "^4.18.2",
-    "http": "^0.0.1-security",
-    "open": "^8.4.0",
-    "pgk": "^0.0.1-security",
-    "pkg": "^5.8.0",
-    "pkg-fetch": "^3.4.2",
-    "yarn": "^1.22.19"
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "firebase": "^10.11.0",
+    "hls.js": "^1.5.7",
+    "m3u8-file-parser": "^0.2.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "video.js": "^8.10.0"
   }
 }

@@ -1,0 +1,239 @@
+@font-face {
+  font-family: "WII";
+  src: url("../fonts/wii.otf");
+}
+
+
+button {
+  /*centers element*/
+  margin: 3% auto 0;
+  display: block;
+  align-items: center;
+  
+  /*slightly blurs text*/
+  color: transparent;
+  text-shadow: 0 0 .09em rgba(0,0,0,100);
+
+  /*sets font*/
+  font-family: "WII";
+  font-size: 2.2vw;
+  font-size: 3vh;
+
+  /*sets border*/
+  border: solid #38bfed;
+  border-radius: 9999em;
+  
+  /*sets size*/
+  height: auto;  
+  max-width: 60%;
+  width: auto;
+
+  /*Sets inner shadow*/
+  box-shadow: inset -15px -15px 10px -10px #abc0db;
+  outline-color: #38bfed;
+
+  padding: 4.5vh 10vh;
+
+
+}
+
+/*buttons on main page*/
+.mainPageButton{
+  max-height: 51%;
+    min-width: 40%;
+    max-width: 60%;
+  padding: initial;
+
+}
+
+button:hover {
+  transform: scale(1.05) perspective(1px);
+}
+
+button:focus {
+  outline: solid .20em #38bfed;
+}
+
+/*Settings Buttons*/
+.settingsButton {
+  height: 70%;
+  padding: 0 0;
+  width: 40vh;
+  max-height: 70%;
+  border-radius: .7em;
+  outline: medium solid #fff;
+}
+.settingsButton:focus {
+  outline-color: #38bfed;
+}
+
+/*all footer buttons*/
+.footerButton {
+  /*sets size*/
+  height: auto;
+  width: 30vw;
+
+  /*font and padding*/
+  font-size: 4vh;
+  padding: 2vh 0;
+
+
+  /*sets position*/
+  margin-top: 1%;
+  position: absolute;
+  left: 55%;
+  
+  /*sets border*/
+  border: none;
+  outline: none;
+}
+.footerButton:focus {
+  outline: solid .20em #38bfed;
+}
+
+#settingBack {
+  left: 10%;
+}
+
+
+/* Channel and Playlist Buttons */
+
+.channelButton {
+  min-width: 95%;
+  max-width: 100%;
+  min-height: 6.5em;
+  height: 6.5em;
+  max-height: 6.5em;
+  border-color: #b4b4b4;
+  margin: .3em;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  border-radius: 10%;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  text-align: center;
+  text-indent: .1em;
+  box-shadow: none;
+  overflow: hidden;
+  padding: 0;
+}
+
+.clockButton {
+  position: absolute;
+  color: #b9bcbf;
+  bottom: 5.5vh;
+  background-color: #d3d5dc;
+  height: auto;
+  border: solid .09em;
+  border-color: #b9bcbf;
+  min-width: 25%;
+  -moz-box-shadow: inset -15px -15px 10px -10px #e2e0e0;
+  -webkit-box-shadow: inset -15px -15px 10px -10px #e2e0e0;
+  box-shadow: inset -15px -15px 10px -10px #e2e0e0;
+  padding: 0 0;
+  font-size: 10vh;
+  text-shadow: none;
+  outline: none;
+}
+
+.clockButton:focus {
+  outline: none;
+}
+
+#backChannel,
+#backPlaylist {
+  left: -10%;
+  text-align: right;
+  padding-right: 5%;
+}
+
+#optionsChannel {
+  right: -10%;
+  text-align: left;
+  padding-left: 5%;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 10vh;
+  height: 6vh;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 5.4vh;
+  width: 5vh;
+  left: 4%;
+  bottom: 4%;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(4vh);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+/*removes text decoration*/
+a{
+  text-decoration: none;
+  width: 100%;
+
+}
+
+
+/*forgot password button*/
+.forgotPassword{
+  margin: 0;
+  justify-self: center;
+}
+
+
+
+#loginButton{
+  padding: 2vh;
+  height: fit-content;
+  margin-top: 2vh;
+  margin-right: 0;
+  min-width: auto;
+  width: auto;
+  
+}
