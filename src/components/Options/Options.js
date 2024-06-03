@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'; //react
 import {Link} from 'react-router-dom'// react router
-import { translations } from "../../misc/translations";
+import { translations } from "../../misc/translations.js";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { soundEffects } from '../../utils.js';
 

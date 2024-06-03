@@ -1,5 +1,5 @@
 import React, {useState, useEffect,useContext} from "react";
-import { curPlaying, soundEffects } from "../../utils";
+import { curPlaying, soundEffects } from "../../utils.js";
 import { SettingsContext } from '../../App'; //gets global settings context
 import VideoJS from "../VideoJS";
 import videojs from "video.js";
@@ -7,7 +7,7 @@ import {useFirstRender} from "../../utils.js";
 import { StreamsContext } from '../../App';
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from "../../utils.js"
-import { translations } from "../../misc/translations";
+import { translations } from "../../misc/translations.js";
 
 
 

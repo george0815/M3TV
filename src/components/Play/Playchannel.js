@@ -1,11 +1,10 @@
 import {React, useState, useContext} from 'react'; //react
 import Clock from '../Clock'; //clock compoenent
-import { playChannel } from '../../utils';
+import { playChannel } from '../../utils.js';
 import Channelwrapper from './Channelwrapper';
 import { StreamsContext } from '../../App';
 import { SettingsContext } from '../../App'; //gets global settings context
 import { soundEffects } from '../../utils.js';
-import { translations } from '../../misc/translations';
 
 
 

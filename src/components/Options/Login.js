@@ -1,11 +1,11 @@
 import {React, useContext, useEffect} from 'react'; //react
-import { translations } from '../../misc/translations';
+import { translations } from '../../misc/translations.js';
 import { SettingsContext } from '../../App'; //gets global settings context
 import { soundEffects } from '../../utils.js';
 
 //firebase
 import {createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword} from "firebase/auth";
-import {auth} from "../../utils";
+import {auth} from "../../utils.js";
 import { StreamsContext } from '../../App';
 
 

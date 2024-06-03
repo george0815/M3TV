@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'; //react
-import { translations } from "../../misc/translations";
+import { translations } from "../../misc/translations.js";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext } from '../../App';
 import { useNavigate } from 'react-router-dom';

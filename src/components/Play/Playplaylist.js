@@ -1,10 +1,10 @@
 import {React, useContext, useState} from 'react'; //react
 import Clock from '../Clock';
-import {soundEffects } from '../../utils'; //import sound effects
+import {soundEffects } from '../../utils.js'; //import sound effects
 import Channelwrapper from './Channelwrapper';
 import M3U8FileParser from 'm3u8-file-parser/src/reader';
 import { playChannel } from '../../utils.js';
-import { translations } from '../../misc/translations';
+import { translations } from '../../misc/translations.js';
 import { StreamsContext } from '../../App';
 import { SettingsContext } from '../../App';
 
