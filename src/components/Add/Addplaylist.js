@@ -1,10 +1,10 @@
 import {React, useState, useRef, useContext} from 'react'; //react
-import {soundEffects} from "../../utils.js"
-import { translations } from "../../misc/translations.js";
+import {soundEffects} from "../../utils"
+import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext } from '../../App';
 import { doc, setDoc } from "firebase/firestore"; 
-import {db} from "../../utils.js"
+import {db} from "../../utils"
 
 
 function Addplaylist(props) {

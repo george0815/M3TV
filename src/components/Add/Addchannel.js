@@ -1,10 +1,10 @@
 import {React, useState, useContext} from 'react'; //react
-import { translations } from "../../misc/translations.js";
+import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext } from '../../App';
-import {soundEffects} from "../../utils.js";
+import {soundEffects} from "../../utils";
 import { doc, setDoc } from "firebase/firestore"; 
-import {db} from "../../utils.js"
+import {db} from "../../utils"
 
 
 

@@ -1,10 +1,10 @@
-import {React, useContext, useState} from 'react'; //react
+import {React, useContext, useState, useEffect} from 'react'; //react
 import Clock from '../Clock';
-import {soundEffects } from '../../utils.js'; //import sound effects
+import {soundEffects } from '../../utils'; //import sound effects
 import Channelwrapper from './Channelwrapper';
 import M3U8FileParser from 'm3u8-file-parser/src/reader';
-import { playChannel } from '../../utils.js';
-import { translations } from '../../misc/translations.js';
+import { playChannel } from '../../utils';
+import { translations } from '../../misc/translations';
 import { StreamsContext } from '../../App';
 import { SettingsContext } from '../../App';
 
@@ -35,7 +35,9 @@ function Playplaylist() {
   const [isPlaylist, setIsPlaylist] = useState(false);
 
 
-  console.log(streams);
+  console.log(streams.playlists);
+  console.log(data);
+
 
 
   //===========================FUNCTIONS=========================//
@@ -104,12 +106,12 @@ function Playplaylist() {
 
 
 
-
   return (
     <div class="playVid">
 
       {/*holds buttons*/}
-      <Channelwrapper play={isChannel ? playChannel : playPlaylist} isPlaylist={isPlaylist} setPage={setPage} setCurPlaying={setCurPlaying} curPlaying={curPlaying} isChannel={isChannel} page={page} data={data}/>
+      { isChannel ? <Channelwrapper play={playChannel} isPlaylist={isPlaylist} setPage={setPage} setCurPlaying={setCurPlaying} curPlaying={curPlaying} isChannel={isChannel} page={page} data={data}/> 
+      : <Channelwrapper play={playPlaylist} isPlaylist={isPlaylist} setPage={setPage} setCurPlaying={setCurPlaying} curPlaying={curPlaying} isChannel={isChannel} page={page} data={streams.playlists}/>}
       {/*clock*/}
       <Clock back={isChannel ? (() => {soundEffects.backMain.play(); setData(streams.playlists); setIsChannel(false); setPage(0)}) : (() => {soundEffects.backMain.play(); window.history.back()})}/>
       <div id="channelsFooter" className="editMenu">

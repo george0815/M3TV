@@ -1,13 +1,13 @@
 import React, {useState, useEffect,useContext} from "react";
-import { curPlaying, soundEffects } from "../../utils.js";
+import { curPlaying, soundEffects } from "../../utils";
 import { SettingsContext } from '../../App'; //gets global settings context
 import VideoJS from "../VideoJS";
 import videojs from "video.js";
-import {useFirstRender} from "../../utils.js";
+import {useFirstRender} from "../../utils";
 import { StreamsContext } from '../../App';
 import { doc, setDoc } from "firebase/firestore"; 
-import {db} from "../../utils.js"
-import { translations } from "../../misc/translations.js";
+import {db} from "../../utils"
+import { translations } from "../../misc/translations";
 
 
 
@@ -41,6 +41,9 @@ function Channelwrapper(props){
 
     //USE TO TELL WHETHER THE COMPONENT HAS RENDERED ONCE
     const firstRender = useFirstRender();
+
+
+    console.log(props.data);
 
 
 

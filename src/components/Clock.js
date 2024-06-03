@@ -1,6 +1,6 @@
 import React from 'react'; //react
 import {Link} from 'react-router-dom'// react router
-import { soundEffects } from '../utils.js';
+import { soundEffects } from '../utils';
 
 
 

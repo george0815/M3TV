@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'; //react
 import { SettingsContext } from '../../App'; //gets global settings context
-import { translations } from '../../misc/translations.js'; // contains all translations
-import { soundEffects } from '../../utils.js';
+import { translations } from '../../misc/translations'; // contains all translations
+import { soundEffects } from '../../utils';
 
 
 function Language() {

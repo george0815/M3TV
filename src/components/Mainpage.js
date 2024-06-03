@@ -5,9 +5,9 @@ import "../styles/General.css";
 import "../styles/Clock.css";
 import "../styles/Buttons.css";
 import "../styles/Misc.css";
-import { translations } from "../misc/translations.js";
+import { translations } from "../misc/translations";
 import { SettingsContext } from '../App'; //gets global settings context
-import { soundEffects } from "../utils.js"; // sounds effect
+import { soundEffects } from "../utils"; // sounds effect
 
   
 
