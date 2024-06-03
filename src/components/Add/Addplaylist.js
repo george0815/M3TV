@@ -4,7 +4,7 @@ import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext } from '../../App';
 import { doc, setDoc } from "firebase/firestore"; 
-import {db} from "../../utils"
+import {db} from "../../utils.js"
 
 
 function Addplaylist(props) {

@@ -4,7 +4,7 @@ import { playChannel } from '../../utils';
 import Channelwrapper from './Channelwrapper';
 import { StreamsContext } from '../../App';
 import { SettingsContext } from '../../App'; //gets global settings context
-import { soundEffects } from '../../utils';
+import { soundEffects } from '../../utils.js';
 import { translations } from '../../misc/translations';
 
 

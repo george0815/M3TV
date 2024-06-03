@@ -3,7 +3,7 @@ import Clock from '../Clock';
 import {soundEffects } from '../../utils'; //import sound effects
 import Channelwrapper from './Channelwrapper';
 import M3U8FileParser from 'm3u8-file-parser/src/reader';
-import { playChannel } from '../../utils';
+import { playChannel } from '../../utils.js';
 import { translations } from '../../misc/translations';
 import { StreamsContext } from '../../App';
 import { SettingsContext } from '../../App';

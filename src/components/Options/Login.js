@@ -1,7 +1,7 @@
 import {React, useContext, useEffect} from 'react'; //react
 import { translations } from '../../misc/translations';
 import { SettingsContext } from '../../App'; //gets global settings context
-import { soundEffects } from '../../utils';
+import { soundEffects } from '../../utils.js';
 
 //firebase
 import {createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword} from "firebase/auth";

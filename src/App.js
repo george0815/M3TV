@@ -14,7 +14,7 @@ import Video from './components/Options/Video';
 import { BrowserRouter, Route, Routes } from 'react-router-dom' //React Router
 import { soundEffects } from './utils';
 import { doc, getDoc } from "firebase/firestore"; 
-import {db} from "./utils"
+import {db} from "./utils.js"
 //CSS
 import "./styles/General.css";
 import "./styles/Clock.css";

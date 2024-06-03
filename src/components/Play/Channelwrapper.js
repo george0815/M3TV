@@ -3,10 +3,10 @@ import { curPlaying, soundEffects } from "../../utils";
 import { SettingsContext } from '../../App'; //gets global settings context
 import VideoJS from "../VideoJS";
 import videojs from "video.js";
-import {useFirstRender} from "../../utils";
+import {useFirstRender} from "../../utils.js";
 import { StreamsContext } from '../../App';
 import { doc, setDoc } from "firebase/firestore"; 
-import {db} from "../../utils"
+import {db} from "../../utils.js"
 import { translations } from "../../misc/translations";
 
 

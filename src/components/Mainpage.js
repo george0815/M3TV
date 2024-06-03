@@ -7,7 +7,7 @@ import "../styles/Buttons.css";
 import "../styles/Misc.css";
 import { translations } from "../misc/translations";
 import { SettingsContext } from '../App'; //gets global settings context
-import { soundEffects } from "../utils"; // sounds effect
+import { soundEffects } from "../utils.js"; // sounds effect
 
   
 

@@ -3,9 +3,9 @@ import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
-import { soundEffects } from '../../utils';
+import { soundEffects } from '../../utils.js';
 import { doc, setDoc } from "firebase/firestore"; 
-import {db} from "../../utils"
+import {db} from "../../utils.js"
 
 
 function Editchannels(props) {

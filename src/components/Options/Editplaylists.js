@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { StreamsContext } from '../../App';
 import { soundEffects } from '../../utils';
 import { doc, setDoc } from "firebase/firestore"; 
-import {db} from "../../utils"
+import {db} from "../../utils.js"
 
 
 

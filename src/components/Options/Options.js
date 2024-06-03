@@ -2,7 +2,7 @@ import React, {useContext} from 'react'; //react
 import {Link} from 'react-router-dom'// react router
 import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
-import { soundEffects } from '../../utils';
+import { soundEffects } from '../../utils.js';
 
 
 function Options() {
