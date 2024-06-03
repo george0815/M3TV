@@ -12,7 +12,7 @@ import Editplaylists from './components/Options/Editplaylists';
 import Language from './components/Options/Language';
 import Video from './components/Options/Video';
 import { BrowserRouter, Route, Routes } from 'react-router-dom' //React Router
-import { soundEffects } from './utils';
+import { soundEffects } from './utils.js';
 import { doc, getDoc } from "firebase/firestore"; 
 import {db} from "./utils.js"
 //CSS
