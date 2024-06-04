@@ -18,7 +18,7 @@ m3tv is a web app that allows you to stream M3U playlists and M3U8 streams.
 
 
 ## Usage
-App is available at https://m3tv.netlify.app/ and https://m3tv.vercel.app/ , make sure to click anywhere on the splash screen to enter the main menu.<br><br>Can be used with most MPEG-DASH and HLS streams, but mainly intended to be used with the streams found [here](https://github.com/iptv-org/iptv).
+The most up-to-date version of the app is available at https://m3tv.net/, this version uses react and has search and account functionality. https://m3tv.netlify.app/ and https://m3tv.vercel.app/ are available as backups, unfortunately these do not include search or account functionality. Make sure to click anywhere on the splash screen to enter the main menu.<br><br>Can be used with most MPEG-DASH and HLS streams, but mainly intended to be used with the streams found [here](https://github.com/iptv-org/iptv).
 
 If you're trying to view a playlist that's locally hosted using something like [dizquetv](https://github.com/vexorian/dizquetv) or [ErsatzTV](https://github.com/jasongdove/ErsatzTV), just remember to allow insecure content in the browser settings. <br>
 
@@ -48,12 +48,16 @@ To change the background music:
 ### Video Settings
 If you want to view CORS protected streams, then click the "CORS Proxy Server" toggle. Additionally, you can also choose the video player that's used to play the streams. 
 
+### Account Settings
+If you want to save streams and then watch them on a different device, then you can create an account, add your desired playlists, and log in on your preferred device (only available on react version). 
+
 
 ### Controls
 Next Channel - N<br>
 Previous Channel - P<br>
 Random Channel - R<br>
 Save Channel - F (only available when watching a channel that's a part of a playlist)<br>
+Search - S (Only available on react version)<br>
 Next Page - D<br>
 Previous Page - A
 
