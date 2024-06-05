@@ -20,7 +20,7 @@ import Hls from 'hls.js';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBvbhfJ4s5LFVq9nrGBBa4vnQ67adTFEZg",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "m3tv-66f28.firebaseapp.com",
   projectId: "m3tv-66f28",
   storageBucket: "m3tv-66f28.appspot.com",
