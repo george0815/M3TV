@@ -22,7 +22,9 @@ The most up-to-date version of the app is available at https://m3tv.net/, this v
 
 If you're trying to view a playlist that's locally hosted using something like [dizquetv](https://github.com/vexorian/dizquetv) or [ErsatzTV](https://github.com/jasongdove/ErsatzTV), just remember to allow insecure content in the browser settings. <br>
 
-NOTE: On Microsoft Edge, you have to whitelist it by going to Settings > Cookies and site permissions > Manage and delete cookies and site data, then clicking "Add" in the "Allow" section and entering the URL
+NOTE: Streams loaded over HTTP may require you to allow insecure requests to view them. On google this is done by going to Site settings > m3tv and setting "Insecure content" to "Allow".
+On Microsoft Edge, you have to whitelist it by going to Settings > Cookies and site permissions > Manage and delete cookies and site data, then clicking "Add" in the "Allow" section and entering the URL
+![スクリーンショット 2024-06-04 223555](https://github.com/george0815/M3TV/assets/20736715/58429d53-ef67-46a9-9d5d-6210de29f509)
 
 ### Add a Playlist or Channel
 1. Click anywhere to exit the splash screen and enter the main menu
