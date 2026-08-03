@@ -46,11 +46,35 @@ function Channelwrapper(props){
     console.log(props.data);
 
 
+    //entries matching the current search, each paired with its index in
+    //props.data. the index has to survive filtering because playChannel(index)
+    //and the curIndex next/prev/random keys all look items back up in props.data
+    const matches = props.data.map((channel, index) => ({channel, index}))
+        .filter(({channel}) => {
+
+            if(search === "" || search === null){ return true; }
+
+            //titles are optional in m3u files, and a missing one used to throw
+            //here rather than simply not matching
+            return (channel.inf && channel.inf.title ? channel.inf.title : "")
+                .toLowerCase().includes(search.toLowerCase());
+
+        });
+
+
+    //pages are counted off the filtered list. props.page is clamped rather than
+    //trusted, because the footer buttons live in the parent and don't know how
+    //many results a search left — overshooting lands on the last page of
+    //results instead of a blank screen
+    const pageCount = Math.max(1, Math.ceil(matches.length / 12));
+    const page = Math.min(props.page, pageCount - 1);
+
+
 
     //CONTROLS CHANNEL BUTTONS
     const handleUserKeyPress = async function(e) {
 
-        if (e.key == 'd' && (props.page < Math.floor((props.data.length / 12))) && props.curPlaying === false) {
+        if (e.key == 'd' && (props.page < pageCount - 1) && props.curPlaying === false) {
 
             //next page
             soundEffects.okSetting.play();
@@ -189,15 +213,12 @@ function Channelwrapper(props){
             <div  style={!props.curPlaying ? {display: "none"} : {display: ""}}  id="vjsContainer"></div>
 
             {/*channel buttons*/}
-            {props.data.map((channel, index)=>(
+            {matches.slice(page * 12, page * 12 + 12).map(({channel, index})=>(
 
-            ((channel.inf.title.includes(search)
-            && (search !== "")) || (search === "" || search === null)) &&
+                props.isChannel ? <button key={index} title={channel.inf.title}  onClick={(()=>{ playChannel(index)})} className='channelButton'><img title={channel.inf.title} src={ channel.inf.tvgLogo} alt={channel.inf.title}></img></button>
+                    :   <button title={channel.inf.title} key={channel.inf.title} onClick={(()=>{props.play(channel.url, channel.isLocal)})} className='channelButton'><img  title={channel.inf.title} src={ channel.urlLogo} alt={channel.inf.title}></img></button>
 
-                (props.isChannel ? <button key={index} title={channel.inf.title}  onClick={(()=>{ playChannel(index)})} className='channelButton'><img title={channel.inf.title} src={ channel.inf.tvgLogo} alt={channel.inf.title}></img></button>       
-                    :   <button title={channel.inf.title} key={channel.inf.title} onClick={(()=>{props.play(channel.url, channel.isLocal)})} className='channelButton'><img  title={channel.inf.title} src={ channel.urlLogo} alt={channel.inf.title}></img></button>      ) 
-
-                )).slice((props.page * 12), props.page * 12 + 12)
+                ))
             }
 
         </div>

@@ -2,10 +2,12 @@
 @font-face {
     font-family: "WII";
     src: url("../fonts/wii.otf");
+  font-display: swap;
 }
 @font-face {
   font-family: "clock";
   src: url("../fonts/clock.ttf");
+  font-display: swap;
 }
 
 /*Time and date*/

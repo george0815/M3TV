@@ -1,11 +1,13 @@
 @font-face {
     font-family: "WII";
     src: url("../fonts/wii.otf");
+  font-display: swap;
   }
   
   @font-face {
     font-family: "LAIN";
     src: url("../fonts/lain.ttf");
+  font-display: swap;
   }
   
   /* General styles */
@@ -209,7 +211,7 @@
     background-position: center;
     background-repeat: no-repeat;
     transition: all ease-in-out 1200ms;
-    background-image: url(../misc/splashBg.png);
+    background-image: url(../misc/splashBg.webp);
     color: #59aeff;
   }
   
@@ -224,7 +226,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url(../misc/splashBg.png);
+    background-image: url(../misc/splashBg.webp);
     z-index: 1;
     transition: all ease-in-out 1200ms;
     position: absolute;

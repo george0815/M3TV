@@ -1,6 +1,7 @@
 @font-face {
   font-family: "WII";
   src: url("../fonts/wii.otf");
+  font-display: swap;
 }
 
 
