@@ -64,7 +64,8 @@
   padding-bottom: 15%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 4(1fr);
+  /* was 4(1fr), which is not valid syntax and was dropped by the parser */
+  grid-template-rows: repeat(4, 1fr);
 }
 
 
@@ -353,3 +354,17 @@ html{
 }
 
 }
+
+
+/* The base layout pins html and body to overflow:hidden for the TV look, and
+   only the max-width:1300px rule hands scrolling back. A short-but-wide window
+   — a landscape phone, or a half-height laptop window — is above that
+   breakpoint, so anything taller than the viewport became unreachable. */
+@media (max-height: 700px) {
+  html, body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+

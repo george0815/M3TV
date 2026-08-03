@@ -26,8 +26,6 @@ function Playchannel() {
   //current page, used to render channel buttons
   const [page, setPage] = useState(0);
 
-  console.log(streams.channels  );
-  console.log(streams);
 
 
 

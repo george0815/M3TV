@@ -123,8 +123,6 @@ function App() {
   //gets playlist and channel data
   async function getData(user){
 
-    console.log(user);
-    console.log(streams);
 
     const docRef = doc(db, "data", user.uid);
       const docSnap = await getDoc(docRef);

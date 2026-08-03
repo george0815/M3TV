@@ -73,7 +73,8 @@
   /* Body for play channels/playlists */
   .playVid {
     height: 100%;
-    min-width: none;
+    /* min-width: none was invalid and ignored; 0 is what was meant */
+    min-width: 0;
     display: grid;
     padding-bottom: 5%;
     margin-top: .3%;
@@ -151,7 +152,9 @@
     background: rgb(0,0,0);
     background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 0%, rgba(41,41,41,1) 100%);
   }
-  iframe
+  /* only the background-music iframe is meant to be invisible; a bare iframe
+     selector would silently hide any other embed added later */
+  #bgMusic
 {
     display: none;
 }
@@ -185,12 +188,17 @@
   #settingsButtonWrapper {
     height: 96%;
     max-height: 96% !important;
+    /* viewport height as a width is odd — resizing the window vertically
+       changes how wide this is — but it only applies above 1300px, where the
+       media query below stops overriding it, and there 100vh is narrower than
+       the viewport. Left as-is: it reads as a centered column on desktop. */
     width: 100vh;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 15%;
     display: grid;
-    grid-template-rows: 5(1fr);
+    /* was 5(1fr), which is not valid syntax and was dropped entirely */
+    grid-template-rows: repeat(5, 1fr);
   }
   
   .splashControls {

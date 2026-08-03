@@ -75,7 +75,6 @@ function Addplaylist(props) {
         var content = readerEvent.target.result; // this is the content!
         
         tempPlaylist.url = content;
-        console.log( tempPlaylist.url );
         document.getElementById("url").value = file.name;
 
 

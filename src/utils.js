@@ -48,6 +48,12 @@ export let soundEffects = {
 
 export let curPlaying = false;
 
+//the fullscreenchange handler from the last playChannel() call. it is kept so
+//the next call can detach it: switching channels without leaving fullscreen
+//never fires exit(), so without this each play left another handler attached,
+//each one holding its own settings, player and hls instance alive
+let activeExitHandler = null;
+
 
 
 export function useFirstRender() {
@@ -84,15 +90,19 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
         }
 
 
-        console.log(player);
 
         //plays sound effect and makes video element invisible, sets playing to false
         
           
           soundEffects.backChannel.play();
-          if(videoPlayer === "vjs"){document.getElementById('vjs').style.display = 'none';  player.hide(); player.pause();}      
-          
+          if(videoPlayer === "vjs"){document.getElementById('vjs').style.display = 'none';  player.hide(); player.pause();}
+
           document.removeEventListener("fullscreenchange", exit);
+          if(activeExitHandler === exit){ activeExitHandler = null; }
+
+          //this was set to true on play and never cleared, so Channelwrapper's
+          //check on it stayed stuck after the first channel of the session
+          curPlaying = false;
           setCurPlaying(false);
 
           //mutes player and unmutes background music, destroys player 
@@ -167,7 +177,6 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
     else if(videoPlayer === "vjs"){
       player.src(url);
       player.volume(settings.vol.channel);
-      console.log(player.volume());
 
 
       player.trigger('resize');
@@ -197,6 +206,8 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
 
 
      //STOPS CHANNEL
+    if(activeExitHandler){ document.removeEventListener("fullscreenchange", activeExitHandler); }
+    activeExitHandler = exit;
     document.addEventListener("fullscreenchange", exit);
    try{ player.addEventListener("webkitendfullscreen", exit);} catch {}
 

@@ -43,7 +43,6 @@ function Channelwrapper(props){
     const firstRender = useFirstRender();
 
 
-    console.log(props.data);
 
 
     //entries matching the current search, each paired with its index in
@@ -140,7 +139,7 @@ function Channelwrapper(props){
         //if player is videojs
         else if(settings.player === "vjs"){ 
 
-            if(videojs.getPlayer("vjs") && !curPlaying){videojs.getPlayer('vjs').dispose(); console.log("DNEONGOINR") }
+            if(videojs.getPlayer("vjs") && !curPlaying){videojs.getPlayer('vjs').dispose(); }
     
             let videoContainerEl = document.getElementById("vjsContainer");
             videoContainerEl.innerHTML = `
@@ -187,15 +186,25 @@ function Channelwrapper(props){
 
             if(settings.player === "vjs"){
 
-            document.getElementById("vjs").addEventListener('enterpictureinpicture', () => {
+            //these used to be attached on every run of this effect with nothing
+            //taking them off again, so each channel change stacked another pair
+            const vjsEl = document.getElementById("vjs");
+
+            const onEnterPip = () => {
                 if(settings.player === "vjs"){  player.play(); }
-            });
+            };
 
-            document.addEventListener("leavepictureinpicture", () => {
-                if(settings.player === "vjs"){document.getElementById('vjs').style.display = 'none';  player.hide(); player.pause();}      
+            const onLeavePip = () => {
+                if(settings.player === "vjs"){document.getElementById('vjs').style.display = 'none';  player.hide(); player.pause();}
+            };
 
+            if(vjsEl){ vjsEl.addEventListener('enterpictureinpicture', onEnterPip); }
+            document.addEventListener("leavepictureinpicture", onLeavePip);
 
-            });
+            return () => {
+                if(vjsEl){ vjsEl.removeEventListener('enterpictureinpicture', onEnterPip); }
+                document.removeEventListener("leavepictureinpicture", onLeavePip);
+            };
 
             }
         }

@@ -35,8 +35,6 @@ function Playplaylist() {
   const [isPlaylist, setIsPlaylist] = useState(false);
 
 
-  console.log(streams.playlists);
-  console.log(data);
 
 
 
@@ -77,7 +75,6 @@ function Playplaylist() {
       try{
         //loads channels
         let channels = parser.getResult().segments;
-        console.log();
 
         if(channels[0].url === "<!DOCTYPE html>" || !Object.hasOwn(channels[0], 'inf')){throw new Error(translations[settings.lang].invalidUrl);}
        
