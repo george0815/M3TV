@@ -1,8 +1,6 @@
-import React, {useState, useEffect, createContext} from 'react'; //react
+import React, {useState, useEffect, createContext, lazy, Suspense} from 'react'; //react
 //Components
 import Mainpage from './components/Mainpage';
-import Playplaylist from "./components/Play/Playplaylist";
-import Playchannel from './components/Play/Playchannel';
 import Addplaylist from './components/Add/Addplaylist';
 import Addchannel from './components/Add/Addchannel';
 import Options from './components/Options/Options';
@@ -21,6 +19,12 @@ import "./styles/Clock.css";
 import "./styles/Buttons.css";
 import "./styles/Misc.css";
 import './App.css';
+
+//the two play routes are the only thing that pulls in video.js, which is far
+//and away the biggest dependency here. loading them on demand keeps it out of
+//the bundle everyone downloads just to reach the main menu.
+const Playplaylist = lazy(() => import("./components/Play/Playplaylist"));
+const Playchannel  = lazy(() => import("./components/Play/Playchannel"));
 
 
 
@@ -192,8 +196,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Mainpage firstLoad={firstLoad} setFirstLoad={setFirstLoad}/>}/>
-            <Route path="playp" element={<Playplaylist />}/>
-            <Route path="playc" element={<Playchannel />}/>
+            <Route path="playp" element={<Suspense fallback={null}><Playplaylist /></Suspense>}/>
+            <Route path="playc" element={<Suspense fallback={null}><Playchannel /></Suspense>}/>
             <Route path="addp" element={<Addplaylist />}/>
             <Route path="addc" element={<Addchannel />}/>
             <Route path="options" element={<Options />}/>

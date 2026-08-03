@@ -18,7 +18,7 @@ m3tv is a web app that allows you to stream M3U playlists and M3U8 streams.
 
 
 ## Usage
-The most up-to-date version of the app is available at https://m3tv.net/, this version uses react and has search and account functionality. https://m3tv.netlify.app/ and https://m3tv.vercel.app/ are available as backups, unfortunately these do not include search or account functionality. Make sure to click anywhere on the splash screen to enter the main menu.<br><br>Can be used with most MPEG-DASH and HLS streams, but mainly intended to be used with the streams found [here](https://github.com/iptv-org/iptv).
+The most up-to-date version of the app is available at https://m3tv.net/, this version uses react and has search and account functionality. https://m3tv.netlify.app/ is available as a backup, unfortunately this does not include search or account functionality. Make sure to click anywhere on the splash screen to enter the main menu.<br><br>Can be used with most MPEG-DASH and HLS streams, but mainly intended to be used with the streams found [here](https://github.com/iptv-org/iptv).
 
 If you're trying to view a playlist that's locally hosted using something like [dizquetv](https://github.com/vexorian/dizquetv) or [ErsatzTV](https://github.com/jasongdove/ErsatzTV), just remember to allow insecure content in the browser settings. <br>
 
@@ -51,7 +51,7 @@ To change the background music:
 If you want to view CORS protected streams, then click the "CORS Proxy Server" toggle. Additionally, you can also choose the video player that's used to play the streams. 
 
 ### Account Settings
-If you want to save streams and then watch them on a different device, then you can create an account, add your desired playlists, and log in on your preferred device (only available on react version). 
+If you want to save streams and then watch them on a different device, then you can create an account, add your desired playlists, and log in on your preferred device (only available on react version). Use "Create account" the first time and "Login" after that. "Forgot password" sends a reset email to whatever address is in the email box.
 
 
 ### Controls
@@ -62,6 +62,57 @@ Save Channel - F (only available when watching a channel that's a part of a play
 Search - S (Only available on react version)<br>
 Next Page - D<br>
 Previous Page - A
+
+## Running it yourself
+
+Needs [Node.js](https://nodejs.org/) 20 or newer. The app is built with [Vite](https://vite.dev/).
+
+```bash
+npm install
+cp .env.example .env   # then fill in VITE_FIREBASE_API_KEY
+npm run dev            # dev server on http://localhost:3000
+```
+
+Without a `.env`, Firebase can't initialise and the login/account features won't work — everything else still runs off local storage. To reach the dev server from another device on your network, run `npm run dev -- --host`.
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Dev server with hot reload |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Serve the built `dist/` locally |
+
+### Firebase
+
+`VITE_FIREBASE_API_KEY` is not a secret. Vite inlines it into the JS bundle, so it's served to every visitor regardless — Firebase web API keys are public project identifiers, not credentials. What actually protects account data is:
+
+1. `firestore.rules`, which limits each user to the single document at `/data/{their uid}`
+2. the authorised domains list in Firebase Console > Authentication > Settings
+3. the API key restrictions in Google Cloud Console > Credentials
+
+Rules changes only take effect once deployed:
+
+```bash
+npx firebase-tools login
+npx firebase-tools deploy --only firestore:rules --project m3tv-66f28
+```
+
+### Deploying
+
+Hosting is AWS Amplify. `amplify.yml` holds the build spec — `npm ci`, `npm run build`, and `dist/` as the artifact directory.
+
+Two things are console-side rather than committed, because Amplify does not read them from the repo:
+
+**Environment variables.** `VITE_FIREBASE_API_KEY` has to be set under App settings → Environment variables, since `.env` isn't committed. Vite inlines it at build time, so changing it requires a fresh build, not just a redeploy.
+
+**Rewrites and redirects.** Client-side routes must fall back to `index.html`, while `/doom/*` keeps serving its own files. Under App settings → Rewrites and redirects, in this order:
+
+| Source | Target | Type |
+| --- | --- | --- |
+| `/doom` | `/doom/index.html` | 200 (Rewrite) |
+| `/doom/<*>` | `/doom/<*>` | 200 (Rewrite) |
+| `</^[^.]+$\|\.(?!(js\|css\|png\|jpg\|svg\|ico\|json\|mp3\|ttf\|otf\|jsdos\|wasm)$)([^.]+$)/>` | `/index.html` | 200 (Rewrite) |
+
+Order matters — Amplify takes the first match. The two `/doom` rules have to come first, since `/doom` and `/doom/js-dos` have no file extension and would otherwise be swallowed by the catch-all and served the app's `index.html`.
 
 ## Acknowledgements
 
