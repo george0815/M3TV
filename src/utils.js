@@ -55,6 +55,10 @@ export let curPlaying = false;
 //each one holding its own settings, player and hls instance alive
 let activeExitHandler = null;
 
+//the media-element error handler from the last native-HLS play, tracked for
+//the same reason as the one above: it has to come off before the next goes on
+let activeNativeErrorHandler = null;
+
 
 
 export function useFirstRender() {
@@ -199,23 +203,54 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
     }
 
 
+    //an http stream on an https page is refused as mixed content before CORS
+    //is even looked at, and no retry changes that — so when we can see it
+    //coming, go through the proxy immediately rather than failing first
+    const mixedContent = window.location.protocol === "https:" && /^http:\/\//i.test(url);
+    const startUrl = (mixedContent && proxy_url) ? proxy_url + url : url;
+
+
     //plays video
     if(videoPlayer === "hls"){
       player.muted = false;
 
       //safari and ios play HLS through the browser's own media pipeline, which
-      //is not subject to CORS at all — so no hls.js and no proxy is needed
-      //there, whatever headers the stream sends
+      //CORS does not apply to — so no hls.js is needed there, and no proxy
+      //either unless the stream is http on an https page
       if(player.canPlayType && player.canPlayType('application/vnd.apple.mpegurl')){
-        player.src = url;
+
+        //native playback raises no hls.js events, so the one retry has to hang
+        //off the media element itself
+        let retried = startUrl !== url;
+
+        if(activeNativeErrorHandler){ player.removeEventListener("error", activeNativeErrorHandler); }
+
+        const onNativeError = () => {
+
+          if(retried || !proxy_url){
+            window.alert(translations[settings.lang].streamBlocked);
+            return;
+          }
+
+          retried = true;
+          player.src = proxy_url + url;
+          fix(player);
+
+        };
+
+        activeNativeErrorHandler = onNativeError;
+        player.addEventListener("error", onNativeError);
+
+        player.src = startUrl;
         fix(player);
+
       }
       else{
-        startHls(url, false);
+        startHls(startUrl, startUrl !== url);
       }
     }
     else if(videoPlayer === "vjs"){
-      player.src(url);
+      player.src(startUrl);
       player.volume(settings.vol.channel);
 
 

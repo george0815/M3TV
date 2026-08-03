@@ -47,12 +47,23 @@ function Playplaylist() {
     //fetches url. tried directly first — most hosts that serve m3u files,
     //github raw among them, send CORS headers and need no help. only if that
     //fails do we retry through the proxy, and only when one is configured.
+    //
+    //an http url on an https page is the exception: that is blocked as mixed
+    //content before the request is made, so there is nothing to learn from
+    //trying it and it goes straight through the proxy.
     function translate(url) {
+
+      const proxy = import.meta.env.VITE_CORS_PROXY;
+      const mixedContent = window.location.protocol === "https:" && /^http:\/\//i.test(url);
+
+      if(mixedContent && proxy){
+        return fetch(proxy + url).then((resp) => resp.text());
+      }
+
       return fetch(url)
         .then((resp) => resp.text())
         .catch((err) => {
 
-          const proxy = import.meta.env.VITE_CORS_PROXY;
           if(!proxy){ throw err; }
 
           return fetch(proxy + url).then((resp) => resp.text());

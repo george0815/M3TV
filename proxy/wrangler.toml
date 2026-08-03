@@ -1,0 +1,11 @@
+name = "m3tv-proxy"
+main = "src/worker.js"
+compatibility_date = "2024-11-06"
+
+# Who is allowed to use this proxy. Comma separated, exact origin match.
+#
+# This is the only thing standing between your worker and being an open relay,
+# so keep it tight. An empty value rejects everything rather than allowing
+# everything, which is the safer way round to fail.
+[vars]
+ALLOWED_ORIGINS = "https://m3tv.net,http://localhost:3000"
