@@ -57,6 +57,7 @@ export const translations =
         
         //VIDEO
         cors: "CORS Proxy Server",
+        streamBlocked: "This stream will not play in the browser — its server does not allow playback from other sites.",
         videoPlayer: "Video Player",
 
         //MAIN PAGE
@@ -142,6 +143,7 @@ export const translations =
         
         //VIDEO
         cors: "Servidor Proxy CORS",
+        streamBlocked: "Esta transmisión no se reproducirá en el navegador: su servidor no permite la reproducción desde otros sitios.",
         videoPlayer: "Reproductor de Vídeo",
 
         //MAIN PAGE
@@ -226,6 +228,7 @@ export const translations =
         
         //VIDEO
         cors: "Serveur Proxy CORS",
+        streamBlocked: "Ce flux ne peut pas être lu dans le navigateur : son serveur n'autorise pas la lecture depuis d'autres sites.",
         videoPlayer: "Lecteur Vidéo",
 
         //MAIN PAGE
@@ -311,6 +314,7 @@ export const translations =
         
         //VIDEO
         cors: "CORS Proxy Server",
+        streamBlocked: "Dieser Stream lässt sich im Browser nicht abspielen — sein Server erlaubt keine Wiedergabe von anderen Seiten.",
         videoPlayer: "Video Spieler",
 
         //MAIN PAGE
@@ -396,6 +400,7 @@ export const translations =
         
         //VIDEO
         cors: "خادم وكيل CORS",
+        streamBlocked: "لن يعمل هذا البث في المتصفح — الخادم لا يسمح بالتشغيل من مواقع أخرى.",
         videoPlayer: "مشغل فديوهات",
 
         //MAIN PAGE
@@ -482,6 +487,7 @@ export const translations =
         
         //VIDEO
         cors: "CORS Прокси-Сервер",
+        streamBlocked: "Этот поток не воспроизводится в браузере — его сервер не разрешает воспроизведение с других сайтов.",
         videoPlayer: "Видеоплеер",
 
         //MAIN PAGE
@@ -568,6 +574,7 @@ export const translations =
         
         //VIDEO
         cors: "CORS代理服务器",
+        streamBlocked: "此直播流无法在浏览器中播放 — 其服务器不允许从其他网站播放。",
         videoPlayer: "视频播放器",
 
         //MAIN PAGE
@@ -653,6 +660,7 @@ export const translations =
         
         //VIDEO
         cors: "CORSプロキシサーバー",
+        streamBlocked: "このストリームはブラウザで再生できません — サーバーが他サイトからの再生を許可していません。",
         videoPlayer: "ビデオプレーヤー",
 
         //MAIN PAGE

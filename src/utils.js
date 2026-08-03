@@ -13,6 +13,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {getFirestore} from "firebase/firestore"
 import Hls from 'hls.js';
+import { translations } from './misc/translations';
 
 
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -70,8 +71,15 @@ export function useFirstRender() {
 export function playChannel(url, setCurPlaying, settings, setSettings, player){
 
     const videoPlayer = settings.player;
-    const cors = settings.cors;
     let unmuteLater = false;
+    let hls = null;
+
+    //optional, and unset by default. streams that send Access-Control-Allow-
+    //Origin play directly and never touch this; it exists only as a fallback
+    //for the ones that don't. there is no way around it for those: hls.js
+    //pulls the manifest and every segment over XHR, so the browser enforces
+    //CORS on them.
+    const proxy_url = import.meta.env.VITE_CORS_PROXY;
 
     //mutes  music.
     //updated from the previous value rather than the settings captured when
@@ -108,9 +116,9 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
           curPlaying = false;
           setCurPlaying(false);
 
-          //mutes player and unmutes background music, destroys player 
+          //mutes player and unmutes background music, destroys player
           player.muted = true;
-          if(videoPlayer === "hls"){hls.destroy();}
+          if(videoPlayer === "hls" && hls){hls.destroy(); hls = null;}
           document.removeEventListener("fullscreenchange", exit);
           try{ player.removeEventListener("webkitendfullscreen", exit);} catch {}
 
@@ -164,18 +172,47 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
     setCurPlaying(true)
 
 
-    //CORS
-    const proxy_url = 'https://phantoma.up.railway.app/';
-    if(cors === true){ url = proxy_url + url; }          
+    //loads a source through hls.js, retrying once through the proxy if the
+    //direct attempt fails at the network level — which is what a missing
+    //Access-Control-Allow-Origin looks like from in here. without a proxy
+    //configured it says so plainly instead of failing silently.
+    function startHls(sourceUrl, viaProxy){
+
+      hls = new Hls();
+
+      hls.on(Hls.Events.ERROR, (event, data) => {
+
+        if(!data.fatal || data.type !== Hls.ErrorTypes.NETWORK_ERROR){ return; }
+
+        hls.destroy();
+        hls = null;
+
+        if(!viaProxy && proxy_url){ startHls(proxy_url + sourceUrl, true); }
+        else{ window.alert(translations[settings.lang].streamBlocked); }
+
+      });
+
+      hls.loadSource(sourceUrl);
+      hls.attachMedia(player);
+      fix(player);
+
+    }
 
 
     //plays video
     if(videoPlayer === "hls"){
       player.muted = false;
-      var hls = new Hls();
-      hls.loadSource(url);
-      hls.attachMedia(player);
-      fix(player)
+
+      //safari and ios play HLS through the browser's own media pipeline, which
+      //is not subject to CORS at all — so no hls.js and no proxy is needed
+      //there, whatever headers the stream sends
+      if(player.canPlayType && player.canPlayType('application/vnd.apple.mpegurl')){
+        player.src = url;
+        fix(player);
+      }
+      else{
+        startHls(url, false);
+      }
     }
     else if(videoPlayer === "vjs"){
       player.src(url);

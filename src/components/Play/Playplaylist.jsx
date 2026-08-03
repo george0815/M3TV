@@ -44,12 +44,20 @@ function Playplaylist() {
   //OPENS PLAYLIST
   function playPlaylist(url, isLocal){
 
-    //fetches url
+    //fetches url. tried directly first — most hosts that serve m3u files,
+    //github raw among them, send CORS headers and need no help. only if that
+    //fails do we retry through the proxy, and only when one is configured.
     function translate(url) {
-      var result = fetch(url).then((resp) => {
-        return resp.text();
-      });
-      return result; // As Promise
+      return fetch(url)
+        .then((resp) => resp.text())
+        .catch((err) => {
+
+          const proxy = import.meta.env.VITE_CORS_PROXY;
+          if(!proxy){ throw err; }
+
+          return fetch(proxy + url).then((resp) => resp.text());
+
+        }); // As Promise
     }
   
 

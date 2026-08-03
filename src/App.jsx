@@ -33,7 +33,6 @@ const DEFAULT_SETTINGS = {
 
   lang: "en",
   player: "hls",
-  cors: false,
   vol: {
     channel: 1.0,
     soundEffects: 0.0

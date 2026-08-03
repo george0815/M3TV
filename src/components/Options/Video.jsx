@@ -31,16 +31,6 @@ function Video() {
       <div tabIndex="-1" id="formWrapperVideo">
         <div tabIndex="-1" id="mform">
 
-          <label tabIndex="-1" lang={[settings.lang]} htmlFor="url" className="label mlabel">{translations[settings.lang].cors}</label>
-    
-          <br/>
-          <label tabIndex="-1"  className="switch" style={{marginTop: "2vh"}}>
-            <input tabIndex="1" checked={settings.cors} onChange={((e) =>{soundEffects.okSetting.play(); setSettings({...settings, cors: e.target.checked});})} id="corsButton" type="checkbox"/>
-            <span className="slider round"></span>
-          </label>
-          <br/>         
-
-
           <label tabIndex="-1" lang={[settings.lang]} htmlFor="url" className="label mlabel">{translations[settings.lang].videoPlayer}</label>
 
           <br/>
