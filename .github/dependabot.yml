@@ -1,0 +1,28 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    # Grouped so routine bumps arrive as one PR a week instead of a daily drip.
+    groups:
+      build-toolchain:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+        update-types:
+          - minor
+          - patch
+      runtime:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "react-router-dom"
+          - "firebase"
+          - "hls.js"
+          - "video.js"
+          - "m3u8-file-parser"
+        update-types:
+          - minor
+          - patch
