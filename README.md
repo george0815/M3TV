@@ -109,10 +109,12 @@ Two things are console-side rather than committed, because Amplify does not read
 | Source | Target | Type |
 | --- | --- | --- |
 | `/doom` | `/doom/index.html` | 200 (Rewrite) |
-| `/doom/<*>` | `/doom/<*>` | 200 (Rewrite) |
-| `</^[^.]+$\|\.(?!(js\|css\|png\|jpg\|svg\|ico\|json\|mp3\|ttf\|otf\|jsdos\|wasm)$)([^.]+$)/>` | `/index.html` | 200 (Rewrite) |
+| `/doom/` | `/doom/index.html` | 200 (Rewrite) |
+| `</^[^.]+$\|\.(?!(js\|css\|html\|png\|jpg\|svg\|ico\|json\|mp3\|ttf\|otf\|jsdos\|wasm)$)([^.]+$)/>` | `/index.html` | 200 (Rewrite) |
 
-Order matters — Amplify takes the first match. The two `/doom` rules have to come first, since `/doom` and `/doom/js-dos` have no file extension and would otherwise be swallowed by the catch-all and served the app's `index.html`.
+Order matters — Amplify takes the first match. The two `/doom` rules come first because neither URL has a file extension, so the catch-all would otherwise serve them the app's `index.html`.
+
+Everything else under `/doom/` is left alone deliberately. Those are real files in the deployment and S3 serves them with correct content types; the extension list in the catch-all is what keeps them from being swallowed, which is why `html` belongs in it. Do **not** add a `/doom/<*>` → `/doom/<*>` rule to cover them — an Amplify 200 rewrite proxies the response and relabels it `text/html`, so `js-dos.css` stops being applied as a stylesheet and `bundle.jsdos` stops parsing, and the emulator silently fails to boot.
 
 ## Acknowledgements
 
