@@ -1,0 +1,25 @@
+rules_version = '2';
+
+// M3TV Firestore security rules.
+//
+// Data model: each signed-in user owns exactly one document at /data/{uid},
+// holding their saved channels and playlists (see src/App.jsx getData() and the
+// setDoc(doc(db, "data", settings.user.uid), ...) calls in src/components).
+//
+// Therefore: a user may only touch the document whose id equals their own uid.
+// Nothing is world-readable, and there is no path that allows listing the
+// collection, so one user can never enumerate or read another user's streams.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /data/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Anything not matched above is denied. Keep it that way: add an explicit
+    // match block per collection rather than loosening this.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

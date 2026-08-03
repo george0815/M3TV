@@ -24,8 +24,8 @@ import './App.css';
 
 
 
-//import context
-export const SettingsContext = createContext(localStorage.getItem("settings") ? JSON.parse(localStorage.getItem("settings")) : {
+//settings for a visitor with nothing saved yet
+const DEFAULT_SETTINGS = {
 
   lang: "en",
   player: "hls",
@@ -39,7 +39,27 @@ export const SettingsContext = createContext(localStorage.getItem("settings") ? 
   music: "https://www.youtube.com/embed/5k3uAtQ8vlg",
   musicOn: false
 
-});
+};
+
+//earlier builds stored the whole Firebase user object in settings, and that
+//serializes the account's refresh token into localStorage. only the uid is
+//ever read, so trim it back on load — otherwise existing installs keep
+//carrying a long-lived credential around forever.
+function loadSettings(){
+
+  const saved = localStorage.getItem("settings");
+  if(!saved){ return DEFAULT_SETTINGS; }
+
+  const settings = JSON.parse(saved);
+  if(settings.user && typeof settings.user === "object"){
+    settings.user = { uid: settings.user.uid, email: settings.user.email };
+  }
+
+  return settings;
+}
+
+//import context
+export const SettingsContext = createContext(loadSettings());
 
 //export context
 export const StreamsContext = createContext(localStorage.getItem("streams") ? JSON.parse(localStorage.getItem("streams")) : {
@@ -85,21 +105,7 @@ function App() {
   });
 
   //channels
-  const [settings, setSettings] = useState(localStorage.getItem("settings") ? JSON.parse(localStorage.getItem("settings")) : {
-
-    lang: "en",
-    player: "hls",
-    cors: false,
-    vol: {
-      channel: 1.0,
-      soundEffects: 0.0
-    },
-    loggedIn: false,
-    user: {},
-    music: "https://www.youtube.com/embed/5k3uAtQ8vlg",
-    musicOn: false
-  
-  });
+  const [settings, setSettings] = useState(loadSettings());
 
 
   //used for editingChannels/playlists

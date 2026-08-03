@@ -4,7 +4,7 @@ import { SettingsContext } from '../../App'; //gets global settings context
 import { soundEffects } from '../../utils';
 
 //firebase
-import {createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword} from "firebase/auth";
+import {createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import {auth} from "../../utils";
 import { StreamsContext } from '../../App';
 
@@ -24,6 +24,13 @@ function Login(){
 
 //===================================FUNCTIONS=========================//
 
+//the whole settings object gets written to localStorage, and a Firebase user
+//serializes its refresh token along with it. only the uid is ever used, so
+//keep just that instead of parking a long-lived credential in localStorage.
+function publicProfile(user){
+  return { uid: user.uid, email: user.email };
+}
+
 //registers new users
 function register(){
     
@@ -40,7 +47,7 @@ function register(){
           const user = userCredential.user;
           
           //set loggedIn local storage value to true and go to main page
-          setSettings({...settings, loggedIn: true, user: user});
+          setSettings({...settings, loggedIn: true, user: publicProfile(user)});
 
         })
         .catch((error) => {
@@ -77,7 +84,7 @@ function register(){
        const user = userCredential.user;
        
        //set loggedIn local storage value to true and go to main page
-       setSettings({...settings, loggedIn: true, user: user});
+       setSettings({...settings, loggedIn: true, user: publicProfile(user)});
 
      })
      .catch((error) => {
@@ -95,7 +102,11 @@ function register(){
   //logs out user
   function logout(){
     if (window.confirm("Are you sure you want to logout?")) {
-    
+
+      //actually end the Firebase session, otherwise the SDK keeps the user
+      //signed in (and keeps refreshing their token) after a "logout"
+      signOut(auth).catch((error) => { console.error(error); });
+
       //set loggedIn local storage value to true and go to main page
       setSettings({...settings, loggedIn: false, user: null});
       setStreams(localStorage.getItem("streams") ? JSON.parse(localStorage.getItem("streams")) : {
