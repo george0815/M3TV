@@ -107,7 +107,7 @@ function Playplaylist() {
 
 
   return (
-    <div class="playVid">
+    <div className="playVid">
 
       {/*holds buttons*/}
       { isChannel ? <Channelwrapper play={playChannel} isPlaylist={isPlaylist} setPage={setPage} setCurPlaying={setCurPlaying} curPlaying={curPlaying} isChannel={isChannel} page={page} data={data}/> 
@@ -116,8 +116,8 @@ function Playplaylist() {
       <Clock back={isChannel ? (() => {soundEffects.backMain.play(); setData(streams.playlists); setIsChannel(false); setPage(0)}) : (() => {soundEffects.backMain.play(); window.history.back()})}/>
       <div id="channelsFooter" className="editMenu">
       
-        <button onClick={(() => {if(page > 0){ soundEffects.okSetting.play();  setPage(page - 1)}})} lang="en" class="footerButton channelFooterButton" id="addPBack" style={{left: "15%"}}>{'<'}</button>
-        <button onClick={(() => { if(page < Math.floor((data.length / 12))){soundEffects.okSetting.play(); setPage(page + 1)}})} lang="en" class="footerButton channelFooterButton" id="okay">{'>'}</button> 
+        <button onClick={(() => {if(page > 0){ soundEffects.okSetting.play();  setPage(page - 1)}})} lang="en" className="footerButton channelFooterButton" id="addPBack" style={{left: "15%"}}>{'<'}</button>
+        <button onClick={(() => { if(page < Math.floor((data.length / 12))){soundEffects.okSetting.play(); setPage(page + 1)}})} lang="en" className="footerButton channelFooterButton" id="okay">{'>'}</button> 
   
       </div>
 

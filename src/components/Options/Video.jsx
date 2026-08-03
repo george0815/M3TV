@@ -23,28 +23,28 @@ function Video() {
 
     <div id="remBody" className='htmlSettings'>
 
-      <div tabindex="-1" id="settingsTop">
-        <div tabindex="-1" lang={[settings.lang]} class="label" id="settingsLabel">{translations[settings.lang].video}</div>
+      <div tabIndex="-1" id="settingsTop">
+        <div tabIndex="-1" lang={[settings.lang]} className="label" id="settingsLabel">{translations[settings.lang].video}</div>
       </div>
 
 
-      <div tabindex="-1" id="formWrapperVideo">
-        <div tabindex="-1" id="mform">
+      <div tabIndex="-1" id="formWrapperVideo">
+        <div tabIndex="-1" id="mform">
 
-          <label tabindex="-1" lang={[settings.lang]} for="url" class="label mlabel">{translations[settings.lang].cors}</label>
+          <label tabIndex="-1" lang={[settings.lang]} htmlFor="url" className="label mlabel">{translations[settings.lang].cors}</label>
     
           <br/>
-          <label tabindex="-1"  class="switch" style={{marginTop: "2vh"}}>
-            <input tabindex="1" checked={settings.cors} onChange={((e) =>{soundEffects.okSetting.play(); setSettings({...settings, cors: e.target.checked});})} id="corsButton" type="checkbox"/>
-            <span class="slider round"></span>
+          <label tabIndex="-1"  className="switch" style={{marginTop: "2vh"}}>
+            <input tabIndex="1" checked={settings.cors} onChange={((e) =>{soundEffects.okSetting.play(); setSettings({...settings, cors: e.target.checked});})} id="corsButton" type="checkbox"/>
+            <span className="slider round"></span>
           </label>
           <br/>         
 
 
-          <label tabindex="-1" lang={[settings.lang]} for="url" class="label mlabel">{translations[settings.lang].videoPlayer}</label>
+          <label tabIndex="-1" lang={[settings.lang]} htmlFor="url" className="label mlabel">{translations[settings.lang].videoPlayer}</label>
 
           <br/>
-          <select value={settings.player} onChange={((e) =>{soundEffects.okSetting.play(); setSettings({...settings, player: e.target.value});})} tabindex="2" class="miscOptions" id="player">
+          <select value={settings.player} onChange={((e) =>{soundEffects.okSetting.play(); setSettings({...settings, player: e.target.value});})} tabIndex="2" className="miscOptions" id="player">
 
               <option value="hls">hls.js</option>
               <option value="vjs">Video.js</option>
@@ -62,7 +62,7 @@ function Video() {
 
 
       <div id="bButtonWrapper">
-        <button lang={[settings.lang]} onClick={(()=>{soundEffects.backSetting.play(); window.history.back()})}  class="footerButton" id="settingBack">{translations[settings.lang].back}</button> 
+        <button lang={[settings.lang]} onClick={(()=>{soundEffects.backSetting.play(); window.history.back()})}  className="footerButton" id="settingBack">{translations[settings.lang].back}</button> 
       </div>
 
       

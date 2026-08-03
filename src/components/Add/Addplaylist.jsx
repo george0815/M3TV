@@ -263,7 +263,7 @@ function Addplaylist(props) {
 
 
       <div  id="settingsTop">
-        <div lang={[settings.lang]} class="label" id="settingsLabel">{(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1) ? translations[settings.lang].editPlaylists : translations[settings.lang].addPlaylists}</div>
+        <div lang={[settings.lang]} className="label" id="settingsLabel">{(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1) ? translations[settings.lang].editPlaylists : translations[settings.lang].addPlaylists}</div>
       </div>
 
 
@@ -273,24 +273,24 @@ function Addplaylist(props) {
 
 
 
-          <label lang={[settings.lang]} class="label" for="name">{translations[settings.lang].name}</label>
+          <label lang={[settings.lang]} className="label" htmlFor="name">{translations[settings.lang].name}</label>
           <br/>
-          <input value={input.title} onChange={(e) => {onInputChange(e)}} type="text" class="miscOptions" id="title" name="title"/>
+          <input value={input.title} onChange={(e) => {onInputChange(e)}} type="text" className="miscOptions" id="title" name="title"/>
 
-          <label style={{paddingRight: "5%"}} className="label" for="url">
+          <label style={{paddingRight: "5%"}} className="label" htmlFor="url">
           {translations[settings.lang].url} 
             <span style={{marginLeft: "2vw"}}>{translations[settings.lang].local}</span>
-            <label style={{marginTop: "1vh", marginLeft: "1vw"}} className="switch" for="isLocal">
+            <label style={{marginTop: "1vh", marginLeft: "1vw"}} className="switch" htmlFor="isLocal">
               <input value={input.isLocal} onChange={(e) => {soundEffects.okSetting.play(); onInputChange(e)}} id="isLocal" type="checkbox"/>
               <span className="slider round"></span>
             </label>
           </label>
           <br/>
-          <input value={input.url} onChange={(e) => {onInputChange(e)}} tabindex="2" type="text" class="miscOptions" id="url" name="url"/>
+          <input value={input.url} onChange={(e) => {onInputChange(e)}} tabIndex="2" type="text" className="miscOptions" id="url" name="url"/>
 
-          <label tabindex="-1" lang={[settings.lang]} class="label" for="logoUrl">{translations[settings.lang].logoUrl}</label>
+          <label tabIndex="-1" lang={[settings.lang]} className="label" htmlFor="logoUrl">{translations[settings.lang].logoUrl}</label>
           <br/>
-          <input value={input.logoUrl} onChange={(e) => {onInputChange(e)}} tabindex="3" type="text" id="logoUrl" class="miscOptions" name="logoUrl"/>
+          <input value={input.logoUrl} onChange={(e) => {onInputChange(e)}} tabIndex="3" type="text" id="logoUrl" className="miscOptions" name="logoUrl"/>
           
           <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
@@ -300,8 +300,8 @@ function Addplaylist(props) {
 
       <div id="bButtonWrapper" className="editMenu">
       
-        <button onClick={(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1) ? editPlaylist : (()=>{soundEffects.backMain.play(); window.history.back()})} lang={[settings.lang]} class="footerButton" id="addPBack" style={{left: "15%"}}>{translations[settings.lang].back}</button>
-        <button onClick={(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1) ? removePlaylist : Addplaylist} lang={[settings.lang]} class="footerButton" id="okay">{(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1)  ? translations[settings.lang].remove : translations[settings.lang].confirm}</button> 
+        <button onClick={(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1) ? editPlaylist : (()=>{soundEffects.backMain.play(); window.history.back()})} lang={[settings.lang]} className="footerButton" id="addPBack" style={{left: "15%"}}>{translations[settings.lang].back}</button>
+        <button onClick={(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1) ? removePlaylist : Addplaylist} lang={[settings.lang]} className="footerButton" id="okay">{(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1)  ? translations[settings.lang].remove : translations[settings.lang].confirm}</button> 
   
       </div>
 

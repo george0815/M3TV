@@ -53,20 +53,20 @@ function Editplaylists(props) {
     <div id="remBody" className='htmlSettings'>
 
         
-      <div tabindex="-1" id="settingsTop">
-        <div tabindex="-1" lang={[settings.lang]} class="label" id="settingsLabel">{translations[settings.lang].editPlaylists}</div>      
+      <div tabIndex="-1" id="settingsTop">
+        <div tabIndex="-1" lang={[settings.lang]} className="label" id="settingsLabel">{translations[settings.lang].editPlaylists}</div>      
       </div>
       
-      <div tabindex="-1" id="remChannelWrapper">{streams.playlists.map((playlist, index)=>{
+      <div tabIndex="-1" id="remChannelWrapper">{streams.playlists.map((playlist, index)=>{
 
-        return (<button onClick={(()=>{props.setIndex(index); nav("/editpForm")})} className='settingsButton'>{playlist.inf.title}</button>)
+        return (<button key={index} onClick={(()=>{props.setIndex(index); nav("/editpForm")})} className='settingsButton'>{playlist.inf.title}</button>)
 
       })}</div>
 
-      <div tabindex="-1" id="bButtonWrapper">
+      <div tabIndex="-1" id="bButtonWrapper">
 
-        <button onClick={(()=>{soundEffects.backSetting.play(); window.history.back();})}  class="footerButton" id="settingBack" >{translations[settings.lang].back}</button>
-        <button onClick={(()=>{soundEffects.okSetting.play(); removeAll()})}  lang={[settings.lang]} id="removeAll" class="footerButton" >{translations[settings.lang].removeAll}</button> 
+        <button onClick={(()=>{soundEffects.backSetting.play(); window.history.back();})}  className="footerButton" id="settingBack" >{translations[settings.lang].back}</button>
+        <button onClick={(()=>{soundEffects.okSetting.play(); removeAll()})}  lang={[settings.lang]} id="removeAll" className="footerButton" >{translations[settings.lang].removeAll}</button> 
 
       </div>
 

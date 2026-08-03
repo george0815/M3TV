@@ -120,7 +120,7 @@ function Channelwrapper(props){
     
             let videoContainerEl = document.getElementById("vjsContainer");
             videoContainerEl.innerHTML = `
-              <video id="vjs" class="video-js vjs-default-skin" controls  ></video>
+              <video id="vjs" className="video-js vjs-default-skin" controls  ></video>
            `;
     
            //sets player to videojs

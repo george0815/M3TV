@@ -10,7 +10,7 @@ export const VideoJS = (props) => {
 
     videoContainerEl.innerHTML = `
       <div data-vjs-player>
-        <video id="vjs" style={!props.curPlaying ? {display: "none"} : {display: ""}} class="video-js vjs-default-skin" controls  ><source src="path/to/your/video.mp4"/> </video>
+        <video id="vjs" style={!props.curPlaying ? {display: "none"} : {display: ""}} className="video-js vjs-default-skin" controls  ><source src="path/to/your/video.mp4"/> </video>
       </div>
     `;
 

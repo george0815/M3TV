@@ -228,7 +228,8 @@ a{
 
 
 
-#loginButton{
+/*login, sign up and forgot password buttons*/
+.loginButton{
   padding: 2vh;
   height: fit-content;
   margin-top: 2vh;

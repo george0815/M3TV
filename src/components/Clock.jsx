@@ -26,8 +26,8 @@ function Clock(props) {
         <div id="date">
             <strong>{(dt.toLocaleDateString(getClientLocale(), { weekday: 'short' })) + " " + (("0"+(dt.getMonth()+1)).slice(-2)) + "/" +(("0"+dt.getDate()).slice(-2))}</strong>
         </div>
-        <button onClick={props.back} id="backChannel"  class="clockButton">&#8617;</button>
-        <Link onClick={(()=>{soundEffects.okMain.play();})} to="/options"><button tabindex="6" id="optionsChannel" class="clockButton" >&#9881;</button></Link>
+        <button onClick={props.back} id="backChannel"  className="clockButton">&#8617;</button>
+        <Link onClick={(()=>{soundEffects.okMain.play();})} to="/options"><button tabIndex="6" id="optionsChannel" className="clockButton" >&#9881;</button></Link>
     </div>
   );
 }

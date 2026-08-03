@@ -51,21 +51,21 @@ function Editchannels(props) {
 
     <div id="remBody" className='htmlSettings'>
 
-      <div tabindex="-1" id="settingsTop">
-        <div tabindex="-1" lang={[settings.lang]} class="label" id="settingsLabel">{translations[settings.lang].editChannels}</div>  
+      <div tabIndex="-1" id="settingsTop">
+        <div tabIndex="-1" lang={[settings.lang]} className="label" id="settingsLabel">{translations[settings.lang].editChannels}</div>  
       </div>
       
-      <div tabindex="-1" id="remChannelWrapper">{streams.channels.map((channel, index)=>{
+      <div tabIndex="-1" id="remChannelWrapper">{streams.channels.map((channel, index)=>{
 
-        return (<button onClick={(()=>{soundEffects.okSetting.play(); props.setIndex(index); nav("/editcForm")})} className='settingsButton'>{channel.inf.title}</button>)
+        return (<button key={index} onClick={(()=>{soundEffects.okSetting.play(); props.setIndex(index); nav("/editcForm")})} className='settingsButton'>{channel.inf.title}</button>)
 
 
       })}</div>
     
-      <div tabindex="-1" id="bButtonWrapper">
+      <div tabIndex="-1" id="bButtonWrapper">
 
-        <button onClick={(()=>{soundEffects.backSetting.play(); window.history.back();})}  class="footerButton" id="settingBack" >{translations[settings.lang].back}</button>
-        <button onClick={(()=>{soundEffects.okSetting.play(); removeAll()})}  lang={[settings.lang]} id="removeAll" class="footerButton" >{translations[settings.lang].removeAll}</button> 
+        <button onClick={(()=>{soundEffects.backSetting.play(); window.history.back();})}  className="footerButton" id="settingBack" >{translations[settings.lang].back}</button>
+        <button onClick={(()=>{soundEffects.okSetting.play(); removeAll()})}  lang={[settings.lang]} id="removeAll" className="footerButton" >{translations[settings.lang].removeAll}</button> 
       
       </div>
       

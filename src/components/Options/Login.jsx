@@ -1,4 +1,4 @@
-import {React, useContext, useEffect} from 'react'; //react
+import {useContext} from 'react'; //react
 import { translations } from '../../misc/translations';
 import { SettingsContext } from '../../App'; //gets global settings context
 import { soundEffects } from '../../utils';
@@ -19,7 +19,7 @@ function Login(){
 
 
   //global streams
-  const {streams, setStreams} = useContext(StreamsContext);
+  const {setStreams} = useContext(StreamsContext);
 
 
 //===================================FUNCTIONS=========================//
@@ -32,20 +32,26 @@ function publicProfile(user){
 }
 
 //registers new users
+//
+//this is deliberately its own button. it used to be what the "Login" button
+//called, falling back to login() on auth/email-already-in-use — which meant a
+//typo in the email field silently created a brand new account and dropped the
+//user into it with none of their channels, instead of telling them the
+//password was wrong.
 function register(){
-    
+
 
     //get inputs from fields
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-    
+
 
     //if both inputted passwords match, attempt to sign up user
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          // Signed up 
+          // Signed up
           const user = userCredential.user;
-          
+
           //set loggedIn local storage value to true and go to main page
           setSettings({...settings, loggedIn: true, user: publicProfile(user)});
 
@@ -54,17 +60,18 @@ function register(){
 
           switch (error.code) {
             case 'auth/email-already-in-use':
-              login();
+              //don't quietly log them in — they asked to create an account
+              window.alert(translations[settings.lang].accountExists);
               break;
             default:
               //display error alert
               window.alert("Error: " + error.message + "\nCode: " + error.code);
               break;
           }
-          
+
 
         });
-    
+
   }
 
 
@@ -88,8 +95,22 @@ function register(){
 
      })
      .catch((error) => {
-       //display error alert
-       window.alert("Error: " + error.message + "\nCode: " + error.code);
+
+       switch (error.code) {
+         //firebase collapses "no such user" and "wrong password" into
+         //invalid-credential, so point at the sign-up button rather than
+         //guessing which one it was
+         case 'auth/invalid-credential':
+         case 'auth/user-not-found':
+         case 'auth/wrong-password':
+           window.alert(translations[settings.lang].loginFailed);
+           break;
+         default:
+           //display error alert
+           window.alert("Error: " + error.message + "\nCode: " + error.code);
+           break;
+       }
+
      });
 
  }
@@ -148,16 +169,17 @@ function register(){
         <div id="loginContainer">
 
              {!settings.loggedIn && <div className="inputContainer">
-                <label tabindex="-1" lang={[settings.lang]} for="email" class="label mlabel">{translations[settings.lang].email}</label>
-                <input  type="text" className="miscOptions loginInput"  id="email" name="email"/>
+                <label tabIndex="-1" lang={[settings.lang]} htmlFor="email" className="label mlabel">{translations[settings.lang].email}</label>
+                <input  type="email" autoComplete="username" className="miscOptions loginInput"  id="email" name="email"/>
               </div> }
               {!settings.loggedIn &&<div className="inputContainer">
-                <label tabindex="-1" lang={[settings.lang]} for="password" class="label mlabel">{translations[settings.lang].password}</label>
-                <input  type="text" className="miscOptions loginInput"  id="password" name="password"/>
+                <label tabIndex="-1" lang={[settings.lang]} htmlFor="password" className="label mlabel">{translations[settings.lang].password}</label>
+                <input  type="password" autoComplete="current-password" className="miscOptions loginInput"  id="password" name="password"/>
               </div>}
               <div id="buttonRow">
-                {!settings.loggedIn && <button lang={[settings.lang]} id="loginButton" onClick={(() => {soundEffects.okSetting.play(); resetPassword()})} className="settingsButton forgotPassword">{translations[settings.lang].forgot}</button>}
-                <button lang={[settings.lang]} id="loginButton" onClick={(()=>{soundEffects.okSetting.play(); settings.loggedIn ? logout() : register()})} className="settingsButton">{settings.loggedIn ? translations[settings.lang].logout : translations[settings.lang].login}</button>
+                {!settings.loggedIn && <button lang={[settings.lang]} id="forgotButton" onClick={(() => {soundEffects.okSetting.play(); resetPassword()})} className="settingsButton loginButton forgotPassword">{translations[settings.lang].forgot}</button>}
+                {!settings.loggedIn && <button lang={[settings.lang]} id="signUpButton" onClick={(()=>{soundEffects.okSetting.play(); register()})} className="settingsButton loginButton">{translations[settings.lang].signUp}</button>}
+                <button lang={[settings.lang]} id="loginButton" onClick={(()=>{soundEffects.okSetting.play(); settings.loggedIn ? logout() : login()})} className="settingsButton loginButton">{settings.loggedIn ? translations[settings.lang].logout : translations[settings.lang].login}</button>
               </div>
           </div>
 

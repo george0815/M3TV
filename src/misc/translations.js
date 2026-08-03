@@ -11,6 +11,8 @@ export const translations =
         signUp: "Create account",
         logout: "Logout",
         forgot: "Forgot password",
+        loginFailed: "Wrong email or password. If you don't have an account yet, use Create account.",
+        accountExists: "An account already exists for that email. Use Login instead.",
 
         //ADD CHANNELS
         addChannels: "Add Channels",
@@ -94,6 +96,8 @@ export const translations =
         signUp: "Crear cuenta",
         logout: "Cierre de sesión",
         forgot: "Contraseña olvidada",
+        loginFailed: "Correo o contraseña incorrectos. Si aún no tienes una cuenta, usa Crear cuenta.",
+        accountExists: "Ya existe una cuenta con ese correo. Usa Inicio de sesión.",
 
         //ADD CHANNELS
         addChannels: "Añadir Canales",
@@ -176,6 +180,8 @@ export const translations =
         signUp: "Créer un compte",
         logout: "Déconnexion",
         forgot: "Mot de passe oublié",
+        loginFailed: "E-mail ou mot de passe incorrect. Si vous n'avez pas encore de compte, utilisez Créer un compte.",
+        accountExists: "Un compte existe déjà pour cet e-mail. Utilisez Connexion.",
 
         //ADD CHANNELS
         addChannels: "Ajouter Des Chaînes",
@@ -259,6 +265,8 @@ export const translations =
         signUp: "Konto erstellen",
         logout: "Abmeldung",
         forgot: "Passwort vergessen",
+        loginFailed: "E-Mail oder Passwort falsch. Wenn Sie noch kein Konto haben, verwenden Sie Konto erstellen.",
+        accountExists: "Für diese E-Mail existiert bereits ein Konto. Verwenden Sie Anmeldung.",
 
         //ADD CHANNELS
         addChannels: "Kanäle Hinzufügen",
@@ -342,6 +350,8 @@ export const translations =
         signUp: "إنشاء حساب",
         logout: "تسجيل الخروج",
         forgot: "نسيت كلمة المرور",
+        loginFailed: "البريد الإلكتروني أو كلمة المرور غير صحيحة. إذا لم يكن لديك حساب بعد، استخدم إنشاء حساب.",
+        accountExists: "يوجد حساب بالفعل لهذا البريد الإلكتروني. استخدم تسجيل الدخول.",
 
         //ADD CHANNELS
         addChannels: "إضافة قناة",
@@ -426,6 +436,8 @@ export const translations =
         signUp: "Создать аккаунт",
         logout: "Выход из системы",
         forgot: "Забыли пароль",
+        loginFailed: "Неверный адрес электронной почты или пароль. Если у вас ещё нет аккаунта, нажмите «Создать аккаунт».",
+        accountExists: "Аккаунт с таким адресом уже существует. Нажмите «Вход в систему».",
 
         //ADD CHANNELS
         addChannels: "Добавить Каналы",
@@ -510,6 +522,8 @@ export const translations =
         signUp: "创建账户",
         logout: "注销",
         forgot: "忘记密码",
+        loginFailed: "邮箱或密码错误。如果您还没有账户，请使用“创建账户”。",
+        accountExists: "该邮箱已存在账户。请使用“登录”。",
 
         //ADD CHANNELS
         addChannels: "添加频道",
@@ -593,6 +607,8 @@ export const translations =
         signUp: "アカウント作成",
         logout: "ログアウト",
         forgot: "パスワードを忘れた場合",
+        loginFailed: "メールアドレスまたはパスワードが違います。アカウントをお持ちでない場合は「アカウント作成」をご利用ください。",
+        accountExists: "そのメールアドレスのアカウントは既に存在します。「ログイン」をご利用ください。",
 
         //ADD CHANNELS
         addChannels: "チャネルを追加する",

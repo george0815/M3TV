@@ -254,7 +254,7 @@
     min-width: 45vw !important  ;
     border-radius: 30px;
   }
-  #loginButton{
+  .loginButton{
     font-size: smaller;
     width: auto;
     min-width: auto !important;

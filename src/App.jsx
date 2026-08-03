@@ -208,7 +208,7 @@ function App() {
           </Routes>
         </BrowserRouter>
 
-        <iframe key={Date()} tabindex="-1"  id="bgMusic" width="0" height="0" src={settings.music + "?rel=0&autoplay=1&loop=1" + (settings.musicOn ? "" : "&mute=1")} title="YouTube video player" frameborder="0" allow="autoplay"></iframe> 
+        <iframe key={Date()} tabIndex="-1"  id="bgMusic" width="0" height="0" src={settings.music + "?rel=0&autoplay=1&loop=1" + (settings.musicOn ? "" : "&mute=1")} title="YouTube video player" frameBorder="0" allow="autoplay"></iframe> 
 
       </StreamsContext.Provider>
     </SettingsContext.Provider>
