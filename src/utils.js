@@ -73,9 +73,12 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
     const cors = settings.cors;
     let unmuteLater = false;
 
-    //mutes  music 
+    //mutes  music.
+    //updated from the previous value rather than the settings captured when
+    //this ran: exit() can fire minutes later, and spreading the stale object
+    //would roll back anything changed while the channel was playing
     if(settings.musicOn){
-      setSettings({...settings, musicOn: false});
+      setSettings(prev => ({...prev, musicOn: false}));
       unmuteLater = true;
     }
 
@@ -86,7 +89,7 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
 
         //unmutes music
         if(unmuteLater){
-          setSettings({...settings, musicOn: true});
+          setSettings(prev => ({...prev, musicOn: true}));
         }
 
 

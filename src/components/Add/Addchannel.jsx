@@ -63,9 +63,6 @@ function Addchannel(props) {
     //plays sound effect 
     soundEffects.okSetting.play();
 
-    //get streams object and set it to temp
-    let tempChannels = streams.channels;
-
     //creates and sets variables of channel to be pushed
     let tempChannel = {
       inf: {
@@ -75,11 +72,12 @@ function Addchannel(props) {
       url: input.url,
     }
 
-    
+
     //if valid
     if(!(tempChannel.url === "" || tempChannel.inf.title === "")){
-      //pushes channel to array
-      tempChannels.push(tempChannel);
+      //a copy, not streams.channels itself — pushing onto the array held in
+      //state mutated the current state in place before setStreams ever ran
+      let tempChannels = [...streams.channels, tempChannel];
 
 
       setInput({
@@ -119,21 +117,19 @@ function Addchannel(props) {
     soundEffects.backSetting.play();
 
 
-    //get streams object and set it to temp
-    let tempChannels = streams.channels;
-
-    //creates and sets variables of channel to be pushed
-    tempChannels[props.index] = {
-      inf: {
-        title: input.title,
-        tvgLogo: input.logoUrl,
-      },
-      url: input.url,
-    }
-
-    
-    //if valid
+    //if valid. checked before building anything: the edit used to be written
+    //straight into the array held in state, so an edit rejected below had
+    //already been applied in memory by the time the alert appeared
     if(!(input.url === "" || input.title === "")){
+
+      //replaces the entry at props.index without touching the original array
+      let tempChannels = streams.channels.map((channel, i) => i === props.index ? {
+        inf: {
+          title: input.title,
+          tvgLogo: input.logoUrl,
+        },
+        url: input.url,
+      } : channel);
 
       //sets channels
       setStreams({...streams, channels: tempChannels});
@@ -164,12 +160,10 @@ function Addchannel(props) {
     soundEffects.okSetting.play();
 
 
-    //get streams object and set it to temp
-    let tempChannels = streams.channels;
+    //removes channel from array. filter rather than splice, which would edit
+    //the array held in state in place
+    let tempChannels = streams.channels.filter((channel, i) => i !== props.index);
 
-    //removes channel from array
-    tempChannels.splice(props.index, 1); 
-    
     //sets channels
     setStreams({...streams, channels: tempChannels});
 

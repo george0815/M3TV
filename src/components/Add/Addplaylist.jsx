@@ -50,7 +50,8 @@ function Addplaylist(props) {
 
 
   //SETS UP TEMP PLAYLIST
-  let tempPlaylist = {}, playlists = [];
+  //carries the pending entry from Addplaylist() to the file reader callback
+  let tempPlaylist = {};
 
 
   //WHEN INPUT CHANGES, UPATE STATE (AND THUS, UI)
@@ -78,12 +79,15 @@ function Addplaylist(props) {
         document.getElementById("url").value = file.name;
 
 
-        //repeated if statement because the other one will run before 
+        //repeated if statement because the other one will run before
         //the reader is finished, and thus wont push it into the array
         //if url and title arent empty, push
         if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){
-          //pushes channel to array
-          playlists.push(tempPlaylist);
+          //built from streams rather than the component-scope playlists array:
+          //that one is reassigned on every render, so any re-render between
+          //opening the file dialog and the reader finishing would have left it
+          //empty here and wiped every other playlist
+          let playlists = [...streams.playlists, tempPlaylist];
 
 
           setInput({
@@ -122,10 +126,6 @@ function Addplaylist(props) {
     //plays sound effect ADD SOUND EFFECT BACK
     soundEffects.okSetting.play();
 
-    //get streams object and set it to temp
-    playlists = streams.playlists;
-
-
     //creates and sets variables of channel to be pushed
     tempPlaylist = {
       inf : {title: input.title},
@@ -149,8 +149,8 @@ function Addplaylist(props) {
 
         //if url and title arent empty, push
         if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){
-          //pushes channel to array
-          playlists.push(tempPlaylist);
+          //a copy — pushing onto streams.playlists edited state in place
+          let playlists = [...streams.playlists, tempPlaylist];
 
 
           setInput({
@@ -190,20 +190,18 @@ function Addplaylist(props) {
     soundEffects.backSetting.play();
 
 
-    //get streams object and set it to temp
-    let tempPlaylists = streams.playlists;
-
-    //creates and sets variables of channel to be pushed
-    tempPlaylists[props.index] = {
-      inf : {title: input.title},
-      url: input.url,
-      logoUrl: input.logoUrl,
-      isLocal: input.isLocal
-    }
-
-    
-    //if valid
+    //if valid. checked before building anything: the edit used to be written
+    //straight into the array held in state, so an edit rejected below had
+    //already been applied in memory by the time the alert appeared
     if(!(input.url === "" || input.title === "")){
+
+      //replaces the entry at props.index without touching the original array
+      let tempPlaylists = streams.playlists.map((playlist, i) => i === props.index ? {
+        inf : {title: input.title},
+        url: input.url,
+        logoUrl: input.logoUrl,
+        isLocal: input.isLocal
+      } : playlist);
 
       //sets playlists
       setStreams({...streams, playlists: tempPlaylists});
@@ -233,12 +231,10 @@ function Addplaylist(props) {
 
     soundEffects.okSetting.play();
     
-    //get streams object and set it to temp
-    let tempPlaylists = streams.playlists;
+    //removes channel from array. filter rather than splice, which would edit
+    //the array held in state in place
+    let tempPlaylists = streams.playlists.filter((playlist, i) => i !== props.index);
 
-    //removes channel from array
-    tempPlaylists.splice(props.index, 1); 
-    
     //sets channels
     setStreams({...streams, playlists: tempPlaylists});
 

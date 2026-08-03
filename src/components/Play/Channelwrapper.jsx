@@ -107,10 +107,9 @@ function Channelwrapper(props){
             //adds channel in playlist to individual channels
             else if(e.key == 'f' && props.data != null && props.curPlaying === true && props.isPlaylist){
                 soundEffects.okSetting.play();
-                //get streams object and set it to temp
-                let tempChannels = streams.channels;
-                //pushes channel to array
-                tempChannels.push(props.data[curIndex]);
+                //a copy — pushing onto streams.channels edited the array held
+                //in state in place, before setStreams had run
+                let tempChannels = [...streams.channels, props.data[curIndex]];
 
                 //sets channels
                 setStreams({...streams, channels: tempChannels});
