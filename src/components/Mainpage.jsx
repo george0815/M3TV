@@ -35,8 +35,6 @@ function Mainpage(props) {
     const [dontShow, setDontShow] = useState(sessionStorage.getItem("splash") !== null ? sessionStorage.getItem("splash") : false);
 
 
-    console.log(sessionStorage.getItem("splash"));
-
   //===========================FUNCTIONS====================//
 
 

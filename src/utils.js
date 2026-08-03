@@ -7,12 +7,11 @@ import backMain  from "./audio/backMain.mp3"
 import backChannel  from "./audio/backChannel.mp3"
 import splashIn  from "./audio/splashScreenIn.mp3"
 import splashOut from "./audio/splashScreenOut.mp3"
-import videojs from 'video.js';
 import { useRef, useEffect } from 'react';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {getFirestore, collection} from "firebase/firestore"
+import {getFirestore} from "firebase/firestore"
 import Hls from 'hls.js';
 
 
@@ -20,10 +19,9 @@ import Hls from 'hls.js';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "m3tv-66f28.firebaseapp.com",
   projectId: "m3tv-66f28",
-  storageBucket: "m3tv-66f28.appspot.com",
   messagingSenderId: "830463803107",
   appId: "1:830463803107:web:14c9fd7d36623752fd4fd6"
 };
@@ -32,7 +30,6 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
-export const dataCollection = collection(db, "data");
 
 export const auth = getAuth();
 
