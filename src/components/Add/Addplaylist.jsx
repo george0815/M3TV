@@ -56,19 +56,31 @@ function Addplaylist(props) {
 
   //WHEN INPUT CHANGES, UPATE STATE (AND THUS, UI)
   function onInputChange(e){
+    //a checkbox carries its state on .checked; reading .value gave the string
+    //"on" regardless of whether it was ticked
+    const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setInput( prevInput => {
-      return { ...prevInput,  [e.target.name]: e.target.value}
+      return { ...prevInput,  [e.target.name]: value}
     })
   }
 
 
   async function onInputClick(e){
-        
+
       // getting a hold of the file reference
-      var file = e.target.files[0]; 
+      var file = e.target.files[0];
+
+      //undefined when the picker is dismissed without choosing anything, and
+      //readAsText(undefined) throws
+      if(!file){ return; }
 
       // setting up the reader
       var reader = new FileReader();
+
+      reader.onerror = () => {
+        window.alert(translations[settings.lang].noInput);
+      };
+
       reader.readAsText(file,'UTF-8');
 
       // here we tell the reader what to do when it's done reading...
@@ -81,8 +93,12 @@ function Addplaylist(props) {
 
         //repeated if statement because the other one will run before
         //the reader is finished, and thus wont push it into the array
-        //if url and title arent empty, push
-        if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){
+        //
+        //the title check reads inf.title, which is where the title actually
+        //lives. it used to read tempPlaylist.title — always undefined, never
+        //equal to "" — so an untitled playlist passed validation and was saved
+        //with nothing to identify it in the edit list.
+        if(!(tempPlaylist.url === "" || !tempPlaylist.inf || tempPlaylist.inf.title === "")){
           //built from streams rather than the component-scope playlists array:
           //that one is reassigned on every render, so any re-render between
           //opening the file dialog and the reader finishing would have left it
@@ -134,11 +150,10 @@ function Addplaylist(props) {
       isLocal: input.isLocal
     }
 
-    if(document.getElementById("isLocal").checked){
+    //reads the controlled state now that the checkbox actually tracks it,
+    //rather than reaching back into the DOM node
+    if(input.isLocal){
       tempPlaylist.isLocal = true;
-    
-
-      
 
       ref.current.click()
     }
@@ -147,8 +162,9 @@ function Addplaylist(props) {
         tempPlaylist.url = document.getElementById("url").value;
         tempPlaylist.isLocal = false;
 
-        //if url and title arent empty, push
-        if(!(tempPlaylist.url === "" || tempPlaylist.title === "")){
+        //title lives at inf.title; the old check read tempPlaylist.title,
+        //which is always undefined, so it never rejected anything
+        if(!(tempPlaylist.url === "" || !tempPlaylist.inf || tempPlaylist.inf.title === "")){
           //a copy — pushing onto streams.playlists edited state in place
           let playlists = [...streams.playlists, tempPlaylist];
 
@@ -276,7 +292,7 @@ function Addplaylist(props) {
           {translations[settings.lang].url} 
             <span style={{marginLeft: "2vw"}}>{translations[settings.lang].local}</span>
             <label style={{marginTop: "1vh", marginLeft: "1vw"}} className="switch" htmlFor="isLocal">
-              <input value={input.isLocal} onChange={(e) => {soundEffects.okSetting.play(); onInputChange(e)}} id="isLocal" type="checkbox"/>
+              <input checked={input.isLocal} name="isLocal" onChange={(e) => {soundEffects.okSetting.play(); onInputChange(e)}} id="isLocal" type="checkbox"/>
               <span className="slider round"></span>
             </label>
           </label>

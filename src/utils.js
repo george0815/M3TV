@@ -120,8 +120,13 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
           curPlaying = false;
           setCurPlaying(false);
 
-          //mutes player and unmutes background music, destroys player
-          player.muted = true;
+          //mutes player and unmutes background music, destroys player.
+          //on a media element muted is a property, but on a videojs player it
+          //is a method — assigning to it there replaced the method with `true`
+          //instead of muting anything.
+          if(videoPlayer === "vjs"){ player.muted(true); }
+          else { player.muted = true; }
+
           if(videoPlayer === "hls" && hls){hls.destroy(); hls = null;}
           document.removeEventListener("fullscreenchange", exit);
           try{ player.removeEventListener("webkitendfullscreen", exit);} catch {}
