@@ -19,6 +19,8 @@ import "./styles/General.css";
 import "./styles/Clock.css";
 import "./styles/Buttons.css";
 import "./styles/Misc.css";
+//last, so the refinements win ties without !important
+import "./styles/Polish.css";
 import './App.css';
 
 //the two play routes are the only thing that pulls in video.js, which is far

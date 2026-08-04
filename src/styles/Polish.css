@@ -1,0 +1,435 @@
+/* Refinements layered over the existing look rather than replacing it.
+   Everything here is meant to be felt rather than noticed: motion on the things
+   a hand drives, focus rings where keyboard users need them, and a couple of
+   places where a value had drifted off the palette.
+
+   Kept in one file, imported last, so the whole pass can be tuned or reverted
+   as a unit and so these rules win ties without reaching for !important. */
+
+:root {
+  /* the cyan already used for borders, focus rings and the clock's top edge —
+     named so new rules cannot drift away from it */
+  --accent: #38bfed;
+
+  /* the splash eases over 1200ms. These are the shorter relatives of that
+     curve, for things the hand drives rather than things the screen decides */
+  --ease: cubic-bezier(0.2, 0.8, 0.3, 1);
+  --quick: 140ms;
+  --settle: 260ms;
+}
+
+
+/* ---------- text ---------- */
+
+/* Flat ink, no glow.
+
+   The original drew every button and label as `color: transparent` with a
+   single blurred shadow standing in for the glyph, which softened the type but
+   read as a font that had failed to load rather than as an effect. A layered
+   bloom was tried in its place — core, halo and a faint red/blue separation,
+   the way the splash does it — and looked better, but still reads as a glow
+   at interface sizes rather than as softness.
+
+   So: no shadow at all. The scanline background carries the character on its
+   own and the type is simply legible. */
+:root {
+  --ink: 40, 40, 40;
+}
+
+button,
+.label {
+  color: rgb(var(--ink));
+  text-shadow: none;
+}
+
+
+/* ---------- motion ---------- */
+
+/* button:hover already scales to 1.05, but with nothing to animate the change
+   was instantaneous. This is the single biggest difference between the menu
+   feeling built and feeling assembled. */
+button {
+  transition: transform var(--settle) var(--ease),
+              border-color var(--settle) var(--ease),
+              outline-color var(--quick) linear;
+}
+
+/* a press should be felt: dip just under the resting size, and quickly, so it
+   tracks the finger rather than trailing it */
+button:active {
+  transform: scale(0.98) perspective(1px);
+  transition-duration: var(--quick);
+}
+
+/* the player's controls are video.js's business, not ours */
+.video-js button {
+  transition: none;
+}
+
+
+/* ---------- focus ---------- */
+
+/* keyboard focus deserves a ring; a mouse click does not. :focus-visible draws
+   it only for keyboard and other non-pointer input, so the interface stops
+   flashing outlines at people using a mouse. */
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+button:focus-visible {
+  outline: solid .2em var(--accent);
+  outline-offset: .1em;
+}
+
+/* the footer and clock buttons had focus removed outright. The clock's back and
+   options buttons are the only controls present on every screen, so in an app
+   driven by the keyboard that left the most-used pair with no affordance. */
+.footerButton:focus-visible {
+  outline: solid .2em var(--accent);
+  outline-offset: -.25em;
+}
+
+.clockButton:focus-visible {
+  outline: solid .12em var(--accent);
+  outline-offset: -.12em;
+}
+
+
+/* ---------- the main menu ---------- */
+
+/* Rounded squares rather than pills, laid out as label along the top and icon
+   filling the body beneath it. Sizing is explicit — min() of a height and a
+   width unit — because the tiles have to stay square whichever dimension the
+   window runs out of first, and because the surrounding rules size buttons
+   from their content, which a square cannot do. */
+.mainPageButton {
+  /* 4:3, the shape of the thing it is a menu for. Height leads and the width
+     follows it, so the tile stays in proportion whichever dimension the window
+     runs out of first. */
+  height: min(29vh, 31vw);
+  aspect-ratio: 4 / 3;
+  width: auto;
+
+  /* these three are set elsewhere in ways that fight a fixed tile. The
+     !important is answering `button { min-width: 45vw !important }` in the
+     max-width:1300px block, not decoration. */
+  max-width: none;
+  max-height: none;
+  min-width: 0 !important;
+
+  margin: 1.5% auto 0;
+  padding: 1.6vh 1.2vh 1.2vh;
+  border-radius: 1.15em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* the icon sits centred in the whole tile, with the label positioned over
+     the top of it rather than taking a row of its own — see below */
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Four across on a wide screen, as one row. Scoped above the 1300px breakpoint
+   because below it the back and options buttons stop being display:none and
+   join the flow — six items in four columns would wrap to a ragged second row,
+   and the two-column layout already handles that case.
+
+   The tile height has to come down to suit: at 4:3 a tile is a third wider than
+   it is tall, so four of them plus gutters is the constraint, not the height of
+   the row. */
+@media (min-width: 1301px) {
+
+  #body {
+    /* auto columns rather than 1fr: equal fractions leave whatever space is
+       spare inside each column, so the tiles end up far apart with no way to
+       control the distance. Sizing the columns to the tiles and centring the
+       row puts the spacing under column-gap instead. */
+    grid-template-columns: repeat(4, auto);
+    justify-content: center;
+    column-gap: 1.1vw;
+
+    /* the row takes everything above the clock rather than shrinking to the
+       tiles, so there is space to centre them in */
+    grid-template-rows: 1fr 40%;
+    align-items: center;
+  }
+
+  .mainPageButton {
+    height: min(29vh, 17vw);
+
+    /* auto side margins would re-introduce the gap column-gap is now setting */
+    margin: 0;
+  }
+
+}
+
+/* The label is held out of the layout entirely and revealed on hover, so the
+   resting tile is just its icon. Positioned rather than hidden with display,
+   which keeps it in the accessibility tree — the icons are aria-hidden, so this
+   text is the only accessible name the button has and it must not disappear
+   from assistive technology just because it is invisible.
+
+   Shown on focus as well as hover, or the label would be unreachable for anyone
+   navigating by keyboard. */
+.mainPageLabel {
+  position: absolute;
+  top: 2.4vh;
+  left: 0;
+  right: 0;
+
+  font-size: 2.1vh;
+  line-height: 1.15;
+  text-align: center;
+
+
+  opacity: 0;
+  transform: translateY(-.4em);
+  transition: opacity var(--settle) var(--ease),
+              transform var(--settle) var(--ease);
+}
+
+.mainPageButton:hover .mainPageLabel,
+.mainPageButton:focus-visible .mainPageLabel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* the icon eases down out of the way as the label arrives, so the two are not
+   competing for the middle of the tile */
+.mainPageButton:hover .mainPageIcon,
+.mainPageButton:focus-visible .mainPageIcon {
+  transform: translateY(.5vh);
+}
+
+.mainPageIcon {
+  flex: 1 1 auto;
+  width: 52%;
+  min-height: 0;
+  margin-top: .6vh;
+
+  /* The stroke is fully opaque and the fade is applied to the finished icon
+     instead. Drawing each line at 80% alpha meant that wherever two of them
+     crossed the alphas compounded and the junction came out darker than the
+     lines — every corner of the TV and the middle of each plus read as a knot.
+     Group opacity composites the whole icon first, then fades it once, so an
+     intersection is exactly as dark as the lines forming it. */
+  color: rgb(var(--ink));
+  opacity: .8;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  /* the action glyph moves, and a stroke can overshoot its box while it does */
+  overflow: visible;
+
+  transition: transform var(--settle) var(--ease);
+}
+
+.mainPageIcon .filled {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* the piece of each icon that says what the button *does* — the play triangle
+   or the plus — is the piece that moves. transform-box makes the percentages
+   below resolve against the glyph rather than the whole svg canvas. */
+.mainPageIcon .glyph-action {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: var(--ease);
+}
+
+/* Most of each timeline is deliberately empty. The stir happens in the last
+   fifth, so the icons are still for about four seconds out of every five —
+   which is what stops four animated tiles from becoming a fidgeting mess. */
+#playPlaylist .glyph-action,
+#playChannel .glyph-action {
+  animation-name: glyph-nudge;
+}
+
+#addPlaylist .glyph-action,
+#addChannel .glyph-action {
+  animation-name: glyph-turn;
+}
+
+/* offset so the four are never in step */
+#playChannel .glyph-action  { animation-delay: 1.25s; }
+#addPlaylist .glyph-action  { animation-delay: 2.5s; }
+#addChannel .glyph-action   { animation-delay: 3.75s; }
+
+@keyframes glyph-nudge {
+  0%, 80%, 100% { transform: translateX(0); }
+  86%           { transform: translateX(14%); }
+  93%           { transform: translateX(-5%); }
+}
+
+@keyframes glyph-turn {
+  0%, 80%, 100% { transform: rotate(0deg) scale(1); }
+  88%           { transform: rotate(90deg) scale(1.12); }
+  94%           { transform: rotate(90deg) scale(1); }
+}
+
+
+/* ---------- channel tiles ---------- */
+
+/* a channel whose logo fails to load left an empty tile: the global button rule
+   paints text transparent and leans on a text-shadow to suggest it, which does
+   not survive at this size. Fall back to the channel's name, which the alt text
+   already carries.
+
+   deliberately no font-size here: .channelButton is sized in em (height: 6.5em)
+   so the tile's height rides on the inherited 3vh. Setting a smaller font-size
+   for the fallback text shrank the em and with it every tile. */
+/* Modelled on the Wii Menu channel grid. The shape is only part of it — what
+   actually makes those tiles read as physical panels is that each one is a
+   filled surface rather than an outline: a pale vertical gradient, a thin cool
+   grey edge, a bright line along the top where the light catches, and a soft
+   shadow underneath holding it off the background.
+
+   The corner rounding is elliptical but restrained. The sides curve outward
+   just enough to notice — the two numbers are horizontal / vertical radius as
+   percentages of the tile's own width and height, so raising the second adds
+   belly and dropping it flattens back to an ordinary rounded rectangle. */
+.channelButton {
+  /* plain rounded corners with straight sides. Tried curving the edges to match
+     the Wii tiles more closely and it never sat right — border-radius can only
+     shape inside the box, so the "bulge" comes from pulling the corners in,
+     and at any strength worth noticing the tile stops reading as a panel. */
+  border-radius: 10%;
+
+  background: linear-gradient(
+    to bottom,
+    #fdfdfe 0%,
+    #f5f6f8 52%,
+    #e8eaef 100%
+  );
+
+  /* back to the original grey. The cooler #ccd0d8 disappeared into the panel
+     gradient — the tile needs a defined edge to read as a separate object. */
+  border: solid .13em #b4b4b4;
+
+  box-shadow:
+    0 .11em .3em rgba(38, 48, 68, .13),
+    inset 0 .07em 0 rgba(255, 255, 255, .95),
+    inset 0 -.06em .12em rgba(120, 130, 150, .10);
+
+  color: #4a4a4a;
+  text-shadow: none;
+  transition: transform var(--settle) var(--ease),
+              border-color var(--settle) var(--ease),
+              box-shadow var(--settle) var(--ease),
+              opacity var(--settle) var(--ease);
+}
+
+/* the Wii lifts a channel towards you as the pointer crosses it. The global
+   button rule already scales; this adds the light that comes with it. */
+.channelButton:hover {
+  border-color: var(--accent);
+  box-shadow:
+    0 .22em .5em rgba(38, 48, 68, .2),
+    inset 0 .07em 0 rgba(255, 255, 255, .95),
+    0 0 0 .05em rgba(56, 191, 237, .35);
+}
+
+/* the tiles sat shoulder to shoulder, which hid the shadow doing the lifting.
+   The reference grid is mostly gutter. */
+#channelWrapper {
+  row-gap: 1.6%;
+  column-gap: .5%;
+}
+
+
+/* Tiles drift in and out on their own, the way the Wii menu never sits
+   completely still.
+
+   CSS has no randomness, so each tile gets both its own delay *and* its own
+   duration. Matching delays alone would still leave every tile on the same
+   cycle length, and the pattern would repeat visibly; different durations means
+   they slide permanently out of phase with each other and never resynchronise.
+
+   Most of each cycle sits at full opacity — the dip is about a fifth of it — so
+   at any moment only one or two tiles are actually mid-fade. */
+.channelButton {
+  animation-name: tile-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: var(--drift-dur, 11s);
+  animation-delay: var(--drift-delay, 0s);
+}
+
+@keyframes tile-drift {
+  0%, 68%, 100% { opacity: 1; }
+  84%           { opacity: .28; }
+}
+
+/* A tile must not be mid-fade under the pointer that is about to click it.
+
+   This needs !important, which here is the correct tool rather than a
+   shortcut: a running animation outranks a normal author declaration in the
+   cascade, and an important one outranks the animation. Nothing else will win.
+
+   Pausing rather than removing the animation is what makes it ease both ways —
+   the animation holds its position while hovered, so leaving the tile eases
+   from full opacity back down to where the fade had got to, instead of the
+   animation restarting from its first keyframe and jumping. */
+.channelButton:hover {
+  opacity: 1 !important;
+  animation-play-state: paused;
+}
+
+/* twelve tiles to a page, and the two video elements ahead of them in the
+   wrapper are not buttons, so nth-of-type counts the tiles correctly */
+.channelButton:nth-of-type(1)  { --drift-dur: 9s;    --drift-delay: 0s; }
+.channelButton:nth-of-type(2)  { --drift-dur: 12.5s; --drift-delay: 2.3s; }
+.channelButton:nth-of-type(3)  { --drift-dur: 10.5s; --drift-delay: 5.1s; }
+.channelButton:nth-of-type(4)  { --drift-dur: 14s;   --drift-delay: 1.2s; }
+.channelButton:nth-of-type(5)  { --drift-dur: 11s;   --drift-delay: 6.4s; }
+.channelButton:nth-of-type(6)  { --drift-dur: 13.5s; --drift-delay: 3.4s; }
+.channelButton:nth-of-type(7)  { --drift-dur: 9.5s;  --drift-delay: 7.8s; }
+.channelButton:nth-of-type(8)  { --drift-dur: 12s;   --drift-delay: 0.7s; }
+.channelButton:nth-of-type(9)  { --drift-dur: 14.5s; --drift-delay: 4.9s; }
+.channelButton:nth-of-type(10) { --drift-dur: 10s;   --drift-delay: 2.8s; }
+.channelButton:nth-of-type(11) { --drift-dur: 13s;   --drift-delay: 8.3s; }
+.channelButton:nth-of-type(12) { --drift-dur: 11.5s; --drift-delay: 1.9s; }
+
+
+/* ---------- palette consistency ---------- */
+
+/* the toggle was the one control wearing a different blue — #2196F3, a
+   material default that arrived with the switch markup */
+input:checked + .slider {
+  background-color: var(--accent);
+}
+
+input:focus-visible + .slider {
+  box-shadow: 0 0 0 .15em var(--accent);
+}
+
+
+/* ---------- motion preferences ---------- */
+
+/* honour the system setting. This covers the 1200ms splash fade too, which is
+   the longest movement in the app and the most likely to bother anyone who has
+   asked for less of it. */
+@media (prefers-reduced-motion: reduce) {
+
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+
+  button:hover,
+  button:active {
+    transform: none;
+  }
+
+}
