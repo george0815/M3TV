@@ -4,8 +4,17 @@ compatibility_date = "2024-11-06"
 
 # Who is allowed to use this proxy. Comma separated, exact origin match.
 #
-# This is the only thing standing between your worker and being an open relay,
+# This is the only thing standing between the worker and being an open relay,
 # so keep it tight. An empty value rejects everything rather than allowing
 # everything, which is the safer way round to fail.
+#
+# Both m3tv.net and www.m3tv.net are listed because the browser treats them as
+# separate origins and both serve the app — www answers 200 rather than
+# redirecting to the apex — so omitting either breaks streams for whoever
+# arrives at that one.
+#
+# The amplifyapp entry is the branch's default domain, kept so that testing
+# against the raw Amplify URL behaves the same as production. That subdomain is
+# the branch name, so a new branch would need its own entry.
 [vars]
-ALLOWED_ORIGINS = "https://m3tv.net,http://localhost:3000"
+ALLOWED_ORIGINS = "https://m3tv.net,https://www.m3tv.net,https://react.d38054p69gmhef.amplifyapp.com,http://localhost:3000"
