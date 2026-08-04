@@ -2,6 +2,10 @@ import React, {useState, useEffect,useContext} from "react";
 import { curPlaying, soundEffects } from "../../utils";
 import { SettingsContext } from '../../App'; //gets global settings context
 import videojs from "video.js";
+//video.js ships its own stylesheet and builds the control bar out of <button>
+//elements. Without this the app's global button rules style them instead, and
+//the control bar renders as a column of full width menu buttons.
+import "video.js/dist/video-js.css";
 import {useFirstRender} from "../../utils";
 import { StreamsContext } from '../../App';
 import { doc, setDoc } from "firebase/firestore"; 

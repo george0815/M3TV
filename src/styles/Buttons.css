@@ -38,6 +38,28 @@ button {
 
 }
 
+/* video.js builds its control bar, big play button and menus out of <button>
+   elements, so every rule on the bare `button` selector above lands on them —
+   and the `min-width: 45vw !important` in Misc.css turns each control into a
+   full width pill, stacking the control bar into a column.
+
+   This hands the player's own buttons back to video.js's stylesheet. Layout
+   properties are deliberately left out: video.js sizes its own controls and
+   its selectors are more specific, so those still win. */
+.video-js button {
+  min-width: 0 !important;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: inherit;
+  text-shadow: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
 /*buttons on main page*/
 .mainPageButton{
   max-height: 51%;
