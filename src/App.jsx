@@ -11,8 +11,9 @@ import Language from './components/Options/Language';
 import Video from './components/Options/Video';
 import { BrowserRouter, Route, Routes } from 'react-router-dom' //React Router
 import { soundEffects } from './utils';
-import { doc, getDoc } from "firebase/firestore"; 
-import {db} from "./utils"
+import { doc, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import {db, auth} from "./utils"
 //CSS
 import "./styles/General.css";
 import "./styles/Clock.css";
@@ -122,12 +123,13 @@ function App() {
   //gets playlist and channel data
   async function getData(user){
 
+    try{
 
-    const docRef = doc(db, "data", user.uid);
+      const docRef = doc(db, "data", user.uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-       
+
         //sets state
         setStreams(docSnap.data());
 
@@ -143,7 +145,19 @@ function App() {
 
       }
 
-  } 
+    }
+    catch (error) {
+
+      //this used to be an unhandled rejection. a denied or failed read left
+      //the user looking at stale or empty data with nothing to say anything
+      //had gone wrong. deliberately not an alert: token refreshes and brief
+      //network drops would make that fire constantly. whatever is already in
+      //state is left alone rather than being cleared.
+      console.error("could not load saved streams:", error);
+
+    }
+
+  }
 
  
 
@@ -156,13 +170,35 @@ function App() {
 
 
 
-  //saves settings to local storage whenever it's saved
+  //loads saved streams once firebase has told us who, if anyone, is signed in.
+  //
+  //this used to key off settings.loggedIn, which is persisted in localStorage
+  //and therefore available immediately on load — while firebase restores its
+  //session asynchronously. So on a refresh the read could go out before auth
+  //was ready, with request.auth still null, and the firestore rules would
+  //rightly deny it. That is the "sometimes my channels don't load" shape.
+  //
+  //it also reconciles the persisted flag with reality: if the session is gone
+  //but localStorage still says logged in, the app now believes firebase.
   useEffect(() => {
-    
-    if(settings.loggedIn === true){
-      getData(settings.user);
-    }
-  }, [settings.loggedIn, settings.user]);
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+
+      if(user){
+        setSettings(prev => prev.loggedIn && prev.user && prev.user.uid === user.uid
+          ? prev
+          : {...prev, loggedIn: true, user: { uid: user.uid, email: user.email }});
+        getData(user);
+      }
+      else{
+        setSettings(prev => prev.loggedIn ? {...prev, loggedIn: false, user: null} : prev);
+      }
+
+    });
+
+    return unsubscribe;
+
+  }, []);
 
 
   //saves streams to local storage whenever it's saved
