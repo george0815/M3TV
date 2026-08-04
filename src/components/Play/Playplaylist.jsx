@@ -93,9 +93,17 @@ function Playplaylist() {
 
       try{
         //loads channels
-        let channels = parser.getResult().segments;
+        //the parser only attaches inf to an entry that had an #EXTINF line
+        //before it, and the check below only ever inspected the first segment.
+        //So a playlist with one malformed entry anywhere after the first
+        //passed validation and then threw while rendering — which in react
+        //unmounts the tree and leaves a blank screen. Give every segment
+        //something renderable, falling back to the url as a label.
+        let channels = parser.getResult().segments.map(segment =>
+          segment.inf ? segment : {...segment, inf: {title: segment.url}}
+        );
 
-        if(channels[0].url === "<!DOCTYPE html>" || !Object.hasOwn(channels[0], 'inf')){throw new Error(translations[settings.lang].invalidUrl);}
+        if(channels.length === 0 || channels[0].url === "<!DOCTYPE html>"){throw new Error(translations[settings.lang].invalidUrl);}
        
 
 

@@ -57,7 +57,7 @@ function Editchannels(props) {
       
       <div tabIndex="-1" id="remChannelWrapper">{streams.channels.map((channel, index)=>{
 
-        return (<button key={index} onClick={(()=>{soundEffects.okSetting.play(); props.setIndex(index); nav("/editcForm")})} className='settingsButton'>{channel.inf.title}</button>)
+        return (<button key={index} onClick={(()=>{soundEffects.okSetting.play(); props.setIndex(index); nav("/editcForm")})} className='settingsButton'>{(channel.inf && channel.inf.title) || channel.url}</button>)
 
 
       })}</div>

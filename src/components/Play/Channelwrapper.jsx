@@ -220,12 +220,19 @@ function Channelwrapper(props){
             <div  style={!props.curPlaying ? {display: "none"} : {display: ""}}  id="vjsContainer"></div>
 
             {/*channel buttons*/}
-            {matches.slice(page * 12, page * 12 + 12).map(({channel, index})=>(
+            {matches.slice(page * 12, page * 12 + 12).map(({channel, index})=>{
 
-                props.isChannel ? <button key={index} title={channel.inf.title}  onClick={(()=>{ playChannel(index)})} className='channelButton'><img title={channel.inf.title} src={ channel.inf.tvgLogo} alt={channel.inf.title}></img></button>
-                    :   <button title={channel.inf.title} key={channel.inf.title} onClick={(()=>{props.play(channel.url, channel.isLocal)})} className='channelButton'><img  title={channel.inf.title} src={ channel.urlLogo} alt={channel.inf.title}></img></button>
+                //entries saved before playlists were normalised can still be
+                //missing inf, and reading through it during render throws,
+                //which takes the whole page down rather than one tile
+                const title = (channel.inf && channel.inf.title) || channel.url || "";
+                const logo = props.isChannel ? (channel.inf && channel.inf.tvgLogo) : channel.urlLogo;
 
-                ))
+                return props.isChannel
+                    ? <button key={index} title={title} onClick={(()=>{ playChannel(index)})} className='channelButton'><img title={title} src={logo} alt={title}></img></button>
+                    : <button title={title} key={title} onClick={(()=>{props.play(channel.url, channel.isLocal)})} className='channelButton'><img title={title} src={logo} alt={title}></img></button>;
+
+                })
             }
 
         </div>

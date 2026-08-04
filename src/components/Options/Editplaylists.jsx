@@ -59,7 +59,7 @@ function Editplaylists(props) {
       
       <div tabIndex="-1" id="remChannelWrapper">{streams.playlists.map((playlist, index)=>{
 
-        return (<button key={index} onClick={(()=>{props.setIndex(index); nav("/editpForm")})} className='settingsButton'>{playlist.inf.title}</button>)
+        return (<button key={index} onClick={(()=>{props.setIndex(index); nav("/editpForm")})} className='settingsButton'>{(playlist.inf && playlist.inf.title) || playlist.url}</button>)
 
       })}</div>
 
