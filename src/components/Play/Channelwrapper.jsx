@@ -186,29 +186,11 @@ function Channelwrapper(props){
 
 
 
-            if(settings.player === "vjs"){
-
-            //these used to be attached on every run of this effect with nothing
-            //taking them off again, so each channel change stacked another pair
-            const vjsEl = document.getElementById("vjs");
-
-            const onEnterPip = () => {
-                if(settings.player === "vjs"){  player.play(); }
-            };
-
-            const onLeavePip = () => {
-                if(settings.player === "vjs"){document.getElementById('vjs').style.display = 'none';  player.hide(); player.pause();}
-            };
-
-            if(vjsEl){ vjsEl.addEventListener('enterpictureinpicture', onEnterPip); }
-            document.addEventListener("leavepictureinpicture", onLeavePip);
-
-            return () => {
-                if(vjsEl){ vjsEl.removeEventListener('enterpictureinpicture', onEnterPip); }
-                document.removeEventListener("leavepictureinpicture", onLeavePip);
-            };
-
-            }
+            //picture-in-picture used to be handled here as well, hiding and
+            //pausing the player on leave and calling play() on enter. It is
+            //owned by playChannel() in utils now, for both player types and in
+            //one place: entering hides the in-page surface without stopping
+            //anything, leaving runs the same teardown as exiting fullscreen.
         }
     }, [player, curIndex, play]);
 
@@ -220,7 +202,16 @@ function Channelwrapper(props){
         <div id="channelWrapper">
 
             {/*video players*/}
-            <video id="curPlaying"  style={!props.curPlaying ? {display: "none"} : {display: ""}} >  <source id="currentChannel" src="" type="application/x-mpegURL"/> </video>
+            {/*controls are what give the viewer a volume slider, a pause button
+               and the picture-in-picture control while fullscreen. Without it
+               this element had none of them, and the channel volume could only
+               be set beforehand from the audio settings page.*/}
+            {/*no <source> child: it carried an empty src and a mime type
+               firefox has no native support for, so the browser ran resource
+               selection against it on every mount, failed, and logged it. The
+               source is set either by hls.js through MediaSource or by
+               assigning .src directly on the native path.*/}
+            <video id="curPlaying" controls playsInline  style={!props.curPlaying ? {display: "none"} : {display: ""}} ></video>
             <div  style={!props.curPlaying ? {display: "none"} : {display: ""}}  id="vjsContainer"></div>
 
             {/*channel buttons*/}

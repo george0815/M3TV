@@ -59,6 +59,10 @@ let activeExitHandler = null;
 //the same reason as the one above: it has to come off before the next goes on
 let activeNativeErrorHandler = null;
 
+//and the picture-in-picture handlers, same again
+let activeLeavePipHandler = null;
+let activeEnterPipHandler = null;
+
 
 
 export function useFirstRender() {
@@ -96,39 +100,64 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
 
 
     function exit(){
+
+      //entering picture-in-picture takes the video out of fullscreen, so this
+      //fires — but the user has not stopped watching. Tearing the player down
+      //here left the picture-in-picture window showing a hidden, paused, muted
+      //video the moment it opened.
+      if (document.pictureInPictureElement) { return; }
+
       if (!document.fullscreen) {
-        try {
+
+        //Everything that has to happen regardless runs first and outside the
+        //try below. It used to sit underneath the sound effect and the player
+        //calls, inside a bare catch — so if the player threw (which it does
+        //once a stream has errored) the flag was never cleared, the player
+        //surfaces kept display:"" and an invisible overlay swallowed every
+        //click on the page. A teardown must not depend on the thing it is
+        //tearing down still working.
+        curPlaying = false;
+        setCurPlaying(false);
+
+        document.removeEventListener("fullscreenchange", exit);
+        if(activeExitHandler === exit){ activeExitHandler = null; }
+
+        document.removeEventListener("leavepictureinpicture", exit);
+        if(activeLeavePipHandler === exit){ activeLeavePipHandler = null; }
+
+        if(activeEnterPipHandler){
+          document.removeEventListener("enterpictureinpicture", activeEnterPipHandler);
+          activeEnterPipHandler = null;
+        }
+
+        if(activeNativeErrorHandler){
+          try{ player.removeEventListener("error", activeNativeErrorHandler); } catch {}
+          activeNativeErrorHandler = null;
+        }
+
+        if(videoPlayer === "hls" && hls){
+          try{ hls.destroy(); } catch {}
+          hls = null;
+        }
 
         //unmutes music
         if(unmuteLater){
           setSettings(prev => ({...prev, musicOn: true}));
         }
 
+        try {
 
-
-        //plays sound effect and makes video element invisible, sets playing to false
-        
-          
           soundEffects.backChannel.play();
+
+          //makes the video element invisible
           if(videoPlayer === "vjs"){document.getElementById('vjs').style.display = 'none';  player.hide(); player.pause();}
 
-          document.removeEventListener("fullscreenchange", exit);
-          if(activeExitHandler === exit){ activeExitHandler = null; }
-
-          //this was set to true on play and never cleared, so Channelwrapper's
-          //check on it stayed stuck after the first channel of the session
-          curPlaying = false;
-          setCurPlaying(false);
-
-          //mutes player and unmutes background music, destroys player.
-          //on a media element muted is a property, but on a videojs player it
-          //is a method — assigning to it there replaced the method with `true`
-          //instead of muting anything.
+          //mutes player. on a media element muted is a property, but on a
+          //videojs player it is a method — assigning to it there replaced the
+          //method with `true` instead of muting anything.
           if(videoPlayer === "vjs"){ player.muted(true); }
           else { player.muted = true; }
 
-          if(videoPlayer === "hls" && hls){hls.destroy(); hls = null;}
-          document.removeEventListener("fullscreenchange", exit);
           try{ player.removeEventListener("webkitendfullscreen", exit);} catch {}
 
 
@@ -255,6 +284,29 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
       }
     }
     else if(videoPlayer === "vjs"){
+
+      //video.js reports failures through its own error event rather than
+      //throwing, so without this the vjs path had no proxy fallback at all —
+      //a stream that hls.js would have retried simply died here with
+      //MEDIA_ERR_SRC_NOT_SUPPORTED. Worth having even for streams that do send
+      //CORS headers: some send Access-Control-Allow-Origin twice, which the
+      //browser rejects outright, and going through the proxy normalises it.
+      let vjsRetried = startUrl !== url;
+
+      player.on('error', () => {
+
+        if(vjsRetried || !proxy_url){
+          window.alert(translations[settings.lang].streamBlocked);
+          return;
+        }
+
+        vjsRetried = true;
+        player.error(null);
+        player.src(proxy_url + url);
+        player.play();
+
+      });
+
       player.src(startUrl);
       player.volume(settings.vol.channel);
 
@@ -289,6 +341,39 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
     if(activeExitHandler){ document.removeEventListener("fullscreenchange", activeExitHandler); }
     activeExitHandler = exit;
     document.addEventListener("fullscreenchange", exit);
+
+    //closing the picture-in-picture window does not fire fullscreenchange, so
+    //without this the channel would stay marked as playing with the player
+    //sitting there after the viewer had closed it
+    if(activeLeavePipHandler){ document.removeEventListener("leavepictureinpicture", activeLeavePipHandler); }
+    activeLeavePipHandler = exit;
+    document.addEventListener("leavepictureinpicture", exit);
+
+    //the in-page player is still on screen once picture-in-picture opens, and
+    //it covers the channel grid. Put the grid back by clearing the playing
+    //flag — deliberately without pausing, muting or destroying anything, since
+    //the stream carries on in the picture-in-picture window.
+    //
+    //firefox does not drop out of fullscreen when a video pops out to
+    //picture-in-picture, so the document stayed fullscreen over an empty black
+    //surface. exit() is gated on leaving fullscreen, so closing the
+    //picture-in-picture window then tore nothing down and the page looked
+    //frozen until esc was pressed. Picture-in-picture replaces fullscreen, so
+    //end it here — the resulting fullscreenchange is ignored by exit() while
+    //pictureInPictureElement is set.
+    const enterPip = () => {
+
+      setCurPlaying(false);
+
+      if(document.fullscreenElement){
+        try{ document.exitFullscreen().catch(() => {}); } catch {}
+      }
+
+    };
+
+    if(activeEnterPipHandler){ document.removeEventListener("enterpictureinpicture", activeEnterPipHandler); }
+    activeEnterPipHandler = enterPip;
+    document.addEventListener("enterpictureinpicture", enterPip);
    try{ player.addEventListener("webkitendfullscreen", exit);} catch {}
 
 
