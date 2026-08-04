@@ -1,4 +1,4 @@
-import {React, useState, useRef, useContext} from 'react'; //react
+import React, {useState, useRef, useContext} from 'react'; //react
 import {soundEffects} from "../../utils"
 import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context

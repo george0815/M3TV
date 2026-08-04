@@ -1,4 +1,4 @@
-import {React, useContext, useState, useEffect} from 'react'; //react
+import React, {useContext, useState} from 'react'; //react
 import Clock from '../Clock';
 import {soundEffects } from '../../utils'; //import sound effects
 import Channelwrapper from './Channelwrapper';

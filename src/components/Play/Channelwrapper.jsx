@@ -1,7 +1,6 @@
 import React, {useState, useEffect,useContext} from "react";
 import { curPlaying, soundEffects } from "../../utils";
 import { SettingsContext } from '../../App'; //gets global settings context
-import VideoJS from "../VideoJS";
 import videojs from "video.js";
 import {useFirstRender} from "../../utils";
 import { StreamsContext } from '../../App';
