@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useContext} from "react";
+import React, {useState, useEffect, useRef, useContext} from "react";
 import { curPlaying, soundEffects } from "../../utils";
 import { SettingsContext } from '../../App'; //gets global settings context
 import videojs from "video.js";
@@ -70,6 +70,16 @@ function Channelwrapper(props){
     //results instead of a blank screen
     const pageCount = Math.max(1, Math.ceil(matches.length / 12));
     const page = Math.min(props.page, pageCount - 1);
+
+
+    //which way the last page change went, so the incoming tiles enter from the
+    //side you are travelling from rather than always the same one. The tiles
+    //already remount on a page change — their keys carry the entry's index in
+    //props.data, so a new page means a new set of keys — which is what lets the
+    //entrance animation replay without any of this having to trigger it.
+    const lastPage = useRef(page);
+    const direction = page === lastPage.current ? 1 : (page > lastPage.current ? 1 : -1);
+    useEffect(() => { lastPage.current = page; });
 
 
 
@@ -199,7 +209,7 @@ function Channelwrapper(props){
 
 
     return (
-        <div id="channelWrapper">
+        <div id="channelWrapper" style={{"--slide-from": direction < 0 ? "-14%" : "14%"}}>
 
             {/*video players*/}
             {/*controls are what give the viewer a volume slider, a pause button

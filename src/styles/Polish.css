@@ -357,12 +357,36 @@ button:focus-visible {
 
    Most of each cycle sits at full opacity — the dip is about a fifth of it — so
    at any moment only one or two tiles are actually mid-fade. */
+/* Two animations at once: the slow opacity drift, and a slide as the tile
+   arrives on a page change.
+
+   They can share the element because they touch different properties — drift
+   is opacity, the entrance is transform. Where two animations do set the same
+   property the later one wins for as long as it runs, so an entrance animating
+   opacity would have fought the drift and then, with any fill mode other than
+   none, pinned it at the final value forever. */
 .channelButton {
-  animation-name: tile-drift;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-duration: var(--drift-dur, 11s);
-  animation-delay: var(--drift-delay, 0s);
+  animation-name: tile-drift, tile-page-in;
+  animation-timing-function: ease-in-out, var(--ease);
+  animation-iteration-count: infinite, 1;
+  animation-duration: var(--drift-dur, 11s), 380ms;
+  animation-delay: var(--drift-delay, 0s), var(--page-delay, 0s);
+  animation-fill-mode: none, none;
+}
+
+/* the arriving page cascades across the columns rather than landing as one
+   block. Four columns on a wide screen, two on a phone — either way this reads
+   as a sweep because the delay follows the source order. */
+.channelButton:nth-of-type(4n+1) { --page-delay: 0ms; }
+.channelButton:nth-of-type(4n+2) { --page-delay: 35ms; }
+.channelButton:nth-of-type(4n+3) { --page-delay: 70ms; }
+.channelButton:nth-of-type(4n+4) { --page-delay: 105ms; }
+
+/* --slide-from is set on the wrapper from the direction of travel, so tiles
+   come in from the side you are paging away from */
+@keyframes tile-page-in {
+  from { transform: translateX(var(--slide-from, 14%)); }
+  to   { transform: translateX(0); }
 }
 
 @keyframes tile-drift {
@@ -633,9 +657,13 @@ input:focus-visible + .slider {
   }
 
   /* nothing can pause a tile that is fading, so a tap could land on one at 28%
-     opacity with no way to bring it back first */
+     opacity with no way to bring it back first. The page-change slide stays —
+     it is the one that tells you the grid changed under your thumb. */
   .channelButton {
-    animation: none;
+    animation-name: tile-page-in;
+    animation-duration: 380ms;
+    animation-iteration-count: 1;
+    animation-delay: var(--page-delay, 0s);
     opacity: 1;
   }
 
