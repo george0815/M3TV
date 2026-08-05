@@ -378,7 +378,17 @@ button:focus-visible {
   animation-iteration-count: infinite, 1;
   animation-duration: var(--drift-dur, 11s), 560ms;
   animation-delay: var(--drift-delay, 0s), var(--page-delay, 0s);
-  animation-fill-mode: none, none;
+
+  /* backwards on the entrance, not none. The columns are staggered by up to
+     105ms, and with no fill each tile sat fully visible through its delay, then
+     snapped to opacity 0 the instant the animation began and faded back in —
+     visible, gone, back. backwards holds the opening frame during the delay so
+     the tile simply is not there yet.
+
+     Not `both`: forwards would pin the closing frame permanently and the drift,
+     which is the earlier animation on the same property, would never get
+     opacity back. */
+  animation-fill-mode: none, backwards;
 }
 
 /* the arriving page cascades across the columns rather than landing as one
@@ -681,6 +691,7 @@ input:focus-visible + .slider {
     animation-timing-function: var(--ease-soft);
     animation-iteration-count: 1;
     animation-delay: var(--page-delay, 0s);
+    animation-fill-mode: backwards;
     opacity: 1;
   }
 
