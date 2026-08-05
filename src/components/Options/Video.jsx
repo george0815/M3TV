@@ -49,9 +49,15 @@ function Video() {
         <br/><br/><br/>
 
       </div>
+      {/*The footer is display:none below 1300px — it is a full width
+         panel and gets in the way on a phone — so the same action
+         appears as a floating control at those widths instead.*/}
+      <button onClick={(()=>{soundEffects.backSetting.play(); window.history.back()})} lang={[settings.lang]} className="mobileBack">{translations[settings.lang].back}</button>
 
 
-      <div id="bButtonWrapper" className="editMenu">
+
+
+      <div id="bButtonWrapper">
         <button lang={[settings.lang]} onClick={(()=>{soundEffects.backSetting.play(); window.history.back()})}  className="footerButton" id="settingBack">{translations[settings.lang].back}</button> 
       </div>
 
