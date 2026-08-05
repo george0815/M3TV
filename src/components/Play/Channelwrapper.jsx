@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useContext} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { curPlaying, soundEffects } from "../../utils";
 import { SettingsContext } from '../../App'; //gets global settings context
 import videojs from "video.js";
@@ -72,28 +72,13 @@ function Channelwrapper(props){
     const page = Math.min(props.page, pageCount - 1);
 
 
-    /* How far sideways the tiles travel as they arrive, and from which side.
+    /* Arriving on the screen and changing page run the same entrance: the tiles
+       cascade up and fade in, column by column. No direction tracking, because
+       there is no sideways travel to point anywhere.
 
-       Zero on the way in, so landing on the screen is a cascade straight up
-       while the page fades; a page change sends them in from the side being
-       paged away from.
-
-       Held in a ref rather than derived each render, because a custom property
-       feeds the running animation: recomputing it would change the value while
-       the animation was still going and make the tiles jump mid-flight. This
-       only moves when the page actually moves.
-
-       Nothing here triggers the animation. The tiles already remount on a page
-       change — their keys carry each entry's index in props.data, so a new page
-       is a new set of keys — and the animation replays off that. */
-    const lastPage = useRef(page);
-    const slideFrom = useRef("0%");
-
-    if (page !== lastPage.current) {
-      slideFrom.current = page > lastPage.current ? "10%" : "-10%";
-    }
-
-    useEffect(() => { lastPage.current = page; });
+       Nothing here triggers it. The tiles already remount on a page change —
+       their keys carry each entry's index in props.data, so a new page is a new
+       set of keys — and the animation replays off that. */
 
 
 
@@ -223,7 +208,7 @@ function Channelwrapper(props){
 
 
     return (
-        <div id="channelWrapper" style={{"--slide-from": slideFrom.current}}>
+        <div id="channelWrapper">
 
             {/*video players*/}
             {/*controls are what give the viewer a volume slider, a pause button

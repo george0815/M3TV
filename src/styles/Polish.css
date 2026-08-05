@@ -389,21 +389,18 @@ button:focus-visible {
 .channelButton:nth-of-type(4n+3) { --page-delay: 70ms; }
 .channelButton:nth-of-type(4n+4) { --page-delay: 105ms; }
 
-/* One entrance covering both cases. --slide-from is set on the wrapper: zero
-   when the screen is being arrived at, so the tiles simply cascade up as the
-   page fades, and the direction of travel on a page change so they come in
-   from the side being paged away from.
-
-   The rise and the fade happen either way, which is what makes the two read as
-   the same gesture at different strengths rather than as two different
-   animations. */
+/* The same entrance whether the screen is being arrived at or paged through:
+   rise and fade, cascading across the columns. A sideways version keyed to the
+   direction of travel was tried and read as a different animation from the one
+   that plays on arrival, which made paging feel like a separate mechanism
+   rather than the grid refilling. */
 @keyframes tile-page-in {
   from {
-    transform: translate(var(--slide-from, 0%), .5em);
+    transform: translateY(.5em);
     opacity: 0;
   }
   to {
-    transform: translate(0, 0);
+    transform: translateY(0);
     opacity: 1;
   }
 }
