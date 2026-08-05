@@ -72,13 +72,27 @@ function Channelwrapper(props){
     const page = Math.min(props.page, pageCount - 1);
 
 
-    //which way the last page change went, so the incoming tiles enter from the
-    //side you are travelling from rather than always the same one. The tiles
-    //already remount on a page change — their keys carry the entry's index in
-    //props.data, so a new page means a new set of keys — which is what lets the
-    //entrance animation replay without any of this having to trigger it.
+    /* How far sideways the tiles travel as they arrive, and from which side.
+
+       Zero on the way in, so landing on the screen is a cascade straight up
+       while the page fades; a page change sends them in from the side being
+       paged away from.
+
+       Held in a ref rather than derived each render, because a custom property
+       feeds the running animation: recomputing it would change the value while
+       the animation was still going and make the tiles jump mid-flight. This
+       only moves when the page actually moves.
+
+       Nothing here triggers the animation. The tiles already remount on a page
+       change — their keys carry each entry's index in props.data, so a new page
+       is a new set of keys — and the animation replays off that. */
     const lastPage = useRef(page);
-    const direction = page === lastPage.current ? 1 : (page > lastPage.current ? 1 : -1);
+    const slideFrom = useRef("0%");
+
+    if (page !== lastPage.current) {
+      slideFrom.current = page > lastPage.current ? "10%" : "-10%";
+    }
+
     useEffect(() => { lastPage.current = page; });
 
 
@@ -208,16 +222,8 @@ function Channelwrapper(props){
     //==============================JSXOBJECT========================//
 
 
-    //No slide on the way in. The page itself already fades up when you land
-    //here, and having the tiles arrive from the side at the same moment reads
-    //as two entrances competing. Zero distance on the first render makes the
-    //animation a no-op without having to add or remove it — changing a custom
-    //property cannot restart an animation, so the real value simply sits there
-    //waiting for the first actual page change.
-    const slideFrom = firstRender ? "0%" : (direction < 0 ? "-14%" : "14%");
-
     return (
-        <div id="channelWrapper" style={{"--slide-from": slideFrom}}>
+        <div id="channelWrapper" style={{"--slide-from": slideFrom.current}}>
 
             {/*video players*/}
             {/*controls are what give the viewer a volume slider, a pause button

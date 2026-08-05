@@ -14,6 +14,13 @@
   /* the splash eases over 1200ms. These are the shorter relatives of that
      curve, for things the hand drives rather than things the screen decides */
   --ease: cubic-bezier(0.2, 0.8, 0.3, 1);
+
+  /* a gentler relative of the above, for things arriving on their own rather
+     than answering a click. --ease overshoots toward its end and lands hard,
+     which is right under a finger and too abrupt for a grid settling into
+     place. */
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+
   --quick: 140ms;
   --settle: 260ms;
 }
@@ -367,9 +374,9 @@ button:focus-visible {
    none, pinned it at the final value forever. */
 .channelButton {
   animation-name: tile-drift, tile-page-in;
-  animation-timing-function: ease-in-out, var(--ease);
+  animation-timing-function: ease-in-out, var(--ease-soft);
   animation-iteration-count: infinite, 1;
-  animation-duration: var(--drift-dur, 11s), 380ms;
+  animation-duration: var(--drift-dur, 11s), 560ms;
   animation-delay: var(--drift-delay, 0s), var(--page-delay, 0s);
   animation-fill-mode: none, none;
 }
@@ -382,11 +389,23 @@ button:focus-visible {
 .channelButton:nth-of-type(4n+3) { --page-delay: 70ms; }
 .channelButton:nth-of-type(4n+4) { --page-delay: 105ms; }
 
-/* --slide-from is set on the wrapper from the direction of travel, so tiles
-   come in from the side you are paging away from */
+/* One entrance covering both cases. --slide-from is set on the wrapper: zero
+   when the screen is being arrived at, so the tiles simply cascade up as the
+   page fades, and the direction of travel on a page change so they come in
+   from the side being paged away from.
+
+   The rise and the fade happen either way, which is what makes the two read as
+   the same gesture at different strengths rather than as two different
+   animations. */
 @keyframes tile-page-in {
-  from { transform: translateX(var(--slide-from, 14%)); }
-  to   { transform: translateX(0); }
+  from {
+    transform: translate(var(--slide-from, 0%), .5em);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
 }
 
 @keyframes tile-drift {
@@ -661,7 +680,8 @@ input:focus-visible + .slider {
      it is the one that tells you the grid changed under your thumb. */
   .channelButton {
     animation-name: tile-page-in;
-    animation-duration: 380ms;
+    animation-duration: 560ms;
+    animation-timing-function: var(--ease-soft);
     animation-iteration-count: 1;
     animation-delay: var(--page-delay, 0s);
     opacity: 1;
