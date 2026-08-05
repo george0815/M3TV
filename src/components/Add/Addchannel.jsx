@@ -46,6 +46,10 @@ function Addchannel(props) {
 
 
 
+  //shows the "Added" confirmation for a moment after a successful save
+  const [saved, setSaved] = useState(false);
+
+
   //===========================FUNCTIONS=========================//
 
 
@@ -87,6 +91,7 @@ function Addchannel(props) {
     //state mutated the current state in place before setStreams ever ran
     let tempChannels = [...streams.channels, tempChannel];
 
+    if(!await save(tempChannels)){ return; }
 
     setInput({
 
@@ -96,16 +101,43 @@ function Addchannel(props) {
 
     })
 
-    //sets channels
-    setStreams({...streams, channels: tempChannels});
+    flashSaved();
 
-    //uploads doc to firebase
-    if(settings.loggedIn){
+  }
+
+
+  /* Writes to state and, when signed in, to firestore. The write was previously
+     awaited with nothing catching it, so a failure — a document over the 1 MiB
+     limit, or simply being offline — rejected into an unhandled promise and the
+     channel silently never arrived. Returns false when it failed, so the caller
+     does not clear the form or claim success. */
+  async function save(channels){
+
+    setStreams({...streams, channels: channels});
+
+    if(!settings.loggedIn){ return true; }
+
+    try {
       await setDoc(doc(db, "data", settings.user.uid), {
-        ...streams, channels: tempChannels
+        ...streams, channels: channels
       });
+      return true;
+    }
+    catch (error) {
+      console.error("could not save channels:", error);
+      window.alert(translations[settings.lang].saveFailed);
+      return false;
     }
 
+  }
+
+
+  /* Confirmation that something was actually saved. The form clearing itself
+     was the only signal before, which reads as the app having forgotten the
+     entry rather than having stored it. */
+  function flashSaved(){
+    setSaved(true);
+    window.setTimeout(() => setSaved(false), 1900);
   }
 
 
@@ -212,7 +244,9 @@ function Addchannel(props) {
       </div>
 
 
-      <div  id="bButtonWrapper" className="editMenu">    
+      {saved && <div className="saveToast" role="status">{translations[settings.lang].saved}</div>}
+
+      <div  id="bButtonWrapper" className="editMenu">
           <button onClick={(typeof props.index !== "undefined" && props.index <= streams.channels.length - 1)  ? editChannel : (()=>{ soundEffects.backMain.play(); window.history.back()})} lang={[settings.lang]} className="footerButton" id="addCBack" style={{left: "15%"}}>{translations[settings.lang].back}</button>
           <button onClick={(typeof props.index !== "undefined" && props.index <= streams.channels.length - 1)  ? removeChannel : addChannel} lang={[settings.lang]} className="footerButton" id="okay">{(typeof props.index !== "undefined" && props.index <= streams.channels.length - 1)  ? translations[settings.lang].remove : translations[settings.lang].confirm}</button>  
       </div>

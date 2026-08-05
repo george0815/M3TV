@@ -205,7 +205,15 @@ function App() {
 
   //saves streams to local storage whenever it's saved
   useEffect(() => {
-   if(!settings.loggedIn){ localStorage.setItem("streams", JSON.stringify(streams))}
+   if(!settings.loggedIn){
+
+     //localStorage runs out at roughly 5MB and throws QuotaExceededError when
+     //it does, which a local playlist stored as its own file contents can
+     //reach. Unhandled, that took down the render that triggered it.
+     try { localStorage.setItem("streams", JSON.stringify(streams)); }
+     catch (error) { console.error("could not save streams locally:", error); }
+
+   }
   }, [streams]);
 
 

@@ -1,5 +1,5 @@
 import React, {useState, useRef, useContext} from 'react'; //react
-import {soundEffects, validateEntry} from "../../utils"
+import {soundEffects, validateEntry, looksLikePlaylist, MAX_PLAYLIST_BYTES} from "../../utils"
 import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext } from '../../App';
@@ -43,6 +43,10 @@ function Addplaylist(props) {
   ); 
 
 
+  //shows the "Added" confirmation for a moment after a successful save
+  const [saved, setSaved] = useState(false);
+
+
   //===========================FUNCTIONS=========================//
 
   //REF FOR FILEINPUT
@@ -74,11 +78,20 @@ function Addplaylist(props) {
       //readAsText(undefined) throws
       if(!file){ return; }
 
+      //checked from the file handle, before a byte is read. A local playlist is
+      //stored as its own text, and that text has to fit either a firestore
+      //document or localStorage — so reading a video in as a string first and
+      //discovering the problem at save time helps nobody.
+      if(file.size > MAX_PLAYLIST_BYTES){
+        window.alert(translations[settings.lang].fileTooBig);
+        return;
+      }
+
       // setting up the reader
       var reader = new FileReader();
 
       reader.onerror = () => {
-        window.alert(translations[settings.lang].noInput);
+        window.alert(translations[settings.lang].notAPlaylist);
       };
 
       reader.readAsText(file,'UTF-8');
@@ -86,7 +99,15 @@ function Addplaylist(props) {
       // here we tell the reader what to do when it's done reading...
       reader.onload = async readerEvent => {
         var content = readerEvent.target.result; // this is the content!
-        
+
+        //the picker's accept list is only a hint — anyone can switch it to "all
+        //files" — so the contents are what actually decide. Deliberately loose:
+        //see looksLikePlaylist, a headerless list of urls is still valid m3u.
+        if(!looksLikePlaylist(content)){
+          window.alert(translations[settings.lang].notAPlaylist);
+          return;
+        }
+
         tempPlaylist.url = content;
         document.getElementById("url").value = file.name;
 
@@ -105,38 +126,64 @@ function Addplaylist(props) {
           return;
         }
 
-        {
-          //built from streams rather than the component-scope playlists array:
-          //that one is reassigned on every render, so any re-render between
-          //opening the file dialog and the reader finishing would have left it
-          //empty here and wiped every other playlist
-          let playlists = [...streams.playlists, tempPlaylist];
+        //built from streams rather than the component-scope playlists array:
+        //that one is reassigned on every render, so any re-render between
+        //opening the file dialog and the reader finishing would have left it
+        //empty here and wiped every other playlist
+        let playlists = [...streams.playlists, tempPlaylist];
 
+        if(!await save(playlists)){ return; }
 
-          setInput({
+        setInput({
 
-            title: "",
-            logoUrl: "",
-            url: "",
-            isLocal: false
+          title: "",
+          logoUrl: "",
+          url: "",
+          isLocal: false
 
-          })
+        })
 
-          //sets playlists
-          setStreams({...streams, playlists: playlists});
-
-          //uploads doc to firebase
-          if(settings.loggedIn){
-            await setDoc(doc(db, "data", settings.user.uid), {
-              ...streams, playlists: playlists
-            });
-          }
-
-        }
-
+        flashSaved();
 
       }
-    
+
+  }
+
+
+  /* Writes the new list to state and, when signed in, to firestore.
+
+     The firestore write was previously awaited with nothing catching it, so a
+     document over the 1 MiB limit — which one sizeable local playlist will
+     reach on its own — rejected into an unhandled promise and the entry simply
+     never arrived, with nothing on screen to say so. Returns false when the
+     save failed, so the caller knows not to clear the form or claim success. */
+  async function save(playlists){
+
+    setStreams({...streams, playlists: playlists});
+
+    if(!settings.loggedIn){ return true; }
+
+    try {
+      await setDoc(doc(db, "data", settings.user.uid), {
+        ...streams, playlists: playlists
+      });
+      return true;
+    }
+    catch (error) {
+      console.error("could not save playlists:", error);
+      window.alert(translations[settings.lang].saveFailed);
+      return false;
+    }
+
+  }
+
+
+  /* Confirmation that something was actually saved. The form clearing itself
+     was the only signal before, which reads as the app having forgotten the
+     entry rather than having stored it. */
+  function flashSaved(){
+    setSaved(true);
+    window.setTimeout(() => setSaved(false), 1900);
   }
 
 
@@ -195,6 +242,7 @@ function Addplaylist(props) {
         //a copy — pushing onto streams.playlists edited state in place
         let playlists = [...streams.playlists, tempPlaylist];
 
+        if(!await save(playlists)){ return; }
 
         setInput({
 
@@ -205,15 +253,7 @@ function Addplaylist(props) {
 
         })
 
-        //sets playlists
-        setStreams({...streams, playlists: playlists});
-
-        //uploads doc to firebase
-        if(settings.loggedIn){
-          await setDoc(doc(db, "data", settings.user.uid), {
-            ...streams, playlists: playlists
-          });
-        }
+        flashSaved();
     }
 
     
@@ -345,7 +385,13 @@ function Addplaylist(props) {
   
       </div>
 
-      <input id="fileInput" type='file' ref={ref} onChange={((e) =>{onInputClick(e)})}></input>
+      {/*accept is a hint for the picker, not a restriction — the dialog still
+         lets anyone switch to "all files", which is why the contents are
+         sniffed after reading rather than trusted from the extension. text/plain
+         is listed because plenty of providers serve playlists as .txt.*/}
+      <input id="fileInput" type='file' accept=".m3u,.m3u8,.txt,audio/x-mpegurl,application/vnd.apple.mpegurl,text/plain" ref={ref} onChange={((e) =>{onInputClick(e)})}></input>
+
+      {saved && <div className="saveToast" role="status">{translations[settings.lang].saved}</div>}
     </div>
   );
 }

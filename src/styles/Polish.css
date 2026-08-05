@@ -414,6 +414,74 @@ input:focus-visible + .slider {
 }
 
 
+/* ---------- clock buttons ---------- */
+
+/* The back and settings glyphs were html entities, drawn by whatever font on
+   the system carried them — different weight, size and baseline on every
+   platform, and an emoji or a missing-glyph box on some. These are svg now, so
+   they sit where the .clockButton padding puts them rather than wherever the
+   font's metrics happened to. */
+.clockIcon {
+  width: 42%;
+  height: 42%;
+  display: block;
+  margin: 0 auto;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* the glyphs used to be sized by font-size; the svg is sized by the box, so the
+   enormous value that made the entities legible is no longer wanted */
+.clockButton {
+  font-size: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ---------- save confirmation ---------- */
+
+/* Adding something used to give no sign it had worked beyond the form emptying
+   itself, which reads as the app having discarded the entry rather than stored
+   it. Deliberately not an alert: a confirmation that has to be dismissed is
+   worse than no confirmation, because it interrupts adding the next one.
+
+   role="status" on the element means assistive technology announces it without
+   moving focus. */
+.saveToast {
+  position: fixed;
+  left: 50%;
+  bottom: 12vh;
+  transform: translateX(-50%);
+  z-index: 40;
+
+  padding: 1.2vh 3vh;
+  border-radius: 9999em;
+
+  background: rgba(30, 38, 52, .92);
+  color: #f2f6fb;
+  border: solid .12em var(--accent);
+  box-shadow: 0 .3em .8em rgba(20, 26, 38, .35);
+
+  font-family: "WII";
+  font-size: 2.4vh;
+  white-space: nowrap;
+  pointer-events: none;
+
+  animation: toast-in var(--settle) var(--ease);
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translate(-50%, 1.2em); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+
 /* ---------- devices with no pointer ---------- */
 
 /* Everything above that hangs off :hover is unreachable on a touchscreen —

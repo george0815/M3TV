@@ -104,6 +104,35 @@ export function validateEntry({ title, url, isLocal }, existing, skipIndex) {
 }
 
 
+/* A local playlist is stored as the file's own text, and that text has to fit
+   somewhere: a firestore document caps at 1 MiB for the whole of a user's saved
+   data, and localStorage at roughly 5 MB for everyone signed out. Anything past
+   this cannot be saved at all, so it is worth refusing before the read rather
+   than failing silently afterwards. */
+export const MAX_PLAYLIST_BYTES = 1024 * 1024;
+
+/* Is this text plausibly an m3u playlist?
+
+   Deliberately loose. A playlist does not have to carry the #EXTM3U header — a
+   bare list of urls is perfectly valid m3u and plenty of providers ship exactly
+   that — so demanding the header would reject working files. What this is
+   really for is catching someone picking a photo or a video by mistake, which
+   is why the binary check comes first. */
+export function looksLikePlaylist(text) {
+
+  const head = (text || "").slice(0, 8192);
+
+  //a NUL byte anywhere near the start means it is not text at all
+  if (head.includes("\u0000")) { return false; }
+
+  if (/^\uFEFF?\s*#EXTM3U/i.test(head)) { return true; }
+
+  //otherwise accept it if it contains at least one line that is a url
+  return /^\s*https?:\/\/\S+/mi.test(head);
+
+}
+
+
 export function useFirstRender() {
   const firstRender = useRef(true);
 
