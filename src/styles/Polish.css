@@ -414,6 +414,38 @@ input:focus-visible + .slider {
 }
 
 
+/* ---------- devices with no pointer ---------- */
+
+/* Everything above that hangs off :hover is unreachable on a touchscreen —
+   there is no hover state to enter, so on a phone or tablet the menu labels
+   would simply never appear and the tiles could only ever be seen mid-fade.
+
+   `hover: none` asks the device whether its primary input can hover at all,
+   which is the right question here: it is about the input, not the width. A
+   width breakpoint would get this wrong for a touchscreen laptop and for a
+   phone held in landscape. */
+@media (hover: none) {
+
+  /* the label is the only text on these buttons, so it has to be visible */
+  .mainPageLabel {
+    opacity: 1;
+    transform: none;
+  }
+
+  .mainPageIcon {
+    transform: translateY(.5vh);
+  }
+
+  /* nothing can pause a tile that is fading, so a tap could land on one at 28%
+     opacity with no way to bring it back first */
+  .channelButton {
+    animation: none;
+    opacity: 1;
+  }
+
+}
+
+
 /* ---------- motion preferences ---------- */
 
 /* honour the system setting. This covers the 1200ms splash fade too, which is

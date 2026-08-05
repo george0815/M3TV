@@ -65,6 +65,45 @@ let activeEnterPipHandler = null;
 
 
 
+/* Shared by all four save paths — add and edit, channels and playlists — so the
+   rules cannot drift apart between them, which is exactly what had happened:
+   adding accepted an empty title while editing rejected it.
+
+   Returns null when the entry is good, or the translation key naming the first
+   thing wrong with it, so the caller can say which field to fix instead of the
+   old catch-all "please fill out the required fields".
+
+   `existing` is the list being saved into and `skipIndex` the entry being
+   edited, which must not count as a duplicate of itself. */
+export function validateEntry({ title, url, isLocal }, existing, skipIndex) {
+
+  const name = (title || "").trim();
+  const link = (url || "").trim();
+
+  //trimmed, so a title of nothing but spaces no longer counts as filled in
+  if (!name) { return "needTitle"; }
+  if (!link) { return "needUrl"; }
+
+  //a local playlist carries the file's contents here rather than an address,
+  //so there is nothing to check the shape of
+  if (!isLocal) {
+
+    if (!/^https?:\/\//i.test(link)) { return "badUrl"; }
+
+    try { new URL(link); } catch { return "badUrl"; }
+
+    const clash = (existing || []).some((entry, i) =>
+      i !== skipIndex && ((entry && entry.url) || "").trim() === link);
+
+    if (clash) { return "duplicate"; }
+
+  }
+
+  return null;
+
+}
+
+
 export function useFirstRender() {
   const firstRender = useRef(true);
 
@@ -195,14 +234,29 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
 
     function fix(item) {
         var playPromise = item.play();
-    
+
         if (playPromise !== undefined) {
             playPromise.then(_ => {})
             .catch(error => {
               console.error(error);
-  
+
             });
           }
+    }
+
+
+    //Called once a channel has run out of ways to play. Previously each failure
+    //path only raised an alert, which left the viewer holding a dead player —
+    //still fullscreen, still marked as playing, with the channel grid
+    //unreachable behind it. Leaving fullscreen fires the teardown; if we never
+    //got there, run it directly.
+    function giveUp(){
+
+      if(document.fullscreenElement){ document.exitFullscreen().catch(() => {}); }
+      else { exit(); }
+
+      window.alert(translations[settings.lang].streamBlocked);
+
     }
 
     // sets playing to true so channel buttons can work
@@ -226,7 +280,7 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
         hls = null;
 
         if(!viaProxy && proxy_url){ startHls(proxy_url + sourceUrl, true); }
-        else{ window.alert(translations[settings.lang].streamBlocked); }
+        else{ giveUp(); }
 
       });
 
@@ -262,7 +316,7 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
         const onNativeError = () => {
 
           if(retried || !proxy_url){
-            window.alert(translations[settings.lang].streamBlocked);
+            giveUp();
             return;
           }
 
@@ -296,14 +350,18 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
       player.on('error', () => {
 
         if(vjsRetried || !proxy_url){
-          window.alert(translations[settings.lang].streamBlocked);
+          giveUp();
           return;
         }
 
         vjsRetried = true;
         player.error(null);
         player.src(proxy_url + url);
-        player.play();
+
+        //fix() rather than a bare play(): play() returns a promise and nothing
+        //was catching it, so a stream that failed through the proxy as well
+        //surfaced as an uncaught DOMException in the console
+        fix(player);
 
       });
 

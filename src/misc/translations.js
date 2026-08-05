@@ -56,7 +56,7 @@ export const translations =
         video: "Video and Account",
         
         //VIDEO
-        streamBlocked: "This stream will not play in the browser — its server does not allow playback from other sites.",
+        streamBlocked: "This channel would not play. The stream may be offline, or its server may not allow playback from other sites.",
         videoPlayer: "Video Player",
 
         //MAIN PAGE
@@ -77,6 +77,10 @@ export const translations =
 
         //ALERTS
         noInput: "Please fill out the required fields",
+        needTitle: "Give this a name before saving it.",
+        needUrl: "Enter a URL before saving.",
+        badUrl: "That does not look like a link. It should start with http:// or https://",
+        duplicate: "That is already in your list.",
         removeChannelAlert: "Are you sure you want to remove this channel?",
         removeAllChannelsAlert: "Are you sure you want to remove all channels?",
         removePlaylistAlert: "Are you sure you want to remove this playlist?",
@@ -141,7 +145,7 @@ export const translations =
         video: "Vídeo y Cuenta",
         
         //VIDEO
-        streamBlocked: "Esta transmisión no se reproducirá en el navegador: su servidor no permite la reproducción desde otros sitios.",
+        streamBlocked: "Este canal no se pudo reproducir. La transmisión puede estar fuera de línea o su servidor puede no permitir la reproducción desde otros sitios.",
         videoPlayer: "Reproductor de Vídeo",
 
         //MAIN PAGE
@@ -161,6 +165,10 @@ export const translations =
 
         //ALERTS
         noInput: "Por favor, complete los campos requeridos",
+        needTitle: "Ponle un nombre antes de guardarlo.",
+        needUrl: "Introduce una URL antes de guardar.",
+        badUrl: "Eso no parece un enlace. Debe empezar por http:// o https://",
+        duplicate: "Eso ya está en tu lista.",
         removeChannelAlert: "¿Estás seguro de que quieres eliminar este canal?",
         removeAllChannelsAlert: "¿Estás seguro de que quieres eliminar todos los canales?",
         removePlaylistAlert: "¿Estás seguro de que quieres eliminar esta lista de reproducción?",
@@ -225,7 +233,7 @@ export const translations =
         video: "Vidéo et Compte",
         
         //VIDEO
-        streamBlocked: "Ce flux ne peut pas être lu dans le navigateur : son serveur n'autorise pas la lecture depuis d'autres sites.",
+        streamBlocked: "Cette chaîne n'a pas pu être lue. Le flux est peut-être hors ligne, ou son serveur n'autorise pas la lecture depuis d'autres sites.",
         videoPlayer: "Lecteur Vidéo",
 
         //MAIN PAGE
@@ -245,6 +253,10 @@ export const translations =
 
         //ALERTS
         noInput: "Veuillez remplir les champs obligatoires",
+        needTitle: "Donnez-lui un nom avant de l'enregistrer.",
+        needUrl: "Saisissez une URL avant d'enregistrer.",
+        badUrl: "Cela ne ressemble pas à un lien. Il doit commencer par http:// ou https://",
+        duplicate: "C'est déjà dans votre liste.",
         removeChannelAlert: "Êtes-vous sûr de vouloir supprimer cette chaîne ?",
         removeAllChannelsAlert: "Êtes-vous sûr de vouloir supprimer toutes les chaînes ?",
         removePlaylistAlert: "Êtes-vous sûr de vouloir supprimer cette liste de lecture ?",
@@ -310,7 +322,7 @@ export const translations =
         video: "Video und Konto",
         
         //VIDEO
-        streamBlocked: "Dieser Stream lässt sich im Browser nicht abspielen — sein Server erlaubt keine Wiedergabe von anderen Seiten.",
+        streamBlocked: "Dieser Kanal konnte nicht abgespielt werden. Der Stream ist möglicherweise offline, oder sein Server erlaubt keine Wiedergabe von anderen Seiten.",
         videoPlayer: "Video Spieler",
 
         //MAIN PAGE
@@ -330,6 +342,10 @@ export const translations =
 
         //ALERTS
         noInput: "Bitte füllen Sie die Pflichtfelder aus",
+        needTitle: "Geben Sie einen Namen ein, bevor Sie speichern.",
+        needUrl: "Geben Sie eine URL ein, bevor Sie speichern.",
+        badUrl: "Das sieht nicht nach einem Link aus. Er sollte mit http:// oder https:// beginnen",
+        duplicate: "Das ist bereits in Ihrer Liste.",
         removeChannelAlert: "Sind Sie sicher, dass Sie diesen Kanal entfernen möchten?",
         removeAllChannelsAlert: "Sind Sie sicher, dass Sie alle Kanäle entfernen wollen?",
         removePlaylistAlert: "Sind Sie sicher, dass Sie diese Wiedergabeliste entfernen möchten?",
@@ -395,7 +411,7 @@ export const translations =
         video: "الفيديو والحساب",
         
         //VIDEO
-        streamBlocked: "لن يعمل هذا البث في المتصفح — الخادم لا يسمح بالتشغيل من مواقع أخرى.",
+        streamBlocked: "تعذّر تشغيل هذه القناة. قد يكون البث غير متصل، أو أن الخادم لا يسمح بالتشغيل من مواقع أخرى.",
         videoPlayer: "مشغل فديوهات",
 
         //MAIN PAGE
@@ -416,6 +432,10 @@ export const translations =
 
         //ALERTS
         noInput: "يرجى ملء الحقول المطلوبة",
+        needTitle: "أعطِ هذا اسمًا قبل الحفظ.",
+        needUrl: "أدخل رابطًا قبل الحفظ.",
+        badUrl: "لا يبدو هذا رابطًا. يجب أن يبدأ بـ http:// أو https://",
+        duplicate: "هذا موجود بالفعل في قائمتك.",
         removeChannelAlert: "هل أنت متأكد من رغبتك في إزالة هذه القناة؟",
         removeAllChannelsAlert: "هل أنت متأكد أنك تريد إزالة جميع القنوات؟",
         removePlaylistAlert: "هل أنت متأكد من رغبتك في إزالة قائمة التشغيل هذه؟",
@@ -481,7 +501,7 @@ export const translations =
         video: "Видео и счет",
         
         //VIDEO
-        streamBlocked: "Этот поток не воспроизводится в браузере — его сервер не разрешает воспроизведение с других сайтов.",
+        streamBlocked: "Не удалось воспроизвести этот канал. Возможно, поток отключён или его сервер не разрешает воспроизведение с других сайтов.",
         videoPlayer: "Видеоплеер",
 
         //MAIN PAGE
@@ -502,6 +522,10 @@ export const translations =
 
         //ALERTS
         noInput: "Пожалуйста, заполните обязательные поля",
+        needTitle: "Дайте название, прежде чем сохранять.",
+        needUrl: "Введите URL, прежде чем сохранять.",
+        badUrl: "Это не похоже на ссылку. Она должна начинаться с http:// или https://",
+        duplicate: "Это уже есть в вашем списке.",
         removeChannelAlert: "Вы уверены, что хотите удалить этот канал?",
         removeAllChannelsAlert: "Вы уверены, что хотите удалить все каналы?",
         removePlaylistAlert: "Вы уверены, что хотите удалить этот список воспроизведения?",
@@ -567,7 +591,7 @@ export const translations =
         video: "视频和帐户",
         
         //VIDEO
-        streamBlocked: "此直播流无法在浏览器中播放 — 其服务器不允许从其他网站播放。",
+        streamBlocked: "无法播放此频道。直播流可能已离线，或其服务器不允许从其他网站播放。",
         videoPlayer: "视频播放器",
 
         //MAIN PAGE
@@ -587,6 +611,10 @@ export const translations =
 
         //ALERTS
         noInput: "请填写必填字段",
+        needTitle: "保存前请先命名。",
+        needUrl: "保存前请输入网址。",
+        badUrl: "这看起来不像链接。它应以 http:// 或 https:// 开头",
+        duplicate: "它已经在您的列表中了。",
         removeChannelAlert: "您确定要删除这个频道吗？",
         removeAllChannelsAlert: "您确定要删除所有频道吗？",
         removePlaylistAlert: "您确定要删除此播放列表吗？",
@@ -652,7 +680,7 @@ export const translations =
         video: "ビデオとアカウント",
         
         //VIDEO
-        streamBlocked: "このストリームはブラウザで再生できません — サーバーが他サイトからの再生を許可していません。",
+        streamBlocked: "このチャンネルを再生できませんでした。ストリームが停止しているか、サーバーが他サイトからの再生を許可していない可能性があります。",
         videoPlayer: "ビデオプレーヤー",
 
         //MAIN PAGE
@@ -673,6 +701,10 @@ export const translations =
 
         //ALERTS
         noInput: "必須項目を入力してください",
+        needTitle: "保存する前に名前を付けてください。",
+        needUrl: "保存する前に URL を入力してください。",
+        badUrl: "リンクではないようです。http:// または https:// で始まる必要があります",
+        duplicate: "すでにリストにあります。",
         removeChannelAlert: "このチャンネルを削除してもよろしいですか？",
         removeAllChannelsAlert: "すべてのチャンネルを削除してもよろしいですか？",
         removePlaylistAlert: "このプレイリストを削除してもよろしいですか？",

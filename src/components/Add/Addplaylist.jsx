@@ -1,5 +1,5 @@
 import React, {useState, useRef, useContext} from 'react'; //react
-import {soundEffects} from "../../utils"
+import {soundEffects, validateEntry} from "../../utils"
 import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext } from '../../App';
@@ -91,14 +91,21 @@ function Addplaylist(props) {
         document.getElementById("url").value = file.name;
 
 
-        //repeated if statement because the other one will run before
-        //the reader is finished, and thus wont push it into the array
-        //
-        //the title check reads inf.title, which is where the title actually
-        //lives. it used to read tempPlaylist.title — always undefined, never
-        //equal to "" — so an untitled playlist passed validation and was saved
-        //with nothing to identify it in the edit list.
-        if(!(tempPlaylist.url === "" || !tempPlaylist.inf || tempPlaylist.inf.title === "")){
+        //checked again here rather than only before the picker opened: the read
+        //happens asynchronously, so this is the first point at which the file's
+        //contents actually exist. isLocal tells the validator not to expect a
+        //link — the contents live in url for a local playlist.
+        const problem = validateEntry(
+          { title: tempPlaylist.inf && tempPlaylist.inf.title, url: content, isLocal: true },
+          streams.playlists
+        );
+
+        if(problem){
+          window.alert(translations[settings.lang][problem]);
+          return;
+        }
+
+        {
           //built from streams rather than the component-scope playlists array:
           //that one is reassigned on every render, so any re-render between
           //opening the file dialog and the reader finishing would have left it
@@ -125,11 +132,8 @@ function Addplaylist(props) {
             });
           }
 
-          
-          
-        } 
-        else {window.alert(translations[settings.lang].noInput);}
-        
+        }
+
 
       }
     
@@ -153,7 +157,17 @@ function Addplaylist(props) {
     //reads the controlled state now that the checkbox actually tracks it,
     //rather than reaching back into the DOM node
     if(input.isLocal){
+
+      //the title is the only thing worth checking before the file dialog opens;
+      //the url does not exist yet, and asking for a file first and rejecting the
+      //name afterwards wastes the trip through the picker
+      if(!input.title.trim()){
+        window.alert(translations[settings.lang].needTitle);
+        return;
+      }
+
       tempPlaylist.isLocal = true;
+      tempPlaylist.inf = { title: input.title.trim() };
 
       ref.current.click()
     }
@@ -162,34 +176,44 @@ function Addplaylist(props) {
         tempPlaylist.url = document.getElementById("url").value;
         tempPlaylist.isLocal = false;
 
-        //title lives at inf.title; the old check read tempPlaylist.title,
-        //which is always undefined, so it never rejected anything
-        if(!(tempPlaylist.url === "" || !tempPlaylist.inf || tempPlaylist.inf.title === "")){
-          //a copy — pushing onto streams.playlists edited state in place
-          let playlists = [...streams.playlists, tempPlaylist];
+        const problem = validateEntry(
+          { title: input.title, url: tempPlaylist.url, isLocal: false },
+          streams.playlists
+        );
+
+        if(problem){
+          window.alert(translations[settings.lang][problem]);
+          return;
+        }
+
+        //trimmed, so a stray space cannot make an otherwise identical playlist
+        //look like a new one next time
+        tempPlaylist.inf = { title: input.title.trim() };
+        tempPlaylist.url = tempPlaylist.url.trim();
+        tempPlaylist.logoUrl = input.logoUrl.trim();
+
+        //a copy — pushing onto streams.playlists edited state in place
+        let playlists = [...streams.playlists, tempPlaylist];
 
 
-          setInput({
+        setInput({
 
-            title: "",
-            logoUrl: "",
-            url: "",
-            isLocal: false
+          title: "",
+          logoUrl: "",
+          url: "",
+          isLocal: false
 
-          })
+        })
 
-          //sets playlists
-          setStreams({...streams, playlists: playlists});
+        //sets playlists
+        setStreams({...streams, playlists: playlists});
 
-          //uploads doc to firebase
-          if(settings.loggedIn){
-            await setDoc(doc(db, "data", settings.user.uid), {
-              ...streams, playlists: playlists
-            });
-          }
-
-        } 
-        else {window.alert(translations[settings.lang].noInput);}
+        //uploads doc to firebase
+        if(settings.loggedIn){
+          await setDoc(doc(db, "data", settings.user.uid), {
+            ...streams, playlists: playlists
+          });
+        }
     }
 
     
@@ -206,34 +230,39 @@ function Addplaylist(props) {
     soundEffects.backSetting.play();
 
 
-    //if valid. checked before building anything: the edit used to be written
-    //straight into the array held in state, so an edit rejected below had
-    //already been applied in memory by the time the alert appeared
-    if(!(input.url === "" || input.title === "")){
+    //validated before building anything: the edit used to be written straight
+    //into the array held in state, so an edit rejected below had already been
+    //applied in memory by the time the alert appeared.
+    //
+    //props.index is passed so the entry being edited does not count as a
+    //duplicate of itself. A local playlist keeps its file contents in url, so
+    //validateEntry is told to skip the link checks for it.
+    const problem = validateEntry(input, streams.playlists, props.index);
 
-      //replaces the entry at props.index without touching the original array
-      let tempPlaylists = streams.playlists.map((playlist, i) => i === props.index ? {
-        inf : {title: input.title},
-        url: input.url,
-        logoUrl: input.logoUrl,
-        isLocal: input.isLocal
-      } : playlist);
-
-      //sets playlists
-      setStreams({...streams, playlists: tempPlaylists});
-
-      //uploads doc to firebase
-      if(settings.loggedIn){
-        await setDoc(doc(db, "data", settings.user.uid), {
-          ...streams, playlists: tempPlaylists
-        });
-      }
-      
-      window.history.back();
-
+    if(problem){
+      window.alert(translations[settings.lang][problem]);
+      return;
     }
-    //if not valid
-    else{window.alert(translations[settings.lang].noInput);}
+
+    //replaces the entry at props.index without touching the original array
+    let tempPlaylists = streams.playlists.map((playlist, i) => i === props.index ? {
+      inf : {title: input.title.trim()},
+      url: input.isLocal ? input.url : input.url.trim(),
+      logoUrl: input.logoUrl.trim(),
+      isLocal: input.isLocal
+    } : playlist);
+
+    //sets playlists
+    setStreams({...streams, playlists: tempPlaylists});
+
+    //uploads doc to firebase
+    if(settings.loggedIn){
+      await setDoc(doc(db, "data", settings.user.uid), {
+        ...streams, playlists: tempPlaylists
+      });
+    }
+
+    window.history.back();
 
 
   }

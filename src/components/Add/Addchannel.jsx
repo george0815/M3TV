@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react'; //react
 import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext } from '../../App';
-import {soundEffects} from "../../utils";
+import {soundEffects, validateEntry} from "../../utils";
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from "../../utils"
 
@@ -63,48 +63,49 @@ function Addchannel(props) {
     //plays sound effect 
     soundEffects.okSetting.play();
 
-    //creates and sets variables of channel to be pushed
+    //names the field that is wrong rather than the old catch-all, and catches
+    //whitespace-only entries, malformed links and duplicates, all of which the
+    //previous empty-string check let straight through
+    const problem = validateEntry(input, streams.channels);
+
+    if(problem){
+      window.alert(translations[settings.lang][problem]);
+      return;
+    }
+
+    //trimmed on the way in, so a stray space cannot make an otherwise identical
+    //entry look like a new one next time
     let tempChannel = {
       inf: {
-        title: input.title,
-        tvgLogo: input.logoUrl,
+        title: input.title.trim(),
+        tvgLogo: input.logoUrl.trim(),
       },
-      url: input.url,
+      url: input.url.trim(),
     }
 
-
-    //if valid
-    if(!(tempChannel.url === "" || tempChannel.inf.title === "")){
-      //a copy, not streams.channels itself — pushing onto the array held in
-      //state mutated the current state in place before setStreams ever ran
-      let tempChannels = [...streams.channels, tempChannel];
+    //a copy, not streams.channels itself — pushing onto the array held in
+    //state mutated the current state in place before setStreams ever ran
+    let tempChannels = [...streams.channels, tempChannel];
 
 
-      setInput({
+    setInput({
 
-        title: "",
-        logoUrl: "",
-        url: ""
+      title: "",
+      logoUrl: "",
+      url: ""
 
-      })
+    })
 
-      //sets channels
-      setStreams({...streams, channels: tempChannels});
+    //sets channels
+    setStreams({...streams, channels: tempChannels});
 
-      //uploads doc to firebase
-      if(settings.loggedIn){
-        await setDoc(doc(db, "data", settings.user.uid), {
-          ...streams, channels: tempChannels
-        });
-      }
-      
-
+    //uploads doc to firebase
+    if(settings.loggedIn){
+      await setDoc(doc(db, "data", settings.user.uid), {
+        ...streams, channels: tempChannels
+      });
     }
-    //if not valid
-    else{window.alert(translations[settings.lang].noInput);}
-        
-  
-    
+
   }
 
 
@@ -117,36 +118,39 @@ function Addchannel(props) {
     soundEffects.backSetting.play();
 
 
-    //if valid. checked before building anything: the edit used to be written
-    //straight into the array held in state, so an edit rejected below had
-    //already been applied in memory by the time the alert appeared
-    if(!(input.url === "" || input.title === "")){
+    //validated before building anything: the edit used to be written straight
+    //into the array held in state, so an edit rejected below had already been
+    //applied in memory by the time the alert appeared.
+    //
+    //props.index is passed so the entry being edited does not count as a
+    //duplicate of itself
+    const problem = validateEntry(input, streams.channels, props.index);
 
-      //replaces the entry at props.index without touching the original array
-      let tempChannels = streams.channels.map((channel, i) => i === props.index ? {
-        inf: {
-          title: input.title,
-          tvgLogo: input.logoUrl,
-        },
-        url: input.url,
-      } : channel);
-
-      //sets channels
-      setStreams({...streams, channels: tempChannels});
-
-      //uploads doc to firebase
-      if(settings.loggedIn){
-        await setDoc(doc(db, "data", settings.user.uid), {
-          ...streams, channels: tempChannels
-        });
-      }
-      
-      window.history.back();
-
+    if(problem){
+      window.alert(translations[settings.lang][problem]);
+      return;
     }
-    //if not valid
-    else{window.alert(translations[settings.lang].noInput);}
 
+    //replaces the entry at props.index without touching the original array
+    let tempChannels = streams.channels.map((channel, i) => i === props.index ? {
+      inf: {
+        title: input.title.trim(),
+        tvgLogo: input.logoUrl.trim(),
+      },
+      url: input.url.trim(),
+    } : channel);
+
+    //sets channels
+    setStreams({...streams, channels: tempChannels});
+
+    //uploads doc to firebase
+    if(settings.loggedIn){
+      await setDoc(doc(db, "data", settings.user.uid), {
+        ...streams, channels: tempChannels
+      });
+    }
+
+    window.history.back();
 
   }
 
