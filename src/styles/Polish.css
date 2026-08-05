@@ -486,6 +486,92 @@ input:focus-visible + .slider {
 }
 
 
+/* ---------- arriving on a page ---------- */
+
+/* Each route fades up as it mounts. Opacity only, deliberately: a transform on
+   any of these containers would make it the containing block for every
+   position:absolute descendant, and the clock, the footers, the settings
+   header and the video surfaces are all absolutely positioned against
+   something further out. Animating transform here would move all of them.
+
+   Movement instead goes on the contents, which have no such dependants. */
+#body,
+.playVid,
+#remBody {
+  animation: page-in 320ms var(--ease) both;
+}
+
+@keyframes page-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* the settings lists arrive a beat after the page and one item at a time. The
+   stagger is small — at 40ms a five item list is fully in within a fifth of a
+   second, which reads as the list settling rather than as a sequence. */
+#settingsButtonWrapper .settingsButton,
+#langWrapper .settingsButton,
+#remChannelWrapper .settingsButton {
+  animation: item-in 300ms var(--ease) both;
+}
+
+#settingsButtonWrapper .settingsButton:nth-child(1),
+#langWrapper .settingsButton:nth-child(1) { animation-delay: 60ms; }
+#settingsButtonWrapper .settingsButton:nth-child(2),
+#langWrapper .settingsButton:nth-child(2) { animation-delay: 100ms; }
+#settingsButtonWrapper .settingsButton:nth-child(3),
+#langWrapper .settingsButton:nth-child(3) { animation-delay: 140ms; }
+#settingsButtonWrapper .settingsButton:nth-child(4),
+#langWrapper .settingsButton:nth-child(4) { animation-delay: 180ms; }
+#settingsButtonWrapper .settingsButton:nth-child(5),
+#langWrapper .settingsButton:nth-child(5) { animation-delay: 220ms; }
+
+/* the edit lists can run to hundreds of entries, so only the first handful are
+   staggered — past that the delay would outlast anyone's patience */
+#remChannelWrapper .settingsButton:nth-child(1) { animation-delay: 40ms; }
+#remChannelWrapper .settingsButton:nth-child(2) { animation-delay: 70ms; }
+#remChannelWrapper .settingsButton:nth-child(3) { animation-delay: 100ms; }
+#remChannelWrapper .settingsButton:nth-child(4) { animation-delay: 130ms; }
+#remChannelWrapper .settingsButton:nth-child(5) { animation-delay: 160ms; }
+#remChannelWrapper .settingsButton:nth-child(n+6) { animation-delay: 190ms; }
+
+@keyframes item-in {
+  from { opacity: 0; transform: translateY(.5em); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* the main menu tiles do the same, left to right */
+.mainPageButton {
+  animation: item-in 340ms var(--ease) both;
+}
+
+#playPlaylist { animation-delay: 60ms; }
+#playChannel  { animation-delay: 110ms; }
+#addPlaylist  { animation-delay: 160ms; }
+#addChannel   { animation-delay: 210ms; }
+
+
+/* ---------- clearing a form ---------- */
+
+/* The fields emptying is what tells you the entry was taken, and instantaneous
+   emptying reads as the app having lost it rather than stored it. The toast
+   says so in words; this says so in the fields themselves, which is where you
+   were looking. */
+.justSaved .miscOptions {
+  animation: field-flush 620ms var(--ease);
+}
+
+/* a ring that fades out, rather than animating the field's own border and
+   background. Those have no explicit values on .miscOptions, so interpolating
+   them toward `initial` heads for currentColor and transparent — which is not
+   where the field rests, and looks wrong on the way there. box-shadow has a
+   clean zero to land on and touches nothing else. */
+@keyframes field-flush {
+  0%   { box-shadow: 0 0 0 .18em rgba(56, 191, 237, .55); }
+  100% { box-shadow: 0 0 0 .18em rgba(56, 191, 237, 0); }
+}
+
+
 /* ---------- getting back on a phone ---------- */
 
 /* The max-width:1300px block hides #clock and #bButtonWrapper. Between them

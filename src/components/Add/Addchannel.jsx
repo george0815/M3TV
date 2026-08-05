@@ -226,7 +226,7 @@ function Addchannel(props) {
         <div lang={[settings.lang]} className="label" id="settingsLabel">{(typeof props.index !== "undefined" && props.index <= streams.channels.length - 1) ? translations[settings.lang].editChannels : translations[settings.lang].addChannels}</div>
       </div>
 
-      <div id="mform" className='audioForm'>
+      <div id="mform" className={saved ? 'audioForm justSaved' : 'audioForm'}>
 
           <label lang={[settings.lang]} className="label" htmlFor="name">{translations[settings.lang].name}</label>       
           <br/>              
