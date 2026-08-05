@@ -62,7 +62,7 @@ function Editchannels(props) {
 
       })}</div>
     
-      <div tabIndex="-1" id="bButtonWrapper">
+      <div tabIndex="-1" id="bButtonWrapper" className="editMenu">
 
         <button onClick={(()=>{soundEffects.backSetting.play(); window.history.back();})}  className="footerButton" id="settingBack" >{translations[settings.lang].back}</button>
         <button onClick={(()=>{soundEffects.okSetting.play(); removeAll()})}  lang={[settings.lang]} id="removeAll" className="footerButton" >{translations[settings.lang].removeAll}</button> 

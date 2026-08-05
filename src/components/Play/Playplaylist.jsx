@@ -137,6 +137,13 @@ function Playplaylist() {
   //empty and the next-page button could never fire
   const shown = isChannel ? data : streams.playlists;
 
+  //one step back: out of an opened playlist to the list of playlists, or off
+  //the screen entirely if we are already looking at the list. Shared by the
+  //clock and by the mobile back button below it.
+  const goBack = isChannel
+    ? (() => {soundEffects.backMain.play(); setData(streams.playlists); setIsChannel(false); setPage(0)})
+    : (() => {soundEffects.backMain.play(); window.history.back()});
+
   return (
     <div className="playVid">
 
@@ -144,7 +151,13 @@ function Playplaylist() {
       { isChannel ? <Channelwrapper play={playChannel} isPlaylist={isPlaylist} setPage={setPage} setCurPlaying={setCurPlaying} curPlaying={curPlaying} isChannel={isChannel} page={page} data={shown}/>
       : <Channelwrapper play={playPlaylist} isPlaylist={isPlaylist} setPage={setPage} setCurPlaying={setCurPlaying} curPlaying={curPlaying} isChannel={isChannel} page={page} data={shown}/>}
       {/*clock*/}
-      <Clock back={isChannel ? (() => {soundEffects.backMain.play(); setData(streams.playlists); setIsChannel(false); setPage(0)}) : (() => {soundEffects.backMain.play(); window.history.back()})}/>
+      <Clock back={goBack}/>
+
+      {/*The clock carries the only way off this screen, and the clock is
+         display:none below 1300px — so on a phone there was no route back to
+         the playlist list, or off to the menu, at all. Same handler, shown only
+         where the clock is not.*/}
+      <button onClick={goBack} lang={[settings.lang]} className="mobileBack">{translations[settings.lang].back}</button>
       <div id="channelsFooter" className="editMenu">
       
         <button onClick={(() => {if(page > 0){ soundEffects.okSetting.play();  setPage(page - 1)}})} lang="en" className="footerButton channelFooterButton" id="addPBack" style={{left: "15%"}}>{'<'}</button>

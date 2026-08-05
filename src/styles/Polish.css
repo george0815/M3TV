@@ -421,11 +421,17 @@ input:focus-visible + .slider {
    platform, and an emoji or a missing-glyph box on some. These are svg now, so
    they sit where the .clockButton padding puts them rather than wherever the
    font's metrics happened to. */
+/* Sized in em and left inline, which is what keeps the button the shape it was.
+   .clockButton has height: auto with font-size: 10vh, so the font size was what
+   gave the button its height — zeroing it collapsed the box. The buttons also
+   place their glyph with text-align and padding, which display: flex overrode.
+   So: no changes to the button at all, and the svg simply stands where the
+   character used to. */
 .clockIcon {
-  width: 42%;
-  height: 42%;
-  display: block;
-  margin: 0 auto;
+  width: .98em;
+  height: .98em;
+  display: inline-block;
+  vertical-align: middle;
 
   fill: none;
   stroke: currentColor;
@@ -434,13 +440,11 @@ input:focus-visible + .slider {
   stroke-linejoin: round;
 }
 
-/* the glyphs used to be sized by font-size; the svg is sized by the box, so the
-   enormous value that made the entities legible is no longer wanted */
-.clockButton {
-  font-size: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* the gear is a filled shape rather than an outline, the way the ⚙ character it
+   replaces was. The back arrow stays stroked. */
+.clockIcon .solid {
+  fill: currentColor;
+  stroke: none;
 }
 
 
@@ -479,6 +483,44 @@ input:focus-visible + .slider {
 @keyframes toast-in {
   from { opacity: 0; transform: translate(-50%, 1.2em); }
   to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+
+/* ---------- getting back on a phone ---------- */
+
+/* The max-width:1300px block hides #clock and #bButtonWrapper. Between them
+   those carry the back and settings controls on every screen except the two
+   add forms, whose footers are marked .editMenu and survive — so on a phone
+   most screens had no way out at all except the browser's own back gesture.
+
+   The settings screens are fixed by marking their footers .editMenu too, the
+   same way the add forms already were. The two play screens have no footer to
+   mark, so they get this button instead: same handler as the clock's, present
+   only at the widths where the clock is not. */
+.mobileBack {
+  display: none;
+}
+
+@media (max-width: 1300px) {
+
+  .mobileBack {
+    display: block;
+    position: absolute;
+    top: 1.4vh;
+    left: 3vw;
+    z-index: 20;
+
+    /* answering `button { min-width: 45vw !important }` in the same block —
+       a back control does not want half the screen */
+    min-width: 0 !important;
+    width: auto;
+    max-width: none;
+
+    padding: 1vh 4vw;
+    font-size: 2.6vh;
+    margin: 0;
+  }
+
 }
 
 

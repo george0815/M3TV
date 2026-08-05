@@ -51,7 +51,7 @@ function Video() {
       </div>
 
 
-      <div id="bButtonWrapper">
+      <div id="bButtonWrapper" className="editMenu">
         <button lang={[settings.lang]} onClick={(()=>{soundEffects.backSetting.play(); window.history.back()})}  className="footerButton" id="settingBack">{translations[settings.lang].back}</button> 
       </div>
 

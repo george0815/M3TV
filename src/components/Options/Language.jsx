@@ -32,7 +32,7 @@ function Language() {
             
         </div>  
       
-        <div tabIndex="-1" id="bButtonWrapper">
+        <div tabIndex="-1" id="bButtonWrapper" className="editMenu">
           <button onClick={(()=>{soundEffects.backSetting.play(); window.history.back()})}  className="footerButton" id="settingBack" >{translations[settings.lang].back}</button>
         </div>
       

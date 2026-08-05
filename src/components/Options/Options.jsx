@@ -33,7 +33,7 @@ function Options() {
    
         </div>  
 
-        <div tabIndex="-1" id="bButtonWrapper">
+        <div tabIndex="-1" id="bButtonWrapper" className="editMenu">
             <button lang={[settings.lang]} onClick={(()=>{soundEffects.backMain.play(); window.history.back()})}   className="footerButton" id="settingBack" >{translations[settings.lang].back}</button>
         </div>
       
