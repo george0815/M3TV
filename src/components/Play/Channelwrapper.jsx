@@ -208,8 +208,16 @@ function Channelwrapper(props){
     //==============================JSXOBJECT========================//
 
 
+    //No slide on the way in. The page itself already fades up when you land
+    //here, and having the tiles arrive from the side at the same moment reads
+    //as two entrances competing. Zero distance on the first render makes the
+    //animation a no-op without having to add or remove it — changing a custom
+    //property cannot restart an animation, so the real value simply sits there
+    //waiting for the first actual page change.
+    const slideFrom = firstRender ? "0%" : (direction < 0 ? "-14%" : "14%");
+
     return (
-        <div id="channelWrapper" style={{"--slide-from": direction < 0 ? "-14%" : "14%"}}>
+        <div id="channelWrapper" style={{"--slide-from": slideFrom}}>
 
             {/*video players*/}
             {/*controls are what give the viewer a volume slider, a pause button
