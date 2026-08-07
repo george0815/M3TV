@@ -745,6 +745,52 @@ input:focus-visible + .slider {
 }
 
 
+/* ---------- signing in with google ---------- */
+
+/* The two ways in are alternatives, so a rule sits between them rather than
+   the button simply being the next thing down the column. */
+#googleRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orRule {
+  width: min(28em, 70%);
+  height: 1px;
+  margin: 2.5vh 0 .5vh;
+  background: linear-gradient(90deg,
+    rgba(56, 191, 237, 0), rgba(56, 191, 237, .45), rgba(56, 191, 237, 0));
+}
+
+/* Google's guidelines want their mark and wordmark legible and unaltered; the
+   rest of the button stays the app's. So the pill, the font and the inner
+   shadow are unchanged and only the mark is theirs — which is also why it sits
+   on a white plate, the one background their logo is specified against. */
+.googleButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.4vh;
+
+  /* the label is a span here rather than bare text, so the blur the other
+     buttons carry would smear it against the mark beside it */
+  color: #3c4043;
+  text-shadow: none;
+  background: #fff;
+  border-color: #dadce0;
+}
+
+.googleButton:hover {
+  border-color: var(--accent);
+}
+
+.googleMark {
+  width: 1.1em;
+  height: 1.1em;
+  flex: 0 0 auto;
+}
+
+
 /* ---------- deleting an account ---------- */
 
 /* The one irreversible action in the app. It keeps the same pill, the same

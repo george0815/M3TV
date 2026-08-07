@@ -15,6 +15,16 @@ export const translations =
         loginFailed: "Wrong email or password. If you don't have an account yet, use Create account.",
         accountExists: "An account already exists for that email. Use Login instead.",
 
+        //SIGNING IN WITH GOOGLE
+        continueWithGoogle: "Continue with Google",
+        linkNeeded: "You already have an account for that email. Sign in with your password and Google will be linked to it.",
+        googleLinked: "Google is now linked to your account.",
+        googleNotEnabled: "Google sign-in is not enabled for this app yet.",
+        domainNotAllowed: "Sign-in is not allowed from this address.",
+        networkFailed: "Could not reach the server. Check your connection and try again.",
+        signInFailed: "Could not sign you in. Please try again.",
+        confirmWithGoogle: "Confirm with Google to continue",
+
         //ADD CHANNELS
         addChannels: "Add Channels",
         name: "Name:",
@@ -122,6 +132,16 @@ export const translations =
         loginFailed: "Correo o contraseña incorrectos. Si aún no tienes una cuenta, usa Crear cuenta.",
         accountExists: "Ya existe una cuenta con ese correo. Usa Inicio de sesión.",
 
+        //SIGNING IN WITH GOOGLE
+        continueWithGoogle: "Continuar con Google",
+        linkNeeded: "Ya tienes una cuenta con ese correo. Inicia sesión con tu contraseña y Google quedará vinculado a ella.",
+        googleLinked: "Google ya está vinculado a tu cuenta.",
+        googleNotEnabled: "El inicio de sesión con Google aún no está habilitado en esta aplicación.",
+        domainNotAllowed: "No se permite iniciar sesión desde esta dirección.",
+        networkFailed: "No se pudo conectar con el servidor. Comprueba tu conexión e inténtalo de nuevo.",
+        signInFailed: "No se pudo iniciar sesión. Inténtalo de nuevo.",
+        confirmWithGoogle: "Confirma con Google para continuar",
+
         //ADD CHANNELS
         addChannels: "Añadir Canales",
         name: "Nombre:",
@@ -227,6 +247,16 @@ export const translations =
         forgot: "Mot de passe oublié",
         loginFailed: "E-mail ou mot de passe incorrect. Si vous n'avez pas encore de compte, utilisez Créer un compte.",
         accountExists: "Un compte existe déjà pour cet e-mail. Utilisez Connexion.",
+
+        //SIGNING IN WITH GOOGLE
+        continueWithGoogle: "Continuer avec Google",
+        linkNeeded: "Vous avez déjà un compte avec cette adresse. Connectez-vous avec votre mot de passe et Google y sera associé.",
+        googleLinked: "Google est désormais associé à votre compte.",
+        googleNotEnabled: "La connexion avec Google n'est pas encore activée pour cette application.",
+        domainNotAllowed: "La connexion n'est pas autorisée depuis cette adresse.",
+        networkFailed: "Impossible de joindre le serveur. Vérifiez votre connexion et réessayez.",
+        signInFailed: "Impossible de vous connecter. Veuillez réessayer.",
+        confirmWithGoogle: "Confirmez avec Google pour continuer",
 
         //ADD CHANNELS
         addChannels: "Ajouter Des Chaînes",
@@ -335,6 +365,16 @@ export const translations =
         loginFailed: "E-Mail oder Passwort falsch. Wenn Sie noch kein Konto haben, verwenden Sie Konto erstellen.",
         accountExists: "Für diese E-Mail existiert bereits ein Konto. Verwenden Sie Anmeldung.",
 
+        //SIGNING IN WITH GOOGLE
+        continueWithGoogle: "Mit Google fortfahren",
+        linkNeeded: "Für diese E-Mail-Adresse besteht bereits ein Konto. Melden Sie sich mit Ihrem Passwort an, dann wird Google damit verknüpft.",
+        googleLinked: "Google ist jetzt mit Ihrem Konto verknüpft.",
+        googleNotEnabled: "Die Google-Anmeldung ist für diese App noch nicht aktiviert.",
+        domainNotAllowed: "Die Anmeldung von dieser Adresse aus ist nicht zulässig.",
+        networkFailed: "Der Server war nicht erreichbar. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+        signInFailed: "Die Anmeldung war nicht möglich. Bitte versuchen Sie es erneut.",
+        confirmWithGoogle: "Zum Fortfahren mit Google bestätigen",
+
         //ADD CHANNELS
         addChannels: "Kanäle Hinzufügen",
         name: "Name:",
@@ -441,6 +481,16 @@ export const translations =
         forgot: "نسيت كلمة المرور",
         loginFailed: "البريد الإلكتروني أو كلمة المرور غير صحيحة. إذا لم يكن لديك حساب بعد، استخدم إنشاء حساب.",
         accountExists: "يوجد حساب بالفعل لهذا البريد الإلكتروني. استخدم تسجيل الدخول.",
+
+        //SIGNING IN WITH GOOGLE
+        continueWithGoogle: "المتابعة باستخدام Google",
+        linkNeeded: "لديك حساب بالفعل بهذا البريد الإلكتروني. سجّل الدخول بكلمة المرور وسيتم ربط Google به.",
+        googleLinked: "تم ربط Google بحسابك.",
+        googleNotEnabled: "لم يتم تفعيل تسجيل الدخول عبر Google لهذا التطبيق بعد.",
+        domainNotAllowed: "تسجيل الدخول غير مسموح به من هذا العنوان.",
+        networkFailed: "تعذر الوصول إلى الخادم. تحقق من اتصالك وحاول مرة أخرى.",
+        signInFailed: "تعذر تسجيل دخولك. يرجى المحاولة مرة أخرى.",
+        confirmWithGoogle: "أكّد باستخدام Google للمتابعة",
 
         //ADD CHANNELS
         addChannels: "إضافة قناة",
@@ -550,6 +600,16 @@ export const translations =
         loginFailed: "Неверный адрес электронной почты или пароль. Если у вас ещё нет аккаунта, нажмите «Создать аккаунт».",
         accountExists: "Аккаунт с таким адресом уже существует. Нажмите «Вход в систему».",
 
+        //SIGNING IN WITH GOOGLE
+        continueWithGoogle: "Продолжить с Google",
+        linkNeeded: "Аккаунт с этой почтой уже существует. Войдите с паролем, и Google будет к нему привязан.",
+        googleLinked: "Google привязан к вашему аккаунту.",
+        googleNotEnabled: "Вход через Google пока не включён для этого приложения.",
+        domainNotAllowed: "Вход с этого адреса не разрешён.",
+        networkFailed: "Не удалось связаться с сервером. Проверьте подключение и попробуйте снова.",
+        signInFailed: "Не удалось выполнить вход. Попробуйте ещё раз.",
+        confirmWithGoogle: "Подтвердите через Google, чтобы продолжить",
+
         //ADD CHANNELS
         addChannels: "Добавить Каналы",
         name: "Имя:",
@@ -658,6 +718,16 @@ export const translations =
         loginFailed: "邮箱或密码错误。如果您还没有账户，请使用“创建账户”。",
         accountExists: "该邮箱已存在账户。请使用“登录”。",
 
+        //SIGNING IN WITH GOOGLE
+        continueWithGoogle: "使用 Google 继续",
+        linkNeeded: "该邮箱已有账户。请使用密码登录，Google 将与其关联。",
+        googleLinked: "Google 已关联到您的账户。",
+        googleNotEnabled: "本应用尚未启用 Google 登录。",
+        domainNotAllowed: "不允许从此地址登录。",
+        networkFailed: "无法连接服务器。请检查网络后重试。",
+        signInFailed: "无法登录，请重试。",
+        confirmWithGoogle: "请使用 Google 确认以继续",
+
         //ADD CHANNELS
         addChannels: "添加频道",
         name: "名称",
@@ -764,6 +834,16 @@ export const translations =
         forgot: "パスワードを忘れた場合",
         loginFailed: "メールアドレスまたはパスワードが違います。アカウントをお持ちでない場合は「アカウント作成」をご利用ください。",
         accountExists: "そのメールアドレスのアカウントは既に存在します。「ログイン」をご利用ください。",
+
+        //SIGNING IN WITH GOOGLE
+        continueWithGoogle: "Google で続行",
+        linkNeeded: "このメールアドレスのアカウントは既にあります。パスワードでログインすると Google が連携されます。",
+        googleLinked: "Google をアカウントに連携しました。",
+        googleNotEnabled: "このアプリではまだ Google ログインが有効になっていません。",
+        domainNotAllowed: "このアドレスからのログインは許可されていません。",
+        networkFailed: "サーバーに接続できませんでした。接続を確認してもう一度お試しください。",
+        signInFailed: "ログインできませんでした。もう一度お試しください。",
+        confirmWithGoogle: "続行するには Google で確認してください",
 
         //ADD CHANNELS
         addChannels: "チャネルを追加する",

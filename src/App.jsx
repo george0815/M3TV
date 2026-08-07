@@ -11,13 +11,15 @@ import Language from './components/Options/Language';
 import Video from './components/Options/Video';
 import { BrowserRouter, Route, Routes } from 'react-router-dom' //React Router
 import { soundEffects } from './utils';
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, getRedirectResult } from "firebase/auth";
 import {auth} from "./utils"
 import { loadUserData } from "./lib/userdata";
 //CSS
 import Toasts from "./components/Toasts";
 import { addToast, removeToast, TOAST_MS } from "./lib/toasts";
 import { embedUrl } from "./lib/music";
+import { isUserCancellation, authErrorReason } from "./lib/auth";
+import { translations } from "./misc/translations";
 import "./styles/General.css";
 import "./styles/Clock.css";
 import "./styles/Buttons.css";
@@ -162,6 +164,13 @@ function App() {
   }, []);
 
 
+  /* The latest settings, readable from a callback that outlives the render
+     that made it. The redirect handler below runs once on mount but has to
+     report in whatever language is selected when it actually fires. */
+  const settingsRef = useRef(settings);
+  settingsRef.current = settings;
+
+
   //toasts, in place of window.alert
   const [toasts, setToasts] = useState([]);
 
@@ -188,6 +197,26 @@ function App() {
     window.setTimeout(() => setToasts(current => removeToast(current, id)), TOAST_MS);
 
   }, []);
+
+
+  /* Collect a google sign-in that went the redirect way.
+
+     Where a popup cannot be opened — mobile safari, the browsers embedded in
+     other apps — signInWithRedirect leaves the page entirely and comes back
+     here. onAuthStateChanged picks up the session on its own, so the success
+     case needs nothing; this exists for the failure case, which otherwise
+     returns to a silently unchanged screen with no explanation. */
+  useEffect(() => {
+
+    getRedirectResult(auth).catch((error) => {
+
+      if(isUserCancellation(error)){ return; }
+
+      notify(translations[settingsRef.current.lang][authErrorReason(error)], "danger");
+
+    });
+
+  }, [notify]);
 
 
   //gets playlist and channel data
