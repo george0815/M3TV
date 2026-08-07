@@ -1,11 +1,32 @@
 import {useState, useEffect, useContext, useRef} from "react";
 import { curPlaying, soundEffects } from "../../utils";
 import { SettingsContext } from '../../App'; //gets global settings context
-import videojs from "video.js";
-//video.js ships its own stylesheet and builds the control bar out of <button>
-//elements. Without this the app's global button rules style them instead, and
-//the control bar renders as a column of full width menu buttons.
-import "video.js/dist/video-js.css";
+/* video.js is 688 kB on its own — bigger than everything else on this screen
+   put together — and hls.js is the default player. Most people never select
+   it, so it is fetched only when it is going to be used.
+
+   Its stylesheet comes with it. video.js builds its control bar out of
+   <button> elements, so without that stylesheet the app's global button rules
+   style them instead and the control bar renders as a column of full width
+   menu buttons. The counter-rules for that live in Buttons.css, which is in
+   the main bundle and harmless on its own.
+
+   The promise is cached rather than the module, so two clicks in quick
+   succession wait on one download instead of starting two. */
+let videojsLoad = null;
+
+function loadVideojs(){
+
+  if(!videojsLoad){
+    videojsLoad = Promise.all([
+      import("video.js"),
+      import("video.js/dist/video-js.css"),
+    ]).then(([module]) => module.default);
+  }
+
+  return videojsLoad;
+
+}
 import {useFirstRender} from "../../utils";
 import { StreamsContext, ToastContext } from '../../App';
 import { doc, setDoc } from "firebase/firestore"; 
@@ -148,43 +169,57 @@ function Channelwrapper(props){
     }
 
     //PLAYS CHANNEL
-    function playChannel(index){
-
-    
-
-
-
+    async function playChannel(index){
 
         //if player is hls
         if(settings.player === "hls"){setPlayer(document.getElementById('curPlaying')); document.getElementById("curPlaying").volume = settings.vol.channel;
     }
         //if player is videojs
-        else if(settings.player === "vjs"){ 
+        else if(settings.player === "vjs"){
+
+            //already in hand by now — the effect below starts fetching it as
+            //soon as this screen opens, so this awaits a settled promise and
+            //resolves on a microtask
+            const videojs = await loadVideojs();
 
             if(videojs.getPlayer("vjs") && !curPlaying){videojs.getPlayer('vjs').dispose(); }
-    
+
             let videoContainerEl = document.getElementById("vjsContainer");
             videoContainerEl.innerHTML = `
               <video id="vjs" class="video-js vjs-default-skin" controls  ></video>
            `;
-    
+
            //sets player to videojs
             let videoEl = videoContainerEl.querySelector('video');
             setPlayer(videojs(videoEl));
 
-            
+
         }
-        
+
         //sets current index
         setCurIndex(index);
         //if index and player hsn't changed
         if(curIndex === index){ setPlay(!play)}
-    
-    
+
+
       }
 
     
     //==============================USEEFFECT========================//
+
+
+    /* Fetch video.js on arrival at the grid, not on the click.
+
+       Waiting for it inside the click handler would spend the user activation
+       that requestFullscreen depends on: activation is transient and expires
+       after a few seconds, so a cold download of 688 kB could outlast it and
+       the channel would play windowed instead of fullscreen. Starting here
+       gives it the time it takes to pick a channel, and leaves the click
+       awaiting a promise that has already settled. */
+    useEffect(() => {
+        if(settings.player === "vjs"){ loadVideojs(); }
+    }, [settings.player]);
+
 
 
     //opened by a keypress, so the next keystroke has to land in it

@@ -26,9 +26,9 @@ import "./styles/Misc.css";
 import "./styles/Polish.css";
 import './App.css';
 
-//the two play routes are the only thing that pulls in video.js, which is far
-//and away the biggest dependency here. loading them on demand keeps it out of
-//the bundle everyone downloads just to reach the main menu.
+//loaded on demand so the menu does not carry them. They used to bring video.js
+//with them, which was most of their weight; that is fetched separately now and
+//only when it is the selected player, so what is left here is small.
 const Playplaylist = lazy(() => import("./components/Play/Playplaylist"));
 const Playchannel  = lazy(() => import("./components/Play/Playchannel"));
 
@@ -134,16 +134,14 @@ function App() {
 
   /* Fetch the play routes before anyone asks for them.
 
-     They are loaded on demand to keep video.js out of the bundle everyone
-     downloads to reach the menu, which is worth doing — but it means the first
-     navigation to one waits on a chunk with nothing on screen at all, since
-     Suspense renders its fallback and the clock bar is inside the route that
-     has not arrived yet. That is the blank on the first visit, and only the
-     first: afterwards the chunk is resolved and nothing suspends.
+     The first navigation to one waits on its chunk with nothing on screen at
+     all, since Suspense renders its fallback and the clock bar is inside the
+     route that has not arrived yet. That is the blank on the first visit, and
+     only the first: afterwards the chunk is resolved and nothing suspends.
 
-     So it is fetched while the menu is sitting idle, when there is nothing
-     competing for the connection. By the time a tile is clicked there is
-     usually nothing left to wait for. */
+     These are about 14 kB between them now that video.js is fetched
+     separately, so this costs almost nothing and closes the gap for a click
+     that lands before the idle callback would have run anyway. */
   useEffect(() => {
 
     const load = () => {
