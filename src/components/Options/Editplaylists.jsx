@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { StreamsContext } from '../../App';
 import { soundEffects } from '../../utils';
 import { useArmedConfirm } from '../../lib/useArmedConfirm';
-import { doc, setDoc } from "firebase/firestore"; 
-import {db} from "../../utils"
+import { saveUserData } from "../../lib/userdata";
 
 
 
@@ -38,7 +37,7 @@ function Editplaylists(props) {
 
       //uploads doc to firebase
       if(settings.loggedIn){
-        await setDoc(doc(db, "data", settings.user.uid), {
+        await saveUserData(settings.user.uid, {
           ...streams, playlists: []
         });
       }

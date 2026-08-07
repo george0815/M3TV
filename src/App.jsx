@@ -11,9 +11,9 @@ import Language from './components/Options/Language';
 import Video from './components/Options/Video';
 import { BrowserRouter, Route, Routes } from 'react-router-dom' //React Router
 import { soundEffects } from './utils';
-import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import {db, auth} from "./utils"
+import {auth} from "./utils"
+import { loadUserData } from "./lib/userdata";
 //CSS
 import Toasts from "./components/Toasts";
 import { addToast, removeToast, TOAST_MS } from "./lib/toasts";
@@ -195,25 +195,11 @@ function App() {
 
     try{
 
-      const docRef = doc(db, "data", user.uid);
-      const docSnap = await getDoc(docRef);
+      //null when the account has no document yet, which a new account does not
+      //until its first save
+      const saved = await loadUserData(user.uid);
 
-      if (docSnap.exists()) {
-
-        //sets state
-        setStreams(docSnap.data());
-
-      }
-      else{
-
-        setStreams({
-
-          channels: [],
-          playlists: []
-
-        });
-
-      }
+      setStreams(saved || { channels: [], playlists: [] });
 
     }
     catch (error) {

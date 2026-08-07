@@ -29,8 +29,8 @@ function loadVideojs(){
 }
 import {useFirstRender} from "../../utils";
 import { StreamsContext, ToastContext } from '../../App';
-import { doc, setDoc } from "firebase/firestore"; 
-import {db, loadHls, needsHlsJs} from "../../utils"
+import {loadHls, needsHlsJs} from "../../utils"
+import { saveUserData } from "../../lib/userdata";
 import { translations } from "../../misc/translations";
 import { matchChannels, pageCount, pageOf } from "../../lib/channels";
 import { addEntry } from "../../lib/streams";
@@ -160,7 +160,7 @@ function Channelwrapper(props){
 
                 //uploads doc to firebase
                 if(settings.loggedIn){
-                await setDoc(doc(db, "data", settings.user.uid), {
+                await saveUserData(settings.user.uid, {
                     ...streams, channels: tempChannels
                 });
                 }

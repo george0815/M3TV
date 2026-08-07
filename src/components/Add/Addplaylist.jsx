@@ -5,8 +5,7 @@ import { useArmedConfirm } from "../../lib/useArmedConfirm";
 import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext, ToastContext } from '../../App';
-import { doc, setDoc } from "firebase/firestore"; 
-import {db} from "../../utils"
+import { saveUserData } from "../../lib/userdata";
 
 
 function Addplaylist(props) {
@@ -173,7 +172,7 @@ function Addplaylist(props) {
     if(!settings.loggedIn){ return true; }
 
     try {
-      await setDoc(doc(db, "data", settings.user.uid), {
+      await saveUserData(settings.user.uid, {
         ...streams, playlists: playlists
       });
       return true;
@@ -312,7 +311,7 @@ function Addplaylist(props) {
 
     //uploads doc to firebase
     if(settings.loggedIn){
-      await setDoc(doc(db, "data", settings.user.uid), {
+      await saveUserData(settings.user.uid, {
         ...streams, playlists: tempPlaylists
       });
     }
@@ -339,7 +338,7 @@ function Addplaylist(props) {
 
     //uploads doc to firebase
     if(settings.loggedIn){
-      await setDoc(doc(db, "data", settings.user.uid), {
+      await saveUserData(settings.user.uid, {
         ...streams, playlists: tempPlaylists
       });
     }

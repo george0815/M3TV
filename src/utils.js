@@ -11,7 +11,6 @@ import { useRef, useEffect } from 'react';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {getFirestore} from "firebase/firestore"
 import { translations } from './misc/translations';
 
 //the save rules live in src/lib so they can be loaded without firebase and
@@ -35,7 +34,6 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 
-export const db = getFirestore(app);
 
 export const auth = getAuth();
 

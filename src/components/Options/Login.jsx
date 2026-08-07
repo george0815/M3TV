@@ -6,8 +6,8 @@ import { soundEffects } from '../../utils';
 //firebase
 import {createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut,
         deleteUser, reauthenticateWithCredential, EmailAuthProvider} from "firebase/auth";
-import {doc, deleteDoc} from "firebase/firestore";
-import {auth, db} from "../../utils";
+import {auth} from "../../utils";
+import { deleteUserData } from "../../lib/userdata";
 import { StreamsContext, ToastContext } from '../../App';
 import { deleteAccount } from '../../lib/account';
 import { useArmedConfirm } from '../../lib/useArmedConfirm';
@@ -209,7 +209,7 @@ function register(){
       reauthenticate: () => reauthenticateWithCredential(
         user, EmailAuthProvider.credential(user.email, password)),
 
-      deleteDocument: () => deleteDoc(doc(db, "data", user.uid)),
+      deleteDocument: () => deleteUserData(user.uid),
 
       deleteAuthUser: () => deleteUser(user),
 

@@ -5,8 +5,7 @@ import { StreamsContext, ToastContext } from '../../App';
 import {soundEffects, validateEntry} from "../../utils";
 import { addEntry, replaceEntry, removeEntry } from "../../lib/streams";
 import { useArmedConfirm } from "../../lib/useArmedConfirm";
-import { doc, setDoc } from "firebase/firestore"; 
-import {db} from "../../utils"
+import { saveUserData } from "../../lib/userdata";
 
 
 
@@ -127,7 +126,7 @@ function Addchannel(props) {
     if(!settings.loggedIn){ return true; }
 
     try {
-      await setDoc(doc(db, "data", settings.user.uid), {
+      await saveUserData(settings.user.uid, {
         ...streams, channels: channels
       });
       return true;
@@ -192,7 +191,7 @@ function Addchannel(props) {
 
     //uploads doc to firebase
     if(settings.loggedIn){
-      await setDoc(doc(db, "data", settings.user.uid), {
+      await saveUserData(settings.user.uid, {
         ...streams, channels: tempChannels
       });
     }
@@ -219,7 +218,7 @@ function Addchannel(props) {
 
     //uploads doc to firebase
     if(settings.loggedIn){
-      await setDoc(doc(db, "data", settings.user.uid), {
+      await saveUserData(settings.user.uid, {
         ...streams, channels: tempChannels
       });
     }
