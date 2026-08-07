@@ -698,6 +698,62 @@ input:focus-visible + .slider {
 }
 
 
+/* ---------- deleting an account ---------- */
+
+/* The one irreversible action in the app. It keeps the same pill, the same
+   font and the same inner shadow as every other button — swapping in a filled
+   red rectangle would read as someone else's UI dropped into this one. Only
+   the border and the focus ring change, which is the same language the rest
+   of the app already uses to say what a control is. */
+
+:root {
+  /* deliberately not a pure red: it sits at the same lightness as --accent so
+     the two read as a pair rather than as a warning pasted over the palette */
+  --danger: #e2585f;
+}
+
+.dangerButton {
+  border-color: var(--danger);
+  outline-color: var(--danger);
+}
+
+.dangerButton:focus {
+  outline: solid .20em var(--danger);
+}
+
+/* in flight. Not hidden — the row must not reflow mid-deletion — but plainly
+   not pressable again, since a second attempt would run against a session the
+   first is already tearing down */
+.dangerButton:disabled {
+  opacity: .55;
+  cursor: progress;
+}
+
+.dangerButton:disabled:hover {
+  transform: none;
+}
+
+#deleteConfirm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2vh;
+
+  /* set apart from the login row above it, so the confirmation reads as its
+     own thing rather than as more of the same form */
+  border-top: solid 1px rgba(226, 88, 95, .35);
+  padding-top: 2vh;
+}
+
+.deleteWarning {
+  /* the warning is prose, not a field label, so it wraps and centres rather
+     than sitting flush left like the labels above it */
+  text-align: center;
+  max-width: 40em;
+  margin: 0 auto 1vh;
+  line-height: 1.4;
+}
+
+
 /* ---------- motion preferences ---------- */
 
 /* honour the system setting. This covers the 1200ms splash fade too, which is

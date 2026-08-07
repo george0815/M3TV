@@ -1,12 +1,15 @@
-import {useContext} from 'react'; //react
+import {useContext, useState} from 'react'; //react
 import { translations } from '../../misc/translations';
 import { SettingsContext } from '../../App'; //gets global settings context
 import { soundEffects } from '../../utils';
 
 //firebase
-import {createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut} from "firebase/auth";
-import {auth} from "../../utils";
+import {createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut,
+        deleteUser, reauthenticateWithCredential, EmailAuthProvider} from "firebase/auth";
+import {doc, deleteDoc} from "firebase/firestore";
+import {auth, db} from "../../utils";
 import { StreamsContext } from '../../App';
+import { deleteAccount } from '../../lib/account';
 
 
 function Login(){
@@ -20,6 +23,17 @@ function Login(){
 
   //global streams
   const {setStreams} = useContext(StreamsContext);
+
+
+  //whether the delete-account confirmation is open. Deleting is irreversible
+  //and sits on the same screen as the logout button, so it takes two
+  //deliberate steps and a password rather than one click.
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
+
+  //disables the confirm button while the deletion is in flight, so a second
+  //click cannot start a second attempt against a session the first one is
+  //already tearing down
+  const [deleting, setDeleting] = useState(false);
 
 
 //===================================FUNCTIONS=========================//
@@ -120,6 +134,22 @@ function register(){
 
 
 
+  /* Back to whatever this device had saved before anyone signed in. The
+     account's channels live only in firestore — App.jsx writes to localStorage
+     only while signed out — so the local list is still sitting there untouched
+     and is what should come back. Shared by logout and by deletion. */
+  function restoreLocalStreams(){
+
+    setStreams(localStorage.getItem("streams") ? JSON.parse(localStorage.getItem("streams")) : {
+
+      channels: [],
+      playlists: []
+
+    });
+
+  }
+
+
   //logs out user
   function logout(){
     if (window.confirm("Are you sure you want to logout?")) {
@@ -130,16 +160,69 @@ function register(){
 
       //set loggedIn local storage value to true and go to main page
       setSettings({...settings, loggedIn: false, user: null});
-      setStreams(localStorage.getItem("streams") ? JSON.parse(localStorage.getItem("streams")) : {
+      restoreLocalStreams();
 
-        channels: [],
-        playlists: []
-      
-      });
-
-
-    
     }
+  }
+
+
+  /* Deletes the account and everything saved to it.
+
+     The sequence lives in src/lib/account.js — the order is load-bearing and
+     is explained there. This half is only the firebase calls to hand it, and
+     what to do with the answer.
+
+     Firebase refuses to delete a session more than a few minutes old, so the
+     password is required rather than merely a confirmation: it is what makes
+     the deletion possible at all. */
+  async function removeAccount(){
+
+    const user = auth.currentUser;
+
+    //the persisted flag can outlive the session — App.jsx reconciles the two
+    //on load, but the button is on screen in the meantime
+    if(!user){
+      window.alert(translations[settings.lang].deleteReauthFailed);
+      return;
+    }
+
+    const password = document.getElementById("deletePassword").value;
+
+    if(!password){
+      window.alert(translations[settings.lang].confirmPassword);
+      return;
+    }
+
+    setDeleting(true);
+
+    const result = await deleteAccount({
+
+      reauthenticate: () => reauthenticateWithCredential(
+        user, EmailAuthProvider.credential(user.email, password)),
+
+      deleteDocument: () => deleteDoc(doc(db, "data", user.uid)),
+
+      deleteAuthUser: () => deleteUser(user),
+
+    });
+
+    setDeleting(false);
+
+    //the saved channels and playlists are really gone, whether or not the
+    //account itself went with them, so stop showing them
+    if(result.dataDeleted){ restoreLocalStreams(); }
+
+    if(result.ok){
+
+      //onAuthStateChanged does this too once firebase notices, but saying it
+      //here means the screen does not sit on a deleted account in the meantime
+      setSettings({...settings, loggedIn: false, user: null});
+      setConfirmingDelete(false);
+
+    }
+
+    window.alert(translations[settings.lang][result.reason]);
+
   }
 
 
@@ -181,6 +264,33 @@ function register(){
                 {!settings.loggedIn && <button lang={[settings.lang]} id="signUpButton" onClick={(()=>{soundEffects.okSetting.play(); register()})} className="settingsButton loginButton">{translations[settings.lang].signUp}</button>}
                 <button lang={[settings.lang]} id="loginButton" onClick={(()=>{soundEffects.okSetting.play(); settings.loggedIn ? logout() : login()})} className="settingsButton loginButton">{settings.loggedIn ? translations[settings.lang].logout : translations[settings.lang].login}</button>
               </div>
+
+              {/*Only offered while signed in, and kept below the login row
+                 rather than beside it — this is the one button on the screen
+                 that cannot be undone, so it should not sit within a slip of
+                 Logout.*/}
+              {settings.loggedIn && !confirmingDelete &&
+                <button lang={[settings.lang]} id="deleteAccountButton" onClick={(()=>{soundEffects.backSetting.play(); setConfirmingDelete(true)})} className="settingsButton loginButton dangerButton">{translations[settings.lang].deleteAccount}</button>}
+
+              {settings.loggedIn && confirmingDelete &&
+                <div id="deleteConfirm">
+
+                  <div lang={[settings.lang]} className="label deleteWarning">{translations[settings.lang].deleteWarning}</div>
+
+                  <div className="inputContainer">
+                    <label tabIndex="-1" lang={[settings.lang]} htmlFor="deletePassword" className="label mlabel">{translations[settings.lang].confirmPassword}</label>
+                    {/*a real password field, so it is masked and the browser's
+                       password manager can fill it — the alternative was a
+                       window.prompt, which shows what is typed in clear*/}
+                    <input type="password" autoComplete="current-password" className="miscOptions loginInput" id="deletePassword" name="deletePassword"/>
+                  </div>
+
+                  <div id="buttonRow">
+                    <button lang={[settings.lang]} onClick={(()=>{soundEffects.backSetting.play(); setConfirmingDelete(false)})} className="settingsButton loginButton">{translations[settings.lang].cancel}</button>
+                    <button lang={[settings.lang]} disabled={deleting} onClick={(()=>{soundEffects.okSetting.play(); removeAccount()})} className="settingsButton loginButton dangerButton">{translations[settings.lang].deleteConfirm}</button>
+                  </div>
+
+                </div>}
           </div>
 
 

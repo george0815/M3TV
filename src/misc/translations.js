@@ -91,6 +91,19 @@ export const translations =
         invalidUrl: "Error reading channel, usually this is due to an invalid URL. If the playlist works with other players then please open an issue on the Github page.",
         search: "Please enter channel/playlist title",
 
+        //DELETE ACCOUNT
+        deleteAccount: "Delete account",
+        deleteWarning: "This deletes your account and every channel and playlist saved to it. It cannot be undone.",
+        confirmPassword: "Enter your password to confirm",
+        deleteConfirm: "Delete permanently",
+        cancel: "Cancel",
+        accountDeleted: "Your account and everything saved to it has been deleted.",
+        deleteWrongPassword: "That password is not correct.",
+        deleteReauthFailed: "Could not confirm your password. Please try again.",
+        tooManyAttempts: "Too many attempts. Please wait a while and try again.",
+        deleteDataFailed: "Could not delete your saved channels and playlists, so your account has been left as it was. Please try again.",
+        deleteAccountFailed: "Your saved channels and playlists were deleted, but the account itself could not be removed. Please log in again and retry.",
+
 
 
     },
@@ -181,6 +194,19 @@ export const translations =
         removeAllPlaylistsAlert: "¿Estás seguro de que quieres eliminar todas las listas de reproducción?",
         invalidUrl: "Error al leer el canal, normalmente se debe a una URL no válida. Si la lista de reproducción funciona con otros reproductores, abre una incidencia en la página de Github.",
         search: "Por favor, introduzca el título del canal/lista de reproducción",
+
+        //DELETE ACCOUNT
+        deleteAccount: "Eliminar cuenta",
+        deleteWarning: "Esto elimina tu cuenta y todos los canales y listas de reproducción guardados en ella. No se puede deshacer.",
+        confirmPassword: "Introduce tu contraseña para confirmar",
+        deleteConfirm: "Eliminar permanentemente",
+        cancel: "Cancelar",
+        accountDeleted: "Tu cuenta y todo lo guardado en ella se han eliminado.",
+        deleteWrongPassword: "Esa contraseña no es correcta.",
+        deleteReauthFailed: "No se pudo confirmar tu contraseña. Inténtalo de nuevo.",
+        tooManyAttempts: "Demasiados intentos. Espera un momento e inténtalo de nuevo.",
+        deleteDataFailed: "No se pudieron eliminar tus canales y listas guardados, así que tu cuenta no se ha modificado. Inténtalo de nuevo.",
+        deleteAccountFailed: "Tus canales y listas guardados se eliminaron, pero no se pudo eliminar la cuenta. Vuelve a iniciar sesión e inténtalo de nuevo.",
 
         
 
@@ -273,6 +299,19 @@ export const translations =
         invalidUrl: "Erreur de lecture du canal, généralement due à une URL invalide. Si la liste de lecture fonctionne avec d'autres lecteurs, veuillez ouvrir un problème sur la page Github.",
         search: "Veuillez saisir le titre de la chaîne ou de la liste de lecture",
 
+        //DELETE ACCOUNT
+        deleteAccount: "Supprimer le compte",
+        deleteWarning: "Cela supprime votre compte ainsi que toutes les chaînes et listes de lecture qui y sont enregistrées. Cette action est irréversible.",
+        confirmPassword: "Saisissez votre mot de passe pour confirmer",
+        deleteConfirm: "Supprimer définitivement",
+        cancel: "Annuler",
+        accountDeleted: "Votre compte et tout ce qui y était enregistré ont été supprimés.",
+        deleteWrongPassword: "Ce mot de passe est incorrect.",
+        deleteReauthFailed: "Impossible de confirmer votre mot de passe. Veuillez réessayer.",
+        tooManyAttempts: "Trop de tentatives. Veuillez patienter un moment et réessayer.",
+        deleteDataFailed: "Impossible de supprimer vos chaînes et listes enregistrées ; votre compte est donc resté inchangé. Veuillez réessayer.",
+        deleteAccountFailed: "Vos chaînes et listes enregistrées ont été supprimées, mais le compte lui-même n'a pas pu être supprimé. Reconnectez-vous et réessayez.",
+
         
 
 
@@ -364,6 +403,19 @@ export const translations =
         removeAllPlaylistsAlert: "Sind Sie sicher, dass Sie alle Wiedergabelisten entfernen möchten?",
         invalidUrl: "Fehler beim Lesen des Kanals, normalerweise liegt das an einer ungültigen URL. Wenn die Wiedergabeliste mit anderen Playern funktioniert, öffnen Sie bitte ein Problem auf der Github-Seite..",
         search: "Bitte Titel des Kanals/der Wiedergabeliste eingeben",
+
+        //DELETE ACCOUNT
+        deleteAccount: "Konto löschen",
+        deleteWarning: "Dadurch werden Ihr Konto und alle darin gespeicherten Kanäle und Wiedergabelisten gelöscht. Dies kann nicht rückgängig gemacht werden.",
+        confirmPassword: "Geben Sie zur Bestätigung Ihr Passwort ein",
+        deleteConfirm: "Endgültig löschen",
+        cancel: "Abbrechen",
+        accountDeleted: "Ihr Konto und alles darin Gespeicherte wurden gelöscht.",
+        deleteWrongPassword: "Dieses Passwort ist nicht korrekt.",
+        deleteReauthFailed: "Ihr Passwort konnte nicht bestätigt werden. Bitte versuchen Sie es erneut.",
+        tooManyAttempts: "Zu viele Versuche. Bitte warten Sie einen Moment und versuchen Sie es erneut.",
+        deleteDataFailed: "Ihre gespeicherten Kanäle und Wiedergabelisten konnten nicht gelöscht werden, Ihr Konto wurde daher unverändert gelassen. Bitte versuchen Sie es erneut.",
+        deleteAccountFailed: "Ihre gespeicherten Kanäle und Wiedergabelisten wurden gelöscht, das Konto selbst konnte jedoch nicht entfernt werden. Bitte melden Sie sich erneut an und versuchen Sie es noch einmal.",
 
         
 
@@ -458,6 +510,19 @@ export const translations =
         invalidUrl: "خطأ في قراءة القناة، وعادة ما يكون هذا بسبب عنوان URL غير صالح. إذا كانت قائمة التشغيل تعمل مع مشغلات أخرى، فيرجى فتح مشكلة على صفحة Github.",
         search: "الرجاء إدخال عنوان القناة/قائمة التشغيل",
 
+        //DELETE ACCOUNT
+        deleteAccount: "حذف الحساب",
+        deleteWarning: "سيؤدي هذا إلى حذف حسابك وجميع القنوات وقوائم التشغيل المحفوظة فيه. لا يمكن التراجع عن ذلك.",
+        confirmPassword: "أدخل كلمة المرور للتأكيد",
+        deleteConfirm: "حذف نهائي",
+        cancel: "إلغاء",
+        accountDeleted: "تم حذف حسابك وكل ما هو محفوظ فيه.",
+        deleteWrongPassword: "كلمة المرور غير صحيحة.",
+        deleteReauthFailed: "تعذر تأكيد كلمة المرور. يرجى المحاولة مرة أخرى.",
+        tooManyAttempts: "محاولات كثيرة جدًا. يرجى الانتظار قليلاً ثم المحاولة مرة أخرى.",
+        deleteDataFailed: "تعذر حذف القنوات وقوائم التشغيل المحفوظة، لذلك بقي حسابك كما هو. يرجى المحاولة مرة أخرى.",
+        deleteAccountFailed: "تم حذف القنوات وقوائم التشغيل المحفوظة، لكن تعذر حذف الحساب نفسه. يرجى تسجيل الدخول مرة أخرى وإعادة المحاولة.",
+
         
 
 
@@ -551,6 +616,19 @@ export const translations =
         invalidUrl: "Ошибка чтения канала, обычно это связано с недействительным URL. Если плейлист работает с другими плеерами, пожалуйста, откройте проблему на странице Github.",
         search: "Пожалуйста, введите название канала/плейлиста",
 
+        //DELETE ACCOUNT
+        deleteAccount: "Удалить аккаунт",
+        deleteWarning: "Это удалит ваш аккаунт и все сохранённые в нём каналы и плейлисты. Отменить это будет нельзя.",
+        confirmPassword: "Введите пароль для подтверждения",
+        deleteConfirm: "Удалить навсегда",
+        cancel: "Отмена",
+        accountDeleted: "Ваш аккаунт и всё сохранённое в нём удалены.",
+        deleteWrongPassword: "Неверный пароль.",
+        deleteReauthFailed: "Не удалось подтвердить пароль. Пожалуйста, попробуйте ещё раз.",
+        tooManyAttempts: "Слишком много попыток. Подождите немного и попробуйте снова.",
+        deleteDataFailed: "Не удалось удалить сохранённые каналы и плейлисты, поэтому аккаунт остался без изменений. Пожалуйста, попробуйте ещё раз.",
+        deleteAccountFailed: "Сохранённые каналы и плейлисты удалены, но сам аккаунт удалить не удалось. Войдите снова и повторите попытку.",
+
         
 
 
@@ -642,6 +720,19 @@ export const translations =
         removeAllPlaylistsAlert: "您确定要删除所有播放列表吗？",
         invalidUrl: "读取频道出错，通常是由于 URL 无效。如果播放列表能与其他播放器一起使用，请在 Github 页面上提交问题。",
         search: "请输入频道/播放列表标题",
+
+        //DELETE ACCOUNT
+        deleteAccount: "删除账户",
+        deleteWarning: "这将删除您的账户以及其中保存的所有频道和播放列表。此操作无法撤销。",
+        confirmPassword: "请输入密码以确认",
+        deleteConfirm: "永久删除",
+        cancel: "取消",
+        accountDeleted: "您的账户及其中保存的所有内容均已删除。",
+        deleteWrongPassword: "密码不正确。",
+        deleteReauthFailed: "无法确认您的密码，请重试。",
+        tooManyAttempts: "尝试次数过多，请稍后再试。",
+        deleteDataFailed: "无法删除您保存的频道和播放列表，因此账户未作更改。请重试。",
+        deleteAccountFailed: "您保存的频道和播放列表已删除，但账户本身无法删除。请重新登录后再试。",
 
         
 
@@ -735,6 +826,19 @@ export const translations =
         removeAllPlaylistsAlert: "すべてのプレイリストを削除してもよろしいですか？",
         invalidUrl: "チャンネル読み込みのエラーです。通常、これは無効なURLによるものです。プレイリストが他のプレイヤーで動作する場合は、Githubページでissueを開いてください。",
         search: "チャンネル/プレイリストのタイトルを入力してください",
+
+        //DELETE ACCOUNT
+        deleteAccount: "アカウントを削除",
+        deleteWarning: "アカウントと、そこに保存されているすべてのチャンネルとプレイリストが削除されます。元に戻すことはできません。",
+        confirmPassword: "確認のためパスワードを入力してください",
+        deleteConfirm: "完全に削除",
+        cancel: "キャンセル",
+        accountDeleted: "アカウントと保存されていたすべての内容を削除しました。",
+        deleteWrongPassword: "パスワードが正しくありません。",
+        deleteReauthFailed: "パスワードを確認できませんでした。もう一度お試しください。",
+        tooManyAttempts: "試行回数が多すぎます。しばらく待ってからもう一度お試しください。",
+        deleteDataFailed: "保存されたチャンネルとプレイリストを削除できなかったため、アカウントはそのままです。もう一度お試しください。",
+        deleteAccountFailed: "保存されたチャンネルとプレイリストは削除されましたが、アカウント自体を削除できませんでした。ログインし直してもう一度お試しください。",
 
         
 

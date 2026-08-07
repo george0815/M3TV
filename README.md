@@ -53,6 +53,8 @@ If you want to view CORS protected streams, then click the "CORS Proxy Server" t
 ### Account Settings
 If you want to save streams and then watch them on a different device, then you can create an account, add your desired playlists, and log in on your preferred device (only available on react version). Use "Create account" the first time and "Login" after that. "Forgot password" sends a reset email to whatever address is in the email box.
 
+"Delete account" removes the account and every channel and playlist saved to it. It asks for your password first — Firebase will not delete a session more than a few minutes old, so this is required rather than just a confirmation. Anything saved on the device itself while signed out is left alone and comes back afterwards. It cannot be undone.
+
 
 ### Controls
 Next Channel - N<br>
@@ -92,6 +94,7 @@ Without a `.env`, Firebase can't initialise and the login/account features won't
 | `src/lib/entries.test.js` | What counts as a saveable channel or playlist, and whether a chosen file is really an m3u |
 | `src/lib/channels.test.js` | Searching and paging the channel grid, including keeping each result's index in the unfiltered list |
 | `src/lib/streams.test.js` | The add, edit and remove transforms, each of which has to leave the array held in state alone |
+| `src/lib/account.test.js` | The account deletion sequence, above all that the saved data goes before the account does |
 | `src/lib/clock.test.js` | Time and date formatting, run under a fixed `Asia/Kolkata` so a machine set to UTC can't hide a UTC bug |
 | `proxy/test/manifest.test.mjs` | The stream proxy's manifest rewriting and target validation |
 
