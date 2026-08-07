@@ -324,6 +324,20 @@ function Channelwrapper(props){
                     >{translations[settings.lang].cancel}</button>
                 </div>}
 
+            {/*Nothing to show, and why.
+
+               An empty grid on its own reads as a load that failed rather
+               than an account with nothing in it yet — and now that search
+               filters as it is typed, "no results" needs saying too. Rendered
+               always but only visible on a phone: the desktop layout is
+               finished and this would be a change to it.*/}
+            {matches.length === 0 &&
+                <div lang={[settings.lang]} className="emptyGrid" role="status">
+                    {search
+                        ? translations[settings.lang].noMatches
+                        : translations[settings.lang][props.isChannel ? "noChannelsYet" : "noPlaylistsYet"]}
+                </div>}
+
             {/*channel buttons*/}
             {pageOf(matches, props.page).map(({channel, index})=>{
 

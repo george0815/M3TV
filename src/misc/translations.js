@@ -102,6 +102,11 @@ export const translations =
         invalidUrl: "Error reading channel, usually this is due to an invalid URL. If the playlist works with other players then please open an issue on the Github page.",
         search: "Please enter channel/playlist title",
 
+        //EMPTY STATES
+        noChannelsYet: "No channels saved yet. Add one from the main menu.",
+        noPlaylistsYet: "No playlists saved yet. Add one from the main menu.",
+        noMatches: "Nothing matches that search.",
+
         //DELETE ACCOUNT
         deleteAccount: "Delete account",
         resetEmailSent: "Password reset email sent.",
@@ -217,6 +222,11 @@ export const translations =
         removeAllPlaylistsAlert: "Elimina todas las listas de reproducción. Pulsa de nuevo para confirmar.",
         invalidUrl: "Error al leer el canal, normalmente se debe a una URL no válida. Si la lista de reproducción funciona con otros reproductores, abre una incidencia en la página de Github.",
         search: "Por favor, introduzca el título del canal/lista de reproducción",
+
+        //EMPTY STATES
+        noChannelsYet: "Aún no hay canales guardados. Añade uno desde el menú principal.",
+        noPlaylistsYet: "Aún no hay listas guardadas. Añade una desde el menú principal.",
+        noMatches: "No hay coincidencias con esa búsqueda.",
 
         //DELETE ACCOUNT
         deleteAccount: "Eliminar cuenta",
@@ -334,6 +344,11 @@ export const translations =
         invalidUrl: "Erreur de lecture du canal, généralement due à une URL invalide. Si la liste de lecture fonctionne avec d'autres lecteurs, veuillez ouvrir un problème sur la page Github.",
         search: "Veuillez saisir le titre de la chaîne ou de la liste de lecture",
 
+        //EMPTY STATES
+        noChannelsYet: "Aucune chaîne enregistrée. Ajoutez-en une depuis le menu principal.",
+        noPlaylistsYet: "Aucune liste enregistrée. Ajoutez-en une depuis le menu principal.",
+        noMatches: "Aucun résultat pour cette recherche.",
+
         //DELETE ACCOUNT
         deleteAccount: "Supprimer le compte",
         resetEmailSent: "E-mail de réinitialisation du mot de passe envoyé.",
@@ -450,6 +465,11 @@ export const translations =
         removeAllPlaylistsAlert: "Entfernt alle Wiedergabelisten. Zum Bestätigen erneut drücken.",
         invalidUrl: "Fehler beim Lesen des Kanals, normalerweise liegt das an einer ungültigen URL. Wenn die Wiedergabeliste mit anderen Playern funktioniert, öffnen Sie bitte ein Problem auf der Github-Seite..",
         search: "Bitte Titel des Kanals/der Wiedergabeliste eingeben",
+
+        //EMPTY STATES
+        noChannelsYet: "Noch keine Kanäle gespeichert. Fügen Sie einen über das Hauptmenü hinzu.",
+        noPlaylistsYet: "Noch keine Wiedergabelisten gespeichert. Fügen Sie eine über das Hauptmenü hinzu.",
+        noMatches: "Keine Treffer für diese Suche.",
 
         //DELETE ACCOUNT
         deleteAccount: "Konto löschen",
@@ -569,6 +589,11 @@ export const translations =
         invalidUrl: "خطأ في قراءة القناة، وعادة ما يكون هذا بسبب عنوان URL غير صالح. إذا كانت قائمة التشغيل تعمل مع مشغلات أخرى، فيرجى فتح مشكلة على صفحة Github.",
         search: "الرجاء إدخال عنوان القناة/قائمة التشغيل",
 
+        //EMPTY STATES
+        noChannelsYet: "لا توجد قنوات محفوظة بعد. أضف واحدة من القائمة الرئيسية.",
+        noPlaylistsYet: "لا توجد قوائم تشغيل محفوظة بعد. أضف واحدة من القائمة الرئيسية.",
+        noMatches: "لا توجد نتائج مطابقة لهذا البحث.",
+
         //DELETE ACCOUNT
         deleteAccount: "حذف الحساب",
         resetEmailSent: "تم إرسال رسالة إعادة تعيين كلمة المرور.",
@@ -687,6 +712,11 @@ export const translations =
         invalidUrl: "Ошибка чтения канала, обычно это связано с недействительным URL. Если плейлист работает с другими плеерами, пожалуйста, откройте проблему на странице Github.",
         search: "Пожалуйста, введите название канала/плейлиста",
 
+        //EMPTY STATES
+        noChannelsYet: "Каналы ещё не сохранены. Добавьте один из главного меню.",
+        noPlaylistsYet: "Плейлисты ещё не сохранены. Добавьте один из главного меню.",
+        noMatches: "По этому запросу ничего не найдено.",
+
         //DELETE ACCOUNT
         deleteAccount: "Удалить аккаунт",
         resetEmailSent: "Письмо для сброса пароля отправлено.",
@@ -803,6 +833,11 @@ export const translations =
         removeAllPlaylistsAlert: "将移除所有播放列表。请再次点击以确认。",
         invalidUrl: "读取频道出错，通常是由于 URL 无效。如果播放列表能与其他播放器一起使用，请在 Github 页面上提交问题。",
         search: "请输入频道/播放列表标题",
+
+        //EMPTY STATES
+        noChannelsYet: "尚未保存任何频道。请从主菜单添加。",
+        noPlaylistsYet: "尚未保存任何播放列表。请从主菜单添加。",
+        noMatches: "没有符合该搜索的内容。",
 
         //DELETE ACCOUNT
         deleteAccount: "删除账户",
@@ -921,6 +956,11 @@ export const translations =
         removeAllPlaylistsAlert: "すべてのプレイリストを削除します。もう一度押して確定してください。",
         invalidUrl: "チャンネル読み込みのエラーです。通常、これは無効なURLによるものです。プレイリストが他のプレイヤーで動作する場合は、Githubページでissueを開いてください。",
         search: "チャンネル/プレイリストのタイトルを入力してください",
+
+        //EMPTY STATES
+        noChannelsYet: "保存されたチャンネルはまだありません。メインメニューから追加してください。",
+        noPlaylistsYet: "保存されたプレイリストはまだありません。メインメニューから追加してください。",
+        noMatches: "その検索に一致するものはありません。",
 
         //DELETE ACCOUNT
         deleteAccount: "アカウントを削除",

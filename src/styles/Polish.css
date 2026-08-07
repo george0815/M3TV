@@ -922,6 +922,147 @@ input:focus-visible + .slider {
 }
 
 
+/* rendered on every screen so the markup does not branch, but shown only on a
+   phone — see the breakpoint below */
+.emptyGrid {
+  display: none;
+}
+
+
+/* ---------- the phone ---------- */
+
+/* The desktop layout is finished and none of this reaches it: every rule below
+   is inside the phone breakpoint, and none of them exist above it.
+
+   The trouble on a phone was never the look — a full channel grid, two across
+   with the logos carrying the colour, reads exactly as intended. It was that
+   the layout reserves proportions of a landscape canvas the phone does not
+   have, and that the one control unique to this width had nothing holding a
+   space for it. */
+
+@media (max-width: 1300px) {
+
+  /* Room for the floating back control.
+
+     .mobileBack is position:absolute in the top-left corner and nothing was
+     reserving room for it, so it sat on top of whatever each screen begins
+     with — the first settings button, the first playlist's name, the first
+     channel's logo. It looked like a rendering fault on every screen at once.
+     Both containers that carry one now start below it.
+
+     10.5vh because the control measures 67px tall on a 844px viewport and
+     sits 12px down — so it ends at 79px, and anything less than about 9.4vh
+     still clips it. Estimating this from the padding and font-size gave 7.5vh
+     and left it overlapping by 4px, which is worse than not having tried. */
+  #remBody,
+  #channelWrapper {
+    padding-top: 10.5vh;
+  }
+
+
+  /* Let the grid be as tall as it has channels to show.
+
+     The tile area was a fixed 70vh divided into six equal rows whatever was
+     in it, so two playlists left five sixths of the screen as empty texture
+     and an empty account looked like a load that had failed. Rows are made as
+     they are needed now.
+
+     The footer keeps the bottom edge rather than following the tiles up the
+     screen — it is the page's edge, not the last thing in the list. */
+  .playVid {
+    grid-template-rows: 1fr auto;
+
+    /* .playVid is content-box with height:100%, so the 5% bottom padding it
+       carries put it 21px taller than the viewport. That did not show while
+       the footer sat at a fixed 70vh with room beneath it; anchoring the
+       footer to the bottom edge is what brought it into view. */
+    padding-bottom: 0;
+  }
+
+  /* What an empty grid says for itself. Only here — above this width the
+     layout is finished and untouched, so the element renders but stays
+     hidden. */
+  .emptyGrid {
+    display: block;
+    grid-column: 1 / -1;
+    align-self: start;
+
+    margin: 4vh 8vw 0;
+    text-align: center;
+    font-family: "WII";
+    font-size: 2.5vh;
+    line-height: 1.45;
+    color: rgb(var(--ink));
+    opacity: .72;
+  }
+
+
+  /* The footer's two page buttons are position:absolute, so the row measures
+     20px — its own padding — and nothing else. Fine when it sat mid-screen
+     with space below; at the bottom edge it pushed the buttons off it. This
+     is the height they actually occupy. */
+  #channelsFooter {
+    min-height: 12vh;
+  }
+
+  #channelWrapper {
+    grid-template-rows: none;
+    grid-auto-rows: 10.5vh;
+    align-content: start;
+    height: auto;
+
+    /* in vh, not the 2% it was: a percentage gap resolves against the
+       container's own height, and that height is now auto */
+    row-gap: 1.2vh;
+  }
+
+
+  /* The main menu, gathered rather than spread.
+
+     Three auto rows inside a container with a fixed height stretch to fill
+     it, so the spare space was dealt out between the rows and the gaps grew
+     as tall as the tiles themselves. Sizing the rows to their contents and
+     centring the block puts that space around the menu instead of through
+     it. */
+  #body {
+    align-content: center;
+    row-gap: 2vh;
+  }
+
+
+  /* Back and Settings are not features.
+
+     They were the same size, shape and weight as Play Channels, so the menu
+     read as six things to choose between rather than four things and a way
+     out. They keep their width, since the column is what it is, and give up
+     the 4:3 tile shape that marks the others as content. */
+  #backMain,
+  #optionsMain {
+    height: auto;
+    aspect-ratio: auto;
+    padding: 1.3vh 0;
+    font-size: 2.6vh;
+    align-self: center;
+
+    /* the same width as the tiles above, worked out from their own height and
+       ratio so the two cannot drift apart — a row under the grid rather than
+       two pills adrift in it. Without this they collapse to their text. */
+    width: calc(min(29vh, 34vw) * 4 / 3);
+    min-width: 0;
+    max-width: none;
+  }
+
+  /* Bigger tiles. The shared rule caps height at 31vw, which on a phone is the
+     limit that binds and leaves a third of the width unused — the cap exists
+     to stop four across overflowing on a wide screen, and there are only two
+     across here. */
+  .mainPageButton {
+    height: min(29vh, 34vw);
+  }
+
+}
+
+
 /* ---------- motion preferences ---------- */
 
 /* honour the system setting. This covers the 1200ms splash fade too, which is
