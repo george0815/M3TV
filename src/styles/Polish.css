@@ -758,7 +758,7 @@ input:focus-visible + .slider {
 .orRule {
   width: min(28em, 70%);
   height: 1px;
-  margin: 2.5vh 0 .5vh;
+  margin: 1.4vh 0 0;
   background: linear-gradient(90deg,
     rgba(56, 191, 237, 0), rgba(56, 191, 237, .45), rgba(56, 191, 237, 0));
 }
@@ -767,10 +767,17 @@ input:focus-visible + .slider {
    rest of the button stays the app's. So the pill, the font and the inner
    shadow are unchanged and only the mark is theirs — which is also why it sits
    on a white plate, the one background their logo is specified against. */
+/* Shorter than the buttons above it. Those are the primary actions and are
+   sized for it; this sits below a rule as the alternative, and at the bottom
+   of a column that has a footer absolutely positioned across the foot of the
+   screen — so every vh it does not take is one it cannot run into. */
 .googleButton {
   display: inline-flex;
   align-items: center;
-  gap: 1.4vh;
+  gap: 1.2vh;
+
+  padding: 1.3vh 3.5vh;
+  font-size: 2.5vh;
 
   /* the label is a span here rather than bare text, so the blur the other
      buttons carry would smear it against the mark beside it */
