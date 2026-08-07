@@ -1,6 +1,7 @@
 import {useState, useRef, useContext} from 'react'; //react
 import {soundEffects, validateEntry, looksLikePlaylist, MAX_PLAYLIST_BYTES} from "../../utils"
 import { addEntry, replaceEntry, removeEntry } from "../../lib/streams";
+import { useArmedConfirm } from "../../lib/useArmedConfirm";
 import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext, ToastContext } from '../../App';
@@ -21,6 +22,9 @@ function Addplaylist(props) {
 
   //toasts, in place of the alerts these paths used to raise
   const {notify} = useContext(ToastContext);
+
+  //and the button asks before removing, rather than a browser dialog
+  const {confirm, isArmed} = useArmedConfirm();
 
 
 
@@ -322,7 +326,6 @@ function Addplaylist(props) {
   //REMOVES PLAYLIST
   async function removePlaylist(){
 
-    if (window.confirm(translations[settings.lang].removePlaylistAlert) == true) {
 
 
     soundEffects.okSetting.play();
@@ -343,8 +346,6 @@ function Addplaylist(props) {
 
     //redirect
     window.history.back();
-
-    }
 
   }
 
@@ -392,7 +393,7 @@ function Addplaylist(props) {
       <div id="bButtonWrapper" className="editMenu">
       
         <button onClick={(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1) ? editPlaylist : (()=>{soundEffects.backMain.play(); window.history.back()})} lang={[settings.lang]} className="footerButton" id="addPBack" style={{left: "15%"}}>{translations[settings.lang].back}</button>
-        <button onClick={(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1) ? removePlaylist : Addplaylist} lang={[settings.lang]} className="footerButton" id="okay">{(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1)  ? translations[settings.lang].remove : translations[settings.lang].confirm}</button> 
+        <button onClick={(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1) ? (() => confirm("remove", translations[settings.lang].removePlaylistAlert, removePlaylist)) : Addplaylist} lang={[settings.lang]} className={isArmed("remove") ? "footerButton armed" : "footerButton"} id="okay">{(typeof props.index !== "undefined" && props.index <= streams.playlists.length - 1)  ? translations[settings.lang].remove : translations[settings.lang].confirm}</button> 
   
       </div>
 

@@ -4,6 +4,7 @@ import { SettingsContext } from '../../App'; //gets global settings context
 import { useNavigate } from 'react-router-dom';
 import { StreamsContext } from '../../App';
 import { soundEffects } from '../../utils';
+import { useArmedConfirm } from '../../lib/useArmedConfirm';
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from "../../utils"
 
@@ -23,13 +24,15 @@ function Editplaylists(props) {
    //sets up naviage
   const nav = useNavigate();
 
+  //removing everything asks on the button rather than in a browser dialog
+  const {confirm, isArmed} = useArmedConfirm();
+
    //===========================FUNCTIONS=====================//
 
 
   async function removeAll(){
 
 
-    if (window.confirm(translations[settings.lang].removeAllPlaylistsAlert) == true) {
 
       setStreams({...streams, playlists: []});
 
@@ -39,8 +42,6 @@ function Editplaylists(props) {
           ...streams, playlists: []
         });
       }
-
-    }
 
   }
 
@@ -72,7 +73,7 @@ function Editplaylists(props) {
       <div tabIndex="-1" id="bButtonWrapper">
 
         <button onClick={(()=>{soundEffects.backSetting.play(); window.history.back();})}  className="footerButton" id="settingBack" >{translations[settings.lang].back}</button>
-        <button onClick={(()=>{soundEffects.okSetting.play(); removeAll()})}  lang={[settings.lang]} id="removeAll" className="footerButton" >{translations[settings.lang].removeAll}</button> 
+        <button onClick={(()=>{soundEffects.okSetting.play(); confirm("removeAll", translations[settings.lang].removeAllPlaylistsAlert, removeAll)})} lang={[settings.lang]} id="removeAll" className={isArmed("removeAll") ? "footerButton armed" : "footerButton"} >{translations[settings.lang].removeAll}</button> 
 
       </div>
 

@@ -793,12 +793,21 @@ input:focus-visible + .slider {
   padding-top: 2vh;
 }
 
-/* Armed: the next press deletes. The button says so by filling in rather than
-   by changing its label — the label is the thing being confirmed, and swapping
-   it out mid-gesture moves the target under the pointer. */
-.dangerButton.armed {
+/* Armed: the next press is the one that counts. The button says so by filling
+   in rather than by changing its label — the label is the thing being
+   confirmed, and swapping it out mid-gesture moves the target under the
+   pointer, which is how you end up removing something you meant to keep.
+
+   Not scoped to .dangerButton: every confirm in the app arms now, including
+   the ordinary footer buttons for removing a channel and logging out. */
+.armed {
   background: var(--danger);
+  border-color: var(--danger);
   box-shadow: inset -15px -15px 10px -10px rgba(120, 30, 35, .5);
+}
+
+.armed:focus {
+  outline: solid .20em var(--danger);
 }
 
 /* The warning toast. It borrows .saveToast's position and entrance, then

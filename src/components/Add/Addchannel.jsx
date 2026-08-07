@@ -4,6 +4,7 @@ import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext, ToastContext } from '../../App';
 import {soundEffects, validateEntry} from "../../utils";
 import { addEntry, replaceEntry, removeEntry } from "../../lib/streams";
+import { useArmedConfirm } from "../../lib/useArmedConfirm";
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from "../../utils"
 
@@ -23,6 +24,9 @@ function Addchannel(props) {
 
   //toasts, in place of the alerts these paths used to raise
   const {notify} = useContext(ToastContext);
+
+  //and the button asks before removing, rather than a browser dialog
+  const {confirm, isArmed} = useArmedConfirm();
 
 
  
@@ -201,7 +205,6 @@ function Addchannel(props) {
 
   async function removeChannel(){
 
-    if (window.confirm(translations[settings.lang].removeChannelAlert) == true) {
 
     //sound effect
     soundEffects.okSetting.play();
@@ -223,8 +226,6 @@ function Addchannel(props) {
 
     //redirect
     window.history.back();
-
-    }
 
   }
 
@@ -258,7 +259,7 @@ function Addchannel(props) {
 
       <div  id="bButtonWrapper" className="editMenu">
           <button onClick={(typeof props.index !== "undefined" && props.index <= streams.channels.length - 1)  ? editChannel : (()=>{ soundEffects.backMain.play(); window.history.back()})} lang={[settings.lang]} className="footerButton" id="addCBack" style={{left: "15%"}}>{translations[settings.lang].back}</button>
-          <button onClick={(typeof props.index !== "undefined" && props.index <= streams.channels.length - 1)  ? removeChannel : addChannel} lang={[settings.lang]} className="footerButton" id="okay">{(typeof props.index !== "undefined" && props.index <= streams.channels.length - 1)  ? translations[settings.lang].remove : translations[settings.lang].confirm}</button>  
+          <button onClick={(typeof props.index !== "undefined" && props.index <= streams.channels.length - 1)  ? (() => confirm("remove", translations[settings.lang].removeChannelAlert, removeChannel)) : addChannel} lang={[settings.lang]} className={isArmed("remove") ? "footerButton armed" : "footerButton"} id="okay">{(typeof props.index !== "undefined" && props.index <= streams.channels.length - 1)  ? translations[settings.lang].remove : translations[settings.lang].confirm}</button>  
       </div>
 
     </div>

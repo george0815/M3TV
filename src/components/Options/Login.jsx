@@ -1,4 +1,4 @@
-import {useContext, useState, useRef, useEffect} from 'react'; //react
+import {useContext, useState} from 'react'; //react
 import { translations } from '../../misc/translations';
 import { SettingsContext } from '../../App'; //gets global settings context
 import { soundEffects } from '../../utils';
@@ -10,6 +10,7 @@ import {doc, deleteDoc} from "firebase/firestore";
 import {auth, db} from "../../utils";
 import { StreamsContext, ToastContext } from '../../App';
 import { deleteAccount } from '../../lib/account';
+import { useArmedConfirm } from '../../lib/useArmedConfirm';
 
 
 function Login(){
@@ -39,16 +40,10 @@ function Login(){
   //already tearing down
   const [deleting, setDeleting] = useState(false);
 
-  /* Whether the delete button is armed. The warning used to sit inside the
-     panel as a paragraph, where it was long enough to run off the side of the
-     screen. As a toast it is out of the layout altogether, and it arrives at
-     the moment it matters — on the press that would otherwise have deleted
-     the account — rather than sitting there being read past. */
-  const [armed, setArmed] = useState(false);
-
-  //the toast disarms itself, so walking away from a half-pressed delete does
-  //not leave it primed for whoever sits down next
-  const armedTimer = useRef(null);
+  /* Logging out and deleting both ask on their own button rather than in a
+     browser dialog — see useArmedConfirm. Keyed, because this screen carries
+     two of them and arming one must not arm the other. */
+  const {confirm, disarm, isArmed} = useArmedConfirm();
 
 
 //===================================FUNCTIONS=========================//
@@ -167,46 +162,17 @@ function register(){
 
   //logs out user
   function logout(){
-    if (window.confirm("Are you sure you want to logout?")) {
 
-      //actually end the Firebase session, otherwise the SDK keeps the user
-      //signed in (and keeps refreshing their token) after a "logout"
-      signOut(auth).catch((error) => { console.error(error); });
+    //actually end the Firebase session, otherwise the SDK keeps the user
+    //signed in (and keeps refreshing their token) after a "logout"
+    signOut(auth).catch((error) => { console.error(error); });
 
-      //set loggedIn local storage value to true and go to main page
-      setSettings({...settings, loggedIn: false, user: null});
-      restoreLocalStreams();
-
-    }
-  }
-
-
-  function disarm(){
-    window.clearTimeout(armedTimer.current);
-    armedTimer.current = null;
-    setArmed(false);
-  }
-
-  //a timer outliving the component would call setArmed on something that is
-  //no longer mounted
-  useEffect(() => () => window.clearTimeout(armedTimer.current), []);
-
-
-  /* First press arms and says what is about to happen; the second press does
-     it. Both presses are on the same button, so the warning cannot be clicked
-     past without reading where it is — the pointer is already there. */
-  function pressDelete(){
-
-    if(armed){
-      disarm();
-      removeAccount();
-      return;
-    }
-
-    setArmed(true);
-    armedTimer.current = window.setTimeout(() => { armedTimer.current = null; setArmed(false); }, 6000);
+    //set loggedIn local storage value to true and go to main page
+    setSettings({...settings, loggedIn: false, user: null});
+    restoreLocalStreams();
 
   }
+
 
 
   /* Deletes the account and everything saved to it.
@@ -305,7 +271,7 @@ function register(){
               <div id="buttonRow">
                 {!settings.loggedIn && <button lang={[settings.lang]} id="forgotButton" onClick={(() => {soundEffects.okSetting.play(); resetPassword()})} className="settingsButton loginButton forgotPassword">{translations[settings.lang].forgot}</button>}
                 {!settings.loggedIn && <button lang={[settings.lang]} id="signUpButton" onClick={(()=>{soundEffects.okSetting.play(); register()})} className="settingsButton loginButton">{translations[settings.lang].signUp}</button>}
-                <button lang={[settings.lang]} id="loginButton" onClick={(()=>{soundEffects.okSetting.play(); settings.loggedIn ? logout() : login()})} className="settingsButton loginButton">{settings.loggedIn ? translations[settings.lang].logout : translations[settings.lang].login}</button>
+                <button lang={[settings.lang]} id="loginButton" onClick={(()=>{soundEffects.okSetting.play(); settings.loggedIn ? confirm("logout", translations[settings.lang].logoutAlert, logout) : login()})} className={isArmed("logout") ? "settingsButton loginButton armed" : "settingsButton loginButton"}>{settings.loggedIn ? translations[settings.lang].logout : translations[settings.lang].login}</button>
               </div>
 
               {/*Only offered while signed in, and kept below the login row
@@ -328,14 +294,11 @@ function register(){
 
                   <div id="buttonRow">
                     <button lang={[settings.lang]} onClick={(()=>{soundEffects.backSetting.play(); disarm(); setConfirmingDelete(false)})} className="settingsButton loginButton">{translations[settings.lang].cancel}</button>
-                    <button lang={[settings.lang]} disabled={deleting} onClick={(()=>{soundEffects.okSetting.play(); pressDelete()})} className={armed ? "settingsButton loginButton dangerButton armed" : "settingsButton loginButton dangerButton"}>{translations[settings.lang].deleteConfirm}</button>
+                    <button lang={[settings.lang]} disabled={deleting} onClick={(()=>{soundEffects.okSetting.play(); confirm("delete", translations[settings.lang].deleteWarning, removeAccount)})} className={isArmed("delete") ? "settingsButton loginButton dangerButton armed" : "settingsButton loginButton dangerButton"}>{translations[settings.lang].deleteConfirm}</button>
                   </div>
 
                 </div>}
 
-              {/*The warning, at the moment it applies. Fixed to the viewport,
-                 so its length is no longer the layout's problem.*/}
-              {armed && <div lang={[settings.lang]} className="saveToast warningToast" role="alert">{translations[settings.lang].deleteWarning}</div>}
           </div>
 
 
