@@ -341,7 +341,23 @@ function App() {
 
         <Toasts/>
 
-        {/* key={Date()} before, which is a new value in every second — so any
+        {/* Here only while the music is on, rather than always here and muted
+            by adding mute=1 to the address.
+
+            That is a back button fix. Changing the src of a frame that is
+            already on the page navigates it, and a frame navigation goes into
+            the same session history as the page itself — so turning the music
+            on, or having a channel mute it for you, left an entry behind and
+            the next press of back spent itself stepping over that instead of
+            leaving the screen. Two presses to get back to the menu. Adding and
+            removing the frame does neither: a new frame's first navigation
+            replaces its own blank entry, and a frame that leaves the page
+            takes its entries with it.
+
+            It also stops a muted player from streaming in the background the
+            whole time the music is switched off.
+
+            key={Date()} before, which is a new value in every second — so any
             render that crossed a second boundary remounted this, reloading the
             embed and restarting the track from the top. Keyed on the address
             instead: it changes when the music does and not otherwise.
@@ -349,7 +365,8 @@ function App() {
             allow="autoplay" stays. Firefox logs "skipping unsupported feature
             name" for it because it has not implemented that permission, but
             chrome needs it or the track never starts. */}
-        <iframe key={settings.music} tabIndex="-1" id="bgMusic" width="0" height="0" style={{border: 0}} src={embedUrl(settings.music, !settings.musicOn)} title="Background music" allow="autoplay"></iframe>
+        {settings.musicOn &&
+          <iframe key={settings.music} tabIndex="-1" id="bgMusic" width="0" height="0" style={{border: 0}} src={embedUrl(settings.music)} title="Background music" allow="autoplay"></iframe>}
 
        </ToastContext.Provider>
       </StreamsContext.Provider>

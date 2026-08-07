@@ -229,11 +229,6 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player, n
 
   
 
-    /*
-    if (!(document.getElementById("bgMusic").src.includes("&mute=1"))) {
-      document.getElementById("bgMusic").src = document.getElementById("bgMusic").src + "&mute=1";
-    }*/
-
 
     // player for playing vids
     

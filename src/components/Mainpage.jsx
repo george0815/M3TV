@@ -44,7 +44,15 @@ function Mainpage(props) {
 
     function hideSplashScreen(){
 
-        document.getElementById("bgMusic").src = document.getElementById("bgMusic").src
+        /* Reloading the music frame here is what actually starts the track:
+           it is mounted before anyone has touched the page, so autoplay is
+           refused, and this re-navigation happens inside a click and is
+           allowed. It is only on the page while the music is switched on,
+           hence the guard — without it this threw, and the whole of the rest
+           of this function, the splash included, never ran. */
+        const music = document.getElementById("bgMusic");
+        if(music){ music.src = music.src; }
+
         soundEffects.splashIn.play();
         sessionStorage.setItem("splash", true)
         if(document.getElementById("splashScreen")){document.getElementById("splashScreen").style.opacity = 0;}

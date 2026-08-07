@@ -29,7 +29,7 @@ function privacyHost(url) {
 }
 
 
-export function embedUrl(source, muted) {
+export function embedUrl(source) {
 
   if (!source) { return ""; }
 
@@ -53,8 +53,12 @@ export function embedUrl(source, muted) {
   const id = videoId(url);
   if (id) { url.searchParams.set("playlist", id); }
 
-  if (muted) { url.searchParams.set("mute", "1"); }
-  else { url.searchParams.delete("mute"); }
+  /* There is no muted state to represent any more — the frame is on the page
+     when the music is on and gone when it is off, because muting it by
+     changing this address put an entry in the session history and cost the
+     viewer an extra press of back. So mute always comes off, including when
+     it was typed into the field by hand. */
+  url.searchParams.delete("mute");
 
   return url.toString();
 
