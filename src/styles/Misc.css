@@ -187,8 +187,18 @@
   #formWrapperVideo > #mform{
     height: auto;
   }
+  /* block, not initial. `initial` for display is `inline`, so this turned every
+     footer it is on into an inline box whose only children are position:
+     absolute buttons — no height, nothing for the border, shadow and background
+     below to paint on, and the buttons taking their static position from
+     wherever that empty inline box happened to fall in the flow. The channel
+     footer moved around or vanished depending on what was above it.
+
+     It also beat `#channelsFooter { display: block }` further down this file,
+     because an !important class wins over a plain id. That rule says plainly
+     what was meant here. */
   .editMenu{
-    display: initial !important;
+    display: block !important;
     padding-top: 2vh;
   }
   body {
