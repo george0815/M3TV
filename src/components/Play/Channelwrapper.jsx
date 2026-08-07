@@ -11,6 +11,8 @@ import { StreamsContext } from '../../App';
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from "../../utils"
 import { translations } from "../../misc/translations";
+import { matchChannels, pageCount, pageOf } from "../../lib/channels";
+import { addEntry } from "../../lib/streams";
 
 
 
@@ -51,25 +53,11 @@ function Channelwrapper(props){
     //entries matching the current search, each paired with its index in
     //props.data. the index has to survive filtering because playChannel(index)
     //and the curIndex next/prev/random keys all look items back up in props.data
-    const matches = props.data.map((channel, index) => ({channel, index}))
-        .filter(({channel}) => {
+    const matches = matchChannels(props.data, search);
 
-            if(search === "" || search === null){ return true; }
-
-            //titles are optional in m3u files, and a missing one used to throw
-            //here rather than simply not matching
-            return (channel.inf && channel.inf.title ? channel.inf.title : "")
-                .toLowerCase().includes(search.toLowerCase());
-
-        });
-
-
-    //pages are counted off the filtered list. props.page is clamped rather than
-    //trusted, because the footer buttons live in the parent and don't know how
-    //many results a search left — overshooting lands on the last page of
-    //results instead of a blank screen
-    const pageCount = Math.max(1, Math.ceil(matches.length / 12));
-    const page = Math.min(props.page, pageCount - 1);
+    //pages are counted off the filtered list, and props.page is clamped rather
+    //than trusted — see src/lib/channels.js
+    const pages = pageCount(matches.length);
 
 
     /* Arriving on the screen and changing page run the same entrance: the tiles
@@ -85,7 +73,7 @@ function Channelwrapper(props){
     //CONTROLS CHANNEL BUTTONS
     const handleUserKeyPress = async function(e) {
 
-        if (e.key == 'd' && (props.page < pageCount - 1) && props.curPlaying === false) {
+        if (e.key == 'd' && (props.page < pages - 1) && props.curPlaying === false) {
 
             //next page
             soundEffects.okSetting.play();
@@ -121,7 +109,7 @@ function Channelwrapper(props){
                 soundEffects.okSetting.play();
                 //a copy — pushing onto streams.channels edited the array held
                 //in state in place, before setStreams had run
-                let tempChannels = [...streams.channels, props.data[curIndex]];
+                let tempChannels = addEntry(streams.channels, props.data[curIndex]);
 
                 //sets channels
                 setStreams({...streams, channels: tempChannels});
@@ -224,7 +212,7 @@ function Channelwrapper(props){
             <div  style={!props.curPlaying ? {display: "none"} : {display: ""}}  id="vjsContainer"></div>
 
             {/*channel buttons*/}
-            {matches.slice(page * 12, page * 12 + 12).map(({channel, index})=>{
+            {pageOf(matches, props.page).map(({channel, index})=>{
 
                 //entries saved before playlists were normalised can still be
                 //missing inf, and reading through it during render throws,

@@ -1,5 +1,6 @@
 import React, {useState, useRef, useContext} from 'react'; //react
 import {soundEffects, validateEntry, looksLikePlaylist, MAX_PLAYLIST_BYTES} from "../../utils"
+import { addEntry, replaceEntry, removeEntry } from "../../lib/streams";
 import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext } from '../../App';
@@ -130,7 +131,7 @@ function Addplaylist(props) {
         //that one is reassigned on every render, so any re-render between
         //opening the file dialog and the reader finishing would have left it
         //empty here and wiped every other playlist
-        let playlists = [...streams.playlists, tempPlaylist];
+        let playlists = addEntry(streams.playlists, tempPlaylist);
 
         if(!await save(playlists)){ return; }
 
@@ -240,7 +241,7 @@ function Addplaylist(props) {
         tempPlaylist.logoUrl = input.logoUrl.trim();
 
         //a copy — pushing onto streams.playlists edited state in place
-        let playlists = [...streams.playlists, tempPlaylist];
+        let playlists = addEntry(streams.playlists, tempPlaylist);
 
         if(!await save(playlists)){ return; }
 
@@ -285,12 +286,12 @@ function Addplaylist(props) {
     }
 
     //replaces the entry at props.index without touching the original array
-    let tempPlaylists = streams.playlists.map((playlist, i) => i === props.index ? {
+    let tempPlaylists = replaceEntry(streams.playlists, props.index, {
       inf : {title: input.title.trim()},
       url: input.isLocal ? input.url : input.url.trim(),
       logoUrl: input.logoUrl.trim(),
       isLocal: input.isLocal
-    } : playlist);
+    });
 
     //sets playlists
     setStreams({...streams, playlists: tempPlaylists});
@@ -318,7 +319,7 @@ function Addplaylist(props) {
     
     //removes channel from array. filter rather than splice, which would edit
     //the array held in state in place
-    let tempPlaylists = streams.playlists.filter((playlist, i) => i !== props.index);
+    let tempPlaylists = removeEntry(streams.playlists, props.index);
 
     //sets channels
     setStreams({...streams, playlists: tempPlaylists});

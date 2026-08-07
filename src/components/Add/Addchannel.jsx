@@ -3,6 +3,7 @@ import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext } from '../../App';
 import {soundEffects, validateEntry} from "../../utils";
+import { addEntry, replaceEntry, removeEntry } from "../../lib/streams";
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from "../../utils"
 
@@ -89,7 +90,7 @@ function Addchannel(props) {
 
     //a copy, not streams.channels itself — pushing onto the array held in
     //state mutated the current state in place before setStreams ever ran
-    let tempChannels = [...streams.channels, tempChannel];
+    let tempChannels = addEntry(streams.channels, tempChannel);
 
     if(!await save(tempChannels)){ return; }
 
@@ -164,13 +165,13 @@ function Addchannel(props) {
     }
 
     //replaces the entry at props.index without touching the original array
-    let tempChannels = streams.channels.map((channel, i) => i === props.index ? {
+    let tempChannels = replaceEntry(streams.channels, props.index, {
       inf: {
         title: input.title.trim(),
         tvgLogo: input.logoUrl.trim(),
       },
       url: input.url.trim(),
-    } : channel);
+    });
 
     //sets channels
     setStreams({...streams, channels: tempChannels});
@@ -198,7 +199,7 @@ function Addchannel(props) {
 
     //removes channel from array. filter rather than splice, which would edit
     //the array held in state in place
-    let tempChannels = streams.channels.filter((channel, i) => i !== props.index);
+    let tempChannels = removeEntry(streams.channels, props.index);
 
     //sets channels
     setStreams({...streams, channels: tempChannels});

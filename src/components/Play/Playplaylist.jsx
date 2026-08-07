@@ -7,6 +7,8 @@ import { playChannel } from '../../utils';
 import { translations } from '../../misc/translations';
 import { StreamsContext } from '../../App';
 import { SettingsContext } from '../../App';
+import { normaliseSegments, isUsablePlaylist } from '../../lib/streams';
+import { pageCount } from '../../lib/channels';
 
 
 function Playplaylist() {
@@ -92,19 +94,12 @@ function Playplaylist() {
       parser.read(url);
 
       try{
-        //loads channels
-        //the parser only attaches inf to an entry that had an #EXTINF line
-        //before it, and the check below only ever inspected the first segment.
-        //So a playlist with one malformed entry anywhere after the first
-        //passed validation and then threw while rendering — which in react
-        //unmounts the tree and leaves a blank screen. Give every segment
-        //something renderable, falling back to the url as a label.
-        let channels = parser.getResult().segments.map(segment =>
-          segment.inf ? segment : {...segment, inf: {title: segment.url}}
-        );
+        //loads channels, giving every segment something renderable — see
+        //normaliseSegments for what an entry without one used to do
+        let channels = normaliseSegments(parser.getResult().segments);
 
-        if(channels.length === 0 || channels[0].url === "<!DOCTYPE html>"){throw new Error(translations[settings.lang].invalidUrl);}
-       
+        if(!isUsablePlaylist(channels)){throw new Error(translations[settings.lang].invalidUrl);}
+
 
 
         setData(channels);
@@ -161,7 +156,7 @@ function Playplaylist() {
       <div id="channelsFooter" className="editMenu">
       
         <button onClick={(() => {if(page > 0){ soundEffects.okSetting.play();  setPage(page - 1)}})} lang="en" className="footerButton channelFooterButton" id="addPBack" style={{left: "15%"}}>{'<'}</button>
-        <button onClick={(() => { if(page < Math.ceil(shown.length / 12) - 1){soundEffects.okSetting.play(); setPage(page + 1)}})} lang="en" className="footerButton channelFooterButton" id="okay">{'>'}</button>
+        <button onClick={(() => { if(page < pageCount(shown.length) - 1){soundEffects.okSetting.play(); setPage(page + 1)}})} lang="en" className="footerButton channelFooterButton" id="okay">{'>'}</button>
   
       </div>
 

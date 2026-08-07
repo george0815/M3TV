@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from 'react'; //react
 import {Link} from 'react-router-dom'// react router
 import { soundEffects } from '../utils';
-
-
-
-function getClientLocale() {
-    if (typeof Intl !== 'undefined') {
-      try {
-        return Intl.NumberFormat().resolvedOptions().locale;
-      } catch (err) {
-        console.error("Cannot get locale from Intl")
-      }
-    }
-  }
+import { formatTime, formatDate, getClientLocale } from '../lib/clock';
 
 
 function Clock(props) {
@@ -29,20 +18,16 @@ function Clock(props) {
     return () => clearInterval(tick);
   }, []);
 
-  //local time, not UTC. the date underneath has always been local, so reading
-  //the hours in UTC put the two out of step by the whole timezone offset, and
-  //made them disagree outright either side of midnight.
-  //
-  //minutes are padded the same way the date parts are; without it five past
-  //two rendered as "2:5".
-  const time = now.getHours() + ":" + ("0" + now.getMinutes()).slice(-2);
+  //local time, not UTC, and padded minutes — see src/lib/clock.js for what
+  //went wrong with both
+  const time = formatTime(now);
 
   return (
     <div id="clock">
         <div id="time">{time}</div>
         <br/>
         <div id="date">
-            <strong>{(now.toLocaleDateString(getClientLocale(), { weekday: 'short' })) + " " + (("0"+(now.getMonth()+1)).slice(-2)) + "/" +(("0"+now.getDate()).slice(-2))}</strong>
+            <strong>{formatDate(now, getClientLocale())}</strong>
         </div>
         {/*These were the &#8617; and &#9881; entities, which are drawn by
            whichever font on the system happens to carry them — so the arrow and

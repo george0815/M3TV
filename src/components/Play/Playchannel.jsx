@@ -6,6 +6,7 @@ import { StreamsContext } from '../../App';
 import { SettingsContext } from '../../App'; //gets global settings context
 import { soundEffects } from '../../utils';
 import { translations } from '../../misc/translations';
+import { pageCount } from '../../lib/channels';
 
 
 
@@ -49,7 +50,7 @@ function Playchannel() {
       <div id="channelsFooter" className="editMenu">
       
         <button onClick={(() => {if(page > 0){ soundEffects.okSetting.play();  setPage(page - 1)}})} lang="en" className="footerButton channelFooterButton" id="addPBack" style={{left: "15%"}}>{'<'}</button>
-        <button onClick={(() => { if(page < Math.ceil(streams.channels.length / 12) - 1){soundEffects.okSetting.play();  setPage(page + 1)}})} lang="en" className="footerButton channelFooterButton" id="okay">{'>'}</button>
+        <button onClick={(() => { if(page < pageCount(streams.channels.length) - 1){soundEffects.okSetting.play();  setPage(page + 1)}})} lang="en" className="footerButton channelFooterButton" id="okay">{'>'}</button>
   
       </div>
 
