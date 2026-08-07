@@ -17,6 +17,7 @@ import {db, auth} from "./utils"
 //CSS
 import Toasts from "./components/Toasts";
 import { addToast, removeToast, TOAST_MS } from "./lib/toasts";
+import { embedUrl } from "./lib/music";
 import "./styles/General.css";
 import "./styles/Clock.css";
 import "./styles/Buttons.css";
@@ -295,7 +296,15 @@ function App() {
 
         <Toasts/>
 
-        <iframe key={Date()} tabIndex="-1"  id="bgMusic" width="0" height="0" src={settings.music + "?rel=0&autoplay=1&loop=1" + (settings.musicOn ? "" : "&mute=1")} title="YouTube video player" frameBorder="0" allow="autoplay"></iframe> 
+        {/* key={Date()} before, which is a new value in every second — so any
+            render that crossed a second boundary remounted this, reloading the
+            embed and restarting the track from the top. Keyed on the address
+            instead: it changes when the music does and not otherwise.
+
+            allow="autoplay" stays. Firefox logs "skipping unsupported feature
+            name" for it because it has not implemented that permission, but
+            chrome needs it or the track never starts. */}
+        <iframe key={settings.music} tabIndex="-1" id="bgMusic" width="0" height="0" style={{border: 0}} src={embedUrl(settings.music, !settings.musicOn)} title="Background music" allow="autoplay"></iframe>
 
        </ToastContext.Provider>
       </StreamsContext.Provider>
