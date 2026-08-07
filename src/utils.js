@@ -12,7 +12,6 @@ import { useRef, useEffect } from 'react';
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {getFirestore} from "firebase/firestore"
-import Hls from 'hls.js';
 import { translations } from './misc/translations';
 
 //the save rules live in src/lib so they can be loaded without firebase and
@@ -52,6 +51,36 @@ export let soundEffects = {
     splashOut : new Audio(splashOut)
 
 }
+
+/* hls.js is the largest thing left in the bundle and none of it is needed to
+   reach the menu, the settings screens or the add forms — only to play a
+   channel, and not even then on safari and ios, which play HLS through the
+   browser's own pipeline. So it is fetched on demand.
+
+   The promise is cached rather than the module, so two plays in quick
+   succession wait on one download instead of starting two. */
+let hlsLoad = null;
+
+export function loadHls(){
+
+  if(!hlsLoad){ hlsLoad = import('hls.js').then(module => module.default); }
+
+  return hlsLoad;
+
+}
+
+/* Whether this browser needs it at all. Asked of a throwaway element rather
+   than the real player, because this is called before there is one — the grid
+   starts the download on arrival so that playing a channel does not have to
+   wait for it. */
+export function needsHlsJs(){
+
+  const probe = document.createElement("video");
+
+  return !(probe.canPlayType && probe.canPlayType('application/vnd.apple.mpegurl'));
+
+}
+
 
 export let curPlaying = false;
 
@@ -93,6 +122,9 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player, n
     let unmuteLater = false;
     let hls = null;
 
+    //set once exit() has run, so anything still in flight can stand down
+    let tornDown = false;
+
     //optional, and unset by default. streams that send Access-Control-Allow-
     //Origin play directly and never touch this; it exists only as a fallback
     //for the ones that don't. there is no way around it for those: hls.js
@@ -129,6 +161,10 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player, n
         //tearing down still working.
         curPlaying = false;
         setCurPlaying(false);
+
+        //hls.js may still be downloading when this runs; the flag stops the
+        //instance being built after the thing it would attach to has gone
+        tornDown = true;
 
         document.removeEventListener("fullscreenchange", exit);
         if(activeExitHandler === exit){ activeExitHandler = null; }
@@ -249,7 +285,17 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player, n
     //direct attempt fails at the network level — which is what a missing
     //Access-Control-Allow-Origin looks like from in here. without a proxy
     //configured it says so plainly instead of failing silently.
-    function startHls(sourceUrl, viaProxy){
+    async function startHls(sourceUrl, viaProxy){
+
+      /* Already in hand: the channel grid starts this download as soon as it
+         opens, so this awaits a settled promise and resolves on a microtask.
+         It matters that it does — playChannel goes on to call
+         requestFullscreen, which needs the user activation from the click, and
+         activation does not survive a cold download. */
+      const Hls = await loadHls();
+
+      //the viewer left while it was arriving
+      if(tornDown){ return; }
 
       hls = new Hls();
 

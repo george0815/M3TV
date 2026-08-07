@@ -30,7 +30,7 @@ function loadVideojs(){
 import {useFirstRender} from "../../utils";
 import { StreamsContext, ToastContext } from '../../App';
 import { doc, setDoc } from "firebase/firestore"; 
-import {db} from "../../utils"
+import {db, loadHls, needsHlsJs} from "../../utils"
 import { translations } from "../../misc/translations";
 import { matchChannels, pageCount, pageOf } from "../../lib/channels";
 import { addEntry } from "../../lib/streams";
@@ -208,16 +208,23 @@ function Channelwrapper(props){
     //==============================USEEFFECT========================//
 
 
-    /* Fetch video.js on arrival at the grid, not on the click.
+    /* Fetch the player library on arrival at the grid, not on the click.
 
        Waiting for it inside the click handler would spend the user activation
        that requestFullscreen depends on: activation is transient and expires
-       after a few seconds, so a cold download of 688 kB could outlast it and
-       the channel would play windowed instead of fullscreen. Starting here
-       gives it the time it takes to pick a channel, and leaves the click
-       awaiting a promise that has already settled. */
+       after a few seconds, so a cold download could outlast it and the channel
+       would play windowed instead of fullscreen. Starting here gives it the
+       time it takes to pick a channel, and leaves the click awaiting a promise
+       that has already settled.
+
+       Only the one that is actually going to be used — and on safari and ios
+       neither, since those play HLS through the browser's own pipeline and
+       hls.js is never constructed there. */
     useEffect(() => {
+
         if(settings.player === "vjs"){ loadVideojs(); }
+        else if(settings.player === "hls" && needsHlsJs()){ loadHls(); }
+
     }, [settings.player]);
 
 
