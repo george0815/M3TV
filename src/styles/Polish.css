@@ -953,8 +953,13 @@ input:focus-visible + .slider {
      10.5vh because the control measures 67px tall on a 844px viewport and
      sits 12px down — so it ends at 79px, and anything less than about 9.4vh
      still clips it. Estimating this from the padding and font-size gave 7.5vh
-     and left it overlapping by 4px, which is worse than not having tried. */
-  #remBody,
+     and left it overlapping by 4px, which is worse than not having tried.
+
+     :has(), so only the screens that show one pay for it. The two add forms
+     do not — they carry a .editMenu footer with its own Back — and giving
+     them the space anyway pushed the fields off the bottom and made a short
+     form scroll. */
+  #remBody:has(.mobileBack),
   #channelWrapper {
     padding-top: 10.5vh;
   }
@@ -978,6 +983,55 @@ input:focus-visible + .slider {
        footer to the bottom edge is what brought it into view. */
     padding-bottom: 0;
   }
+
+  /* Forms fit the screen they are on.
+
+     #mform is width:100vh — 844px on a phone held upright — and .miscOptions
+     is 35em, which at font-size 3vh comes to 886px. Both are more than twice
+     the width of the device, so the fields ran off the right edge and what
+     was visible was a slice of them sitting off-centre. That is the cramped
+     feeling: not too little room, but boxes built for a room this one is not.
+
+     The search field sets its own width and is more specific, so it keeps
+     it. */
+  #mform,
+  .audioForm {
+    /* the !important answers `width: 100vw !important` in Misc.css, not
+       decoration. 100vw is the whole viewport, and these are content-box with
+       padding on top of it, so the box came out wider than the screen and was
+       then clamped back to something narrower than it started. auto lets the
+       grid column decide, which is the width of the screen. */
+    width: auto !important;
+    max-width: none;
+    justify-self: stretch;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 5vw;
+  }
+
+  .miscOptions {
+    width: 100%;
+    max-width: 100%;
+  }
+
+
+  /* Settings buttons take the height their label needs.
+
+     They were sized as a percentage of their row, so shortening that row —
+     which the padding above does — cut into the text rather than the spacing.
+     "Video and Account" wraps to two lines and wanted 100px inside 82. The
+     other four were unaffected, which is exactly why a percentage was the
+     wrong basis: it holds until one label is longer than the rest, and the
+     translations are not the same length as each other. */
+  #settingsButtonWrapper .settingsButton,
+  #langWrapper .settingsButton,
+  #remChannelWrapper .settingsButton {
+    height: auto;
+    max-height: none;
+    min-height: 0;
+    padding: 1.5vh 2vw;
+  }
+
 
   /* What an empty grid says for itself. Only here — above this width the
      layout is finished and untouched, so the element renders but stays
@@ -1044,20 +1098,24 @@ input:focus-visible + .slider {
     font-size: 2.6vh;
     align-self: center;
 
-    /* the same width as the tiles above, worked out from their own height and
-       ratio so the two cannot drift apart — a row under the grid rather than
-       two pills adrift in it. Without this they collapse to their text. */
-    width: calc(min(29vh, 34vw) * 4 / 3);
+    /* the same width as the tiles above, which are square, so this is their
+       height — a row under the grid rather than two pills adrift in it.
+       Without it they collapse to their text. */
+    width: min(27vh, 45vw);
     min-width: 0;
     max-width: none;
   }
 
-  /* Bigger tiles. The shared rule caps height at 31vw, which on a phone is the
-     limit that binds and leaves a third of the width unused — the cap exists
-     to stop four across overflowing on a wide screen, and there are only two
-     across here. */
+  /* Square, and as big as two across will allow.
+
+     4:3 is the shape of a television and the right one for the menu on a
+     television. On a portrait phone it is the shape that wastes the most: the
+     width is what runs out first, so a wide tile is a short tile, and six
+     short tiles cannot fill a screen half again as tall as it is wide. A
+     square takes the same width and gives back a third more height. */
   .mainPageButton {
-    height: min(29vh, 34vw);
+    aspect-ratio: 1 / 1;
+    height: min(27vh, 45vw);
   }
 
 }
