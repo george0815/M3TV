@@ -132,6 +132,38 @@ function App() {
   const [firstLoad, setFirstLoad] = useState(null);
 
 
+  /* Fetch the play routes before anyone asks for them.
+
+     They are loaded on demand to keep video.js out of the bundle everyone
+     downloads to reach the menu, which is worth doing — but it means the first
+     navigation to one waits on a chunk with nothing on screen at all, since
+     Suspense renders its fallback and the clock bar is inside the route that
+     has not arrived yet. That is the blank on the first visit, and only the
+     first: afterwards the chunk is resolved and nothing suspends.
+
+     So it is fetched while the menu is sitting idle, when there is nothing
+     competing for the connection. By the time a tile is clicked there is
+     usually nothing left to wait for. */
+  useEffect(() => {
+
+    const load = () => {
+      import("./components/Play/Playplaylist");
+      import("./components/Play/Playchannel");
+    };
+
+    //requestIdleCallback is unsupported on safari before 17, so it falls back
+    //to a plain delay long enough to be past the first paint
+    if(window.requestIdleCallback){
+      const id = window.requestIdleCallback(load, { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    }
+
+    const id = window.setTimeout(load, 1500);
+    return () => window.clearTimeout(id);
+
+  }, []);
+
+
   //toasts, in place of window.alert
   const [toasts, setToasts] = useState([]);
 
