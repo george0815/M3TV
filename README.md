@@ -80,6 +80,20 @@ Without a `.env`, Firebase can't initialise and the login/account features won't
 | `npm run dev` | Dev server with hot reload |
 | `npm run build` | Production build into `dist/` |
 | `npm run preview` | Serve the built `dist/` locally |
+| `npm test` | Run the test suites once |
+| `npm run test:watch` | Re-run them as files change |
+
+### Tests
+
+[Vitest](https://vitest.dev/), no browser and no jsdom. The logic worth testing was pulled out of the components into `src/lib/`, which is what the suites import:
+
+| Suite | Covers |
+| --- | --- |
+| `src/lib/entries.test.js` | What counts as a saveable channel or playlist, and whether a chosen file is really an m3u |
+| `src/lib/channels.test.js` | Searching and paging the channel grid, including keeping each result's index in the unfiltered list |
+| `src/lib/streams.test.js` | The add, edit and remove transforms, each of which has to leave the array held in state alone |
+| `src/lib/clock.test.js` | Time and date formatting, run under a fixed `Asia/Kolkata` so a machine set to UTC can't hide a UTC bug |
+| `proxy/test/manifest.test.mjs` | The stream proxy's manifest rewriting and target validation |
 
 ### Firebase
 

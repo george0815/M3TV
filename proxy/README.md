@@ -81,8 +81,10 @@ variant playlists in a master are all rewritten.
 
 ## Tests
 
+Run from the repository root, alongside the app's own suites:
+
 ```bash
-node test/manifest.test.mjs
+npm test
 ```
 
 Covers manifest rewriting and target validation, including that no upstream URL
