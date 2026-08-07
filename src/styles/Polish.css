@@ -962,6 +962,13 @@ input:focus-visible + .slider {
   #remBody:has(.mobileBack),
   #channelWrapper {
     padding-top: 10.5vh;
+
+    /* border-box, or the padding is added to a height that is already the
+       whole screen and the element ends up taller than the viewport — the
+       same fault .playVid had with its bottom padding. Everything inside then
+       fills a box that overhangs, which is what made the settings lists
+       scroll once they started using their full height. */
+    box-sizing: border-box;
   }
 
 
@@ -1012,6 +1019,102 @@ input:focus-visible + .slider {
   .miscOptions {
     width: 100%;
     max-width: 100%;
+  }
+
+
+  /* The settings screens were living in 60% of the phone.
+
+     #remBody is grid-template-rows: 60% 40%, and on most of these screens the
+     second row holds #bButtonWrapper — which is display:none here. So two
+     fifths of the screen was reserved for something that never rendered, and
+     every settings list was squeezed into the rest with the slack piling up
+     underneath it. The add forms are the exception: their footer is .editMenu
+     and does show, which `auto` gives it. */
+  #remBody {
+    grid-template-rows: 1fr auto;
+  }
+
+  /* and with the height back, the lists use it. They are already
+     repeat(5, 1fr) — the rows simply had nothing to divide.
+
+     Each button is wrapped in a <Link>, so the anchors are the grid items and
+     the anchors are what stretch; align-self on the button reached nothing.
+     min-height rather than height, so a label that needs more than its row —
+     three lines in some translation — grows instead of being cut off, which
+     is the fault this file has already fixed once. */
+  #settingsButtonWrapper > a,
+  #langWrapper > a {
+    display: flex;
+  }
+
+  /* #langWrapper is a flex column rather than a grid, so there are no rows to
+     divide — the anchors have to take the share themselves, or eight buttons
+     each claiming the full height overflow it. */
+  #langWrapper > a {
+    flex: 1;
+    min-height: 0;
+  }
+
+  #settingsButtonWrapper .settingsButton {
+    min-height: 100%;
+  }
+
+  #settingsButtonWrapper .settingsButton,
+  #langWrapper .settingsButton {
+    flex: 1;
+
+    /* the 3% top margin every button carries was being added on top of a row
+       the button already fills, which is five rows' worth of overflow. The
+       spacing is row-gap's job now. */
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* and the wrapper fills its row exactly rather than overhanging it: 96%
+     height plus 15% bottom padding plus a 5vh bottom margin came to more than
+     the screen before anything was in it. */
+  #settingsButtonWrapper,
+  #langWrapper {
+    height: 100%;
+    max-height: 100% !important;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    row-gap: 1.2vh;
+
+    /* border-box again. This stylesheet is content-box throughout, so every
+       `height: 100%` with padding on it comes out taller than the box it is
+       filling — .playVid by 21px, #remBody by 89px, and this by the 17px that
+       was cutting the last language off the bottom. */
+    box-sizing: border-box;
+  }
+
+
+  /* The player dropdown was 78px wide, cutting "hls.js" to "hls.j".
+
+     #player sets width: 20vw, and an id beats the class rule above it — on a
+     phone that is a fifth of 390px. It reads as a broken control rather than a
+     narrow one. */
+  #player {
+    width: 100%;
+  }
+
+
+  /* "Continue with Google" was breaking across three lines.
+
+     The button was exactly 175px because `button { min-width: 45vw
+     !important }` in Misc.css was setting its width outright — 45vw is a
+     sensible floor for a menu button and a ceiling for nothing. */
+  #googleButton {
+    min-width: 0 !important;
+    width: 100%;
+    max-width: none;
+  }
+
+  /* three buttons at 45vw each cannot sit in one row 293px wide; they were
+     each wrapping to two lines to fit */
+  #buttonRow {
+    flex-wrap: wrap;
+    gap: 1vh;
   }
 
 
@@ -1101,7 +1204,7 @@ input:focus-visible + .slider {
     /* the same width as the tiles above, which are square, so this is their
        height — a row under the grid rather than two pills adrift in it.
        Without it they collapse to their text. */
-    width: min(27vh, 45vw);
+    width: calc(min(30vh, 60vw) * 3 / 4);
     min-width: 0;
     max-width: none;
   }
@@ -1112,10 +1215,12 @@ input:focus-visible + .slider {
      television. On a portrait phone it is the shape that wastes the most: the
      width is what runs out first, so a wide tile is a short tile, and six
      short tiles cannot fill a screen half again as tall as it is wide. A
-     square takes the same width and gives back a third more height. */
+     square takes the same width and gives back a third more height — and a
+     tile taller than it is wide gives back more still, which is what a screen
+     half again as tall as it is wide has to spare. */
   .mainPageButton {
-    aspect-ratio: 1 / 1;
-    height: min(27vh, 45vw);
+    aspect-ratio: 3 / 4;
+    height: min(30vh, 60vw);
   }
 
 }
