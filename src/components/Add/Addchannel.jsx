@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'; //react
+import {useState, useContext} from 'react'; //react
 import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
 import { StreamsContext } from '../../App';

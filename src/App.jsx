@@ -1,4 +1,4 @@
-import React, {useState, useEffect, createContext, lazy, Suspense} from 'react'; //react
+import {useState, useEffect, createContext, lazy, Suspense} from 'react'; //react
 //Components
 import Mainpage from './components/Mainpage';
 import Addplaylist from './components/Add/Addplaylist';

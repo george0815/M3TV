@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import {useState, useEffect, useContext} from "react";
 import { curPlaying, soundEffects } from "../../utils";
 import { SettingsContext } from '../../App'; //gets global settings context
 import videojs from "video.js";

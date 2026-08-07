@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; //react
+import { useState, useEffect } from 'react'; //react
 import {Link} from 'react-router-dom'// react router
 import { soundEffects } from '../utils';
 import { formatTime, formatDate, getClientLocale } from '../lib/clock';

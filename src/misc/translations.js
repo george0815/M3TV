@@ -76,7 +76,6 @@ export const translations =
 
 
         //ALERTS
-        noInput: "Please fill out the required fields",
         needTitle: "Give this a name before saving it.",
         needUrl: "Enter a URL before saving.",
         badUrl: "That does not look like a link. It should start with http:// or https://",
@@ -168,7 +167,6 @@ export const translations =
         createdBy: "Creado por George S.",
 
         //ALERTS
-        noInput: "Por favor, complete los campos requeridos",
         needTitle: "Ponle un nombre antes de guardarlo.",
         needUrl: "Introduce una URL antes de guardar.",
         badUrl: "Eso no parece un enlace. Debe empezar por http:// o https://",
@@ -260,7 +258,6 @@ export const translations =
         createdBy: "Créé par George S.",
 
         //ALERTS
-        noInput: "Veuillez remplir les champs obligatoires",
         needTitle: "Donnez-lui un nom avant de l'enregistrer.",
         needUrl: "Saisissez une URL avant d'enregistrer.",
         badUrl: "Cela ne ressemble pas à un lien. Il doit commencer par http:// ou https://",
@@ -353,7 +350,6 @@ export const translations =
         createdBy: "Erstellt von George S.",
 
         //ALERTS
-        noInput: "Bitte füllen Sie die Pflichtfelder aus",
         needTitle: "Geben Sie einen Namen ein, bevor Sie speichern.",
         needUrl: "Geben Sie eine URL ein, bevor Sie speichern.",
         badUrl: "Das sieht nicht nach einem Link aus. Er sollte mit http:// oder https:// beginnen",
@@ -447,7 +443,6 @@ export const translations =
 
 
         //ALERTS
-        noInput: "يرجى ملء الحقول المطلوبة",
         needTitle: "أعطِ هذا اسمًا قبل الحفظ.",
         needUrl: "أدخل رابطًا قبل الحفظ.",
         badUrl: "لا يبدو هذا رابطًا. يجب أن يبدأ بـ http:// أو https://",
@@ -541,7 +536,6 @@ export const translations =
 
 
         //ALERTS
-        noInput: "Пожалуйста, заполните обязательные поля",
         needTitle: "Дайте название, прежде чем сохранять.",
         needUrl: "Введите URL, прежде чем сохранять.",
         badUrl: "Это не похоже на ссылку. Она должна начинаться с http:// или https://",
@@ -634,7 +628,6 @@ export const translations =
         createdBy: "创建者：George S.",
 
         //ALERTS
-        noInput: "请填写必填字段",
         needTitle: "保存前请先命名。",
         needUrl: "保存前请输入网址。",
         badUrl: "这看起来不像链接。它应以 http:// 或 https:// 开头",
@@ -728,7 +721,6 @@ export const translations =
 
 
         //ALERTS
-        noInput: "必須項目を入力してください",
         needTitle: "保存する前に名前を付けてください。",
         needUrl: "保存する前に URL を入力してください。",
         badUrl: "リンクではないようです。http:// または https:// で始まる必要があります",

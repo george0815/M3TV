@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'; //react
+import {useContext, useState} from 'react'; //react
 import Clock from '../Clock';
 import {soundEffects } from '../../utils'; //import sound effects
 import Channelwrapper from './Channelwrapper';
@@ -77,21 +77,21 @@ function Playplaylist() {
     //plays sound effect
     soundEffects.okChannel.play();
 
-    //parse channels from playlist url
-    let urlTemp = url;
+    /* A local playlist already is the file's text — it was read off disk when
+       it was saved — so there is nothing to go and get. This used to call
+       translate() on it regardless and throw the answer away, which meant
+       fetching the entire playlist body as though it were a url. It only
+       looked harmless because the hosting rewrites anything unrecognised to
+       index.html with a 200, so the request "succeeded" and the result was
+       discarded a line later. Off the deployed site it would fail, retry
+       through the proxy, and end at the invalid-url alert. */
+    let promise = isLocal ? Promise.resolve(url) : translate(url);
 
-    let promise = translate(url);
-    promise.then((url) => {
-
-      //  isLocal = true;
-      if(isLocal){
-        url = urlTemp;
-      }
-
+    promise.then((text) => {
 
       //parses m3u file
       var parser = new M3U8FileParser();
-      parser.read(url);
+      parser.read(text);
 
       try{
         //loads channels, giving every segment something renderable — see

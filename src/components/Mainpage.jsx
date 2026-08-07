@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import {useContext, useState} from "react";
 import Clock from "./Clock"
 import {useNavigate} from 'react-router-dom'; //gets link from react router
 import "../styles/General.css";
@@ -31,8 +31,10 @@ function Mainpage(props) {
     const [showSplash, setShowSplash] = useState(true);
 
 
-    //fixes bug where splash screen would reappear when going back to main page from another menu
-    const [dontShow, setDontShow] = useState(sessionStorage.getItem("splash") !== null ? sessionStorage.getItem("splash") : false);
+    //fixes bug where splash screen would reappear when going back to main page
+    //from another menu. read once on mount and never set again — the flag is
+    //written to sessionStorage by hideSplashScreen, not through react state
+    const [dontShow] = useState(sessionStorage.getItem("splash") !== null ? sessionStorage.getItem("splash") : false);
 
 
   //===========================FUNCTIONS====================//

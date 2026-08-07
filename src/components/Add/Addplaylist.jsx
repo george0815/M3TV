@@ -1,4 +1,4 @@
-import React, {useState, useRef, useContext} from 'react'; //react
+import {useState, useRef, useContext} from 'react'; //react
 import {soundEffects, validateEntry, looksLikePlaylist, MAX_PLAYLIST_BYTES} from "../../utils"
 import { addEntry, replaceEntry, removeEntry } from "../../lib/streams";
 import { translations } from "../../misc/translations";

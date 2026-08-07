@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'; //react
+import {useState, useContext} from 'react'; //react
 import Clock from '../Clock'; //clock compoenent
 import { playChannel } from '../../utils';
 import Channelwrapper from './Channelwrapper';
