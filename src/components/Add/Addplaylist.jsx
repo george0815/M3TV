@@ -58,7 +58,10 @@ function Addplaylist(props) {
   //===========================FUNCTIONS=========================//
 
   //REF FOR FILEINPUT
-  const ref = useRef();
+  //given its initial value explicitly: React 19 requires an argument to
+  //useRef, and while that is only enforced by the types it is the one place
+  //here that was relying on the old signature
+  const ref = useRef(null);
 
 
   //SETS UP TEMP PLAYLIST
