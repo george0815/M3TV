@@ -93,7 +93,8 @@ export const translations =
 
         //DELETE ACCOUNT
         deleteAccount: "Delete account",
-        deleteWarning: "This deletes your account and every channel and playlist saved to it. It cannot be undone.",
+        resetEmailSent: "Password reset email sent.",
+        deleteWarning: "Deletes your account and everything saved to it. Press again to confirm.",
         confirmPassword: "Enter your password to confirm",
         deleteConfirm: "Delete permanently",
         cancel: "Cancel",
@@ -197,7 +198,8 @@ export const translations =
 
         //DELETE ACCOUNT
         deleteAccount: "Eliminar cuenta",
-        deleteWarning: "Esto elimina tu cuenta y todos los canales y listas de reproducción guardados en ella. No se puede deshacer.",
+        resetEmailSent: "Correo de restablecimiento de contraseña enviado.",
+        deleteWarning: "Elimina tu cuenta y todo lo guardado en ella. Pulsa de nuevo para confirmar.",
         confirmPassword: "Introduce tu contraseña para confirmar",
         deleteConfirm: "Eliminar permanentemente",
         cancel: "Cancelar",
@@ -301,7 +303,8 @@ export const translations =
 
         //DELETE ACCOUNT
         deleteAccount: "Supprimer le compte",
-        deleteWarning: "Cela supprime votre compte ainsi que toutes les chaînes et listes de lecture qui y sont enregistrées. Cette action est irréversible.",
+        resetEmailSent: "E-mail de réinitialisation du mot de passe envoyé.",
+        deleteWarning: "Supprime votre compte et tout ce qui y est enregistré. Appuyez à nouveau pour confirmer.",
         confirmPassword: "Saisissez votre mot de passe pour confirmer",
         deleteConfirm: "Supprimer définitivement",
         cancel: "Annuler",
@@ -406,7 +409,8 @@ export const translations =
 
         //DELETE ACCOUNT
         deleteAccount: "Konto löschen",
-        deleteWarning: "Dadurch werden Ihr Konto und alle darin gespeicherten Kanäle und Wiedergabelisten gelöscht. Dies kann nicht rückgängig gemacht werden.",
+        resetEmailSent: "E-Mail zum Zurücksetzen des Passworts gesendet.",
+        deleteWarning: "Löscht Ihr Konto und alles darin Gespeicherte. Zum Bestätigen erneut drücken.",
         confirmPassword: "Geben Sie zur Bestätigung Ihr Passwort ein",
         deleteConfirm: "Endgültig löschen",
         cancel: "Abbrechen",
@@ -512,7 +516,8 @@ export const translations =
 
         //DELETE ACCOUNT
         deleteAccount: "حذف الحساب",
-        deleteWarning: "سيؤدي هذا إلى حذف حسابك وجميع القنوات وقوائم التشغيل المحفوظة فيه. لا يمكن التراجع عن ذلك.",
+        resetEmailSent: "تم إرسال رسالة إعادة تعيين كلمة المرور.",
+        deleteWarning: "يحذف حسابك وكل ما هو محفوظ فيه. اضغط مرة أخرى للتأكيد.",
         confirmPassword: "أدخل كلمة المرور للتأكيد",
         deleteConfirm: "حذف نهائي",
         cancel: "إلغاء",
@@ -618,7 +623,8 @@ export const translations =
 
         //DELETE ACCOUNT
         deleteAccount: "Удалить аккаунт",
-        deleteWarning: "Это удалит ваш аккаунт и все сохранённые в нём каналы и плейлисты. Отменить это будет нельзя.",
+        resetEmailSent: "Письмо для сброса пароля отправлено.",
+        deleteWarning: "Удаляет ваш аккаунт и всё сохранённое в нём. Нажмите ещё раз для подтверждения.",
         confirmPassword: "Введите пароль для подтверждения",
         deleteConfirm: "Удалить навсегда",
         cancel: "Отмена",
@@ -723,7 +729,8 @@ export const translations =
 
         //DELETE ACCOUNT
         deleteAccount: "删除账户",
-        deleteWarning: "这将删除您的账户以及其中保存的所有频道和播放列表。此操作无法撤销。",
+        resetEmailSent: "密码重置邮件已发送。",
+        deleteWarning: "将删除您的账户及其中保存的所有内容。请再次点击以确认。",
         confirmPassword: "请输入密码以确认",
         deleteConfirm: "永久删除",
         cancel: "取消",
@@ -829,7 +836,8 @@ export const translations =
 
         //DELETE ACCOUNT
         deleteAccount: "アカウントを削除",
-        deleteWarning: "アカウントと、そこに保存されているすべてのチャンネルとプレイリストが削除されます。元に戻すことはできません。",
+        resetEmailSent: "パスワード再設定メールを送信しました。",
+        deleteWarning: "アカウントと保存されたすべての内容を削除します。もう一度押して確定してください。",
         confirmPassword: "確認のためパスワードを入力してください",
         deleteConfirm: "完全に削除",
         cancel: "キャンセル",

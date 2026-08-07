@@ -1,4 +1,4 @@
-import {useState, useEffect, createContext, lazy, Suspense} from 'react'; //react
+import {useState, useEffect, useRef, useCallback, createContext, lazy, Suspense} from 'react'; //react
 //Components
 import Mainpage from './components/Mainpage';
 import Addplaylist from './components/Add/Addplaylist';
@@ -15,6 +15,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import {db, auth} from "./utils"
 //CSS
+import Toasts from "./components/Toasts";
+import { addToast, removeToast, TOAST_MS } from "./lib/toasts";
 import "./styles/General.css";
 import "./styles/Clock.css";
 import "./styles/Buttons.css";
@@ -75,6 +77,13 @@ export const StreamsContext = createContext(localStorage.getItem("streams") ? JS
 
 });
 
+/* Everything that used to be a window.alert now goes through here.
+
+   notify(message, tone) from anywhere inside the tree; "danger" for something
+   that went wrong, anything else for something that went right. The queue
+   rules — no duplicates, at most three, newest wins — live in src/lib/toasts.js. */
+export const ToastContext = createContext({ toasts: [], notify: () => {}, dismiss: () => {} });
+
 
 
  
@@ -120,6 +129,34 @@ function App() {
 
   //used for making sure the splash screen isn't rendered everytime
   const [firstLoad, setFirstLoad] = useState(null);
+
+
+  //toasts, in place of window.alert
+  const [toasts, setToasts] = useState([]);
+
+  //ids only have to be unique among the handful on screen at once
+  const nextToastId = useRef(0);
+
+  const dismiss = useCallback((id) => {
+    setToasts(current => removeToast(current, id));
+  }, []);
+
+  /* Stable, because it is handed to playChannel() in utils.js, which attaches
+     the handlers that outlive the render that made them. A new function every
+     render would mean the one captured down there aged out of date. */
+  const notify = useCallback((message, tone) => {
+
+    if(!message){ return; }
+
+    const id = ++nextToastId.current;
+
+    setToasts(current => addToast(current, { id, message: String(message), tone }));
+
+    //every toast times out; dismissing by hand just gets there first, and
+    //removeToast is by id so the timer firing afterwards is harmless
+    window.setTimeout(() => setToasts(current => removeToast(current, id)), TOAST_MS);
+
+  }, []);
 
 
   //gets playlist and channel data
@@ -236,6 +273,7 @@ function App() {
     <SettingsContext.Provider value={{settings, setSettings}}>
 
       <StreamsContext.Provider value={{streams, setStreams}}>
+       <ToastContext.Provider value={{toasts, notify, dismiss}}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Mainpage firstLoad={firstLoad} setFirstLoad={setFirstLoad}/>}/>
@@ -255,8 +293,11 @@ function App() {
           </Routes>
         </BrowserRouter>
 
+        <Toasts/>
+
         <iframe key={Date()} tabIndex="-1"  id="bgMusic" width="0" height="0" src={settings.music + "?rel=0&autoplay=1&loop=1" + (settings.musicOn ? "" : "&mute=1")} title="YouTube video player" frameBorder="0" allow="autoplay"></iframe> 
 
+       </ToastContext.Provider>
       </StreamsContext.Provider>
     </SettingsContext.Provider>
 

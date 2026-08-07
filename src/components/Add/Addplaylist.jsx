@@ -3,7 +3,7 @@ import {soundEffects, validateEntry, looksLikePlaylist, MAX_PLAYLIST_BYTES} from
 import { addEntry, replaceEntry, removeEntry } from "../../lib/streams";
 import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
-import { StreamsContext } from '../../App';
+import { StreamsContext, ToastContext } from '../../App';
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from "../../utils"
 
@@ -18,6 +18,10 @@ function Addplaylist(props) {
 
   //global settings
   const {settings} = useContext(SettingsContext);
+
+  //toasts, in place of the alerts these paths used to raise
+  const {notify} = useContext(ToastContext);
+
 
 
   //sets up album state
@@ -84,7 +88,7 @@ function Addplaylist(props) {
       //document or localStorage — so reading a video in as a string first and
       //discovering the problem at save time helps nobody.
       if(file.size > MAX_PLAYLIST_BYTES){
-        window.alert(translations[settings.lang].fileTooBig);
+        notify(translations[settings.lang].fileTooBig, "danger");
         return;
       }
 
@@ -92,7 +96,7 @@ function Addplaylist(props) {
       var reader = new FileReader();
 
       reader.onerror = () => {
-        window.alert(translations[settings.lang].notAPlaylist);
+        notify(translations[settings.lang].notAPlaylist, "danger");
       };
 
       reader.readAsText(file,'UTF-8');
@@ -105,7 +109,7 @@ function Addplaylist(props) {
         //files" — so the contents are what actually decide. Deliberately loose:
         //see looksLikePlaylist, a headerless list of urls is still valid m3u.
         if(!looksLikePlaylist(content)){
-          window.alert(translations[settings.lang].notAPlaylist);
+          notify(translations[settings.lang].notAPlaylist, "danger");
           return;
         }
 
@@ -123,7 +127,7 @@ function Addplaylist(props) {
         );
 
         if(problem){
-          window.alert(translations[settings.lang][problem]);
+          notify(translations[settings.lang][problem], "danger");
           return;
         }
 
@@ -172,7 +176,7 @@ function Addplaylist(props) {
     }
     catch (error) {
       console.error("could not save playlists:", error);
-      window.alert(translations[settings.lang].saveFailed);
+      notify(translations[settings.lang].saveFailed, "danger");
       return false;
     }
 
@@ -183,6 +187,12 @@ function Addplaylist(props) {
      was the only signal before, which reads as the app having forgotten the
      entry rather than having stored it. */
   function flashSaved(){
+
+    //the confirmation itself goes through the shared stack, so it cannot land
+    //on top of an error toast arriving at the same moment. `saved` stays for
+    //the field flush below, which is a different signal in a different place.
+    notify(translations[settings.lang].saved);
+
     setSaved(true);
     window.setTimeout(() => setSaved(false), 1900);
   }
@@ -210,7 +220,7 @@ function Addplaylist(props) {
       //the url does not exist yet, and asking for a file first and rejecting the
       //name afterwards wastes the trip through the picker
       if(!input.title.trim()){
-        window.alert(translations[settings.lang].needTitle);
+        notify(translations[settings.lang].needTitle, "danger");
         return;
       }
 
@@ -230,7 +240,7 @@ function Addplaylist(props) {
         );
 
         if(problem){
-          window.alert(translations[settings.lang][problem]);
+          notify(translations[settings.lang][problem], "danger");
           return;
         }
 
@@ -281,7 +291,7 @@ function Addplaylist(props) {
     const problem = validateEntry(input, streams.playlists, props.index);
 
     if(problem){
-      window.alert(translations[settings.lang][problem]);
+      notify(translations[settings.lang][problem], "danger");
       return;
     }
 
@@ -392,7 +402,6 @@ function Addplaylist(props) {
          is listed because plenty of providers serve playlists as .txt.*/}
       <input id="fileInput" type='file' accept=".m3u,.m3u8,.txt,audio/x-mpegurl,application/vnd.apple.mpegurl,text/plain" ref={ref} onChange={((e) =>{onInputClick(e)})}></input>
 
-      {saved && <div className="saveToast" role="status">{translations[settings.lang].saved}</div>}
     </div>
   );
 }

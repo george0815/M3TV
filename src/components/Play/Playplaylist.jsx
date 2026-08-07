@@ -6,7 +6,7 @@ import M3U8FileParser from 'm3u8-file-parser/src/reader';
 import { playChannel } from '../../utils';
 import { translations } from '../../misc/translations';
 import { StreamsContext } from '../../App';
-import { SettingsContext } from '../../App';
+import { SettingsContext, ToastContext } from '../../App';
 import { normaliseSegments, isUsablePlaylist } from '../../lib/streams';
 import { pageCount } from '../../lib/channels';
 
@@ -21,6 +21,10 @@ function Playplaylist() {
 
   //settings
   const {settings} = useContext(SettingsContext);
+
+  //toasts, in place of the alerts these paths used to raise
+  const {notify} = useContext(ToastContext);
+
 
 
   //============================STATE============================//
@@ -108,7 +112,7 @@ function Playplaylist() {
         setIsPlaylist(true)
       }
       catch (e) {
-        window.alert(e);
+        notify(String(e && e.message ? e.message : e), "danger");
       }
 
       
@@ -116,7 +120,7 @@ function Playplaylist() {
 
 
     }).catch(() => {
-      window.alert(translations[settings.lang].invalidUrl);
+      notify(translations[settings.lang].invalidUrl, "danger");
     });
 
   }

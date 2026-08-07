@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react'; //react
+import {useContext, useState, useRef, useEffect} from 'react'; //react
 import { translations } from '../../misc/translations';
 import { SettingsContext } from '../../App'; //gets global settings context
 import { soundEffects } from '../../utils';
@@ -8,7 +8,7 @@ import {createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailA
         deleteUser, reauthenticateWithCredential, EmailAuthProvider} from "firebase/auth";
 import {doc, deleteDoc} from "firebase/firestore";
 import {auth, db} from "../../utils";
-import { StreamsContext } from '../../App';
+import { StreamsContext, ToastContext } from '../../App';
 import { deleteAccount } from '../../lib/account';
 
 
@@ -24,6 +24,10 @@ function Login(){
   //global streams
   const {setStreams} = useContext(StreamsContext);
 
+  //toasts, in place of the alerts these paths used to raise
+  const {notify} = useContext(ToastContext);
+
+
 
   //whether the delete-account confirmation is open. Deleting is irreversible
   //and sits on the same screen as the logout button, so it takes two
@@ -34,6 +38,17 @@ function Login(){
   //click cannot start a second attempt against a session the first one is
   //already tearing down
   const [deleting, setDeleting] = useState(false);
+
+  /* Whether the delete button is armed. The warning used to sit inside the
+     panel as a paragraph, where it was long enough to run off the side of the
+     screen. As a toast it is out of the layout altogether, and it arrives at
+     the moment it matters — on the press that would otherwise have deleted
+     the account — rather than sitting there being read past. */
+  const [armed, setArmed] = useState(false);
+
+  //the toast disarms itself, so walking away from a half-pressed delete does
+  //not leave it primed for whoever sits down next
+  const armedTimer = useRef(null);
 
 
 //===================================FUNCTIONS=========================//
@@ -75,11 +90,11 @@ function register(){
           switch (error.code) {
             case 'auth/email-already-in-use':
               //don't quietly log them in — they asked to create an account
-              window.alert(translations[settings.lang].accountExists);
+              notify(translations[settings.lang].accountExists, "danger");
               break;
             default:
               //display error alert
-              window.alert("Error: " + error.message + "\nCode: " + error.code);
+              notify(error.message, "danger");
               break;
           }
 
@@ -117,11 +132,11 @@ function register(){
          case 'auth/invalid-credential':
          case 'auth/user-not-found':
          case 'auth/wrong-password':
-           window.alert(translations[settings.lang].loginFailed);
+           notify(translations[settings.lang].loginFailed, "danger");
            break;
          default:
            //display error alert
-           window.alert("Error: " + error.message + "\nCode: " + error.code);
+           notify(error.message, "danger");
            break;
        }
 
@@ -166,6 +181,34 @@ function register(){
   }
 
 
+  function disarm(){
+    window.clearTimeout(armedTimer.current);
+    armedTimer.current = null;
+    setArmed(false);
+  }
+
+  //a timer outliving the component would call setArmed on something that is
+  //no longer mounted
+  useEffect(() => () => window.clearTimeout(armedTimer.current), []);
+
+
+  /* First press arms and says what is about to happen; the second press does
+     it. Both presses are on the same button, so the warning cannot be clicked
+     past without reading where it is — the pointer is already there. */
+  function pressDelete(){
+
+    if(armed){
+      disarm();
+      removeAccount();
+      return;
+    }
+
+    setArmed(true);
+    armedTimer.current = window.setTimeout(() => { armedTimer.current = null; setArmed(false); }, 6000);
+
+  }
+
+
   /* Deletes the account and everything saved to it.
 
      The sequence lives in src/lib/account.js — the order is load-bearing and
@@ -182,14 +225,14 @@ function register(){
     //the persisted flag can outlive the session — App.jsx reconciles the two
     //on load, but the button is on screen in the meantime
     if(!user){
-      window.alert(translations[settings.lang].deleteReauthFailed);
+      notify(translations[settings.lang].deleteReauthFailed, "danger");
       return;
     }
 
     const password = document.getElementById("deletePassword").value;
 
     if(!password){
-      window.alert(translations[settings.lang].confirmPassword);
+      notify(translations[settings.lang].confirmPassword, "danger");
       return;
     }
 
@@ -221,7 +264,7 @@ function register(){
 
     }
 
-    window.alert(translations[settings.lang][result.reason]);
+    notify(translations[settings.lang][result.reason], result.ok ? undefined : "danger");
 
   }
 
@@ -234,10 +277,10 @@ function register(){
     let email = document.getElementById("email").value;
 
     sendPasswordResetEmail(auth, email)
-      .then(() => { window.alert("Password reset email sent!");})
+      .then(() => { notify(translations[settings.lang].resetEmailSent);})
       .catch((error) => {
          //display error alert
-         window.alert("Error: " + error.message + "\nCode: " + error.code);
+         notify(error.message, "danger");
         // ..
       });
 
@@ -275,8 +318,6 @@ function register(){
               {settings.loggedIn && confirmingDelete &&
                 <div id="deleteConfirm">
 
-                  <div lang={[settings.lang]} className="label deleteWarning">{translations[settings.lang].deleteWarning}</div>
-
                   <div className="inputContainer">
                     <label tabIndex="-1" lang={[settings.lang]} htmlFor="deletePassword" className="label mlabel">{translations[settings.lang].confirmPassword}</label>
                     {/*a real password field, so it is masked and the browser's
@@ -286,11 +327,15 @@ function register(){
                   </div>
 
                   <div id="buttonRow">
-                    <button lang={[settings.lang]} onClick={(()=>{soundEffects.backSetting.play(); setConfirmingDelete(false)})} className="settingsButton loginButton">{translations[settings.lang].cancel}</button>
-                    <button lang={[settings.lang]} disabled={deleting} onClick={(()=>{soundEffects.okSetting.play(); removeAccount()})} className="settingsButton loginButton dangerButton">{translations[settings.lang].deleteConfirm}</button>
+                    <button lang={[settings.lang]} onClick={(()=>{soundEffects.backSetting.play(); disarm(); setConfirmingDelete(false)})} className="settingsButton loginButton">{translations[settings.lang].cancel}</button>
+                    <button lang={[settings.lang]} disabled={deleting} onClick={(()=>{soundEffects.okSetting.play(); pressDelete()})} className={armed ? "settingsButton loginButton dangerButton armed" : "settingsButton loginButton dangerButton"}>{translations[settings.lang].deleteConfirm}</button>
                   </div>
 
                 </div>}
+
+              {/*The warning, at the moment it applies. Fixed to the viewport,
+                 so its length is no longer the layout's problem.*/}
+              {armed && <div lang={[settings.lang]} className="saveToast warningToast" role="alert">{translations[settings.lang].deleteWarning}</div>}
           </div>
 
 

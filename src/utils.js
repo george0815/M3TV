@@ -83,7 +83,11 @@ export function useFirstRender() {
 } 
 
 //PLAYS CHANNEL
-export function playChannel(url, setCurPlaying, settings, setSettings, player){
+/* `notify` is the toast function from App's ToastContext, passed in because
+   this is not a component and cannot reach the context itself. It is optional:
+   the playlist screen hands playPlaylist() to the same prop with a different
+   signature, so nothing here may assume it arrived. */
+export function playChannel(url, setCurPlaying, settings, setSettings, player, notify){
 
     const videoPlayer = settings.player;
     let unmuteLater = false;
@@ -220,10 +224,19 @@ export function playChannel(url, setCurPlaying, settings, setSettings, player){
     //got there, run it directly.
     function giveUp(){
 
-      if(document.fullscreenElement){ document.exitFullscreen().catch(() => {}); }
-      else { exit(); }
+      /* A toast is part of the page, and while anything is fullscreen the page
+         is not painted — only the fullscreen element and its descendants are.
+         window.alert was drawn by the browser itself and did not care; a toast
+         raised here would sit behind the video and time out unseen. So it
+         waits for the exit instead of racing it. */
+      const say = () => {
+        if(notify){ notify(translations[settings.lang].streamBlocked, "danger"); }
+      };
 
-      window.alert(translations[settings.lang].streamBlocked);
+      if(document.fullscreenElement){
+        document.exitFullscreen().then(say).catch(() => { exit(); say(); });
+      }
+      else { exit(); say(); }
 
     }
 

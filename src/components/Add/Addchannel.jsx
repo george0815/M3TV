@@ -1,7 +1,7 @@
 import {useState, useContext} from 'react'; //react
 import { translations } from "../../misc/translations";
 import { SettingsContext } from '../../App'; //gets global settings context
-import { StreamsContext } from '../../App';
+import { StreamsContext, ToastContext } from '../../App';
 import {soundEffects, validateEntry} from "../../utils";
 import { addEntry, replaceEntry, removeEntry } from "../../lib/streams";
 import { doc, setDoc } from "firebase/firestore"; 
@@ -20,6 +20,10 @@ function Addchannel(props) {
 
   //global streams
   const {streams, setStreams} = useContext(StreamsContext);
+
+  //toasts, in place of the alerts these paths used to raise
+  const {notify} = useContext(ToastContext);
+
 
  
    
@@ -74,7 +78,7 @@ function Addchannel(props) {
     const problem = validateEntry(input, streams.channels);
 
     if(problem){
-      window.alert(translations[settings.lang][problem]);
+      notify(translations[settings.lang][problem], "danger");
       return;
     }
 
@@ -126,7 +130,7 @@ function Addchannel(props) {
     }
     catch (error) {
       console.error("could not save channels:", error);
-      window.alert(translations[settings.lang].saveFailed);
+      notify(translations[settings.lang].saveFailed, "danger");
       return false;
     }
 
@@ -137,6 +141,12 @@ function Addchannel(props) {
      was the only signal before, which reads as the app having forgotten the
      entry rather than having stored it. */
   function flashSaved(){
+
+    //the confirmation itself goes through the shared stack, so it cannot land
+    //on top of an error toast arriving at the same moment. `saved` stays for
+    //the field flush below, which is a different signal in a different place.
+    notify(translations[settings.lang].saved);
+
     setSaved(true);
     window.setTimeout(() => setSaved(false), 1900);
   }
@@ -160,7 +170,7 @@ function Addchannel(props) {
     const problem = validateEntry(input, streams.channels, props.index);
 
     if(problem){
-      window.alert(translations[settings.lang][problem]);
+      notify(translations[settings.lang][problem], "danger");
       return;
     }
 
@@ -245,7 +255,6 @@ function Addchannel(props) {
       </div>
 
 
-      {saved && <div className="saveToast" role="status">{translations[settings.lang].saved}</div>}
 
       <div  id="bButtonWrapper" className="editMenu">
           <button onClick={(typeof props.index !== "undefined" && props.index <= streams.channels.length - 1)  ? editChannel : (()=>{ soundEffects.backMain.play(); window.history.back()})} lang={[settings.lang]} className="footerButton" id="addCBack" style={{left: "15%"}}>{translations[settings.lang].back}</button>

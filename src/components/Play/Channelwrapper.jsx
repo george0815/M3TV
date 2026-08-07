@@ -7,7 +7,7 @@ import videojs from "video.js";
 //the control bar renders as a column of full width menu buttons.
 import "video.js/dist/video-js.css";
 import {useFirstRender} from "../../utils";
-import { StreamsContext } from '../../App';
+import { StreamsContext, ToastContext } from '../../App';
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from "../../utils"
 import { translations } from "../../misc/translations";
@@ -26,6 +26,10 @@ function Channelwrapper(props){
 
     //global settings
     const {settings, setSettings} = useContext(SettingsContext);
+
+  //toasts, in place of the alerts these paths used to raise
+  const {notify} = useContext(ToastContext);
+
 
     //==============================STATE========================//
 
@@ -179,7 +183,7 @@ function Channelwrapper(props){
 
 
 
-            props.play(props.data[curIndex].url, props.setCurPlaying, settings, setSettings, player);
+            props.play(props.data[curIndex].url, props.setCurPlaying, settings, setSettings, player, notify);
 
 
 

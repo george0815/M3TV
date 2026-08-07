@@ -507,6 +507,55 @@ input:focus-visible + .slider {
 
    role="status" on the element means assistive technology announces it without
    moving focus. */
+/* The stack that replaced window.alert. Fixed rather than in the flow, so a
+   message never changes the layout of the screen it is reporting on, and
+   outside the router so it survives a route change mid-request.
+
+   Column-reverse: new toasts push the older ones upward, which keeps the
+   newest nearest the thumb and stops the stack jumping as one times out. */
+#toastStack {
+  position: fixed;
+  left: 50%;
+  bottom: 12vh;
+  transform: translateX(-50%);
+  z-index: 40;
+
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 1vh;
+
+  /* the stack must not swallow clicks on the page behind it; the toasts
+     themselves take them back, so they can still be dismissed by hand */
+  pointer-events: none;
+}
+
+/* inside the stack the toasts are laid out by it, so they give up the
+   positioning they use when standing alone */
+#toastStack .saveToast {
+  position: static;
+  left: auto;
+  bottom: auto;
+  transform: none;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+#toastStack .saveToast:hover {
+  filter: brightness(1.12);
+}
+
+/* the standalone entrance carries a translateX(-50%) to centre itself, which
+   inside the stack would shove each toast half its width to the left */
+#toastStack .saveToast {
+  animation: toast-in-stacked var(--settle) var(--ease);
+}
+
+@keyframes toast-in-stacked {
+  from { opacity: 0; transform: translateY(1.2em); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .saveToast {
   position: fixed;
   left: 50%;
@@ -744,13 +793,25 @@ input:focus-visible + .slider {
   padding-top: 2vh;
 }
 
-.deleteWarning {
-  /* the warning is prose, not a field label, so it wraps and centres rather
-     than sitting flush left like the labels above it */
+/* Armed: the next press deletes. The button says so by filling in rather than
+   by changing its label — the label is the thing being confirmed, and swapping
+   it out mid-gesture moves the target under the pointer. */
+.dangerButton.armed {
+  background: var(--danger);
+  box-shadow: inset -15px -15px 10px -10px rgba(120, 30, 35, .5);
+}
+
+/* The warning toast. It borrows .saveToast's position and entrance, then
+   undoes the one rule that does not survive a sentence: .saveToast is
+   white-space: nowrap, which is fine for "Added" and would push a warning
+   straight off the side of the screen — which is exactly what the paragraph
+   this replaced was doing inside the panel. */
+.warningToast {
+  white-space: normal;
+  max-width: min(46ch, 88vw);
   text-align: center;
-  max-width: 40em;
-  margin: 0 auto 1vh;
-  line-height: 1.4;
+  line-height: 1.35;
+  border-color: var(--danger);
 }
 
 
