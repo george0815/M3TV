@@ -824,6 +824,53 @@ input:focus-visible + .slider {
 }
 
 
+/* ---------- searching the grid ---------- */
+
+/* Sits over the top of the grid rather than in it: pushing the tiles down
+   would reflow the whole page on a keystroke, and the grid rows are sized in
+   vh, so it would also change how many tiles fit while they were being
+   searched. */
+/* fixed, not absolute: #channelWrapper is not a positioned element, so an
+   absolute box here would resolve against whatever ancestor happens to be one
+   — and making #channelWrapper the containing block instead would drag the
+   video surfaces positioned against something further out along with it. The
+   viewport is the one reference that cannot move. */
+#channelSearch {
+  position: fixed;
+  top: 1.5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+  gap: 1vh;
+
+  animation: search-in var(--quick) var(--ease);
+}
+
+@keyframes search-in {
+  from { opacity: 0; transform: translate(-50%, -.6em); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+#channelSearch .miscOptions {
+  width: min(46vw, 30em);
+  margin: 0;
+}
+
+/* answering `button { min-width: 45vw !important }` — a close button next to a
+   field does not want half the screen */
+#channelSearch .searchClose {
+  min-width: 0 !important;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 1vh 2.5vw;
+  font-size: 2.4vh;
+}
+
+
 /* ---------- motion preferences ---------- */
 
 /* honour the system setting. This covers the 1200ms splash fade too, which is

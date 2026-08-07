@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from "react";
+import {useState, useEffect, useContext, useRef} from "react";
 import { curPlaying, soundEffects } from "../../utils";
 import { SettingsContext } from '../../App'; //gets global settings context
 import videojs from "video.js";
@@ -35,6 +35,15 @@ function Channelwrapper(props){
 
     //search title
     const [search, setSearch] = useState("");
+
+    /* Whether the search field is open. It used to be a window.prompt, which
+       is drawn by the browser and blocks the page — and being modal was doing
+       real work here, because the key handler below is on window and would
+       otherwise read every letter typed into the box as a shortcut. The field
+       takes that job over by refusing the shortcuts while it has focus. */
+    const [searching, setSearching] = useState(false);
+
+    const searchField = useRef(null);
 
 
     //current index
@@ -77,6 +86,13 @@ function Channelwrapper(props){
     //CONTROLS CHANNEL BUTTONS
     const handleUserKeyPress = async function(e) {
 
+        /* Every letter here is a shortcut, so anything typed into a field is
+           not for us — 'a' and 'd' in a channel name would page the grid out
+           from under the search that is being typed. Escape still gets
+           through, because closing the box is the one thing it should do. */
+        const typing = e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA");
+        if(typing && e.key !== "Escape"){ return; }
+
         if (e.key == 'd' && (props.page < pages - 1) && props.curPlaying === false) {
 
             //next page
@@ -92,10 +108,13 @@ function Channelwrapper(props){
 
         }
         else if (e.key == 's' && props.curPlaying === false) {
-            const promptValue = window.prompt(translations[settings.lang].search, search === null ? "" : search);
 
+            //the key that opens the box must not also land in it
+            e.preventDefault();
 
-            setSearch(promptValue); 
+            soundEffects.okSetting.play();
+            setSearching(true);
+
         }
         else if (props.isChannel){
 
@@ -168,6 +187,27 @@ function Channelwrapper(props){
     //==============================USEEFFECT========================//
 
 
+    //opened by a keypress, so the next keystroke has to land in it
+    useEffect(() => {
+        if(searching && searchField.current){ searchField.current.focus(); }
+    }, [searching]);
+
+
+    //a search that no longer matches anything on this page would otherwise
+    //leave the grid blank until the footer was pressed
+    function changeSearch(value){
+        setSearch(value);
+        props.setPage(0);
+    }
+
+
+    function closeSearch(clear){
+        if(clear){ changeSearch(""); }
+        setSearching(false);
+    }
+
+
+
     //makes it so key event handler doesn't exponentially multiply
     useEffect(() => {
         window.addEventListener("keydown", handleUserKeyPress);
@@ -214,6 +254,33 @@ function Channelwrapper(props){
                assigning .src directly on the native path.*/}
             <video id="curPlaying" controls playsInline  style={!props.curPlaying ? {display: "none"} : {display: ""}} ></video>
             <div  style={!props.curPlaying ? {display: "none"} : {display: ""}}  id="vjsContainer"></div>
+
+            {/*The search box, in place of the window.prompt this used to open.
+               Filters as it is typed rather than on an OK, so the grid answers
+               while the name is still being spelled.*/}
+            {searching &&
+                <div id="channelSearch">
+                    <input
+                        ref={searchField}
+                        type="search"
+                        className="miscOptions"
+                        value={search === null ? "" : search}
+                        placeholder={translations[settings.lang].search}
+                        aria-label={translations[settings.lang].search}
+                        onChange={(e) => changeSearch(e.target.value)}
+                        onKeyDown={(e) => {
+                            //escape clears and closes, enter just closes and
+                            //leaves the results up
+                            if(e.key === "Escape"){ closeSearch(true); }
+                            if(e.key === "Enter"){ closeSearch(false); }
+                        }}
+                    />
+                    <button
+                        lang={[settings.lang]}
+                        className="searchClose"
+                        onClick={(() => {soundEffects.backSetting.play(); closeSearch(true)})}
+                    >{translations[settings.lang].cancel}</button>
+                </div>}
 
             {/*channel buttons*/}
             {pageOf(matches, props.page).map(({channel, index})=>{
