@@ -593,10 +593,24 @@ input:focus-visible + .slider {
    header and the video surfaces are all absolutely positioned against
    something further out. Animating transform here would move all of them.
 
-   Movement instead goes on the contents, which have no such dependants. */
+   Movement instead goes on the contents, which have no such dependants.
+
+   The resting opacity is 0 — the animation's opening frame, not its closing
+   one. `both` fills backwards, which holds that frame during a delay, but it
+   holds nothing before the animation exists: a route that paints before its
+   animation is attached shows at full opacity, then drops to zero the instant
+   the animation starts, then fades back in. Visible, gone, back, which is the
+   same fault the tile entrance had and was fixed there with `backwards`. That
+   fix cannot work here, because the gap is before the animation applies at
+   all, not during its delay. Resting at 0 closes it: the worst case becomes
+   arriving a frame late rather than flashing.
+
+   The play routes are where this shows, being the two loaded on demand — the
+   chunk arrives after React has already been asked to render them. */
 #body,
 .playVid,
 #remBody {
+  opacity: 0;
   animation: page-in 320ms var(--ease) both;
 }
 
@@ -882,6 +896,14 @@ input:focus-visible + .slider {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
+  }
+
+  /* the routes rest at opacity 0 and are brought up by their entrance, so
+     anything that stops that entrance running has to hand them back */
+  #body,
+  .playVid,
+  #remBody {
+    opacity: 1;
   }
 
   button:hover,
