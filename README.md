@@ -125,11 +125,18 @@ Two things are console-side rather than committed, because Amplify does not read
 
 | Source | Target | Type |
 | --- | --- | --- |
+| `https://www.m3tv.net` | `https://m3tv.net` | 301 (Permanent) |
 | `/doom` | `/doom/index.html` | 200 (Rewrite) |
 | `/doom/` | `/doom/index.html` | 200 (Rewrite) |
-| `</^[^.]+$\|\.(?!(js\|css\|html\|png\|jpg\|svg\|ico\|json\|mp3\|ttf\|otf\|jsdos\|wasm)$)([^.]+$)/>` | `/index.html` | 200 (Rewrite) |
+| `</^[^.]+$\|\.(?!(css\|html\|json\|webp\|woff2\|jsdos\|wasm\|symbols\|otf\|gif\|ico\|jpg\|js\|png\|txt\|svg\|woff\|mp3\|ttf)$)([^.]+$)/>` | `/index.html` | 200 (Rewrite) |
 
 Order matters — Amplify takes the first match. The two `/doom` rules come first because neither URL has a file extension, so the catch-all would otherwise serve them the app's `index.html`.
+
+**The extension list must be kept in step with the assets the build produces.** Anything not listed is treated as a client-side route and rewritten to `index.html`, so it arrives as a few hundred bytes of HTML rather than the file. That has broken the site twice — once when the splash became `.webp` and once when the font became `.woff2`. Note that `woff` does **not** cover `woff2`; the pattern matches the whole extension. Any commit introducing a new asset type has to update this rule in the same change.
+
+**The www redirect is what keeps the app on one origin**, which matters beyond tidiness: `www.m3tv.net` resolves to the same Amplify distribution and served the app happily, but the browser treats it as a separate origin — so every stream failed for anyone who arrived with the `www.` until it was added to the stream proxy's `ALLOWED_ORIGINS` as well. It is kept in that allowlist regardless, in case this rule is ever removed. The bare origin as a source preserves the path: `www.m3tv.net/playc` lands on `m3tv.net/playc`, so bookmarks survive.
+
+**Saving rules does not apply them.** Amplify serves with a one-year edge TTL (`s-maxage=31536000`) and saving the rules does not invalidate CloudFront — a deploy is what does. After any change here, trigger a build or "Redeploy this version". If the `age` response header only ever climbs across checks, nothing has reached the origin yet.
 
 Everything else under `/doom/` is left alone deliberately. Those are real files in the deployment and S3 serves them with correct content types; the extension list in the catch-all is what keeps them from being swallowed, which is why `html` belongs in it. Do **not** add a `/doom/<*>` → `/doom/<*>` rule to cover them — an Amplify 200 rewrite proxies the response and relabels it `text/html`, so `js-dos.css` stops being applied as a stylesheet and `bundle.jsdos` stops parsing, and the emulator silently fails to boot.
 
